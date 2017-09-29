@@ -96,7 +96,7 @@ module.exports = {
     image: {
       type: 'string',
       size: 128,
-      defaultsTo: ''
+      defaultsTo: 'user-icon.jpg'
     },
 
   	toJSON: function() {

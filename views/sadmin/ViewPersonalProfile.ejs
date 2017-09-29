@@ -73,7 +73,7 @@ html {
 }
 </style>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
         <% include navbar/navbar.ejs %>   
@@ -95,32 +95,32 @@ html {
                                                     <form role="form">
                                                         <div class="row">
                                                             <div class="container-fluid text-center"> 
-                                                            <img src="images/employee.png" class="img-circle" style="height:15%; width:15%;"><hr>
+                                                            <img src="../images/{{ employee.image }}" class="img-circle" style="height:15%; width:15%;"><hr>
                                                             </div>
                                                         </div>                                                
                                                         <div class="row">
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Last Name</label>
-                                                                    <p>Di</p>
+                                                                    <p>{{employee.lastname}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>First Name</label>
-                                                                    <p>Matthew Louis</p>
+                                                                    <p>{{employee.firstname}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Middle Name</label>
-                                                                    <p>Roque</p>
+                                                                    <p>{{employee.middlename || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Qualifier</label>
-                                                                    <p>N/A</p>
+                                                                    <p>{{employee.qualifier || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                        
                                                         </div> 
@@ -128,15 +128,15 @@ html {
                                                         <div class="row">
                                                             <div class="col-lg-4">
                                                                 <label>Gender</label>
-                                                                <p>Male</p>
+                                                                <p>{{employee.gender || 'N/A'}}</p>
                                                             </div> 
                                                             <div class="col-lg-4">
                                                                 <label>Religion</label>
-                                                                <p>Roman Catholic</p>
+                                                                <p>{{employee.religion || 'N/A'}}</p>
                                                             </div> 
                                                             <div class="col-lg-4">
                                                                 <label>Nationality</label>
-                                                                <p>Filipino</p>
+                                                                <p>{{employee.nationality || 'N/A'}}</p>
                                                             </div>                    
                                                         </div>   
                                                         <hr> 
@@ -144,19 +144,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <p>03/27/1997</p>
+                                                                    <p>{{employee.dob || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Place of Birth</label>
-                                                                    <p>Pampanga</p>
+                                                                    <p>{{employee.pob || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Civil Status</label>
-                                                                    <p>Single</p>
+                                                                    <p>{{employee.civil_status || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                       
                                                         </div>
@@ -165,13 +165,13 @@ html {
                                                             <div class="col-lg-4 col-lg-offset-2">
                                                                 <div class="form-group">
                                                                     <label>Email Address</label>
-                                                                    <p>matthewlouisrdi@yahoo.com</p>
+                                                                    <p>{{employee.email}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mobile Number</label>
-                                                                    <p>09952705687</p>
+                                                                    <p>{{employee.mobile_number}}</p>
                                                                 </div>
                                                             </div>                                                      
                                                         </div>                                                                       
@@ -1142,7 +1142,36 @@ html {
     <script src="../bootstrap/data/morris-data.js"></script>
 
     <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+<script>
+    (function() {
+        var app = angular.module('app', []);
 
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+        });
+    })();
+</script>
 </body>
 
 </html>

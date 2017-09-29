@@ -39,7 +39,11 @@ module.exports.routes = {
 
   'POST /login': 'UserController.login',
   'POST /logout': 'UserController.logout',
+
   'GET /user': 'UserController.index',
+
+  'GET /employee/:id': 'UserController.show',
+  'PUT /employee/:id': 'UserController.update',
 
   'GET /sadmin/absencereports': 'SadminController.absencereports',
   'GET /sadmin/addemployee': 'SadminController.addemployee',

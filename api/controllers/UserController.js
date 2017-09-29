@@ -17,6 +17,29 @@ module.exports = {
 		});
 	},
 
+	show: function(req, res) {
+
+		Employee.findOne(req.params.id).exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			return res.json(employee);
+		});
+	},
+
+	update: function(req, res) {
+
+		req.file('file').upload(function (err, uploadedFiles) {
+		  // ...\
+			if(err) {
+				console.log(err);
+			}
+
+			console.log(uploadedFiles);
+		});
+	},
+
 	login: function(req, res) {
 
 		var error = [];
