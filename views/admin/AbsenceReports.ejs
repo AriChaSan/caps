@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angeles City Civilian Security Unit - Absence Report</title>
+
+    <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="assets/demo.css">
+
+    <link rel="stylesheet" href="assets/form-basic.css">
+
+    <link href="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <script src = "../bootstrap/js/bootstrap-datepicker.js"></script>
+
+</head>
+<style>
+html {
+    overflow-x: hidden;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #404040;
+  text-decoration: none;
+}
+
+.img-circle {
+    background: #d9d9d9;
+    padding: 1px; 
+}
+
+.navbar-nav > li > a{ 
+    padding: 8px 8px 
+}
+.sidebar {
+  border-radius: 0 !important;
+  border:0 !important ;
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -30px;
+}
+.modal-sm {
+  width: 450px;
+  margin-top: 30px;
+}
+.modal-md {
+  width: 1050px;
+  margin-top: 30px;
+}
+.modal-notif {
+  width: 1200px;
+  margin-top: 30px;
+}
+.modal-lg {
+  width: 600px;
+  margin-top: 30px;
+}
+.modal-xlg {
+  width: 700px;
+  margin-top: 30px;
+}
+.nav-tabs>li>a:hover, .nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills>li>a:hover, .nav-pills>li>a:focus, .nav-pills>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+} 
+</style>
+  <script>
+  $(function(){
+      $('.datepicker').datepicker();
+  });
+  </script>
+
+<body>
+
+    <div id="wrapper" style="background-color:#262626;">
+         <% include navbar/navbar.ejs %>  
+            <br>
+            <div style="background-color:#e6e6e6; padding-right: 20px; padding-left: 20px;"> 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default" style="background-color:#ffffff">
+                            <div class="panel-body">
+                                <h1 class="page-header"><i class="fa fa-times fa-fw"></i> Absence Report</h1>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group form-group-lg">
+                                                                <div class="col-lg-4">
+                                                                    <h3>Location:</h3>
+                                                                    <select class="form-control" id="sel1">
+                                                                        <option>Angeles City Hall</option>
+                                                                        <option>Renal Care Unit</option>
+                                                                        <option>Angeles City Library</option>
+                                                                        <option>Museo Ning Angeles</option>
+                                                                        <option>Blood Bank</option>
+                                                                        <option>CSWDO</option>
+                                                                        <option>City College of Angeles</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <hr> 
+                                                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Employee ID</th>
+                                                                        <th>Employee Name</th>
+                                                                        <th>Force Leave Remaining</th>
+                                                                        <th>Birthday Leave Remaining</th>
+                                                                        <th>Sick Leave Remaining</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Matthew Louis R. Di </td>
+                                                                        <td>4</td>
+                                                                        <td>1</td>
+                                                                        <td>4</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Owen C. Payumo</td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Arianne Gay C. Santos</td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Antonina Cristina B. Pabalan</td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Matthew Louis R. Di </td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Owen C. Payumo</td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Arianne Gay C. Santos</td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>03</td>
+                                                                        <td>Antonina Cristina B. Pabalan</td>
+                                                                        <td>5</td>
+                                                                        <td>1</td>
+                                                                        <td>5</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                        </td>
+                                                                    </tr>                                                                                
+                                                                </tbody>
+                                                            </table> 
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                        <div id="modal01" class="modal fade" role="dialog">
+                                          <div class="modal-dialog modal-notif">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <center><h2 class="modal-title"><i class="fa fa-eye fa-fw"></i> Absence Details</h2></center>
+                                                </div>                                            
+                                              <div class="modal-body">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group form-group-lg">
+                                                                    <div class="col-lg-4">
+                                                                        <h3>Leave Type:</h3>
+                                                                        <select class="form-control" id="sel1">
+                                                                            <option>Force Leave</option>
+                                                                            <option>Birthday Leave</option>
+                                                                            <option>Sick Leave</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>                                                        
+                                                            </div>
+                                                        </div><hr>                                                      
+                                                        <form role="form">
+                                                            <div class="row">
+                                                                <center>
+                                                                <h3><b>Application for Leave</b></h3>
+                                                                </center>
+                                                            </div><hr>                                          
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Employee ID Number</label>
+                                                                        <p>14-0891-813</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Full Name</label>
+                                                                        <p>Matthew Louis R. Di</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Position</label>
+                                                                        <p>Security Officer IV</p>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Location</label>
+                                                                        <p>City Hall</p>
+                                                                    </div>
+                                                                </div>                                                                                                          
+                                                            </div><hr>                                              
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Swap Schedule with</label>
+                                                                        <p>Owen C. Payumo</p>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Number of Working Days Applied for</label>
+                                                                        <p>3</p>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>From</label>
+                                                                        <p>January 01, 2017</p>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>To</label>
+                                                                        <p>January 03, 2017</p>
+                                                                    </div>
+                                                                </div>                                                                            
+                                                            </div><hr>
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label style="color:red">In case of vacation leave</label>
+                                                                        <label>Where leave will be spent?</label>
+                                                                        <p>Philippines</p>
+                                                                    </div>
+                                                                </div>                                              
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label style="color:red">In case of sick leave</label>
+                                                                        <label>Where leave will be spent?</label>
+                                                                        <p>N/A</p>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label style="color:red">If other</label><br>
+                                                                        <label>Reason for requesting a leave.</label>
+                                                                        <p>N/A</p>
+                                                                    </div>
+                                                                </div>                                                     
+                                                            </div>             
+                                                        </form><hr>
+                                                        <form role="form">
+                                                            <div class="row">
+                                                                <center>
+                                                                <h3><b>Application for Leave</b></h3>
+                                                                </center>
+                                                            </div><hr>                                          
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Employee ID Number</label>
+                                                                        <p>14-0891-813</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Full Name</label>
+                                                                        <p>Matthew Louis R. Di</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Position</label>
+                                                                        <p>Security Officer IV</p>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Location</label>
+                                                                        <p>City Hall</p>
+                                                                    </div>
+                                                                </div>                                                                                                          
+                                                            </div><hr>                                              
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Swap Schedule with</label>
+                                                                        <p>Owen C. Payumo</p>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>Number of Working Days Applied for</label>
+                                                                        <p>3</p>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>From</label>
+                                                                        <p>January 01, 2017</p>
+                                                                    </div>
+                                                                </div>  
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label>To</label>
+                                                                        <p>January 03, 2017</p>
+                                                                    </div>
+                                                                </div>                                                                            
+                                                            </div><hr>
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label style="color:red">In case of vacation leave</label>
+                                                                        <label>Where leave will be spent?</label>
+                                                                        <p>Philippines</p>
+                                                                    </div>
+                                                                </div>                                              
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group">
+                                                                        <label style="color:red">In case of sick leave</label>
+                                                                        <label>Where leave will be spent?</label>
+                                                                        <p>N/A</p>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label style="color:red">If other</label><br>
+                                                                        <label>Reason for requesting a leave.</label>
+                                                                        <p>N/A</p>
+                                                                    </div>
+                                                                </div>                                                     
+                                                            </div>             
+                                                        </form>                                                                                                         
+                                                    </div>                                                                                                                                                                                         
+                                                </div>                                          
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>                                        
+                                    </div>
+                                </div>                                 
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>                     
+        </div>      
+    </div>
+
+    <div id="01modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-gear fa-fw"></i>Account Settings</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <center>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
+                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
+                    </center> 
+                </div>
+            </div>       
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="02modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-edit fa-fw"></i> Update Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                      
+                        </div> <hr>
+                        <div class="col-lg-12 col-lg-offset-11">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="03modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-lock fa-fw"></i> Change Password</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter Current Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter New Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input class="form-control"><hr>  
+                                </div>
+                            </div>                                                   
+                        <div class="col-lg-12 col-lg-offset-9">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                               
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="viewac" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye fa-fw"></i> View Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <p>Di</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <p>Matthew Louis</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <p>Roque</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <p>N/A</p>
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>                                                      
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>      
+
+    <div id="07modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h3>Time: 01:23AM</h3>
+                    <h3>Date: September 2, 2017</h3></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+
+    <div id="notif" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-bell fa-fw"></i> All Notifications</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#SchedSwap" data-target="#SchedSwap" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Owen C. Payumo</b> requested for a schedule swap.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#SchedSwap" data-target="#Leave" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Arianne Gay C. Santos</b> requested for a leave.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#SchedSwap" data-target="#Leave" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> requested for a leave.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#SchedSwap" data-target="#Leave" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> requested for a leave.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#SchedSwap" data-target="#SchedSwap" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Owen C. Payumo</b> requested for a schedule swap.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#Leave" data-target="#Leave" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> requested for a leave.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#Leave" data-target="#Leave" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> requested for a leave.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#Leave" data-target="#Leave" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> requested for a leave.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>                                        
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <div id="SchedSwap" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-notif">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <form role="form">
+                        <div class="row">
+                            <center>
+                            <h3><b>Application for Schedule Swap</b></h3>
+                            </center>
+                        </div><hr>                                          
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Employee ID Number</label>
+                                    <p>14-0891-813</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <p>Matthew Louis R. Di</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Position</label>
+                                    <p>Security Officer IV</p>
+                                </div>
+                            </div>     
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <p>City Hall</p>
+                                </div>
+                            </div>                                                                                                      
+                        </div><hr>                                              
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Swap Schedule with</label>
+                                    <p>Owen C. Payumo</p>
+                                </div>
+                            </div> 
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Number of Working Days Applied for</label>
+                                    <p>3</p>
+                                </div>
+                            </div>  
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>From</label>
+                                    <p>January 01, 2017</p>
+                                </div>
+                            </div>  
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>To</label>
+                                    <p>January 03, 2017</p>
+                                </div>
+                            </div>                                                                            
+                        </div><hr>  
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Reason for requesting a schedule swap</label>
+                                    <p>Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla Blabla </p>
+                                </div>
+                            </div>                                                     
+                        </div><hr>                                                                                            
+                        <div class="col-lg-12">  
+                            <center> 
+                                <button class="btn btn-success" type="button">Approve <i class="fa fa-check"></i></button>
+                                <button class="btn btn-danger" type="button">Decline <i class="fa fa-times"></i></button>
+                            </center>
+                        </div>               
+                    </form>                                               
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="Leave" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-notif">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <form role="form">
+                        <div class="row">
+                            <center>
+                            <h3><b>Application for Leave</b></h3>
+                            </center>
+                        </div><hr>                                          
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Employee ID Number</label>
+                                    <p>14-0891-813</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <p>Matthew Louis R. Di</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Position</label>
+                                    <p>Security Officer IV</p>
+                                </div>
+                            </div>  
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <p>City Hall</p>
+                                </div>
+                            </div>                                                                                                          
+                        </div><hr>                                              
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Swap Schedule with</label>
+                                    <p>Owen C. Payumo</p>
+                                </div>
+                            </div> 
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Number of Working Days Applied for</label>
+                                    <p>3</p>
+                                </div>
+                            </div>  
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>From</label>
+                                    <p>January 01, 2017</p>
+                                </div>
+                            </div>  
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>To</label>
+                                    <p>January 03, 2017</p>
+                                </div>
+                            </div>                                                                            
+                        </div><hr>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label style="color:red">In case of vacation leave</label>
+                                    <label>Where leave will be spent?</label>
+                                    <p>Philippines</p>
+                                </div>
+                            </div>                                              
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label style="color:red">In case of sick leave</label>
+                                    <label>Where leave will be spent?</label>
+                                    <p>N/A</p>
+                                </div>
+                            </div> 
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label style="color:red">If other</label><br>
+                                    <label>Reason for requesting a leave.</label>
+                                    <p>N/A</p>
+                                </div>
+                            </div>                                                     
+                        </div><hr>
+                        <div class="col-lg-12">  
+                            <center> 
+                                <button class="btn btn-success" type="button">Approve <i class="fa fa-check"></i></button>
+                                <button class="btn btn-danger" type="button">Decline <i class="fa fa-times"></i></button>
+                            </center>
+                        </div>              
+                    </form>                                                
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <div id="readallmes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope fa-fw"></i> All Messages</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Matthew Louis R. Di</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Antonina Cristina B. Pabalan</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Owen C. Payumo</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. 
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>                                   
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="mes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3>Subject of the message</h3>
+                    <h5>From: Matthew Louis R. Di</h5>  
+                    <hr>  
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.</p>  
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Reply <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="composemes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Compose Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <div class="row">                                 
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Recipient</label>
+                            <select class="form-control">
+                                <option>Antonina Cristina B. Pabalan</option>
+                                <option>Arianne Gay C. Santos</option>
+                                <option>Matthew Louis R. Di</option>
+                                <option>Owen C. Payumo</option>
+                            </select> 
+                        </div>
+                    </div>                      
+                    <hr>
+                    <div class="row"> 
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                              <label for="comment">Message Content:</label>
+                              <textarea class="form-control" rows="10" id="comment"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Send <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
+
+    <script src="../bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="../bootstrap/vendor/raphael/raphael.min.js"></script>
+
+    <script src="../bootstrap/vendor/morrisjs/morris.min.js"></script>
+
+    <script src="../bootstrap/data/morris-data.js"></script>
+
+    <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+
+    <script src="../bootstrap/vendor/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
+
+    <script>
+    $(document).ready(function() {
+        $('#dataTable1').DataTable({
+            responsive: true
+        });
+    });
+    </script>  
+    <script>
+    $(document).ready(function() {
+        $('#dataTable2').DataTable({
+            responsive: true
+        });
+    });
+    </script>    
+    <script>
+    $(document).ready(function() {
+        $('#dataTable3').DataTable({
+            responsive: true
+        });
+    });
+    </script>        
+    <script>
+    $(document).ready(function() {
+        $('#dataTable4').DataTable({
+            responsive: true
+        });
+    });
+    </script>   
+    <script>
+    $(document).ready(function() {
+        $('#dataTable5').DataTable({
+            responsive: true
+        });
+    });
+    </script>   
+    <script>
+    $(document).ready(function() {
+        $('#dataTable6').DataTable({
+            responsive: true
+        });
+    });
+    </script>   
+    <script>
+    $(document).ready(function() {
+        $('#dataTable7').DataTable({
+            responsive: true
+        });
+    });
+    </script>   
+    <script>
+    $(document).ready(function() {
+        $('#dataTable8').DataTable({
+            responsive: true
+        });
+    });
+    </script>   
+    <script>
+    $(document).ready(function() {
+        $('#dataTable9').DataTable({
+            responsive: true
+        });
+    });
+    </script>   
+</body>
+
+</html>

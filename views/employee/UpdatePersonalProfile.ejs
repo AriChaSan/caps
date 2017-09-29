@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angeles City Civilian Security Unit - Update Personal Profile</title>
+
+    <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="assets/demo.css">
+    
+    <link rel="stylesheet" href="assets/form-basic.css">
+
+</head>
+<style>
+html {
+    overflow-x: hidden;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #404040;
+  text-decoration: none;
+}
+
+.img-circle {
+    background: #d9d9d9;
+    padding: 1px; 
+}
+
+.navbar-nav > li > a{ 
+    padding: 8px 8px 
+}
+.sidebar {
+  border-radius: 0 !important;
+  border:0 !important ;
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -30px;
+}
+.modal-sm {
+  width: 450px;
+  margin-top: 30px;
+}
+.modal-md {
+  width: 1050px;
+  margin-top: 30px;
+}
+.modal-xxlg {
+  width: 700px;
+  margin-top: 30px;
+}
+.modal-xlg {
+  width: 600px;
+  margin-top: 30px;
+}
+</style>
+
+<body>
+
+    <div id="wrapper" style="background-color:#262626;">
+       <% include navbar/navbar.ejs %>     
+            <br>
+            <div style="background-color:#e6e6e6; padding-right: 20px; padding-left: 20px;"> 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default" style="background-color:#ffffff">
+                            <div class="panel-body">
+                                <h1 class="page-header"><i class="fa fa-edit fa-fw"></i> Update Personal Profile</h1>      
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-green">
+                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                <center><h4><b>I. PERSONAL DATA</b></h4></center>
+                                            </div>
+                                            <div class="panel-body">
+                                                <form role="form">
+                                                    <div class="row">
+                                                        <div class="container-fluid text-center"> 
+                                                        <img src="images/employee.png" class="img-circle" style="height:15%; width:15%;"><BR><BR>
+                                                        <button class="btn btn-success" type="button">Upload Picture <i class="fa fa-user"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Last Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>First Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Middle Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Qualifier</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                        
+                                                    </div> 
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <label>Gender</label>
+                                                            <select class="form-control">
+                                                                <option>Male</option>
+                                                                <option>Female</option>
+                                                            </select> 
+                                                        </div> 
+                                                        <div class="col-lg-4">
+                                                            <label>Religion</label>
+                                                            <select class="form-control">
+                                                                <option>Baha'i Faith</option>
+                                                                <option>Baptist</option>
+                                                                <option>Born Again Christian</option>
+                                                                <option>Buddhist</option>
+                                                                <option>Christian</option>
+                                                                <option>Christian Catholic</option>
+                                                                <option>Church of Christ</option>
+                                                                <option>Church of God Intl</option>
+                                                                <option>Evangelical Christian</option>
+                                                                <option>Fundamentalist</option>
+                                                                <option>Hindu</option>
+                                                                <option>Iglesia ng Diyos</option>
+                                                                <option>Iglesia ni Cristo</option>
+                                                                <option>Independent</option>
+                                                                <option>Islam</option>
+                                                                <option>Jehova's Witness</option>
+                                                                <option>Jewish</option>
+                                                                <option>Lutheran</option>
+                                                                <option>Methodist</option>
+                                                                <option>Missionary Baptist</option>
+                                                                <option>Mormon</option>
+                                                                <option>Nazarene</option>
+                                                                <option>Pentecostal</option>
+                                                                <option>Protestant</option>
+                                                                <option>Protestant-Nazarene</option>
+                                                                <option>Roman Catholic</option>
+                                                                <option>Seventh-Day Adventist</option>
+                                                                <option>Southern Baptist</option>
+                                                                <option>The Church of Jesus Christ</option>
+                                                                <option>UECFI</option>
+                                                                <option>Other</option>
+                                                            </select> 
+                                                        </div> 
+                                                        <div class="col-lg-4">
+                                                            <label>Nationality</label>
+                                                            <select class="form-control">
+                                                                <option>American</option>
+                                                                <option>Australian</option>
+                                                                <option>Brazilian</option>
+                                                                <option>Chinese</option>
+                                                                <option>Filipino</option>
+                                                                <option>Indian</option>
+                                                                <option>Japanese</option>
+                                                                <option>Korean</option>
+                                                                <option>Malaysian</option>
+                                                                <option>Nepali</option>
+                                                                <option>Russian</option>
+                                                                <option>Spanish</option>
+                                                                <option>Sri Lankan</option>
+                                                                <option>Timorese</option>
+                                                                <option>Other</option>
+                                                            </select> 
+                                                        </div>                    
+                                                    </div>   
+                                                    <hr> 
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Date of Birth</label>
+                                                                <input class="form-control" placeholder="MM/DD/YYYY">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Place of Birth</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Civil Status</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                       
+                                                    </div>
+                                                    <hr>  
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-lg-offset-2">
+                                                            <div class="form-group">
+                                                                <label>Email Address</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Mobile Number</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                      
+                                                    </div>                                                                       
+                                                </form>                                               
+                                            </div>
+                                        </div>                   
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-green">
+                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                <center><h4><b>II. RESIDENCE DATA</b></h4></center>
+                                            </div>
+                                            <div class="panel-body">
+                                                <form role="form">
+                                                <label style="color:red">Home Address</label>   
+                                                    <div class="row">                                 
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>Apartment Name/ House no./Street/ Baranggay</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>City/Municipality</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                      
+                                                    </div> 
+                                                    <div class="row">                                 
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Province/State</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Country</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>      
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Zipcode</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                                                                          
+                                                    </div>                                                     
+                                                    <hr> 
+                                                    <label style="color:red">Emergency Contact Address</label>   
+                                                    <div class="row">  
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Contact Person name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Relation</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>    
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Contact Number</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>      
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>Apartment Name/ House no./Street/ Baranggay</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>City/Municipality</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                      
+                                                    </div> 
+                                                    <div class="row">                                 
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Province/State</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Country</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>      
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Zipcode</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                                                                           
+                                                    </div>                                                                                                                       
+                                                </form>                                                                                               
+                                            </div>                                            
+                                        </div>   
+
+                                        <div class="panel panel-green">
+                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                <center><h4><b>III. PHYSICAL DESCRIPTION</b></h4></center>
+                                            </div>
+                                            <div class="panel-body">
+                                                <form role="form">
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            <div class="form-group">
+                                                                <label>Height (cm)</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="form-group">
+                                                                <label>Weight (lbs)</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="form-group">
+                                                                <label>Built</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="form-group">
+                                                                <label>Eye Color</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>  
+                                                        <div class="col-lg-2">
+                                                            <div class="form-group">
+                                                                <label>Hair Color</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>  
+                                                        <div class="col-lg-2">
+                                                            <label>Complexion</label>
+                                                            <select class="form-control">
+                                                                <option>Light</option>
+                                                                <option>Fair</option>
+                                                                <option>Dark</option>
+                                                            </select> 
+                                                        </div>                                  
+                                                    </div>                                                                      
+                                                </form>                                               
+                                            </div>
+                                        </div>   
+
+                                        <div class="panel panel-green">
+                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                <center><h4><b>IV. FAMILY DATA</b></h4></center>
+                                            </div>
+                                            <div class="panel-body">
+                                                <form role="form">
+                                                    <label style="color:red">Father</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Father's Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Date of Birth</label>
+                                                                <input class="form-control" placeholder="MM/DD/YYYY">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Contact Number</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Occupation</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Company Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Company Address</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                
+                                                    </div> 
+                                                    <hr>
+                                                    <label style="color:red">Mother</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Mother's Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Date of Birth</label>
+                                                                <input class="form-control" placeholder="MM/DD/YYYY">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Contact Number</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Occupation</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Company Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Company Address</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                
+                                                    </div> 
+                                                    <hr>  
+                                                    <label style="color:red">Brother(s)/Sister(s)</label>      
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group input-group">
+                                                                <input type="text" class="form-control">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" type="button">Go!</button>
+                                                                </span>
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Name</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Date of Birth</label>
+                                                                <input class="form-control" placeholder="MM/DD/YYYY">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Course/Occupation</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>School/Company</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                                                                        
+                                                    </div>              
+                                                </form>                                               
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-green">
+                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                <center><h4><b>VI. EDUCATIONAL BACKGROUND</b></h4></center>
+                                            </div>
+                                            <div class="panel-body">
+                                                <form role="form">
+                                                    <label style="color:red">Elementary</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>School</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Course</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Year Graduated</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Honors/Awards</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                  
+                                                    </div> 
+                                                    <hr> 
+                                                    <label style="color:red">Highschool</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>School</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Course</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Year Graduated</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Honors/Awards</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                  
+                                                    </div> 
+                                                    <hr> 
+                                                    <label style="color:red">College</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>School</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Course</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Year Graduated</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Honors/Awards</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                  
+                                                    </div> 
+                                                    <hr> 
+                                                    <label style="color:red">Post Graduate</label>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>School</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Course</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Year Graduated</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Honors/Awards</label>
+                                                                <input class="form-control">
+                                                            </div>
+                                                        </div>                                  
+                                                    </div> 
+                                                    <hr>                                                                                               
+                                                </form>                                               
+                                            </div>
+                                        </div>                                                                                               
+                                    </div> 
+                                    <div class="col-lg-12 col-lg-offset-11">   
+                                        <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                                    </div>                                                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>          
+            </div>                     
+        </div>  
+    </div>
+
+    <div id="01modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-gear fa-fw"></i>Account Settings</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <center>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
+                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
+                    </center> 
+                </div>
+            </div>       
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="02modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-edit fa-fw"></i> Update Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                      
+                        </div> <hr>
+                        <div class="col-lg-12 col-lg-offset-11">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="03modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-lock fa-fw"></i> Change Password</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter Current Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter New Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input class="form-control"><hr>  
+                                </div>
+                            </div>                                                   
+                        <div class="col-lg-12 col-lg-offset-9">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                               
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="viewac" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye fa-fw"></i> View Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <p>Di</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <p>Matthew Louis</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <p>Roque</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <p>N/A</p>
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>                                                      
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>     
+    <div id="07modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h3>Time: 01:23AM</h3>
+                    <h3>Date: September 2, 2017</h3></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="notif" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-bell fa-fw"></i> All Notifications</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#SSRSent" data-target="#SSRSent" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> Schedule swap request <b>sent</b>.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#SSRApproved" data-target="#SSRApproved" data-toggle="modal" class="list-group-item" data-dismiss="modal"> 
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> Schedule swap request <b>approved</b>.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#SSRDeclined" data-target="#SSRDeclined" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Schedule swap request <b>declined</b>.
+                        <span class="pull-right text-muted small"><em>1 hour ago</em>
+                        </span>
+                    </a>
+                    <a href="#LRSent" data-target="#LRSent" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Leave request <b>sent</b>.
+                        <span class="pull-right text-muted small"><em>3 hours ago</em>
+                        </span>
+                    </a>
+                    <a href="#LRApproved" data-target="#LRApproved" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Leave request <b>approved</b>.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#LRDeclined" data-target="#LRDeclined" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Leave request <b>declined</b>.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="LRSent" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-send"></i> Leave Request was successfully sent to admin!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="LRApproved" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-check"></i> Leave Request was approved!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="LRDeclined" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:red"><i class="fa fa-times"></i> Leave Request was declined!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+    <div id="SSRSent" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-send"></i> Schedule Swap Request was successfully sent to admin!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="SSRApproved" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-check"></i> Schedule Swap Request was approved!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="SSRDeclined" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:red"><i class="fa fa-times"></i> Schedule Swap Request was declined!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <div id="readallmes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope fa-fw"></i> All Messages</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Matthew Louis R. Di</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Antonina Cristina B. Pabalan</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Owen C. Payumo</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. 
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>                                   
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="mes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3>Subject of the message</h3>
+                    <h5>From: Matthew Louis R. Di</h5>  
+                    <hr>  
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.</p>  
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Reply <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="composemes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Compose Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <div class="row">                                 
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Recipient</label>
+                            <select class="form-control">
+                                <option>Antonina Cristina B. Pabalan</option>
+                                <option>Arianne Gay C. Santos</option>
+                                <option>Matthew Louis R. Di</option>
+                                <option>Owen C. Payumo</option>
+                            </select> 
+                        </div>
+                    </div>                      
+                    <hr>
+                    <div class="row"> 
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                              <label for="comment">Message Content:</label>
+                              <textarea class="form-control" rows="10" id="comment"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Send <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
+    <script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
+
+    <script src="../bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="../bootstrap/vendor/raphael/raphael.min.js"></script>
+
+    <script src="../bootstrap/vendor/morrisjs/morris.min.js"></script>
+
+    <script src="../bootstrap/data/morris-data.js"></script>
+
+    <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

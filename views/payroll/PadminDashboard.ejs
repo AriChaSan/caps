@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angeles City Civilian Security Unit - Payroll Admin Dashboard</title>
+
+    <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="assets/demo.css">
+
+    <link rel="stylesheet" href="assets/form-basic.css">
+
+    <link href="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+</head>
+<style>
+html {
+    overflow-x: hidden;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #404040;
+  text-decoration: none;
+}
+
+.img-circle {
+    background: #d9d9d9;
+    padding: 1px; 
+}
+
+.navbar-nav > li > a{ 
+    padding: 8px 8px 
+}
+.sidebar {
+  border-radius: 0 !important;
+  border:0 !important ;
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -30px;
+}
+.modal-sm {
+  width: 450px;
+  margin-top: 30px;
+}
+.modal-md {
+  width: 1050px;
+  margin-top: 30px;
+}
+.modal-lg {
+  width: 600px;
+  margin-top: 30px;
+}
+.modal-xlg {
+  width: 1200px;
+  margin-top: 30px;
+}
+.modal-xxlg {
+  width: 700px;
+  margin-top: 30px;
+}
+.modal-xxxlg {
+  width: 1400px;
+  margin-top: 30px;
+}
+.nav-tabs>li>a:hover, .nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills>li>a:hover, .nav-pills>li>a:focus, .nav-pills>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}  
+</style>
+
+<body>
+
+    <div id="wrapper" style="background-color:#e6e6e6;">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px; background-color:#ffffff">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div> 
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="padding-right: 25px;" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="images/MatthewDi.png" class="img-circle" 
+                        style="height:40px; width:40px;"> Matthew Louis R. Di <i class="fa fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#01modal" data-target="#01modal" data-toggle="modal"><i class="fa fa-fw fa-gear"></i> Account Settings</a>
+                            </li>
+                            <li class="divider"></li> 
+                            <li>
+                                <a href="#07modal" data-target="#07modal" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Time-in</a>
+                            </li>                        
+                            <li>
+                                <a href="index.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            </li>
+                        </ul>                
+                    </li>
+                </ul>                
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <button class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black; border:0px; background-color: white; padding-top: 12px">
+                            <h4><i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
+                        </button>
+                        <span class="badge badge-notify">3</span>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#tod" data-target="#tod" data-toggle="modal">
+                                    <div>
+                                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all payroll <b>today</b>.<br>
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#3d" data-target="#3d" data-toggle="modal">
+                                    <div>
+                                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all payroll within <b>3 days</b>.<br>
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>                                                                                                              
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#notif" data-target="#notif" data-toggle="modal">
+                                    <strong>See All Notifications</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-alerts -->
+                    </li>                           
+                    <li class="dropdown">
+                        <button class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black; border:0px; background-color: white; padding-top: 12px">
+                            <h4><i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
+                        </button>
+                        <span class="badge badge-notify">3</span>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a href="#mes" data-target="#mes" data-toggle="modal">
+                                    <div>
+                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Matthew Louis R. Di</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#mes" data-target="#mes" data-toggle="modal">
+                                    <div>
+                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Antonina Cristina B. Pabalan</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#mes" data-target="#mes" data-toggle="modal">
+                                    <div>
+                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Owen C. Payumo</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#readallmes" data-target="#readallmes" data-toggle="modal">
+                                    <strong>Read All Messages</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#composemes" data-target="#composemes" data-toggle="modal">
+                                    <strong>Compose New Message</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>                           
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
+
+       
+                </ul>                         
+
+            </nav>    
+            <br>
+            <div style="background-color:#e6e6e6; padding-right: 20px; padding-left: 20px;"> 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default" style="background-color:#ffffff">
+                            <div class="panel-body">
+                                <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>          
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-tasks fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">26</div>
+                                                    <div>Total Employee Payroll(s)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#04modal" data-target="#04modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="panel panel-green">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-check fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">5</div>
+                                                    <div>Managed Employee Payroll(s)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#05modal" data-target="#05modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="panel panel-red">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-times-circle fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">3</div>
+                                                    <div>Unmanaged Employee Payroll(s)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#06modal" data-target="#06modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div><br>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group form-group-lg">
+                                                            <div class="col-lg-4">
+                                                                <h3>Location:</h3>
+                                                                <select class="form-control" id="sel1">
+                                                                    <option>Angeles City Hall</option>
+                                                                    <option>Renal Care Unit</option>
+                                                                    <option>Angeles City Library</option>
+                                                                    <option>Museo Ning Angeles</option>
+                                                                    <option>Blood Bank</option>
+                                                                    <option>CSWDO</option>
+                                                                    <option>City College of Angeles</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>                 
+                                                    </div>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <hr>
+                                                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Employee Picture</th>
+                                                                    <th>Employee Name</th>
+                                                                    <th>Account Type</th>
+                                                                    <th>Date Created</th>
+                                                                    <th>Date Updated</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/MatthewDi.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Matthew Louis R. Di </td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/OwenPayumo.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Owen C. Payumo</td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>                                                        
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/ArianneSantos.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Arianne Gay C. Santos</td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>                                                           
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/AntoninaPabalan.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Antonina Cristina B. Pabalan</td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>                                                       
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/MatthewDi.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Matthew Louis R. Di </td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/OwenPayumo.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Owen C. Payumo</td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>                                                        
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/ArianneSantos.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Arianne Gay C. Santos</td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>                                                           
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-center"><img src="images/AntoninaPabalan.png" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>Antonina Cristina B. Pabalan</td>
+                                                                    <td>Admin</td>
+                                                                    <td>07/22/2017</td>
+                                                                    <td>07/22/2017</td>                                                       
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                </tr>                                                        
+                                                            </tbody>
+                                                        </table> <hr>
+                                                        <div class="col-lg-12">   
+                                                            <center><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#ViewPaySum">View Payroll Summary <i class="fa fa-eye fa-fw"></i></button></center></td>
+                                                        </div>                                                      
+                                                    </div>
+                                                </div>                                                                                           
+                                            </div>                                                                                        
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>                     
+              
+    </div>
+
+    <div id="01modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-gear fa-fw"></i>Account Settings</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <center>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
+                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
+                    </center> 
+                </div>
+            </div>       
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="02modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-edit fa-fw"></i> Update Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                      
+                        </div> <hr>
+                        <div class="col-lg-12 col-lg-offset-11">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="03modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-lock fa-fw"></i> Change Password</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter Current Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter New Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input class="form-control"><hr>  
+                                </div>
+                            </div>                                                   
+                        <div class="col-lg-12 col-lg-offset-9">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                               
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="viewac" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye fa-fw"></i> View Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <p>Di</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <p>Matthew Louis</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <p>Roque</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <p>N/A</p>
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>                                                      
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>     
+
+    <div id="04modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-tasks"></i> Total Employee Payroll(s)</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable30">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Account Type</th>
+                                <th>Date Created</th>
+                                <th>Date Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Matthew Louis R. Di </td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                         
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Owen C. Payumo</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                                                     
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Arianne Gay C. Santos</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                              
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Antonina Cristina B. Pabalan</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                               
+                            </tr>
+                        </tbody>
+                    </table>                                             
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="05modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-check"></i> Managed Employee Payroll(s)</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable31">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Account Type</th>
+                                <th>Date Created</th>
+                                <th>Date Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Matthew Louis R. Di </td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                         
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Owen C. Payumo</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                                                     
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Arianne Gay C. Santos</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                              
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Antonina Cristina B. Pabalan</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                               
+                            </tr>
+                        </tbody>
+                    </table>                                             
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="06modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times-circle"></i> Unmanaged Employee Payroll(s)</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable14">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Employee Name</th>
+                                <th>Account Type</th>
+                                <th>Date Created</th>
+                                <th>Date Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Matthew Louis R. Di </td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                         
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Owen C. Payumo</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                                                     
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Arianne Gay C. Santos</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                              
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Antonina Cristina B. Pabalan</td>
+                                <td>Admin</td>
+                                <td>07/22/2017</td>
+                                <td>07/22/2017</td>                                                               
+                            </tr>
+                        </tbody>
+                    </table>                                             
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="07modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h3>Time: 01:23AM</h3>
+                    <h3>Date: September 2, 2017</h3></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div id="notif" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-bell fa-fw"></i> All Notifications</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#tod" data-target="#tod" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all payroll <b>today</b>.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#3d" data-target="#3d" data-toggle="modal" class="list-group-item" data-dismiss="modal"> 
+                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all loans payroll <b>3 days</b>.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#tod" data-target="#tod" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all payroll <b>today</b>.
+                        <span class="pull-right text-muted small"><em>1 hour ago</em>
+                        </span>
+                    </a>
+                </div>                                                                                    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>     
+    <div id="tod" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-list fa-fw"></i> Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <center><h4>You need to manage all payroll <b>today</b>.</h4></center>
+                </div>                                                                                   
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="3d" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-list fa-fw"></i> Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <center><h4>You need to manage all payroll within <b>3 days</b>.</h4></center>
+                </div>                                                                                   
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div id="AddPayroll" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-plus"></i> Add Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3> Name: Matthew Louis R. Di</h3>
+                    <div class="panel panel-default">
+                        <div class="panel-body">  
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Monthly Rate</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Amount Accured for the Period</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>PERA</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Withholding Tax</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>                                                        
+                            </div>  
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>MPL</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Personal Share (new 9%)</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Government Share (old 12%)</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>E.C.C New</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>                                                        
+                            </div><hr>
+                            <div class="col-lg-12 col-lg-offset-11">   
+                                <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                            </div>                                                                                                               
+                        </div>                                                                                        
+                    </div>                    
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="UpdatePayroll" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-edit"></i> Update Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3> Name: Matthew Louis R. Di</h3>
+                    <div class="panel panel-default">
+                        <div class="panel-body">  
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Monthly Rate</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Amount Accured for the Period</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>PERA</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Withholding Tax</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>                                                        
+                            </div>  
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>MPL</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Personal Share (new 9%)</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Government Share (old 12%)</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>E.C.C New</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>                                                        
+                            </div><hr>
+                            <div class="col-lg-12 col-lg-offset-11">   
+                                <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                            </div>                                                                                                               
+                        </div>                                                                                        
+                    </div>                    
+                </div>
+            </div>                             
+          </div>
+        </div>
+      </div>
+    </div>   
+    <div id="ViewPayroll" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye"></i> View Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3> Name: Matthew Louis R. Di</h3>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Monthly Rate</label>
+                                    <p>4300.04</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Amount Accured for the Month</label>
+                                    <p>4300.04</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>PERA</label>
+                                    <p>4300.04</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>Withholding Tax</label>
+                                    <p>2323</p>
+                                </div>                                                   
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>MPL</label>
+                                    <p>5534</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Personal Share (new 9%)</label>
+                                    <p>2313</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Government Share (old 12%)</label>
+                                    <p>4421</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>E.C.C. New</label>
+                                    <p>3321</p>
+                                </div>                                                   
+                            </div>
+                                                                                                               
+                        </div>                                                                                        
+                    </div>                            <div class="col-lg-12 col-lg-offset-11">   
+                                <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
+                            </div>                     
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>     
+    <div id="readallmes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope fa-fw"></i> All Messages</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Matthew Louis R. Di</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Antonina Cristina B. Pabalan</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Owen C. Payumo</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. 
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>                                   
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="mes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3>Subject of the message</h3>
+                    <h5>From: Matthew Louis R. Di</h5>  
+                    <hr>  
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.</p>  
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Reply <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="composemes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Compose Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <div class="row">                                 
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Recipient</label>
+                            <select class="form-control">
+                                <option>Antonina Cristina B. Pabalan</option>
+                                <option>Arianne Gay C. Santos</option>
+                                <option>Matthew Louis R. Di</option>
+                                <option>Owen C. Payumo</option>
+                            </select> 
+                        </div>
+                    </div>                      
+                    <hr>
+                    <div class="row"> 
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                              <label for="comment">Message Content:</label>
+                              <textarea class="form-control" rows="10" id="comment"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Send <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
+
+    <div id="ViewPaySum" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye"></i> View Payroll Summary</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable31">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Monthly Rate</th>
+                                <th>Amount Accured for the Period</th>
+                                <th>PERA</th>
+                                <th>Withholding Tax</th>
+                                <th>MPL</th>
+                                <th>Personal Share (new 9%)</th>
+                                <th>Government Share (old 12%)</th>
+                                <th>E.C.C. New</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Matthew Louis R. Di </td> 
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>   
+                                    
+                            </tr>
+                            <tr>
+                                <td>Owen C. Payumo</td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>   
+                                                                                                               
+                            </tr>
+                            <tr>
+                                <td>Arianne Gay C. Santos</td>   
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>   
+                                                                                         
+                            </tr>
+                            <tr>
+                                <td>Antonina Cristina B. Pabalan</td> 
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>
+                                <td></td>  
+                                <td></td>  
+                                <td></td>  
+                                <td></td>   
+                                                                                            
+                            </tr>
+                        </tbody>
+                    </table><hr>
+                            <div class="col-lg-12 col-lg-offset-11">   
+                                <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
+                            </div>                                              
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>            
+    <script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
+
+    <script src="../bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="../bootstrap/vendor/raphael/raphael.min.js"></script>
+
+    <script src="../bootstrap/vendor/morrisjs/morris.min.js"></script>
+
+    <script src="../bootstrap/data/morris-data.js"></script>
+
+    <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+
+    <script src="../bootstrap/vendor/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
+
+    <script>
+    $(document).ready(function() {
+        $('#dataTable1').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable2').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable3').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable4').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable5').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable6').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable7').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable8').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable9').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable10').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable11').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable12').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable13').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable14').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable15').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable16').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable17').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable18').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable19').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable20').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable21').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable22').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable23').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable24').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable25').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable26').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable27').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable28').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable29').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable30').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable31').DataTable({
+            responsive: true
+        });
+    });                          
+    </script>         
+
+</body>
+
+</html>

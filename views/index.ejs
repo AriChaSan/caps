@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Angeles City Civil Service Unit</title>
+	<script src="angular/angular.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/animate.css">
+
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="appController">
+	<div class="container">
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo"><img src="images/DashboardLG.png" alt="Admin Picture" height="70%" width="70%" class="responsive"></span></h1>
+		</div>
+		<div class="login-box animated fadeInUp">
+		<div class="box-header">
+				<h2>Log in to your account</h2>
+			</div>
+		<div class="container-fluid">
+			
+			<div class="alert alert-danger" id="errorDiv" hidden>
+                <ul id="#errorLists">
+                  <li ng-repeat="error in errors"> {{ error }}</li>
+                </ul>
+              </div>
+			<label for="username">Username</label>
+			<br/>
+			<input type="text" id="username" ng-model="username">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password" ng-model="password">
+			<br/>
+			<button type="button" ng-click="submit()">Sign In</button>
+			<br/>
+			<a href="#"><p class="small">Forgot your password?</p></a>
+		</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+
+<script>
+	(function() {
+		var app = angular.module('app', []);
+
+		app.controller('appController', function($scope, $http) {
+
+			$scope.username = "";
+			$scope.password = "";
+
+			$scope.submit = function () {
+				var data = {};
+				data.username = $scope.username;
+				data.password = $scope.password;
+
+				$http.post('/login', data).then(function success(response) {
+					window.location.href = '/';
+				}, function error(response) {
+					$('#errorDiv').show();
+					$scope.errors = response.data.errors;
+				});
+			};
+			
+		});
+	})();
+</script>
+
+</html>

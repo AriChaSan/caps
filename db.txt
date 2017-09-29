@@ -1,0 +1,2 @@
+
+Creating a user will automatically create his profile and schedule

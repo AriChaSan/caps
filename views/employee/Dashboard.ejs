@@ -1,0 +1,1019 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angeles City Civilian Security Unit - Dashboard</title>
+
+    <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <link href="../bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="assets/demo.css">
+
+    <link rel="stylesheet" href="assets/form-basic.css">
+
+    <link href="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+</head>
+<style>
+html {
+    overflow-x: hidden;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #404040;
+  text-decoration: none;
+}
+
+.img-circle {
+    background: #d9d9d9;
+    padding: 1px; 
+}
+
+.navbar-nav > li > a{ 
+    padding: 8px 8px 
+}
+.sidebar {
+  border-radius: 0 !important;
+  border:0 !important ;
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -30px;
+}
+.modal-sm {
+  width: 450px;
+  margin-top: 30px;
+}
+.modal-md {
+  width: 1050px;
+  margin-top: 30px;
+}
+.modal-xxlg {
+  width: 700px;
+  margin-top: 30px;
+}
+.modal-xlg {
+  width: 600px;
+  margin-top: 30px;
+}
+.nav-tabs>li>a:hover, .nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills>li>a:hover, .nav-pills>li>a:focus, .nav-pills>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}  
+</style>
+
+<body>
+
+    <div id="wrapper" style="background-color:#262626;">
+        <% include navbar/navbar.ejs %>    
+            <br>
+            <div style="background-color:#e6e6e6; padding-right: 20px; padding-left: 20px;"> 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default" style="background-color:#ffffff">
+                            <div class="panel-body">
+                                <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>          
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-exclamation-circle fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">5</div>
+                                                    <div>Force Leave</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#04modal" data-target="#04modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="panel panel-yellow">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-gift fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">1</div>
+                                                    <div>Birthday Leave</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#05modal" data-target="#05modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="panel panel-red">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-times-circle fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">4</div>
+                                                    <div>Sick Leave</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#06modal" data-target="#06modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div><br>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <h2><i class="fa fa-calendar fa-fw"></i> Daily Time Record</h2>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <hr>
+                                                        <div class="panel panel-green">
+                                                            <div class="panel-heading">
+                                                                <center><h4><b>DAY SHIFT (7AM - 3PM)</b></h4></center>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Day</th>
+                                                                            <th>Time In</th>
+                                                                            <th>Time Out</th>
+                                                                            <th>Work Duration</th>
+                                                                            <th>Over Time</th>
+                                                                            <th>Late By</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Monday</td>
+                                                                            <td>08:00am</td>
+                                                                            <td>05:00pm</td>
+                                                                            <td>09:00:00</td>
+                                                                            <td>00:00:00</td>
+                                                                            <td>00:00:00</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Tuesday</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>                                                         
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Wednesday</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>
+                                                                            <td>OFF</td>                                                           
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Thursday</td>
+                                                                            <td>08:00am</td>
+                                                                            <td>05:00pm</td>
+                                                                            <td>09:00:00</td>
+                                                                            <td>00:00:00</td>
+                                                                            <td>00:00:00</td>                                                           
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Friday</td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>                                                           
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Saturday</td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>                                                            
+                                                                        </tr>  
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
+                                                                            <td>Sunday</td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>                                                            
+                                                                        </tr>                                                                                                  
+                                                                    </tbody>
+                                                                </table>
+                                                            </div> 
+                                                        </div>  
+                                                    </div>
+                                                </div>                                                               
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>                     
+        </div>      
+    </div>
+
+    <div id="01modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-gear fa-fw"></i>Account Settings</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <center>
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
+                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
+                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
+                    </center> 
+                </div>
+            </div>       
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="02modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-edit fa-fw"></i> Update Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>                                                      
+                        </div> <hr>
+                        <div class="col-lg-12 col-lg-offset-11">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="03modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-lock fa-fw"></i> Change Password</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter Current Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Enter New Password</label>
+                                    <input class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input class="form-control"><hr>  
+                                </div>
+                            </div>                                                   
+                        <div class="col-lg-12 col-lg-offset-9">   
+                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                        </div>                                                                                                                      
+                    </form>                                               
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="viewac" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye fa-fw"></i> View Account</h2></center>
+          </div>
+          <div class="modal-body">  
+            <div class="panel panel-default">
+                <div class="panel-body">    
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <p>Di</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <p>Matthew Louis</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Middle Name</label>
+                                    <p>Roque</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Qualifier</label>
+                                    <p>N/A</p>
+                                </div>
+                            </div>                                                        
+                        </div>   
+                        <hr> 
+                        <div class="row">
+                            <div class="col-lg-4 col-lg-offset-2">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <p>matthewlouisrdi@yahoo.com</p>
+                                </div>
+                            </div>                                                      
+                        </div>                                                                                                                      
+                    </form>                                                                                                                                                   
+                </div>
+            </div>                
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <div id="04modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-exclamation-circle"></i> Force Leave</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body"> 
+                    <b><h3>You still have 5 remaining Force Leave.</h3></b><hr>
+                    <h4>Leave Record</h4>
+                    <table width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07/22/2017</td>
+                                <td>Forgot to go to work</td>
+                            </tr> 
+                            <tr>
+                                <td>07/29/2017</td>
+                                <td>Vacation</td>
+                            </tr>                                           
+                        </tbody>
+                    </table>                    
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="05modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-gift"></i> Birthday Leave</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body"> 
+                    <b><h3>You still have 5 remaining Birthday Leave.</h3></b><hr>
+                    <h4>Leave Record</h4>
+                    <table width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07/22/2017</td>
+                                <td>Forgot to go to work</td>
+                            </tr> 
+                            <tr>
+                                <td>07/22/2017</td>
+                                <td>Forgot to go to work</td>
+                            </tr>                                           
+                        </tbody>
+                    </table>                    
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="06modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times-circle"></i> Sick Leave</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body"> 
+                    <b><h3>You still have 5 remaining Sick Leave.</h3></b><hr>
+                    <h4>Leave Record</h4>
+                    <table width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07/22/2017</td>
+                                <td>Forgot to go to work</td>
+                            </tr> 
+                            <tr>
+                                <td>07/22/2017</td>
+                                <td>Forgot to go to work</td>
+                            </tr>                                           
+                        </tbody>
+                    </table>                    
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="07modal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h3>Time: 01:23AM</h3>
+                    <h3>Date: September 2, 2017</h3></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div id="notif" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-bell fa-fw"></i> All Notifications</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#SSRSent" data-target="#SSRSent" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> Schedule swap request <b>sent</b>.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#SSRApproved" data-target="#SSRApproved" data-toggle="modal" class="list-group-item" data-dismiss="modal"> 
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> Schedule swap request <b>approved</b>.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#SSRDeclined" data-target="#SSRDeclined" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Schedule swap request <b>declined</b>.
+                        <span class="pull-right text-muted small"><em>1 hour ago</em>
+                        </span>
+                    </a>
+                    <a href="#LRSent" data-target="#LRSent" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Leave request <b>sent</b>.
+                        <span class="pull-right text-muted small"><em>3 hours ago</em>
+                        </span>
+                    </a>
+                    <a href="#LRApproved" data-target="#LRApproved" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Leave request <b>approved</b>.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#LRDeclined" data-target="#LRDeclined" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        Leave request <b>declined</b>.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="LRSent" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-send"></i> Leave Request was successfully sent to admin!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="LRApproved" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-check"></i> Leave Request was approved!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="LRDeclined" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-times"></i> Leave Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:red"><i class="fa fa-times"></i> Leave Request was declined!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+    <div id="SSRSent" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-send"></i> Schedule Swap Request was successfully sent to admin!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div id="SSRApproved" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:green"><i class="fa fa-check"></i> Schedule Swap Request was approved!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div id="SSRDeclined" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-refresh"></i> Schedule Swap Request</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <center><h4 style="color:red"><i class="fa fa-times"></i> Schedule Swap Request was declined!</h4></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <div id="readallmes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope fa-fw"></i> All Messages</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="list-group">
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Matthew Louis R. Di</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Antonina Cristina B. Pabalan</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item"  data-dismiss="modal">
+                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <b>Owen C. Payumo</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>
+                    <a href="#mes" data-target="#mes" data-toggle="modal" class="list-group-item" data-dismiss="modal">
+                        <b>Arianne Gay C. Santos</b> <br><i>Subject:</i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. 
+                        <span class="pull-right text-muted small"><em>1 day ago</em>
+                        </span>
+                    </a>                                   
+                </div>                                                                                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="mes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3>Subject of the message</h3>
+                    <h5>From: Matthew Louis R. Di</h5>  
+                    <hr>  
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.</p>  
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Reply <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div id="composemes" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xxlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Compose Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <div class="row">                                 
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Recipient</label>
+                            <select class="form-control">
+                                <option>Antonina Cristina B. Pabalan</option>
+                                <option>Arianne Gay C. Santos</option>
+                                <option>Matthew Louis R. Di</option>
+                                <option>Owen C. Payumo</option>
+                            </select> 
+                        </div>
+                    </div>                      
+                    <hr>
+                    <div class="row"> 
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                              <label for="comment">Message Content:</label>
+                              <textarea class="form-control" rows="10" id="comment"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                    <hr>
+                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Send <i class="fa fa-send"></i></button></center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>         
+    <script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
+
+    <script src="../bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="../bootstrap/vendor/raphael/raphael.min.js"></script>
+
+    <script src="../bootstrap/vendor/morrisjs/morris.min.js"></script>
+
+    <script src="../bootstrap/data/morris-data.js"></script>
+
+    <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+
+    <script src="../bootstrap/vendor/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+
+    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
+
+    <script>
+    $(document).ready(function() {
+        $('#dataTable1').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable2').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable3').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable4').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable5').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable6').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable7').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable8').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable9').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable10').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable11').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable12').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable13').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable14').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable15').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable16').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable17').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable18').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable19').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable20').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable21').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable22').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable23').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable24').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable25').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable26').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable27').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable28').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTable29').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable30').DataTable({
+            responsive: true
+        });
+    }); 
+    $(document).ready(function() {
+        $('#dataTable31').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable32').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable33').DataTable({
+            responsive: true
+        });
+    });  
+    $(document).ready(function() {
+        $('#dataTable34').DataTable({
+            responsive: true
+        });
+    });                              
+    </script>         
+
+</body>
+
+</html>
