@@ -29,14 +29,42 @@ module.exports = {
 	},
 
 	update: function(req, res) {
+		//var mimeType = req.file('file')._readableState.buffer.head.data.filename.split('.');
+		//mimeType = _.last(mimeType);
+		var now = new Date();
+	    now = now.getTime();
+	    var filename = "";
+		var config = {
+			dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+			saveAs: function(file, cb) {
 
-		req.file('file').upload(function (err, uploadedFiles) {
-		  // ...\
-			if(err) {
-				console.log(err);
-			}
+			 		var extension = file.filename.split('.').pop();
+			 	    filename = now + '.' +extension;
+			 		cb(null, filename);
+			 	},
+			maxBytes: 10000000
+		};
 
-			console.log(uploadedFiles);
+		req.file('file').upload(config, function (err, uploadedFiles){
+		  if(err){
+		    return res.json(500, err);
+		  }
+		  else if(uploadedFiles.length === 0){
+		    // proceed without files
+		    var data = JSON.parse(req.param('data')).employee;
+		    console.log(data);
+		    Employee.update({account_id: req.params.id}, data.personal).exec(function(err, employee) {
+		    	console.log(employee);
+		    });
+		  }
+		  else{
+		    //  handle uploaded file
+		    var data = JSON.parse(req.param('data')).employee;
+		    data.personal.image = filename;
+		    Employee.update({account_id: req.params.id}, data.personal).exec(function(err, employee) {
+		    	console.log(employee);
+		    });
+		  }
 		});
 	},
 
@@ -100,4 +128,19 @@ module.exports = {
 		return res.json(200, {message: 'logged out'});
 	}
 };
+
+function upload(file, filename) {
+		var config = {
+			dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+			saveAs: filename
+		};
+
+		file.upload(config, function (err, uploadedFiles) {
+		  // ...\
+			if(err) {
+				console.log(err);
+			}
+			console.log(uploadedFiles);
+		});
+}
 

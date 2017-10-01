@@ -12,7 +12,8 @@ module.exports = {
 
   	username: {
   		type: 'string',
-  		size: 128
+  		size: 128,
+      unique: true
   	},
 
   	password: {

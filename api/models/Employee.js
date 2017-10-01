@@ -99,6 +99,11 @@ module.exports = {
       defaultsTo: 'user-icon.jpg'
     },
 
+    address: {
+      collection: 'address',
+      via: 'employee_id'
+    },
+
   	toJSON: function() {
       var obj = this.toObject();
       delete obj.createdAt;

@@ -14,25 +14,95 @@ module.exports.bootstrap = function(cb) {
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
 
-  var user = {
-  	username: 'sadmin',
-  	password: 'sadmin',
-  	account_type_id: 1
-  };
+  User.findOne({username: 'sadmin'}).exec(function(err, user) {
 
-  User.findOrCreate(user, user).exec(function(err, user) {
-  	console.log(user);
+    if(!user) {
 
-    var employee = {
-      id_number: '123456',
-      firstname: 'Crisostomo',
-      lastname: 'Pabalan',
-      account_id: user.id
-    };
+      var user = {
+        username: 'sadmin',
+        password: 'sadmin',
+        account_type_id: 1
+      };
 
-    Employee.findOrCreate(employee, employee).exec(function(err, employee) {
-      console.log(employee);
-    });
+      User.create(user).exec(function(err, user) {
+        var employee = {
+          id_number: '123456',
+          firstname: 'Crisostomo',
+          lastname: 'Pabalan',
+          account_id: user.id
+        };
+
+
+        Employee.create(employee).exec(function(err, employee) {
+            
+          Address.create({employee_id: employee.id}).exec(function(err, address) {
+          });
+
+          Emergency.create({employee_id: employee.id}).exec(function(err, address) {
+          });
+
+          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {
+          });
+
+          var parent = [
+            {
+              parent_type: 'father',
+              employee_id: employee.id
+            },
+            {
+              parent_type: 'mother',
+              employee_id: employee.id
+            }
+          ];
+
+          Parent.create(parent).exec(function(err, parent) {
+          });
+
+          var sibling = [
+            {
+              employee_id: employee.id
+            },
+            {
+              employee_id: employee.id
+            },
+            {
+              employee_id: employee.id
+            },
+            {
+              employee_id: employee.id
+            }
+          ];
+
+          Sibling.create(sibling).exec(function(err, sibling) {
+          });
+
+          var education = [
+            {
+              education_type: 'elementary',
+              employee_id: employee.id
+            },
+            {
+              education_type: 'highschool',
+              employee_id: employee.id
+            },
+            {
+              education_type: 'college',
+              employee_id: employee.id
+            },
+            {
+              education_type: 'post_graduate',
+              employee_id: employee.id
+            }
+          ];
+
+          Education_Background.create(education).exec(function(err, education_background) {
+          });
+        });   
+        
+      });
+      
+    }
+
   });
 
   var account_type = [

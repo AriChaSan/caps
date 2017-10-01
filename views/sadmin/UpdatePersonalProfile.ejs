@@ -95,8 +95,8 @@ html {
                                                     <form role="form" enctype="multipart/form-data">
                                                         <div class="row">
                                                             <div class="container-fluid text-center"> 
-                                                            <img src="../images/{{ data.employee.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
-                                                            <input type="file" id="fileInput" class="form-control" ng-model="data.employee.image">
+                                                            <img src="../images/{{ data.employee.personal.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
+                                                            <input type="file" id="fileInput" name="file" class="form-control" ng-model="data.employee.image">
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -104,25 +104,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Last Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.lastname">
+                                                                    <input class="form-control" ng-model="data.employee.personal.lastname">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>First Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.firstname">
+                                                                    <input class="form-control" ng-model="data.employee.personal.firstname">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Middle Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.middlename">
+                                                                    <input class="form-control" ng-model="data.employee.personal.middlename">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Qualifier</label>
-                                                                    <input class="form-control" ng-model="data.employee.qualifier">
+                                                                    <input class="form-control" ng-model="data.employee.personal.qualifier">
                                                                 </div>
                                                             </div>                                                        
                                                         </div> 
@@ -130,14 +130,14 @@ html {
                                                         <div class="row">
                                                             <div class="col-lg-4">
                                                                 <label>Gender</label>
-                                                                <select class="form-control" ng-model="data.employee.gender">
+                                                                <select class="form-control" ng-model="data.employee.personal.gender">
                                                                     <option value="male">Male</option>
                                                                     <option value="female">Female</option>
                                                                 </select> 
                                                             </div> 
                                                             <div class="col-lg-4">
                                                                 <label>Religion</label>
-                                                                <select class="form-control" ng-model="data.employee.religion">
+                                                                <select class="form-control" ng-model="data.employee.personal.religion">
                                                                     <option value="baptist">Baptist</option>
                                                                     <option value="born again christian">Born Again Christian</option>
                                                                     <option value="buddhist">Buddhist</option>
@@ -153,7 +153,7 @@ html {
                                                             </div> 
                                                             <div class="col-lg-4">
                                                                 <label>Nationality</label>
-                                                                <select class="form-control" ng-model="data.employee.religion">
+                                                                <select class="form-control" ng-model="data.employee.personal.religion">
                                                                     <option value="american">American</option>
                                                                     <option value="chinese">Chinese</option>
                                                                     <option value="filipino">Filipino</option>
@@ -169,19 +169,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.dob">
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.personal.dob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Place of Birth</label>
-                                                                    <input class="form-control" ng-model="data.employee.pob">
+                                                                    <input class="form-control" ng-model="data.employee.personal.pob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Civil Status</label>
-                                                                    <input class="form-control" ng-model="data.employee.civil_status">
+                                                                    <input class="form-control" ng-model="data.employee.personal.civil_status">
                                                                 </div>
                                                             </div>                                                       
                                                         </div>
@@ -190,13 +190,13 @@ html {
                                                             <div class="col-lg-4 col-lg-offset-2">
                                                                 <div class="form-group">
                                                                     <label>Email Address</label>
-                                                                    <input class="form-control" ng-model="data.employee.email">
+                                                                    <input class="form-control" ng-model="data.employee.personal.email">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mobile Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.mobile_number">
+                                                                    <input class="form-control" ng-model="data.employee.personal.mobile_number">
                                                                 </div>
                                                             </div>                                                      
                                                         </div>                                                                       
@@ -1191,6 +1191,7 @@ html {
 
             $scope.data = {};
             $scope.data.employee = {};
+            $scope.data.employee.personal = {};
             $scope.data.employee.address = {};
             $scope.data.employee.emergency = {};
             
@@ -1200,19 +1201,19 @@ html {
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
                 
 
-                $scope.data.employee.firstname = $scope.employee.firstname;
-                $scope.data.employee.middlename = $scope.employee.middlename;
-                $scope.data.employee.lastname = $scope.employee.lastname;
-                $scope.data.employee.qualifier = $scope.employee.qualifier;
-                $scope.data.employee.gender = $scope.employee.gender;
-                $scope.data.employee.religion = $scope.employee.religion;
-                $scope.data.employee.nationality = $scope.employee.nationality;
-                $scope.data.employee.dob = $scope.employee.dob;
-                $scope.data.employee.pob = $scope.employee.pob;
-                $scope.data.employee.civil_status = $scope.employee.civil_status;
-                $scope.data.employee.email = $scope.employee.email;
-                $scope.data.employee.mobile_number = $scope.employee.mobile_number;
-                $scope.data.employee.image = $scope.employee.image;
+                $scope.data.employee.personal.firstname = $scope.employee.firstname;
+                $scope.data.employee.personal.middlename = $scope.employee.middlename;
+                $scope.data.employee.personal.lastname = $scope.employee.lastname;
+                $scope.data.employee.personal.qualifier = $scope.employee.qualifier;
+                $scope.data.employee.personal.gender = $scope.employee.gender;
+                $scope.data.employee.personal.religion = $scope.employee.religion;
+                $scope.data.employee.personal.nationality = $scope.employee.nationality;
+                $scope.data.employee.personal.dob = $scope.employee.dob;
+                $scope.data.employee.personal.pob = $scope.employee.pob;
+                $scope.data.employee.personal.civil_status = $scope.employee.civil_status;
+                $scope.data.employee.personal.email = $scope.employee.email;
+                $scope.data.employee.personal.mobile_number = $scope.employee.mobile_number;
+                $scope.data.employee.personal.image = $scope.employee.image;
 
 
 
@@ -1222,8 +1223,10 @@ html {
 
             $scope.submit = function () {
                 var fd = new FormData();
-                  fd.append('file', $("#fileInput")[0].files[0])   ;
-                $http.put('/employee/' + $scope.userId, fd, {transformRequest: angular.identity,headers:{"Content-Type": undefined}}).then(function success(response) {
+                fd.append('file', $("#fileInput")[0].files[0]);
+                fd.append('data', JSON.stringify($scope.data));
+                $http.put('/employee/' + $scope.userId, fd, {transformRequest: angular.identity,headers:{"Content-Type": undefined
+            }}).then(function success(response) {
                     console.log(response);
                 }, function error(response) {
                     console.log(response);
