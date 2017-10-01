@@ -153,7 +153,7 @@ html {
                                                             </div> 
                                                             <div class="col-lg-4">
                                                                 <label>Nationality</label>
-                                                                <select class="form-control" ng-model="data.employee.personal.religion">
+                                                                <select class="form-control" ng-model="data.employee.personal.nationality">
                                                                     <option value="american">American</option>
                                                                     <option value="chinese">Chinese</option>
                                                                     <option value="filipino">Filipino</option>
@@ -217,13 +217,13 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.address.barangay">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.address.municipality">
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -231,19 +231,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.address.province">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.address.country">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.address.zip_code">
                                                                 </div>
                                                             </div>                                                                                                          
                                                         </div>                                                     
@@ -253,31 +253,31 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Person name</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.contact_person">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Relation</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.relation">
                                                                 </div>
                                                             </div>    
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.contact_number">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.barangay">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.municipality">
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -285,19 +285,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.province">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.country">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.emergency.zip_code">
                                                                 </div>
                                                             </div>                                                                                                           
                                                         </div>                                                                                                                       
@@ -315,39 +315,39 @@ html {
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Height (cm)</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.physical_description.height">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Weight (lbs)</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.physical_description.weight">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Built</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.physical_description.built">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Eye Color</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.physical_description.eye_color">
                                                                 </div>
                                                             </div>  
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Hair Color</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.physical_description.hair_color">
                                                                 </div>
                                                             </div>  
                                                             <div class="col-lg-2">
                                                                 <label>Complexion</label>
-                                                                <select class="form-control">
-                                                                    <option>Light</option>
-                                                                    <option>Fair</option>
-                                                                    <option>Dark</option>
+                                                                <select class="form-control" ng-model="data.employee.physical_description.complexion">
+                                                                    <option value="light">Light</option>
+                                                                    <option value="light">Fair</option>
+                                                                    <option value="light">Dark</option>
                                                                 </select> 
                                                             </div>                                  
                                                         </div>                                                                      
@@ -366,19 +366,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Father's Name</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[0].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.parent[0].dob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[0].contact_number">
                                                                 </div>
                                                             </div>                                
                                                         </div>
@@ -386,19 +386,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Occupation</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[0].occupation">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Name</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[0].company_name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Address</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[0].company_address">
                                                                 </div>
                                                             </div>                                
                                                         </div> 
@@ -408,19 +408,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mother's Name</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[1].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.parent[1].dob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[1].contact_number">
                                                                 </div>
                                                             </div>                                
                                                         </div>
@@ -428,19 +428,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Occupation</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[1].occupation">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Name</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[1].company_name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Address</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.parent[1].company_address">
                                                                 </div>
                                                             </div>                                
                                                         </div> 
@@ -448,40 +448,108 @@ html {
                                                         <label style="color:red">Brother(s)/Sister(s)</label>      
                                                         <div class="row">
                                                             <div class="col-lg-3">
-                                                                <div class="form-group input-group">
-                                                                    <input type="text" class="form-control">
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn btn-default" type="button">Go!</button>
-                                                                    </span>
-                                                                </div>
-                                                            </div>   
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Name</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.sibling[0].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY">
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[0].dob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course/Occupation</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.sibling[0].occupation">
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School/Company</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.sibling[0].company">
                                                                 </div>
                                                             </div>                                                                                        
-                                                        </div>              
+                                                        </div> 
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[1].name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[1].dob">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Course/Occupation</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[1].occupation">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>School/Company</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[1].company">
+                                                                </div>
+                                                            </div>                                                                                        
+                                                        </div>  
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[2].name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[2].dob">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Course/Occupation</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[2].occupation">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>School/Company</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[2].company">
+                                                                </div>
+                                                            </div>                                                                                        
+                                                        </div>  
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[3].name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[3].dob">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Course/Occupation</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[3].occupation">
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>School/Company</label>
+                                                                    <input class="form-control" ng-model="data.employee.sibling[3].company">
+                                                                </div>
+                                                            </div>                                                                                        
+                                                        </div>               
                                                     </form>                                               
                                                 </div>
                                             </div>
@@ -497,25 +565,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[0].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[0].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[0].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[0].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -525,25 +593,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[1].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[1].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[1].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[1].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -553,25 +621,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[2].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[2].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[2].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[2].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -581,25 +649,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[3].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[3].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[3].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control">
+                                                                    <input class="form-control" ng-model="data.employee.education_background[3].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -1194,6 +1262,10 @@ html {
             $scope.data.employee.personal = {};
             $scope.data.employee.address = {};
             $scope.data.employee.emergency = {};
+            $scope.data.employee.physical_description = {};
+            $scope.data.employee.parent = [];
+            $scope.data.employee.sibling = [];
+            $scope.data.employee.education_background = [];
             
 
             $http.get('/employee/' + $scope.userId).then(function success(response) {
@@ -1214,6 +1286,129 @@ html {
                 $scope.data.employee.personal.email = $scope.employee.email;
                 $scope.data.employee.personal.mobile_number = $scope.employee.mobile_number;
                 $scope.data.employee.personal.image = $scope.employee.image;
+
+                $scope.data.employee.address.barangay = $scope.employee.address[0].barangay;
+                $scope.data.employee.address.municipality = $scope.employee.address[0].municipality;
+                $scope.data.employee.address.province = $scope.employee.address[0].province;
+                $scope.data.employee.address.country = $scope.employee.address[0].country;
+                $scope.data.employee.address.zip_code = $scope.employee.address[0].zip_code;
+
+                $scope.data.employee.emergency.contact_person = $scope.employee.emergency[0].contact_person;
+                $scope.data.employee.emergency.relation = $scope.employee.emergency[0].relation;
+                $scope.data.employee.emergency.contact_number = $scope.employee.emergency[0].contact_number;
+                $scope.data.employee.emergency.barangay = $scope.employee.emergency[0].barangay;
+                $scope.data.employee.emergency.municipality = $scope.employee.emergency[0].municipality;
+                $scope.data.employee.emergency.province = $scope.employee.emergency[0].province;
+                $scope.data.employee.emergency.country = $scope.employee.emergency[0].country;
+                $scope.data.employee.emergency.zip_code = $scope.employee.emergency[0].zip_code;
+
+                $scope.data.employee.physical_description.height = $scope.employee.physical_description[0].height;
+                $scope.data.employee.physical_description.weight = $scope.employee.physical_description[0].weight;
+                $scope.data.employee.physical_description.built = $scope.employee.physical_description[0].built;
+                $scope.data.employee.physical_description.eye_color = $scope.employee.physical_description[0].eye_color;
+                $scope.data.employee.physical_description.hair_color = $scope.employee.physical_description[0].hair_color;
+                $scope.data.employee.physical_description.complexion = $scope.employee.physical_description[0].complexion;
+
+                var father = {
+                    id: $scope.employee.parent[0].id,
+                    parent_type: $scope.employee.parent[0].parent_type,
+                    name: $scope.employee.parent[0].name,
+                    dob: $scope.employee.parent[0].dob,
+                    occupation: $scope.employee.parent[0].occupation,
+                    company_name: $scope.employee.parent[0].company_name,
+                    company_address: $scope.employee.parent[0].company_address
+                };
+
+                $scope.data.employee.parent.push(father);
+
+
+                var mother = {
+                    id: $scope.employee.parent[1].id,
+                    parent_type: $scope.employee.parent[1].parent_type,
+                    name: $scope.employee.parent[1].name,
+                    dob: $scope.employee.parent[1].dob,
+                    occupation: $scope.employee.parent[1].occupation,
+                    company_name: $scope.employee.parent[1].company_name,
+                    company_address: $scope.employee.parent[1].company_address
+                };
+                
+                $scope.data.employee.parent.push(mother);
+
+                var sibling = [
+                    {
+                        id: $scope.employee.sibling[0].id,
+                        name: $scope.employee.sibling[0].name,
+                        dob: $scope.employee.sibling[0].dob,
+                        occupation: $scope.employee.sibling[0].occupation,
+                        company: $scope.employee.sibling[0].company
+                    },
+                    {
+                        id: $scope.employee.sibling[1].id,
+                        name: $scope.employee.sibling[1].name,
+                        dob: $scope.employee.sibling[1].dob,
+                        occupation: $scope.employee.sibling[1].occupation,
+                        company: $scope.employee.sibling[1].company
+                    },
+                    {
+                        id: $scope.employee.sibling[2].id,
+                        name: $scope.employee.sibling[2].name,
+                        dob: $scope.employee.sibling[2].dob,
+                        occupation: $scope.employee.sibling[2].occupation,
+                        company: $scope.employee.sibling[2].company
+                    },
+                    {
+                        id: $scope.employee.sibling[3].id,
+                        name: $scope.employee.sibling[3].name,
+                        dob: $scope.employee.sibling[3].dob,
+                        occupation: $scope.employee.sibling[3].occupation,
+                        company: $scope.employee.sibling[3].company
+                    }
+                ];
+
+                $scope.data.employee.sibling.push(sibling[0]);
+                $scope.data.employee.sibling.push(sibling[1]);
+                $scope.data.employee.sibling.push(sibling[2]);
+                $scope.data.employee.sibling.push(sibling[3]);
+
+                var education = [
+                    {
+                        id: $scope.employee.education_background[0].id,
+                        education_type: $scope.employee.education_background[0].education_type,
+                        school: $scope.employee.education_background[0].school,
+                        course: $scope.employee.education_background[0].course,
+                        year: $scope.employee.education_background[0].year,
+                        award: $scope.employee.education_background[0].award
+                    },
+                    {
+                        id: $scope.employee.education_background[1].id,
+                        education_type: $scope.employee.education_background[1].education_type,
+                        school: $scope.employee.education_background[1].school,
+                        course: $scope.employee.education_background[1].course,
+                        year: $scope.employee.education_background[1].year,
+                        award: $scope.employee.education_background[1].award
+                    },
+                    {
+                        id: $scope.employee.education_background[2].id,
+                        education_type: $scope.employee.education_background[2].education_type,
+                        school: $scope.employee.education_background[2].school,
+                        course: $scope.employee.education_background[2].course,
+                        year: $scope.employee.education_background[2].year,
+                        award: $scope.employee.education_background[2].award
+                    },
+                    {
+                        id: $scope.employee.education_background[3].id,
+                        education_type: $scope.employee.education_background[3].education_type,
+                        school: $scope.employee.education_background[3].school,
+                        course: $scope.employee.education_background[3].course,
+                        year: $scope.employee.education_background[3].year,
+                        award: $scope.employee.education_background[3].award
+                    }
+                ];
+
+                $scope.data.employee.education_background.push(education[0]);
+                $scope.data.employee.education_background.push(education[1]);
+                $scope.data.employee.education_background.push(education[2]);
+                $scope.data.employee.education_background.push(education[3]);
 
 
 

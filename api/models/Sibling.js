@@ -37,7 +37,15 @@ module.exports = {
 
   	employee_id: {
   		model: 'employee'
-  	}
+  	},
+
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.employee_id;
+      delete obj.createdAt;
+      delete obj.updatedAt;
+      return obj;
+    }
   }
 };
 

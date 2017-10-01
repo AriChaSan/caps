@@ -19,7 +19,18 @@ module.exports = {
 
 	show: function(req, res) {
 
-		Employee.findOne(req.params.id).exec(function(err, employee) {
+		Employee.findOne(req.params.id).populateAll().exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			return res.json(employee);
+		});
+	},
+
+	create: function(req, res) {
+
+		Employee.findOne(req.params.id).populateAll().exec(function(err, employee) {
 			if(err) {
 				return res.serverError(err);
 			}
@@ -54,15 +65,119 @@ module.exports = {
 		    var data = JSON.parse(req.param('data')).employee;
 		    console.log(data);
 		    Employee.update({account_id: req.params.id}, data.personal).exec(function(err, employee) {
-		    	console.log(employee);
+		    	//console.log(employee);
+		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
+		    		
+		    	});
+
+		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
+		    		
+		    	});
+
+		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
+		    		
+		    	});
+
 		    });
 		  }
 		  else{
 		    //  handle uploaded file
 		    var data = JSON.parse(req.param('data')).employee;
 		    data.personal.image = filename;
+		    console.log(data);
 		    Employee.update({account_id: req.params.id}, data.personal).exec(function(err, employee) {
-		    	console.log(employee);
+		    	//console.log(employee);
+		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
+		    		
+		    	});
+
+		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
+		    		
+		    	});
+
+		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
+		    		
+		    	});
 		    });
 		  }
 		});

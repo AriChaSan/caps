@@ -78,7 +78,7 @@ module.exports = {
   	},
 
   	email: {
-  		type: 'email',
+  		type: 'string',
   		size: 128,
   		defaultsTo: ''
   	},
@@ -99,8 +99,33 @@ module.exports = {
       defaultsTo: 'user-icon.jpg'
     },
 
+    physical_description: {
+      collection: 'physical_description',
+      via: 'employee_id'
+    },
+
     address: {
       collection: 'address',
+      via: 'employee_id'
+    },
+
+    emergency: {
+      collection: 'emergency',
+      via: 'employee_id'
+    },
+
+    parent: {
+      collection: 'parent',
+      via: 'employee_id'
+    },
+
+    sibling: {
+      collection: 'sibling',
+      via: 'employee_id'
+    },
+
+    education_background: {
+      collection: 'education_background',
       via: 'employee_id'
     },
 
