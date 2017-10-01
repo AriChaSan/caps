@@ -94,7 +94,7 @@ html {
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Employee ID</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.personal.id_number">
                                                         </div>
                                                     </div>                                                       
                                                 </div>   
@@ -103,25 +103,25 @@ html {
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Last Name</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.personal.lastname">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>First Name</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.personal.firstname">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Middle Name</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.personal.middlename">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Qualifier</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.personal.qualifier">
                                                         </div>
                                                     </div>                                                        
                                                 </div>   
@@ -130,19 +130,19 @@ html {
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Username</label>
-                                                            <input class="form-control" placeholder="MM/DD/YYYY">
+                                                            <input class="form-control" ng-model="data.employee.account.username">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Password</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.account.password">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Repeat Password</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="data.employee.account.confirmPassword">
                                                         </div>
                                                     </div>                                                       
                                                 </div>
@@ -151,12 +151,11 @@ html {
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Position</label>
-                                                        <select class="form-control">
-                                                            <option>Security Officer IV</option>
-                                                            <option>Security Officer III</option>
-                                                            <option>Security Agent II</option>
-                                                            <option>Security Agent I</option>
-                                                            <option>Security Guard</option>
+                                                        <select class="form-control" ng-model="data.employee.personal.employee_type_id">
+                                                            <option value="1">Security Officer I</option>
+                                                            <option value="2">Security Officer II</option>
+                                                            <option value="3">Security Officer III</option>
+                                                            <option value="4">Security Officer IV</option>
                                                         </select> 
                                                         </div>
                                                     </div> 
@@ -187,12 +186,12 @@ html {
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Account Type</label>
-                                                        <select class="form-control">
-                                                            <option>SuperAdmin</option>
-                                                            <option>Admin</option>
-                                                            <option>Employee</option>
-                                                            <option>Loan</option>
-                                                            <option>Accounting</option>
+                                                        <select class="form-control" ng-model="data.employee.account.account_type_id">
+                                                            <option value="1">SuperAdmin</option>
+                                                            <option value="2">Admin</option>
+                                                            <option value="3">Employee</option>
+                                                            <option value="4">Loan</option>
+                                                            <option value="5">Accounting</option>
                                                         </select> 
                                                         </div>
                                                     </div>                                                                                                     
@@ -210,7 +209,7 @@ html {
                                                     </div>                                                                                                
                                                 </div><hr>                                                                                    
                                                 <div class="col-lg-12 col-lg-offset-11">   
-                                                    <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                                                    <button class="btn btn-success" type="button" ng-click="submit()">Save <i class="fa fa-save"></i></button>
                                                 </div>               
                                             </form>                                               
                                         </div>
@@ -793,6 +792,23 @@ html {
             $scope.employee = {};
             $scope.employee.fullname = "";
 
+            $scope.data = {};
+            $scope.data.employee = {};
+
+            $scope.data.employee.personal = {};
+            $scope.data.employee.personal.id_number = "";
+            $scope.data.employee.personal.firstname = "";
+            $scope.data.employee.personal.middlename = ""; 
+            $scope.data.employee.personal.lastname = ""; 
+            $scope.data.employee.personal.qualifier = ""; 
+            $scope.data.employee.personal.employee_type_id = ""; 
+
+            $scope.data.employee.account = {};
+            $scope.data.employee.account.username = "";
+            $scope.data.employee.account.password = "";
+            $scope.data.employee.account.confirmPassword = ""; 
+            $scope.data.employee.account.account_type_id = ""; 
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -805,6 +821,16 @@ html {
 
                 $http.post('/logout').then(function success(response) {
                     window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.submit = function () {
+
+                var data = $scope.data.employee;
+                $http.post('/employee', {data: data}).then(function success(response) {
+                    console.log(response);
                 }, function error(response) {
                     console.log(response);
                 });

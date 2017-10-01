@@ -17,7 +17,18 @@ module.exports = {
 		});
 	},
 
-	show: function(req, res) {
+	showUser: function(req, res) {
+
+		User.findOne(req.params.id).populateAll().exec(function(err, user) {
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			return res.json(user);
+		});
+	},
+
+	showEmployee: function(req, res) {
 
 		Employee.findOne(req.params.id).populateAll().exec(function(err, employee) {
 			if(err) {
@@ -30,13 +41,105 @@ module.exports = {
 
 	create: function(req, res) {
 
-		Employee.findOne(req.params.id).populateAll().exec(function(err, employee) {
-			if(err) {
-				return res.serverError(err);
-			}
-			
-			return res.json(employee);
-		});
+		console.log(req.param('data'));
+		var data = req.param('data');
+		if(data.account.account_type_id == 4 || data.account.account_type_id == 5) {
+
+			User.create(data.account).exec(function(err, user) {
+				var employee = {
+		          id_number: data.personal.id_number,
+		          firstname: data.personal.firstname,
+		          middlename: data.personal.middlename,
+		          lastname: data.personal.lastname,
+		          qualifier: data.personal.qualifier,
+		          account_id: user.id,
+		          employee_type_id: data.personal.employee_type_id
+		        };
+
+				Employee.create(employee).exec(function(err, employee) {	            
+		          
+		        }); 
+			});
+		} else {
+
+			User.create(data.account).exec(function(err, user) {
+				var employee = {
+		          id_number: data.personal.id_number,
+		          firstname: data.personal.firstname,
+		          middlename: data.personal.middlename,
+		          lastname: data.personal.lastname,
+		          qualifier: data.personal.qualifier,
+		          account_id: user.id,
+		          employee_type_id: data.personal.employee_type_id
+		        };
+
+				Employee.create(employee).exec(function(err, employee) {
+		            
+		          Address.create({employee_id: employee.id}).exec(function(err, address) {
+		          });
+
+		          Emergency.create({employee_id: employee.id}).exec(function(err, address) {
+		          });
+
+		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {
+		          });
+
+		          var parent = [
+		            {
+		              parent_type: 'father',
+		              employee_id: employee.id
+		            },
+		            {
+		              parent_type: 'mother',
+		              employee_id: employee.id
+		            }
+		          ];
+
+		          Parent.create(parent).exec(function(err, parent) {
+		          });
+
+		          var sibling = [
+		            {
+		              employee_id: employee.id
+		            },
+		            {
+		              employee_id: employee.id
+		            },
+		            {
+		              employee_id: employee.id
+		            },
+		            {
+		              employee_id: employee.id
+		            }
+		          ];
+
+		          Sibling.create(sibling).exec(function(err, sibling) {
+		          });
+
+		          var education = [
+		            {
+		              education_type: 'elementary',
+		              employee_id: employee.id
+		            },
+		            {
+		              education_type: 'highschool',
+		              employee_id: employee.id
+		            },
+		            {
+		              education_type: 'college',
+		              employee_id: employee.id
+		            },
+		            {
+		              education_type: 'post_graduate',
+		              employee_id: employee.id
+		            }
+		          ];
+
+		          Education_Background.create(education).exec(function(err, education_background) {
+		          });
+		        }); 
+			});
+		}
 	},
 
 	update: function(req, res) {

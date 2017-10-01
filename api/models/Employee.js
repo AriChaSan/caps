@@ -89,6 +89,10 @@ module.exports = {
   		defaultsTo: ''
   	},
 
+    employee_type_id: {
+      model: 'employee_type'
+    },
+
   	account_id: {
   		model: 'user'
   	},

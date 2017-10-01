@@ -165,13 +165,13 @@ html {
                                                             <div class="col-lg-4 col-lg-offset-2">
                                                                 <div class="form-group">
                                                                     <label>Email Address</label>
-                                                                    <p>{{employee.email}}</p>
+                                                                    <p>{{employee.email || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mobile Number</label>
-                                                                    <p>{{employee.mobile_number}}</p>
+                                                                    <p>{{employee.mobile_number || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                      
                                                         </div>                                                                       
@@ -192,13 +192,13 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <p>70 Boungainvilla st. III Salapungan</p>
+                                                                    <p>{{employee.address.barangay || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <p>Angeles City</p>
+                                                                    <p>{{employee.address.municipality || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -206,19 +206,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <p>Pampanga</p>
+                                                                    <p>{{employee.address.province || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <p>Philippines</p>
+                                                                    <p>{{employee.address.country || 'N/A'}}</p>
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <p>20009</p>
+                                                                    <p>{{employee.address.zip_code || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                                                                          
                                                         </div>                                                     
@@ -228,31 +228,31 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Person name</label>
-                                                                    <p>Juanita S. Roque</p>
+                                                                    <p>{{employee.emergency.name || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Relation</label>
-                                                                    <p>Grandmother</p>
+                                                                    <p>{{employee.emergency.relation || 'N/A'}}</p>
                                                                 </div>
                                                             </div>    
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <p>09153439783</p>
+                                                                    <p>{{employee.emergency.contact_number || 'N/A'}}</p>
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <p>70 Boungainvilla st. III Salapungan</p>
+                                                                    <p>{{employee.emergency.barangay || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <p>Angeles City</p>
+                                                                    <p>{{employee.emergency.municipality || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -260,19 +260,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <p>Pampanga</p>
+                                                                    <p>{{employee.emergency.province || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <p>Philippines</p>
+                                                                    <p>{{employee.emergency.country || 'N/A'}}</p>
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <p>20009</p>
+                                                                    <p>{{employee.emergency.zip_code || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                                                                           
                                                         </div>                                                                                                                       

@@ -29,7 +29,8 @@ module.exports.bootstrap = function(cb) {
           id_number: '123456',
           firstname: 'Crisostomo',
           lastname: 'Pabalan',
-          account_id: user.id
+          account_id: user.id,
+          employee_type_id: 4
         };
 
 
@@ -138,7 +139,7 @@ module.exports.bootstrap = function(cb) {
       employee_type: 'security officer III'
     },
     {
-      employee_type: 'lsecurity officer IV'
+      employee_type: 'security officer IV'
     }
   ];
 

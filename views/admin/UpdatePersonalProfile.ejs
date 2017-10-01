@@ -1207,7 +1207,36 @@ html {
     <script src="../bootstrap/data/morris-data.js"></script>
 
     <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+<script>
+    (function() {
+        var app = angular.module('app', []);
 
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+        });
+    })();
+</script>
 </body>
 
 </html>
