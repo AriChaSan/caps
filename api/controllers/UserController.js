@@ -145,6 +145,8 @@ module.exports = {
 	update: function(req, res) {
 		//var mimeType = req.file('file')._readableState.buffer.head.data.filename.split('.');
 		//mimeType = _.last(mimeType);
+		var data = JSON.parse(req.param('data')).employee;
+		var userId = req.params.id;
 		var now = new Date();
 	    now = now.getTime();
 	    var filename = "";
@@ -156,132 +158,22 @@ module.exports = {
 			 	    filename = now + '.' +extension;
 			 		cb(null, filename);
 			 	},
-			maxBytes: 10000000
+			maxBytes: 1000000000
 		};
 
 		req.file('file').upload(config, function (err, uploadedFiles){
 		  if(err){
-		    return res.json(500, err);
+		    return res.json(500, {message: 'Too big'});
 		  }
 		  else if(uploadedFiles.length === 0){
 		    // proceed without files
-		    var data = JSON.parse(req.param('data')).employee;
-		    console.log(data);
-		    Employee.update({account_id: req.params.id}, data.personal).exec(function(err, employee) {
-		    	//console.log(employee);
-		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
-		    		
-		    	});
-
-		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
-		    		
-		    	});
-
-		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    });
+		   	uploadNoImage(data, userId);
+		   	return res.json(200, 'success');
 		  }
 		  else{
 		    //  handle uploaded file
-		    var data = JSON.parse(req.param('data')).employee;
-		    data.personal.image = filename;
-		    console.log(data);
-		    Employee.update({account_id: req.params.id}, data.personal).exec(function(err, employee) {
-		    	//console.log(employee);
-		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
-		    		
-		    	});
-
-		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
-		    		
-		    	});
-
-		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
-		    		
-		    	});
-		    });
+		    uploadWithImage(data, filename, userId);
+		    return res.json(200, 'success');
 		  }
 		});
 	},
@@ -347,18 +239,121 @@ module.exports = {
 	}
 };
 
-function upload(file, filename) {
-		var config = {
-			dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
-			saveAs: filename
-		};
+function uploadNoImage(data, userid) {
+		    console.log(data);
+		    Employee.update({account_id: userid}, data.personal).exec(function(err, employee) {
+		    	//console.log(employee);
+		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
+		    		
+		    	});
 
-		file.upload(config, function (err, uploadedFiles) {
-		  // ...\
-			if(err) {
-				console.log(err);
-			}
-			console.log(uploadedFiles);
-		});
+		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
+		    		
+		    	});
+
+		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    });
+}
+
+function uploadWithImage(data, filename, userid) {
+		    data.personal.image = filename;
+		    console.log(data);
+		    Employee.update({account_id: userid}, data.personal).exec(function(err, employee) {
+		    	//console.log(employee);
+		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
+		    		
+		    	});
+
+		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
+		    		
+		    	});
+
+		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
+		    		
+		    	});
+
+		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
+		    		
+		    	});
+		    });
 }
 

@@ -192,13 +192,13 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <p>{{employee.address.barangay || 'N/A'}}</p>
+                                                                    <p>{{employee.address[0].barangay || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <p>{{employee.address.municipality || 'N/A'}}</p>
+                                                                    <p>{{employee.address[0].municipality || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -206,19 +206,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <p>{{employee.address.province || 'N/A'}}</p>
+                                                                    <p>{{employee.address[0].province || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <p>{{employee.address.country || 'N/A'}}</p>
+                                                                    <p>{{employee.address[0].country || 'N/A'}}</p>
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <p>{{employee.address.zip_code || 'N/A'}}</p>
+                                                                    <p>{{employee.address[0].zip_code || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                                                                          
                                                         </div>                                                     
@@ -228,31 +228,31 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Person name</label>
-                                                                    <p>{{employee.emergency.name || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].contact_person || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Relation</label>
-                                                                    <p>{{employee.emergency.relation || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].relation || 'N/A'}}</p>
                                                                 </div>
                                                             </div>    
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <p>{{employee.emergency.contact_number || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].contact_number || 'N/A'}}</p>
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <p>{{employee.emergency.barangay || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].barangay || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <p>{{employee.emergency.municipality || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].municipality || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -260,19 +260,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <p>{{employee.emergency.province || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].province || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <p>{{employee.emergency.country || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].country || 'N/A'}}</p>
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <p>{{employee.emergency.zip_code || 'N/A'}}</p>
+                                                                    <p>{{employee.emergency[0].zip_code || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                                                                                           
                                                         </div>                                                                                                                       
@@ -290,36 +290,36 @@ html {
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Height (cm)</label>
-                                                                    <p>167.6 cm</p>
+                                                                    <p>{{employee.physical_description[0].height || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Weight (lbs)</label>
-                                                                    <p>132 lbs</p>
+                                                                    <p>{{employee.physical_description[0].weight || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Built</label>
-                                                                    <p>Medium</p>
+                                                                    <p>{{employee.physical_description[0].built || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Eye Color</label>
-                                                                    <p>Black</p>
+                                                                    <p>{{employee.physical_description[0].eye_color || 'N/A'}}</p>
                                                                 </div>
                                                             </div>  
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Hair Color</label>
-                                                                    <p>Black</p>
+                                                                    <p>{{employee.physical_description[0].hair_color || 'N/A'}}</p>
                                                                 </div>
                                                             </div>  
                                                             <div class="col-lg-2">
                                                                 <label>Complexion</label>
-                                                                <p>Fair</p>
+                                                                <p>{{employee.physical_description[0].complexion || 'N/A'}}</p>
                                                             </div>                                  
                                                         </div>                                                                      
                                                     </form>                                               
@@ -337,19 +337,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Father's Name</label>
-                                                                    <p>Louis C. Di</p>
+                                                                    <p>{{employee.parent[0].name || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <p>11/01/1943</p>
+                                                                    <p>{{employee.parent[0].dob || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <p>09543825542</p>
+                                                                    <p>{{employee.parent[0].contact || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                
                                                         </div>
@@ -357,19 +357,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Occupation</label>
-                                                                    <p>N/A</p>
+                                                                    <p>{{employee.parent[0].occupation || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Name</label>
-                                                                    <p>N/A</p>
+                                                                    <p>{{employee.parent[0].company_name || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Address</label>
-                                                                    <p>N/A</p>
+                                                                    <p>{{employee.parent[0].company_address || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                
                                                         </div> 
@@ -379,19 +379,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mother's Name</label>
-                                                                    <p>Marlyn R. Chen</p>
+                                                                    <p>{{employee.parent[1].name || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <p>07/22/1964</p>
+                                                                    <p>{{employee.parent[1].dob || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <p>09275839953</p>
+                                                                    <p>{{employee.parent[1].contact || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                
                                                         </div>
@@ -399,47 +399,47 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Occupation</label>
-                                                                    <p>Factory Worker</p>
+                                                                    <p>{{employee.parent[1].occupation || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Name</label>
-                                                                    <p>Shinchu Company</p>
+                                                                    <p>{{employee.parent[1].company_name || 'N/A'}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Address</label>
-                                                                    <p>Shinchu Shien Hukou Shiang, Taipei</p>
+                                                                    <p>{{employee.parent[1].company_address || 'N/A'}}</p>
                                                                 </div>
                                                             </div>                                
                                                         </div> 
                                                         <hr>  
                                                         <label style="color:red">Brother(s)/Sister(s)</label>      
-                                                        <div class="row">
+                                                        <div class="row" ng-repeat="sibling in employee.sibling">
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Name</label>
-                                                                    <p>Joscelyn Rochelle F. Roque</p>
+                                                                    <p>{{ sibling.name }}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <p>07/22/1990</p>
+                                                                    <p>{{ sibling.dob }}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course/Occupation</label>
-                                                                    <p>Call Center Agent</p>
+                                                                    <p>{{ sibling.occupation }}</p>
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School/Company</label>
-                                                                    <p>Clark, Pampanga</p>
+                                                                    <p>{{ sibling.company }}</p>
                                                                 </div>
                                                             </div>                                                                                        
                                                         </div>              
@@ -452,120 +452,43 @@ html {
                                                     <center><h4><b>VI. EDUCATIONAL BACKGROUND</b></h4></center>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form role="form">
-                                                        <label style="color:red">Elementary</label>
+                                                    <form role="form" ng-repeat="school in employee.education_background">
+                                                    <div ng-switch="school.education_type">
+                                                        <label style="color:red" ng-switch-when="elementary">Elementary</label>
+                                                        <label style="color:red" ng-switch-when="highschool">Highschool</label>
+                                                        <label style="color:red" ng-switch-when="college">College</label>
+                                                        <label style="color:red" ng-switch-when="post_graduate">Post graduate</label>
+                                                        <label style="color:red" ng-switch-default>test</label>
+                                                    </div>
+                                                        
                                                         <div class="row">
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <p>Achievers Special Education Center</p>
+                                                                    <p>{{ school.school || "N/A"}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <p>Primary</p>
+                                                                    <p>{{ school.course || "N/A"}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <p>2009</p>
+                                                                    <p>{{ school.year || "N/A"}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <p>N/A</p>
+                                                                    <p>{{ school.award || "N/A"}}</p>
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
-                                                        <hr> 
-                                                        <label style="color:red">Highschool</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <p>Nazarene Academy</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <p>Secondary</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <p>2013</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <p>N/A</p>
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr> 
-                                                        <label style="color:red">College</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <p>Angeles University Foundation</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <p>Tertiary, BSIT</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <p>Present</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <p>N/A</p>
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr> 
-                                                        <label style="color:red">Post Graduate</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <p>N/A</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <p>N/A</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <p>N/A</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <p>N/A</p>
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr>                                                                                               
-                                                    </form>                                               
+                                                    </form>
+                                                                                                       
                                                 </div>
                                             </div>                                                                                               
                                         </div> 

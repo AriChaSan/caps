@@ -135,8 +135,22 @@ module.exports = {
 
   	toJSON: function() {
       var obj = this.toObject();
+      var elementary = _.findWhere(obj.education_background, {education_type: 'elementary'});
+      var highschool = _.findWhere(obj.education_background, {education_type: 'highschool'});
+      var college = _.findWhere(obj.education_background, {education_type: 'college'});
+      var post_graduate = _.findWhere(obj.education_background, {education_type: 'post_graduate'});
+
+      
+      delete obj.education_background;
       delete obj.createdAt;
       delete obj.updatedAt;
+
+      obj.education_background = [];
+
+      obj.education_background.push(elementary);
+      obj.education_background.push(highschool);
+      obj.education_background.push(college);
+      obj.education_background.push(post_graduate);
       return obj;
     }
   }

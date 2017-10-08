@@ -56,14 +56,14 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
-  // someMongodbServer: {
-  //   adapter: 'sails-mongo',
-  //   host: 'localhost',
-  //   port: 27017,
-  //   user: 'username', //optional
-  //   password: 'password', //optional
-  //   database: 'your_mongo_db_name_here' //optional
-  // },
+   /*mongo: {
+     adapter: 'sails-mongo',
+     host: 'mongodb://owenpayumo:owenpayumo@capstone-shard-00-00-cvx2e.mongodb.net:27017,capstone-shard-00-01-cvx2e.mongodb.net:27017,capstone-shard-00-02-cvx2e.mongodb.net:27017/test?ssl=true&replicaSet=capstone-shard-0&authSource=admin',
+     port: 27017,
+    // user: 'admin', //optional
+     //password: 'admin' //optional
+     //database: 'capstone' //optional
+   },*/
 
   /***************************************************************************
   *                                                                          *
