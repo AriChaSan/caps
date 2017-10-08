@@ -95,8 +95,8 @@ html {
                                                     <form role="form" enctype="multipart/form-data">
                                                         <div class="row">
                                                             <div class="container-fluid text-center"> 
-                                                            <img src="../images/{{ data.employee.personal.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
-                                                            <input type="file" id="fileInput" name="file" class="form-control" ng-model="data.employee.image">
+                                                            <img src="{{ data.employee.personal.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
+                                                            <input type="file" id="fileInput" name="file" class="form-control" ng-model="data.employee.image" accept="image/*">
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -1420,9 +1420,9 @@ html {
 
             $scope.submit = function () {
                 //$('#saveButton').attr("disabled", true);
-                var fd = new FormData();
-                fd.append('file', $("#fileInput")[0].files[0]);
+                var fd = new FormData();           
                 fd.append('data', JSON.stringify($scope.data));
+                fd.append('file', $("#fileInput")[0].files[0]);
                 $http.put('/employee/' + $scope.userId, fd, {transformRequest: angular.identity,headers:{"Content-Type": undefined
             }}).then(function success(response) {
                     //alert('Success');

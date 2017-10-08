@@ -9,17 +9,18 @@ module.exports = {
 	
 	index: function(req, res) {
 		User.find().populate(['account_type_id', 'employee']).exec(function(err, user) {
+
 			if(err) {
 				return res.serverError(err);
-			}
-			
+			}	
+
 			return res.json(user);
 		});
 	},
 
 	showUser: function(req, res) {
-
 		User.findOne(req.params.id).populateAll().exec(function(err, user) {
+
 			if(err) {
 				return res.serverError(err);
 			}
@@ -29,8 +30,8 @@ module.exports = {
 	},
 
 	showEmployee: function(req, res) {
-
 		Employee.findOne(req.params.id).populateAll().exec(function(err, employee) {
+
 			if(err) {
 				return res.serverError(err);
 			}
@@ -40,7 +41,6 @@ module.exports = {
 	},
 
 	create: function(req, res) {
-
 		console.log(req.param('data'));
 		var data = req.param('data');
 		if(data.account.account_type_id == 4 || data.account.account_type_id == 5) {
@@ -56,9 +56,7 @@ module.exports = {
 		          employee_type_id: data.personal.employee_type_id
 		        };
 
-				Employee.create(employee).exec(function(err, employee) {	            
-		          
-		        }); 
+				Employee.create(employee).exec(function(err, employee) {}); 
 			});
 		} else {
 
@@ -75,14 +73,9 @@ module.exports = {
 
 				Employee.create(employee).exec(function(err, employee) {
 		            
-		          Address.create({employee_id: employee.id}).exec(function(err, address) {
-		          });
-
-		          Emergency.create({employee_id: employee.id}).exec(function(err, address) {
-		          });
-
-		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {
-		          });
+		          Address.create({employee_id: employee.id}).exec(function(err, address) {});
+		          Emergency.create({employee_id: employee.id}).exec(function(err, address) {});
+		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 
 		          var parent = [
 		            {
@@ -95,8 +88,7 @@ module.exports = {
 		            }
 		          ];
 
-		          Parent.create(parent).exec(function(err, parent) {
-		          });
+		          Parent.create(parent).exec(function(err, parent) {});
 
 		          var sibling = [
 		            {
@@ -113,8 +105,7 @@ module.exports = {
 		            }
 		          ];
 
-		          Sibling.create(sibling).exec(function(err, sibling) {
-		          });
+		          Sibling.create(sibling).exec(function(err, sibling) {});
 
 		          var education = [
 		            {
@@ -135,8 +126,7 @@ module.exports = {
 		            }
 		          ];
 
-		          Education_Background.create(education).exec(function(err, education_background) {
-		          });
+		          Education_Background.create(education).exec(function(err, education_background) {});
 		        }); 
 			});
 		}
@@ -146,6 +136,7 @@ module.exports = {
 		//var mimeType = req.file('file')._readableState.buffer.head.data.filename.split('.');
 		//mimeType = _.last(mimeType);
 		var data = JSON.parse(req.param('data')).employee;
+		console.log(data);
 		var userId = req.params.id;
 		var now = new Date();
 	    now = now.getTime();
@@ -153,15 +144,26 @@ module.exports = {
 		var config = {
 			dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
 			saveAs: function(file, cb) {
-
 			 		var extension = file.filename.split('.').pop();
 			 	    filename = now + '.' +extension;
 			 		cb(null, filename);
 			 	},
-			maxBytes: 1000000000
+			maxBytes: 10000000
 		};
 
+		var cloudinaryConfig = {
+		      adapter  : require('skipper-cloudinary'),
+		      key      : '621888631475351',
+		      secret   : 'UPaA26iv-O9yDqfFpcSIAf1Lg28',
+		      cloudName: 'capstoneimg',
+		      uploadOptions: {
+		        folder: 'image'
+		      },
+		      maxBytes: 10000000
+		    };
+
 		req.file('file').upload(config, function (err, uploadedFiles){
+			console.log(uploadedFiles);
 		  if(err){
 		    return res.json(500, {message: 'Too big'});
 		  }
@@ -172,6 +174,7 @@ module.exports = {
 		  }
 		  else{
 		    //  handle uploaded file
+		    //filename = uploadedFiles[0].extra.url;
 		    uploadWithImage(data, filename, userId);
 		    return res.json(200, 'success');
 		  }
@@ -183,12 +186,10 @@ module.exports = {
 		var error = [];
 
 		if(req.param('username') == "" || req.param('username') == undefined) {
-
 			error.push('Username is required.');
 		};
 
 		if(req.param('password') == "" || req.param('password') == undefined) {
-
 			error.push('Password is required.');
 		};
 
@@ -199,12 +200,10 @@ module.exports = {
 		User.findOne({username: req.param('username')}).populate('account_type_id').exec(function(err, user) {
 
 			if(err) {
-
 				return res.json(500, err);
 			};
 
 			if(user == undefined || user.length > 0) {
-
 				error.push('Username does not exist.');
 				return res.json(404, {errors: error});
 			};
@@ -234,126 +233,46 @@ module.exports = {
 
 		var date = new Date();
 		req.session.cookie.expires = new Date(date.getTime() - 999999);
-
 		return res.json(200, {message: 'logged out'});
 	}
 };
 
 function uploadNoImage(data, userid) {
-		    console.log(data);
-		    Employee.update({account_id: userid}, data.personal).exec(function(err, employee) {
-		    	//console.log(employee);
-		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
-		    		
-		    	});
-
-		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
-		    		
-		    	});
-
-		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    });
+	console.log(data);
+	Employee.update({account_id: userid}, data.personal).exec(function(err, employee) {
+		Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {});
+		Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {});
+		Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {});
+		Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {});
+		Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {});
+	});
 }
 
 function uploadWithImage(data, filename, userid) {
-		    data.personal.image = filename;
-		    console.log(data);
-		    Employee.update({account_id: userid}, data.personal).exec(function(err, employee) {
-		    	//console.log(employee);
-		    	Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {
-		    		
-		    	});
-
-		    	Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {
-		    		
-		    	});
-
-		    	Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {
-		    		
-		    	});
-
-		    	Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {
-		    		
-		    	});
-		    });
+	data.personal.image = filename;
+	console.log(data);
+	Employee.update({account_id: userid}, data.personal).exec(function(err, employee) {
+		Address.update({employee_id: employee[0].id}, data.emergency).exec(function(err, address) {});
+		Emergency.update({employee_id: employee[0].id}, data.emergency).exec(function(err, emergency) {});
+		Physical_Description.update({employee_id: employee[0].id}, data.physical_description).exec(function(err, physical_description) {});
+		Parent.update({id: data.parent[0].id}, data.parent[0]).exec(function(err, parent) {});
+		Parent.update({id: data.parent[1].id}, data.parent[1]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[0].id}, data.sibling[0]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[1].id}, data.sibling[1]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[2].id}, data.sibling[2]).exec(function(err, parent) {});
+		Sibling.update({id: data.sibling[3].id}, data.sibling[3]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[0].id}, data.education_background[0]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[1].id}, data.education_background[1]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[2].id}, data.education_background[2]).exec(function(err, parent) {});
+		Education_Background.update({id: data.education_background[3].id}, data.education_background[3]).exec(function(err, parent) {});
+	});
 }
 
