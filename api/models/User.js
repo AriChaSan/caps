@@ -40,13 +40,24 @@ module.exports = {
       var obj = this.toObject();
       obj.account_type = obj.account_type_id.account_type;
       delete obj.account_type_id;
-      delete obj.createdAt;
-      delete obj.updatedAt;
+      //delete obj.createdAt;
+      //delete obj.updatedAt;
       return obj;
     }
   },
 
   beforeCreate: function(values, cb) {
+    
+  var bcrypt = require('bcryptjs');
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(values.password, salt);
+  
+  values.password = hash;
+
+  cb();               
+  },
+
+  beforeUpdate: function(values, cb) {
     
   var bcrypt = require('bcryptjs');
   var salt = bcrypt.genSaltSync(10);

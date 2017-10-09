@@ -29,6 +29,20 @@ module.exports = {
 		});
 	},
 
+	changePassword: function(req, res) {
+
+		var data = req.param('data');
+		console.log(data);
+		User.update({id: req.params.id}, {password: data.newPassword}).exec(function(err, user) {
+
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			return res.json(user);
+		});
+	},
+
 	showEmployee: function(req, res) {
 		Employee.findOne(req.params.id).populateAll().exec(function(err, employee) {
 
@@ -38,6 +52,31 @@ module.exports = {
 			
 			return res.json(employee);
 		});
+	},
+
+	showEmployeeList: function(req, res) {
+
+		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
+			// body...
+			var usersId = _.pluck(users, 'id');
+			Employee.find({account_id: usersId})
+			.populate('account_id.account_type_id')
+			.populate('physical_description')
+			.populate('address')
+			.populate('emergency')
+			.populate('parent')
+			.populate('sibling')
+			.populate('education_background')
+			.populate('employee_type_id')
+			.exec(function(err, employee) {
+
+				if(err) {
+					return res.serverError(err);
+				}
+				
+				return res.json(employee);
+			});
+		})	
 	},
 
 	create: function(req, res) {

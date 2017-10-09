@@ -697,13 +697,7 @@ html {
           </div>
           <div class="modal-body">
             <div class="panel panel-default">
-                <div class="panel-body">    
-                    <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
-                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
-                    </center> 
-                </div>
+                <% include changepassword/changepassword.ejs %>
             </div>       
           </div>
         </div>
@@ -779,29 +773,7 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">    
-                    <form role="form">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter Current Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter New Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
-                                </div>
-                            </div>                                                   
-                        <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                        </div>                                                                                                                      
-                    </form>                                               
+                    <% include changepassword/changepasswordform.ejs %>                                               
                 </div>
             </div>            
           </div>
@@ -1266,6 +1238,11 @@ html {
             $scope.data.employee.parent = [];
             $scope.data.employee.sibling = [];
             $scope.data.employee.education_background = [];
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
             
 
             $http.get('/employee/' + $scope.userId).then(function success(response) {
@@ -1425,10 +1402,22 @@ html {
                 fd.append('file', $("#fileInput")[0].files[0]);
                 $http.put('/employee/' + $scope.userId, fd, {transformRequest: angular.identity,headers:{"Content-Type": undefined
             }}).then(function success(response) {
-                    //alert('Success');
-                   // window.location.href = '/sadmin/viewpersonalprofile';
+                    alert('Success');
+                    window.location.href = '/sadmin/viewpersonalprofile';
                 }, function error(response) {
                     alert('Error updating profile.');
+                });
+            };
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
                 });
             };
             

@@ -42,7 +42,9 @@ module.exports.routes = {
 
   'GET /user': 'UserController.index',
   'GET /user/:id': 'UserController.showUser',
+  'GET /user/changepassword/:id': 'UserController.changePassword',
 
+  'GET /employee': 'UserController.showEmployeeList',
   'GET /employee/:id': 'UserController.showEmployee',
   'PUT /employee/:id': 'UserController.update',
   'POST /employee': 'UserController.create',
