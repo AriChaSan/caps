@@ -35,15 +35,10 @@ module.exports.bootstrap = function(cb) {
 
 
         Employee.create(employee).exec(function(err, employee) {
-            
-          Address.create({employee_id: employee.id}).exec(function(err, address) {
-          });
-
-          Emergency.create({employee_id: employee.id}).exec(function(err, address) {
-          });
-
-          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {
-          });
+          Schedule.create({employee_id: employee.id}).exec(function(err, address) {});
+          Address.create({employee_id: employee.id}).exec(function(err, address) {});
+          Emergency.create({employee_id: employee.id}).exec(function(err, address) {});
+          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 
           var parent = [
             {
@@ -56,8 +51,7 @@ module.exports.bootstrap = function(cb) {
             }
           ];
 
-          Parent.create(parent).exec(function(err, parent) {
-          });
+          Parent.create(parent).exec(function(err, parent) {});
 
           var sibling = [
             {
@@ -74,8 +68,7 @@ module.exports.bootstrap = function(cb) {
             }
           ];
 
-          Sibling.create(sibling).exec(function(err, sibling) {
-          });
+          Sibling.create(sibling).exec(function(err, sibling) {});
 
           var education = [
             {
@@ -96,8 +89,7 @@ module.exports.bootstrap = function(cb) {
             }
           ];
 
-          Education_Background.create(education).exec(function(err, education_background) {
-          });
+          Education_Background.create(education).exec(function(err, education_background) {});
         });   
         
       });
@@ -146,6 +138,146 @@ module.exports.bootstrap = function(cb) {
   Employee_Type.findOrCreate(employee_type, employee_type).exec(function(err, employee_type) {
     console.log(employee_type);
   });
+
+     var location = [
+      {
+        location: 'city college of angeles'
+      },
+      {
+        location: 'blood bank'
+      },
+      {
+        location: 'cswdo'
+      },
+      {
+        location: 'renal care unit'
+      },
+      {
+        location: 'museo ning angeles'
+      },
+      {
+        location: 'angeles city library'
+      }
+    ];
+
+    Location.findOrCreate(location).exec(function(err, employeeType) {
+
+    });
+
+    var shiftType = [
+      {
+        shift_type: 'dayTime',
+        start: '7 am',
+        end: '3 pm',
+        location_id: 1
+      },
+      {
+        shift_type: 'swingTime',
+        start: '3 pm',
+        end: '11 pm',
+        location_id: 1
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '11 pm',
+        end: '7 am',
+        location_id: 1
+      },
+      {
+        shift_type: 'dayTime',
+        start: '7 am',
+        end: '3 pm',
+        location_id: 2
+      },
+      {
+        shift_type: 'swingTime',
+        start: '3 pm',
+        end: '11 pm',
+        location_id: 2
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '11 pm',
+        end: '7 am',
+        location_id: 2
+      },
+      {
+        shift_type: 'dayTime',
+        start: '7 am',
+        end: '3 pm',
+        location_id: 3
+      },
+      {
+        shift_type: 'swingTime',
+        start: '3 pm',
+        end: '11 pm',
+        location_id: 3
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '11 pm',
+        end: '7 am',
+        location_id: 3
+      },
+      {
+        shift_type: 'dayTime',
+        start: '7 am',
+        end: '3 pm',
+        location_id: 4
+      },
+      {
+        shift_type: 'swingTime',
+        start: '3 pm',
+        end: '11 pm',
+        location_id: 4
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '11 pm',
+        end: '7 am',
+        location_id: 4
+      },
+      {
+        shift_type: 'dayTime',
+        start: '6 am',
+        end: '2 pm',
+        location_id: 5
+      },
+      {
+        shift_type: 'swingTime',
+        start: '2 pm',
+        end: '10 pm',
+        location_id: 5
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '10 pm',
+        end: '6 am',
+        location_id: 5
+      },
+      {
+        shift_type: 'dayTime',
+        start: '6 am',
+        end: '2 pm',
+        location_id: 6
+      },
+      {
+        shift_type: 'swingTime',
+        start: '2 pm',
+        end: '10 pm',
+        location_id: 6
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '10 pm',
+        end: '6 am',
+        location_id: 6
+      }
+    ];
+
+    Shift.findOrCreate(shiftType).exec(function(err, employeeType) {
+
+    });
 
   cb();
 };

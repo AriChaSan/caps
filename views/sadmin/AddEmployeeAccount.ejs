@@ -199,13 +199,13 @@ html {
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <label style="color:red">Schedule (Select Working Days)</label><br>
-                                                            <h3><center><label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Monday</label>
-                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Tuesday</label>
-                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Wednesday</label>
-                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Thursday</label>
-                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Friday</label>
-                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Saturday</label>       
-                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="">Sunday</label></h3></center>
+                                                            <h3><center><label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.monday">Monday</label>
+                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.tuesday">Tuesday</label>
+                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.wednesday">Wednesday</label>
+                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.thursday">Thursday</label>
+                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.friday">Friday</label>
+                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.saturday">Saturday</label>       
+                                                            <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.sunday">Sunday</label></h3></center>
                                                     </div>                                                                                                
                                                 </div><hr>                                                                                    
                                                 <div class="col-lg-12 col-lg-offset-11">   
@@ -780,6 +780,15 @@ html {
             $scope.data.employee.account.password = "";
             $scope.data.employee.account.confirmPassword = ""; 
             $scope.data.employee.account.account_type_id = ""; 
+
+            $scope.data.employee.schedule = {};
+            $scope.data.employee.schedule.monday = false; 
+            $scope.data.employee.schedule.tuesday = false; 
+            $scope.data.employee.schedule.wednesday = false; 
+            $scope.data.employee.schedule.thursday = false; 
+            $scope.data.employee.schedule.friday = false; 
+            $scope.data.employee.schedule.saturday = false; 
+            $scope.data.employee.schedule.sunday = false; 
 
             $scope.changePassword = {};
             $scope.changePassword.oldPassword = "";

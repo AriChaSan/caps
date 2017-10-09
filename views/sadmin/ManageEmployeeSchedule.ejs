@@ -139,97 +139,19 @@ html {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Security Officer IV</td>
+                                                                <tr ng-repeat="emp in view.employee">
+                                                                    <td>{{ emp.id_number }}</td>
+                                                                    <td>{{ emp.lastname + ', ' + emp.firstname + ' ' + emp.middlename }}</td>
+                                                                    <td>{{ emp.employee_type_id.employee_type }}</td>
                                                                     <td>Swing Shift</td>
                                                                     <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
+                                                                    
                                                                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>    
+                                                                    <!--<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
+                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>-->    
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Security Officer III</td>
-                                                                    <td>Graveyard Shift</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                         
-                                                                </tr>                                                          
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Security Officer II</td>
-                                                                    <td>Day Shift</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                         
-                                                                </tr>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                        
-                                                                </tr>                                                          
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                          
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                           
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                            
-                                                                </tr>                                                        
+                                                                                                                        
                                                             </tbody>
                                                         </table>                                                      
                                                     </div>
@@ -1032,6 +954,8 @@ html {
             $scope.changePassword.newPassword = "";
             $scope.changePassword.confirmPassword = "";
 
+            $scope.view = {};
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -1039,6 +963,14 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+            $http.get('/employeeschedulelist').then(function success(response) {
+                $scope.view.employee = response.data;
+                console.log($scope.view.employee);
+            }, function error(response) {
+                console.log(response);
+            });
+
 
             $scope.changePasswordSubmit = function () {
 

@@ -18,6 +18,17 @@ module.exports = {
 		});
 	},
 
+	showLocation: function(req, res) {
+		Location.find().populate('shifts').exec(function(err, location) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(location);
+		});
+	},
+
 	showUser: function(req, res) {
 		User.findOne(req.params.id).populateAll().exec(function(err, user) {
 
@@ -68,6 +79,32 @@ module.exports = {
 			.populate('sibling')
 			.populate('education_background')
 			.populate('employee_type_id')
+			.populate('schedule')
+			.exec(function(err, employee) {
+
+				if(err) {
+					return res.serverError(err);
+				}
+				
+				return res.json(employee);
+			});
+		})	
+	},
+
+	showEmployeeScheduleList: function(req, res) {
+		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
+			// body...
+			var usersId = _.pluck(users, 'id');
+			Employee.find({account_id: usersId})
+			.populate('account_id.account_type_id')
+			.populate('physical_description')
+			.populate('address')
+			.populate('emergency')
+			.populate('parent')
+			.populate('sibling')
+			.populate('education_background')
+			.populate('employee_type_id')
+			.populate('schedule')
 			.exec(function(err, employee) {
 
 				if(err) {
@@ -111,10 +148,24 @@ module.exports = {
 		        };
 
 				Employee.create(employee).exec(function(err, employee) {
-		            
 		          Address.create({employee_id: employee.id}).exec(function(err, address) {});
 		          Emergency.create({employee_id: employee.id}).exec(function(err, address) {});
 		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
+
+		          var schedule = [
+		            {
+		              monday: data.schedule.monday ? 'on' : 'off',
+		              tuesday: data.schedule.tuesday ? 'on' : 'off',
+		              wednesday: data.schedule.wednesday ? 'on' : 'off',
+		              thursday: data.schedule.thursday ? 'on' : 'off',
+		              friday: data.schedule.friday ? 'on' : 'off',
+		              saturday: data.schedule.saturday ? 'on' : 'off',
+		              sunday: data.schedule.sunday ? 'on' : 'off',
+		              employee_id: employee.id
+		            }
+		          ];
+
+		          Schedule.create(schedule).exec(function(err, address) {});
 
 		          var parent = [
 		            {
