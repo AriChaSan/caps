@@ -18,6 +18,70 @@ module.exports = {
 		});
 	},
 
+	clockIn: function(req, res) {
+		var empIdNumber = req.params.id;
+
+		Employee.findOne({id_number: empIdNumber}).exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			if(employee.length == 0) {
+				return res.json(404, {message: 'Employee not found.'});
+			}
+
+			var time = new Date();
+			time = time.getTime();
+
+			var data = {
+				log: time,
+				employee_id: employee.id
+			};
+
+			Log_TimeIn.create(data).exec(function(err, user) {
+
+				if(err) {
+					return res.serverError(err);
+				}
+				
+				return res.json(user);
+			});
+		});
+
+		
+	},
+
+	clockOut: function(req, res) {
+		var empIdNumber = req.params.id;
+
+		Employee.findOne({id_number: empIdNumber}).exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			if(employee.length == 0) {
+				return res.json(404, {message: 'Employee not found.'});
+			}
+
+			var time = new Date();
+			time = time.getTime();
+
+			var data = {
+				log: time,
+				employee_id: employee.id
+			};
+
+			Log_TimeOut.create(data).exec(function(err, user) {
+
+				if(err) {
+					return res.serverError(err);
+				}
+				
+				return res.json(user);
+			});
+		});
+	},
+
 	showLocation: function(req, res) {
 		Location.find().populate('shifts').exec(function(err, location) {
 

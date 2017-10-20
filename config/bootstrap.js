@@ -30,7 +30,9 @@ module.exports.bootstrap = function(cb) {
           firstname: 'Crisostomo',
           lastname: 'Pabalan',
           account_id: user.id,
-          employee_type_id: 4
+          employee_type_id: 4,
+          location_id: 7,
+          shift: 'dayTime'
         };
 
 
@@ -157,6 +159,9 @@ module.exports.bootstrap = function(cb) {
       },
       {
         location: 'angeles city library'
+      },
+      {
+        location: 'city hall'
       }
     ];
 
@@ -272,6 +277,24 @@ module.exports.bootstrap = function(cb) {
         start: '10 pm',
         end: '6 am',
         location_id: 6
+      },
+      {
+        shift_type: 'dayTime',
+        start: '7 am',
+        end: '3 pm',
+        location_id: 7
+      },
+      {
+        shift_type: 'swingTime',
+        start: '3 pm',
+        end: '11 pm',
+        location_id: 7
+      },
+      {
+        shift_type: 'graveyardTime',
+        start: '11 pm',
+        end: '7 am',
+        location_id: 7
       }
     ];
 

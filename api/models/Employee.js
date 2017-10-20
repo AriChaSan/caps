@@ -138,6 +138,14 @@ module.exports = {
       via: 'employee_id'
     },
 
+    location_id: {
+      model: 'location'
+    },
+
+    shift: {
+      type: 'string'
+    },
+
   	toJSON: function() {
       var obj = this.toObject();
       var elementary = _.findWhere(obj.education_background, {education_type: 'elementary'});

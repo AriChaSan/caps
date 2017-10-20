@@ -50,6 +50,9 @@ module.exports.routes = {
   'POST /employee': 'UserController.create',
   'GET /employeeschedulelist': 'UserController.showEmployeeScheduleList',
 
+  'POST /employee/clockin/:id': 'UserController.clockIn',
+  'POST /employee/clockout/:id': 'UserController.clockOut',
+
   'GET /viewlocation': 'UserController.showLocation',
 
   'GET /sadmin/absencereports': 'SadminController.absencereports',
