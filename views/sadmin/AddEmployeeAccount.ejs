@@ -149,7 +149,7 @@ html {
                                                 <hr>  
                                                 <div class="row">
                                                     <div class="col-lg-3">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="positionDiv">
                                                             <label>Position</label>
                                                         <select class="form-control" ng-model="data.employee.personal.employee_type_id">
                                                             <option value="1">Security Officer I</option>
@@ -160,7 +160,7 @@ html {
                                                         </div>
                                                     </div> 
                                                     <div class="col-lg-3">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="shiftDiv">
                                                             <label>Shift Type</label>
                                                         <select class="form-control" ng-model="data.employee.personal.shift">
                                                             <option value="dayTime">Day Shift</option>
@@ -170,7 +170,7 @@ html {
                                                         </div>
                                                     </div> 
                                                     <div class="col-lg-3">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="locationDiv">
                                                             <label>Location</label>
                                                         <select class="form-control" ng-model="data.employee.personal.location_id">
                                                             <option value="7">City Hall</option>
@@ -186,7 +186,7 @@ html {
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Account Type</label>
-                                                        <select class="form-control" ng-model="data.employee.account.account_type_id">
+                                                        <select class="form-control" ng-change="changeAccount()" ng-model="data.employee.account.account_type_id">
                                                             <option value="1">SuperAdmin</option>
                                                             <option value="2">Admin</option>
                                                             <option value="3">Employee</option>
@@ -197,7 +197,7 @@ html {
                                                     </div>                                                                                                     
                                                 </div><hr>         
                                                 <div class="row">
-                                                    <div class="col-lg-12">
+                                                    <div class="col-lg-12" id="scheduleDiv">
                                                         <label style="color:red">Schedule (Select Working Days)</label><br>
                                                             <h3><center><label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.monday">Monday</label>
                                                             <label class="checkbox-inline"><input type="checkbox" class="big-checkbox" value="" ng-model="data.employee.schedule.tuesday">Tuesday</label>
@@ -372,23 +372,7 @@ html {
         </div>
       </div>
     </div>    
-    <div id="07modal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <center><h3>Time: 01:23AM</h3>
-                    <h3>Date: September 2, 2017</h3></center>
-                </div>                                                                                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>    
+    <% include timemodal/timemodal.ejs %>   
     <div id="notif" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -773,15 +757,15 @@ html {
             $scope.data.employee.personal.middlename = ""; 
             $scope.data.employee.personal.lastname = ""; 
             $scope.data.employee.personal.qualifier = ""; 
-            $scope.data.employee.personal.employee_type_id = ""; 
-            $scope.data.employee.personal.location_id = ""; 
-            $scope.data.employee.personal.shift = ""; 
+            $scope.data.employee.personal.employee_type_id = "1"; 
+            $scope.data.employee.personal.location_id = "7"; 
+            $scope.data.employee.personal.shift = "dayTime"; 
 
             $scope.data.employee.account = {};
             $scope.data.employee.account.username = "";
             $scope.data.employee.account.password = "";
             $scope.data.employee.account.confirmPassword = ""; 
-            $scope.data.employee.account.account_type_id = ""; 
+            $scope.data.employee.account.account_type_id = "3"; 
 
             $scope.data.employee.schedule = {};
             $scope.data.employee.schedule.monday = false; 
@@ -835,6 +819,20 @@ html {
                     console.log(response);
                 });
             };
+
+            $scope.changeAccount = function() {
+                if($scope.data.employee.account.account_type_id == 4 || $scope.data.employee.account.account_type_id == 5) {
+                    $('#positionDiv').hide();
+                    $('#shiftDiv').hide();
+                    $('#locationDiv').hide();
+                    $('#scheduleDiv').hide();
+                } else {
+                    $('#positionDiv').show();
+                    $('#shiftDiv').show();
+                    $('#locationDiv').show();
+                    $('#scheduleDiv').show();
+                }
+            }
             
         });
     })();

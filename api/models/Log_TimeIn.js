@@ -10,9 +10,14 @@ module.exports = {
   tableName: 'tbl_log_timein',
   attributes: {
 
-  	log: {
+  	logIn: {
   		type: 'string'
   	},
+
+    logOut: {
+      type: 'string',
+      defaultsTo: ""
+    },
 
   	employee_id: {
   		model: 'employee'

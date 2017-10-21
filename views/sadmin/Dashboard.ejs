@@ -414,6 +414,15 @@ html {
                                                                         </tr>
                                                                         <tr>
                                                                             <td>07/22/2017</td>
+                                                                            <td>Matthew Louis R. Di </td>
+                                                                            <td>08:00am</td>
+                                                                            <td>05:00pm</td>
+                                                                            <td>09:00:00</td>
+                                                                            <td>00:00:00</td>
+                                                                            <td>00:00:00</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>07/22/2017</td>
                                                                             <td>Owen C. Payumo</td>
                                                                             <td>08:00am</td>
                                                                             <td>05:00pm</td>
@@ -1307,6 +1316,7 @@ html {
         });
     });                          
     </script>         
+<script src="../js/dependencies/sails.io.js"></script>
 
 <script>
     (function() {
@@ -1325,9 +1335,32 @@ html {
 
             $scope.empIdNumber = "";
 
+            $scope.dayLog = "";
+            $scope.swingLog = "";
+            $scope.graveLog = "";
+
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeedaylogs').then(function success(response) {
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeeswinglogs').then(function success(response) {
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeegravelogs').then(function success(response) {
                 console.log(response);
             }, function error(response) {
                 console.log(response);
@@ -1375,6 +1408,11 @@ html {
                     console.log(response);
                 });
             };
+
+            io.socket.on('timeIn', function onServerSentEvent (msg) {
+              alert('someone time in', msg);
+
+            });
             
         });
     })();

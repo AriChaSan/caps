@@ -18,6 +18,62 @@ module.exports = {
 		});
 	},
 
+	showEmployeeDayLogs: function(req, res) {
+		Log_TimeIn.find().populate('employee_id').exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+
+			var dayTime = [];
+
+			_.each(employee, function(value, index) {
+
+				if(value.employee_id.shift == 'dayTime') {
+					dayTime.push(value);
+				}
+			});
+
+			return res.json(dayTime);		
+		});
+	},
+
+	showEmployeeSwingLogs: function(req, res) {
+		Log_TimeIn.find().populate('employee_id').exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+
+			var swingTime = [];
+
+			_.each(employee, function(value, index) {
+
+				if(value.employee_id.shift == 'swingTime') {
+					swingTime.push(value);
+				}
+			});
+			return res.json(swingTime);
+		});
+	},
+
+	showEmployeeGraveLogs: function(req, res) {
+		Log_TimeIn.find().populate('employee_id').exec(function(err, employee) {
+			if(err) {
+				return res.serverError(err);
+			}
+
+			var graveyardTime = [];
+
+			_.each(employee, function(value, index) {
+
+				if(value.employee_id.shift == 'graveyardTime') {
+					graveyardTime.push(value);
+				}
+			});
+			return res.json(graveyardTime);
+		});
+	},
+
+
 	clockIn: function(req, res) {
 		var empIdNumber = req.params.id;
 
@@ -26,7 +82,7 @@ module.exports = {
 				return res.serverError(err);
 			}
 			
-			if(employee.length == 0) {
+			if(!employee) {
 				return res.json(404, {message: 'Employee not found.'});
 			}
 
@@ -34,18 +90,28 @@ module.exports = {
 			time = time.getTime();
 
 			var data = {
-				log: time,
+				logIn: time,
 				employee_id: employee.id
 			};
 
-			Log_TimeIn.create(data).exec(function(err, user) {
-
-				if(err) {
-					return res.serverError(err);
+			Log_TimeIn.find({employee_id: employee.id, logOut: ""}).exec(function(err, log) {
+				if(log.length > 0) {
+					return res.json(404, {message: 'Employee is still logged in.'});
 				}
-				
-				return res.json(user);
+
+				Log_TimeIn.create(data).exec(function(err, user) {
+
+					if(err) {
+						return res.serverError(err);
+					}
+
+					sails.sockets.blast('timeIn', {message: 'hello'});
+					
+					return res.json(user);
+				});
 			});
+
+			
 		});
 
 		
@@ -59,7 +125,7 @@ module.exports = {
 				return res.serverError(err);
 			}
 			
-			if(employee.length == 0) {
+			if(!employee) {
 				return res.json(404, {message: 'Employee not found.'});
 			}
 
@@ -67,17 +133,23 @@ module.exports = {
 			time = time.getTime();
 
 			var data = {
-				log: time,
-				employee_id: employee.id
+				logOut: time				
 			};
 
-			Log_TimeOut.create(data).exec(function(err, user) {
+			Log_TimeIn.findOne({employee_id: employee.id, logOut: ""}).exec(function(err, log) {
 
 				if(err) {
 					return res.serverError(err);
 				}
+
+				if(!log) {
+					return res.json(404, {message: 'Employee is not logged in.'});
+				}
 				
-				return res.json(user);
+				Log_TimeIn.update({id: log.id},data).exec(function(err, log) {
+					return res.json(log);
+				});
+				
 			});
 		});
 	},
@@ -193,7 +265,9 @@ module.exports = {
 		          lastname: data.personal.lastname,
 		          qualifier: data.personal.qualifier,
 		          account_id: user.id,
-		          employee_type_id: data.personal.employee_type_id
+		          employee_type_id: data.personal.employee_type_id,
+		          location_id: "",
+		          shift: ""
 		        };
 
 				Employee.create(employee).exec(function(err, employee) {}); 

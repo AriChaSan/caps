@@ -49,6 +49,9 @@ module.exports.routes = {
   'PUT /employee/:id': 'UserController.update',
   'POST /employee': 'UserController.create',
   'GET /employeeschedulelist': 'UserController.showEmployeeScheduleList',
+  'GET /employeedaylogs' : 'UserController.showEmployeeDayLogs',
+  'GET /employeeswinglogs' : 'UserController.showEmployeeSwingLogs',
+  'GET /employeegravelogs' : 'UserController.showEmployeeGraveLogs',
 
   'POST /employee/clockin/:id': 'UserController.clockIn',
   'POST /employee/clockout/:id': 'UserController.clockOut',
