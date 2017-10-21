@@ -208,7 +208,9 @@ module.exports = {
 		          lastname: data.personal.lastname,
 		          qualifier: data.personal.qualifier,
 		          account_id: user.id,
-		          employee_type_id: data.personal.employee_type_id
+		          employee_type_id: data.personal.employee_type_id,
+		          location_id: data.personal.location_id,
+		          shift: data.personal.shift
 		        };
 
 				Employee.create(employee).exec(function(err, employee) {

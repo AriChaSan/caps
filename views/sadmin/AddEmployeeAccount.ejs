@@ -162,24 +162,24 @@ html {
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Shift Type</label>
-                                                        <select class="form-control">
-                                                            <option>Day Shift</option>
-                                                            <option>Swing Shift</option>
-                                                            <option>Graveyard Shift</option>
+                                                        <select class="form-control" ng-model="data.employee.personal.shift">
+                                                            <option value="dayTime">Day Shift</option>
+                                                            <option value="swingTime">Swing Shift</option>
+                                                            <option value="graveyardTime">Graveyard Shift</option>
                                                         </select> 
                                                         </div>
                                                     </div> 
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Location</label>
-                                                        <select class="form-control">
-                                                            <option>City Hall</option>
-                                                            <option>Renal Care Unit</option>
-                                                            <option>Angeles City Library</option>
-                                                            <option>Museo Ning Angeles</option>
-                                                            <option>Blood Bank</option>
-                                                            <option>CSWDO</option>
-                                                            <option>City College Of Angeles</option>
+                                                        <select class="form-control" ng-model="data.employee.personal.location_id">
+                                                            <option value="7">City Hall</option>
+                                                            <option value="4">Renal Care Unit</option>
+                                                            <option value="6">Angeles City Library</option>
+                                                            <option value="5">Museo Ning Angeles</option>
+                                                            <option value="2">Blood Bank</option>
+                                                            <option value="3">CSWDO</option>
+                                                            <option value="1">City College Of Angeles</option>
                                                         </select> 
                                                         </div>
                                                     </div>                                                        
@@ -774,6 +774,8 @@ html {
             $scope.data.employee.personal.lastname = ""; 
             $scope.data.employee.personal.qualifier = ""; 
             $scope.data.employee.personal.employee_type_id = ""; 
+            $scope.data.employee.personal.location_id = ""; 
+            $scope.data.employee.personal.shift = ""; 
 
             $scope.data.employee.account = {};
             $scope.data.employee.account.username = "";
