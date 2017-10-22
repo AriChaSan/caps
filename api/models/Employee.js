@@ -113,11 +113,6 @@ module.exports = {
       via: 'employee_id'
     },
 
-    timeout: {
-      collection: 'log_timeout',
-      via: 'employee_id'
-    },
-
     address: {
       collection: 'address',
       via: 'employee_id'

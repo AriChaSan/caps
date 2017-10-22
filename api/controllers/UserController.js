@@ -96,7 +96,8 @@ module.exports = {
 
 			Log_TimeIn.find({employee_id: employee.id, logOut: ""}).exec(function(err, log) {
 				if(log.length > 0) {
-					return res.json(404, {message: 'Employee is still logged in.'});
+					sails.sockets.blast('timeIn', {status: 404, employee_id: employee.id});
+					return res.json(404, {message: 'Employee is still logged in.',status: 404});
 				}
 
 				Log_TimeIn.create(data).exec(function(err, user) {
@@ -105,7 +106,7 @@ module.exports = {
 						return res.serverError(err);
 					}
 
-					sails.sockets.blast('timeIn', {message: 'hello'});
+					sails.sockets.blast('timeIn', {status: 200, employee_id: employee.id});
 					
 					return res.json(user);
 				});
@@ -126,7 +127,7 @@ module.exports = {
 			}
 			
 			if(!employee) {
-				return res.json(404, {message: 'Employee not found.'});
+				return res.json(404, {message: 'Employee not found.', status: 404});
 			}
 
 			var time = new Date();
@@ -143,10 +144,12 @@ module.exports = {
 				}
 
 				if(!log) {
+					sails.sockets.blast('timeOut', {status: 404, employee_id: employee.id});
 					return res.json(404, {message: 'Employee is not logged in.'});
 				}
 				
 				Log_TimeIn.update({id: log.id},data).exec(function(err, log) {
+					sails.sockets.blast('timeOut', {status: 200, employee_id: employee.id});
 					return res.json(log);
 				});
 				
@@ -429,9 +432,9 @@ module.exports = {
 
 		User.findOne({username: req.param('username')}).populate('account_type_id').exec(function(err, user) {
 
-			if(err) {
+			/*if(err) {
 				return res.json(500, err);
-			};
+			};*/
 
 			if(user == undefined || user.length > 0) {
 				error.push('Username does not exist.');

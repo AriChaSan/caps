@@ -84,17 +84,17 @@ module.exports.routes = {
   'GET /admin/updatepersonalprofile': 'AdminController.updatepersonalprofile',
   'GET /admin/viewpersonalprofile': 'AdminController.viewpersonalprofile',
 
-  'GET /employee/dashboard': 'EmployeeController.dashboard',
-  'GET /employee/requestleave': 'EmployeeController.requestleave',
-  'GET /employee/requestscheduleswap': 'EmployeeController.requestscheduleswap',
-  'GET /employee/updatepersonalprofile': 'EmployeeController.updatepersonalprofile',
-  'GET /employee/viewattendance': 'EmployeeController.viewattendance',
-  'GET /employee/viewpersonalprofile': 'EmployeeController.viewpersonalprofile',
-  'GET /employee/viewschedule': 'EmployeeController.viewschedule',
-
   'GET /loan/dashboard': 'LoanController.dashboard',
 
   'GET /payroll/dashboard': 'PayrollController.dashboard',
+
+  'GET /employees/dashboard': 'EmployeeController.dashboards',
+  'GET /employees/requestleave': 'EmployeeController.requestleave',
+  'GET /employees/requestscheduleswap': 'EmployeeController.requestscheduleswap',
+  'GET /employees/updatepersonalprofile': 'EmployeeController.updatepersonalprofile',
+  'GET /employees/viewattendance': 'EmployeeController.viewattendance',
+  'GET /employees/viewpersonalprofile': 'EmployeeController.viewpersonalprofile',
+  'GET /employees/viewschedule': 'EmployeeController.viewschedule',
 
   /***************************************************************************
   *                                                                          *
