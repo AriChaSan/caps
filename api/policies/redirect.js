@@ -21,7 +21,7 @@ module.exports = function(req, res, next) {
     }
 
     if (req.session.User.account_type == 'csu_employee') {
-      return res.redirect('/employee/dashboard');
+      return res.redirect('/employees/dashboard');
     }
 
     if (req.session.User.account_type == 'loan') {

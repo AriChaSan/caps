@@ -193,14 +193,14 @@ html {
                                                         <div class="form-group form-group-lg">
                                                             <div class="col-lg-4">
                                                                 <h3>Location:</h3>
-                                                                <select class="form-control" id="sel1">
-                                                                    <option>Angeles City Hall</option>
-                                                                    <option>Renal Care Unit</option>
-                                                                    <option>Angeles City Library</option>
-                                                                    <option>Museo Ning Angeles</option>
-                                                                    <option>Blood Bank</option>
-                                                                    <option>CSWDO</option>
-                                                                    <option>City College of Angeles</option>
+                                                                <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -1062,6 +1062,8 @@ html {
             $scope.swingLog = "";
             $scope.graveLog = "";
 
+            $scope.logLocation = "7";
+
 
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
@@ -1071,27 +1073,61 @@ html {
                 console.log(response);
             });
 
-            $http.get('/employeedaylogs').then(function success(response) {
-                $scope.dayLog = response.data;
-                console.log(response);
-                
-            }, function error(response) {
-                console.log(response);
-            });
+            $scope.refreshLog = function() {
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                    
+                }, function error(response) {
+                    console.log(response);
+                });
 
-            $http.get('/employeeswinglogs').then(function success(response) {
-                $scope.swingLog = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
+                $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.swingLog = response.data;
+                    $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
 
-            $http.get('/employeegravelogs').then(function success(response) {
-                $scope.graveLog = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
+                $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.graveLog = response.data;
+                    $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.refreshLog();
 
             $scope.changePasswordSubmit = function () {
 
@@ -1144,34 +1180,52 @@ html {
               } else {
                 $scope.empIdNumber = "";
                 alert(msg.employee_id + ' has logged in.');
-                $http.get('/employeedaylogs').then(function success(response) {
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
                     $scope.dayLog = response.data;
                     $('#dataTable1').DataTable({
-                        destroy: true,
-                        responsive: true
-                    });
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
                         console.log(response);
                     }, function error(response) {
                         console.log(response);
                     });
 
-                    $http.get('/employeeswinglogs').then(function success(response) {
+                    $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
                         $scope.swingLog = response.data;
                         $('#dataTable2').DataTable({
                             destroy: true,
                             responsive: true
-                        }); 
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500); 
                         console.log(response);
                     }, function error(response) {
                         console.log(response);
                     });
 
-                    $http.get('/employeegravelogs').then(function success(response) {
+                    $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
                         $scope.graveLog = response.data;
                         $('#dataTable3').DataTable({
                             destroy: true,
                             responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
                         });
+                    }, 500);
                         console.log(response);
                     }, function error(response) {
                         console.log(response);
@@ -1187,20 +1241,52 @@ html {
               } else {
                 $scope.empIdNumber = "";
                 alert(msg.employee_id + ' has logged out.');
-                $http.get('/employeedaylogs').then(function success(response) {
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
                     $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
                     console.log(response);
                 }, function error(response) {
                     console.log(response);
                 });
 
-                $http.get('/employeeswinglogs').then(function success(response) {
+                $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.swingLog = response.data;
+                    $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
                     console.log(response);
                 }, function error(response) {
                     console.log(response);
                 });
 
-                $http.get('/employeegravelogs').then(function success(response) {
+                $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.graveLog = response.data;
+                    $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
                     console.log(response);
                 }, function error(response) {
                     console.log(response);
@@ -1229,12 +1315,7 @@ html {
 </script>
  <script>
     $(document).ready(function() {        
-        setTimeout(function(){
-            $('#dataTable1').DataTable({
-                destroy: true,
-                responsive: true
-            });
-        }, 500);
+        
     });
     $(document).ready(function() {
         setTimeout(function(){

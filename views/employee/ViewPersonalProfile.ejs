@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Angeles City Civilian Security Unit - View Personal Profile</title>
-
+<script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -69,7 +70,7 @@ html {
 }
 </style>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
         <% include navbar/navbar.ejs %>      
@@ -86,91 +87,91 @@ html {
                                                 <center><h4><b>I. PERSONAL DATA</b></h4></center>
                                             </div>
                                             <div class="panel-body">
-                                                <form role="form">
-                                                    <div class="row">
-                                                        <div class="container-fluid text-center"> 
-                                                        <img src="images/employee.png" class="img-circle" style="height:15%; width:15%;"><hr>
-                                                        </div>
-                                                    </div>                                                
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Last Name</label>
-                                                                <p>Di</p>
+                                                    <form role="form">
+                                                        <div class="row">
+                                                            <div class="container-fluid text-center"> 
+                                                            <img src="../images/{{ employee.image }}" class="img-circle" style="height:15%; width:15%;"><hr>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>First Name</label>
-                                                                <p>Matthew Louis</p>
+                                                        </div>                                                
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Last Name</label>
+                                                                    <p>{{employee.lastname}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Middle Name</label>
-                                                                <p>Roque</p>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>First Name</label>
+                                                                    <p>{{employee.firstname}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Qualifier</label>
-                                                                <p>N/A</p>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Middle Name</label>
+                                                                    <p>{{employee.middlename || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>                                                        
-                                                    </div> 
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <label>Gender</label>
-                                                            <p>Male</p>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Qualifier</label>
+                                                                    <p>{{employee.qualifier || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                        
                                                         </div> 
-                                                        <div class="col-lg-4">
-                                                            <label>Religion</label>
-                                                            <p>Roman Catholic</p>
-                                                        </div> 
-                                                        <div class="col-lg-4">
-                                                            <label>Nationality</label>
-                                                            <p>Filipino</p>
-                                                        </div>                    
-                                                    </div>   
-                                                    <hr> 
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Date of Birth</label>
-                                                                <p>03/27/1997</p>
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <label>Gender</label>
+                                                                <p>{{employee.gender || 'N/A'}}</p>
+                                                            </div> 
+                                                            <div class="col-lg-4">
+                                                                <label>Religion</label>
+                                                                <p>{{employee.religion || 'N/A'}}</p>
+                                                            </div> 
+                                                            <div class="col-lg-4">
+                                                                <label>Nationality</label>
+                                                                <p>{{employee.nationality || 'N/A'}}</p>
+                                                            </div>                    
+                                                        </div>   
+                                                        <hr> 
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <p>{{employee.dob || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Place of Birth</label>
+                                                                    <p>{{employee.pob || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Civil Status</label>
+                                                                    <p>{{employee.civil_status || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                       
                                                         </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Place of Birth</label>
-                                                                <p>Pampanga</p>
+                                                        <hr>  
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-lg-offset-2">
+                                                                <div class="form-group">
+                                                                    <label>Email Address</label>
+                                                                    <p>{{employee.email || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Civil Status</label>
-                                                                <p>Single</p>
-                                                            </div>
-                                                        </div>                                                       
-                                                    </div>
-                                                    <hr>  
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-lg-offset-2">
-                                                            <div class="form-group">
-                                                                <label>Email Address</label>
-                                                                <p>matthewlouisrdi@yahoo.com</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Mobile Number</label>
-                                                                <p>09952705687</p>
-                                                            </div>
-                                                        </div>                                                      
-                                                    </div>                                                                       
-                                                </form>                                               
-                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Mobile Number</label>
+                                                                    <p>{{employee.mobile_number || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                      
+                                                        </div>                                                                       
+                                                    </form>                                               
+                                                </div>
                                         </div>                   
                                     </div>
 
@@ -180,144 +181,144 @@ html {
                                                 <center><h4><b>II. RESIDENCE DATA</b></h4></center>
                                             </div>
                                             <div class="panel-body">
-                                                <form role="form">
-                                                <label style="color:red">Home Address</label>   
-                                                    <div class="row">                                 
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                <p>70 Boungainvilla st. III Salapungan</p>
+                                                    <form role="form">
+                                                    <label style="color:red">Home Address</label>   
+                                                        <div class="row">                                 
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Apartment Name/ House no./Street/ Baranggay</label>
+                                                                    <p>{{employee.address[0].barangay || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label>City/Municipality</label>
-                                                                <p>Angeles City</p>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>City/Municipality</label>
+                                                                    <p>{{employee.address[0].municipality || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                      
+                                                        </div> 
+                                                        <div class="row">                                 
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Province/State</label>
+                                                                    <p>{{employee.address[0].province || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>                                                      
-                                                    </div> 
-                                                    <div class="row">                                 
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Province/State</label>
-                                                                <p>Pampanga</p>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Country</label>
+                                                                    <p>{{employee.address[0].country || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>      
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Zipcode</label>
+                                                                    <p>{{employee.address[0].zip_code || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                                                                          
+                                                        </div>                                                     
+                                                        <hr> 
+                                                        <label style="color:red">Emergency Contact Address</label>   
+                                                        <div class="row">  
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Contact Person name</label>
+                                                                    <p>{{employee.emergency[0].contact_person || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Country</label>
-                                                                <p>Philippines</p>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Relation</label>
+                                                                    <p>{{employee.emergency[0].relation || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>    
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Contact Number</label>
+                                                                    <p>{{employee.emergency[0].contact_number || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>      
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Apartment Name/ House no./Street/ Baranggay</label>
+                                                                    <p>{{employee.emergency[0].barangay || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>      
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Zipcode</label>
-                                                                <p>20009</p>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>City/Municipality</label>
+                                                                    <p>{{employee.emergency[0].municipality || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                      
+                                                        </div> 
+                                                        <div class="row">                                 
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Province/State</label>
+                                                                    <p>{{employee.emergency[0].province || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>                                                                                                          
-                                                    </div>                                                     
-                                                    <hr> 
-                                                    <label style="color:red">Emergency Contact Address</label>   
-                                                    <div class="row">  
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Contact Person name</label>
-                                                                <p>Juanita S. Roque</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Relation</label>
-                                                                <p>Grandmother</p>
-                                                            </div>
-                                                        </div>    
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Contact Number</label>
-                                                                <p>09153439783</p>
-                                                            </div>
-                                                        </div>      
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                <p>70 Boungainvilla st. III Salapungan</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label>City/Municipality</label>
-                                                                <p>Angeles City</p>
-                                                            </div>
-                                                        </div>                                                      
-                                                    </div> 
-                                                    <div class="row">                                 
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Province/State</label>
-                                                                <p>Pampanga</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Country</label>
-                                                                <p>Philippines</p>
-                                                            </div>
-                                                        </div>      
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Zipcode</label>
-                                                                <p>20009</p>
-                                                            </div>
-                                                        </div>                                                                                                           
-                                                    </div>                                                                                                                       
-                                                </form>                                                                                               
-                                            </div>                                            
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Country</label>
+                                                                    <p>{{employee.emergency[0].country || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>      
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Zipcode</label>
+                                                                    <p>{{employee.emergency[0].zip_code || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                                                                                           
+                                                        </div>                                                                                                                       
+                                                    </form>                                                                                               
+                                                </div>                                            
                                         </div>   
 
                                         <div class="panel panel-green">
                                             <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
                                                 <center><h4><b>III. PHYSICAL DESCRIPTION</b></h4></center>
                                             </div>
-                                            <div class="panel-body">
-                                                <form role="form">
-                                                    <div class="row">
-                                                        <div class="col-lg-2">
-                                                            <div class="form-group">
-                                                                <label>Height (cm)</label>
-                                                                <p>167.6 cm</p>
+                                           <div class="panel-body">
+                                                    <form role="form">
+                                                        <div class="row">
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label>Height (cm)</label>
+                                                                    <p>{{employee.physical_description[0].height || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <div class="form-group">
-                                                                <label>Weight (lbs)</label>
-                                                                <p>132 lbs</p>
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label>Weight (lbs)</label>
+                                                                    <p>{{employee.physical_description[0].weight || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <div class="form-group">
-                                                                <label>Built</label>
-                                                                <p>Medium</p>
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label>Built</label>
+                                                                    <p>{{employee.physical_description[0].built || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <div class="form-group">
-                                                                <label>Eye Color</label>
-                                                                <p>Black</p>
-                                                            </div>
-                                                        </div>  
-                                                        <div class="col-lg-2">
-                                                            <div class="form-group">
-                                                                <label>Hair Color</label>
-                                                                <p>Black</p>
-                                                            </div>
-                                                        </div>  
-                                                        <div class="col-lg-2">
-                                                            <label>Complexion</label>
-                                                            <p>Fair</p>
-                                                        </div>                                  
-                                                    </div>                                                                      
-                                                </form>                                               
-                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label>Eye Color</label>
+                                                                    <p>{{employee.physical_description[0].eye_color || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>  
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label>Hair Color</label>
+                                                                    <p>{{employee.physical_description[0].hair_color || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>  
+                                                            <div class="col-lg-2">
+                                                                <label>Complexion</label>
+                                                                <p>{{employee.physical_description[0].complexion || 'N/A'}}</p>
+                                                            </div>                                  
+                                                        </div>                                                                      
+                                                    </form>                                               
+                                                </div>
                                         </div>   
 
                                         <div class="panel panel-green">
@@ -325,120 +326,120 @@ html {
                                                 <center><h4><b>IV. FAMILY DATA</b></h4></center>
                                             </div>
                                             <div class="panel-body">
-                                                <form role="form">
-                                                    <label style="color:red">Father</label>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Father's Name</label>
-                                                                <p>Louis C. Di</p>
+                                                    <form role="form">
+                                                        <label style="color:red">Father</label>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Father's Name</label>
+                                                                    <p>{{employee.parent[0].name || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <p>{{employee.parent[0].dob || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Contact Number</label>
+                                                                    <p>{{employee.parent[0].contact || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                
                                                         </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Date of Birth</label>
-                                                                <p>11/01/1943</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Occupation</label>
+                                                                    <p>{{employee.parent[0].occupation || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Contact Number</label>
-                                                                <p>09543825542</p>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Company Name</label>
+                                                                    <p>{{employee.parent[0].company_name || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>                                
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Occupation</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Company Name</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Company Address</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>                                
-                                                    </div> 
-                                                    <hr>
-                                                    <label style="color:red">Mother</label>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Mother's Name</label>
-                                                                <p>Marlyn R. Chen</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Date of Birth</label>
-                                                                <p>07/22/1964</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Contact Number</label>
-                                                                <p>09275839953</p>
-                                                            </div>
-                                                        </div>                                
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Occupation</label>
-                                                                <p>Factory Worker</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Company Name</label>
-                                                                <p>Shinchu Company</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label>Company Address</label>
-                                                                <p>Shinchu Shien Hukou Shiang, Taipei</p>
-                                                            </div>
-                                                        </div>                                
-                                                    </div> 
-                                                    <hr>  
-                                                    <label style="color:red">Brother(s)/Sister(s)</label>      
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Name</label>
-                                                                <p>Joscelyn Rochelle F. Roque</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Date of Birth</label>
-                                                                <p>07/22/1990</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Course/Occupation</label>
-                                                                <p>Call Center Agent</p>
-                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Company Address</label>
+                                                                    <p>{{employee.parent[0].company_address || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                
                                                         </div> 
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>School/Company</label>
-                                                                <p>Clark, Pampanga</p>
+                                                        <hr>
+                                                        <label style="color:red">Mother</label>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Mother's Name</label>
+                                                                    <p>{{employee.parent[1].name || 'N/A'}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>                                                                                        
-                                                    </div>              
-                                                </form>                                               
-                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <p>{{employee.parent[1].dob || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Contact Number</label>
+                                                                    <p>{{employee.parent[1].contact || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Occupation</label>
+                                                                    <p>{{employee.parent[1].occupation || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Company Name</label>
+                                                                    <p>{{employee.parent[1].company_name || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Company Address</label>
+                                                                    <p>{{employee.parent[1].company_address || 'N/A'}}</p>
+                                                                </div>
+                                                            </div>                                
+                                                        </div> 
+                                                        <hr>  
+                                                        <label style="color:red">Brother(s)/Sister(s)</label>      
+                                                        <div class="row" ng-repeat="sibling in employee.sibling">
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Name</label>
+                                                                    <p>{{ sibling.name || "N/A"}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Date of Birth</label>
+                                                                    <p>{{ sibling.dob || "N/A"}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Course/Occupation</label>
+                                                                    <p>{{ sibling.occupation || "N/A"}}</p>
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>School/Company</label>
+                                                                    <p>{{ sibling.company || "N/A"}}</p>
+                                                                </div>
+                                                            </div>                                                                                        
+                                                        </div>              
+                                                    </form>                                               
+                                                </div>
                                         </div>
 
                                         <div class="panel panel-green">
@@ -446,121 +447,44 @@ html {
                                                 <center><h4><b>VI. EDUCATIONAL BACKGROUND</b></h4></center>
                                             </div>
                                             <div class="panel-body">
-                                                <form role="form">
-                                                    <label style="color:red">Elementary</label>
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>School</label>
-                                                                <p>Achievers Special Education Center</p>
+                                                    <form role="form" ng-repeat="school in employee.education_background">
+                                                    <div ng-switch="school.education_type">
+                                                        <label style="color:red" ng-switch-when="elementary">Elementary</label>
+                                                        <label style="color:red" ng-switch-when="highschool">Highschool</label>
+                                                        <label style="color:red" ng-switch-when="college">College</label>
+                                                        <label style="color:red" ng-switch-when="post_graduate">Post graduate</label>
+                                                        <label style="color:red" ng-switch-default>test</label>
+                                                    </div>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>School</label>
+                                                                    <p>{{ school.school || "N/A"}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Course</label>
-                                                                <p>Primary</p>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Course</label>
+                                                                    <p>{{ school.course || "N/A"}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Year Graduated</label>
-                                                                <p>2009</p>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Year Graduated</label>
+                                                                    <p>{{ school.year || "N/A"}}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Honors/Awards</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>                                  
-                                                    </div> 
-                                                    <hr> 
-                                                    <label style="color:red">Highschool</label>
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>School</label>
-                                                                <p>Nazarene Academy</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Course</label>
-                                                                <p>Secondary</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Year Graduated</label>
-                                                                <p>2013</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Honors/Awards</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>                                  
-                                                    </div> 
-                                                    <hr> 
-                                                    <label style="color:red">College</label>
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>School</label>
-                                                                <p>Angeles University Foundation</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Course</label>
-                                                                <p>Tertiary, BSIT</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Year Graduated</label>
-                                                                <p>Present</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Honors/Awards</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>                                  
-                                                    </div> 
-                                                    <hr> 
-                                                    <label style="color:red">Post Graduate</label>
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>School</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Course</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Year Graduated</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="form-group">
-                                                                <label>Honors/Awards</label>
-                                                                <p>N/A</p>
-                                                            </div>
-                                                        </div>                                  
-                                                    </div> 
-                                                    <hr>                                                                                               
-                                                </form>                                               
-                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label>Honors/Awards</label>
+                                                                    <p>{{ school.award || "N/A"}}</p>
+                                                                </div>
+                                                            </div>                                  
+                                                        </div> 
+                                                    </form>
+                                                                                                       
+                                                </div>
                                         </div>                                                                                               
                                     </div> 
                                     <div class="col-lg-12 col-lg-offset-11">   
@@ -584,11 +508,7 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">    
-                    <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
-                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
-                    </center> 
+<% include changepassword/changepassword.ejs %>  
                 </div>
             </div>       
           </div>
@@ -665,29 +585,7 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">    
-                    <form role="form">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter Current Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter New Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
-                                </div>
-                            </div>                                                   
-                        <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                        </div>                                                                                                                      
-                    </form>                                               
+                   <% include changepassword/changepasswordform.ejs %>                                                 
                 </div>
             </div>            
           </div>
@@ -1028,6 +926,54 @@ html {
     <script src="../bootstrap/data/morris-data.js"></script>
 
     <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+
+    <script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+        });
+    })();
+</script>
 
 </body>
 

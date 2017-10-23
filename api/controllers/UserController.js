@@ -27,11 +27,15 @@ module.exports = {
 			var dayTime = [];
 
 			_.each(employee, function(value, index) {
+				if(value.employee_id.location_id == req.param('location_id')) {
 
-				if(value.employee_id.shift == 'dayTime') {
-					dayTime.push(value);
+					if(value.employee_id.shift == 'dayTime') {
+						dayTime.push(value);
+					}
 				}
+
 			});
+			console.log(req.param('location_id'));
 
 			return res.json(dayTime);		
 		});

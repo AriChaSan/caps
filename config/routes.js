@@ -42,7 +42,7 @@ module.exports.routes = {
 
   'GET /user': 'UserController.index',
   'GET /user/:id': 'UserController.showUser',
-  'GET /user/changepassword/:id': 'UserController.changePassword',
+  'POST /user/changepassword/:id': 'UserController.changePassword',
 
   'GET /employee': 'UserController.showEmployeeList',
   'GET /employee/:id': 'UserController.showEmployee',
@@ -88,7 +88,7 @@ module.exports.routes = {
 
   'GET /payroll/dashboard': 'PayrollController.dashboard',
 
-  'GET /employees/dashboard': 'EmployeeController.dashboards',
+  'GET /employees/dashboard': 'EmployeeController.dashboard',
   'GET /employees/requestleave': 'EmployeeController.requestleave',
   'GET /employees/requestscheduleswap': 'EmployeeController.requestscheduleswap',
   'GET /employees/updatepersonalprofile': 'EmployeeController.updatepersonalprofile',
