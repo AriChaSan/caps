@@ -736,9 +736,18 @@ html {
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
                 console.log(response);
 
+                $http.get('/employeeattendance/' + $scope.employee.id ).then(function success(response) {
+                    console.log(response);
+
+                }, function error(response) {
+                    console.log(response);
+                });
+
             }, function error(response) {
                 console.log(response);
             });
+
+            
 
             $scope.changePasswordSubmit = function () {
 
