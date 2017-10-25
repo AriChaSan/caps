@@ -113,8 +113,8 @@ html {
                 </div> 
                 <ul class="nav navbar-nav navbar-right">
                     <li style="padding-right: 25px;" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="images/MatthewDi.png" class="img-circle" 
-                        style="height:40px; width:40px;"> Matthew Louis R. Di <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="../images/{{ employee.image }}" class="img-circle" 
+                        style="height:40px; width:40px;">{{ employee.fullname }}<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#01modal" data-target="#01modal" data-toggle="modal"><i class="fa fa-fw fa-gear"></i> Account Settings</a>
@@ -124,7 +124,7 @@ html {
                                 <a href="#07modal" data-target="#07modal" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Time-in</a>
                             </li>                        
                             <li>
-                                <a href="index.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="#" ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             </li>
                         </ul>                
                     </li>
@@ -308,14 +308,14 @@ html {
                                                         <div class="form-group form-group-lg">
                                                             <div class="col-lg-4">
                                                                 <h3>Location:</h3>
-                                                                <select class="form-control" id="sel1">
-                                                                    <option>Angeles City Hall</option>
-                                                                    <option>Renal Care Unit</option>
-                                                                    <option>Angeles City Library</option>
-                                                                    <option>Museo Ning Angeles</option>
-                                                                    <option>Blood Bank</option>
-                                                                    <option>CSWDO</option>
-                                                                    <option>City College of Angeles</option>
+                                                                <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
                                                                 </select>
                                                             </div>
                                                         </div>                 
@@ -372,8 +372,6 @@ html {
             <div class="panel panel-default">
                 <div class="panel-body">    
                     <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
                     <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
                     </center> 
                 </div>
@@ -456,23 +454,23 @@ html {
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Enter Current Password</label>
-                                    <input class="form-control">
+                                    <input class="form-control" ng-model="changePassword.oldPassword">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Enter New Password</label>
-                                    <input class="form-control">
+                                    <input class="form-control" ng-model="changePassword.newPassword">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
+                                    <input class="form-control" ng-model="changePassword.confirmPassword"><hr>  
                                 </div>
                             </div>                                                   
                         <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                            <button class="btn btn-success" type="button" ng-click="changePasswordSubmit()">Save <i class="fa fa-save"></i></button>
                         </div>                                                                                                                      
                     </form>                                               
                 </div>
@@ -909,32 +907,32 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">  
-                    <h3> Name: {{ empUpdate.lastname + ', ' + empUpdate.firstname + ' ' + empUpdate.middlename }}</h3>
+                    <h3> Name: {{ empUpdate.employee_id.lastname + ', ' + empUpdate.employee_id.firstname + ' ' + empUpdate.employee_id.middlename }}</h3>
                     <div class="panel panel-default">
                         <div class="panel-body">  
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Conso Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].conso">
+                                        <input class="form-control" ng-model="empUpdate.conso">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Policy Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].policy">
+                                        <input class="form-control" ng-model="empUpdate.policy">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>GSIS Education Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].gsis_education">
+                                        <input class="form-control" ng-model="empUpdate.gsis_education">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>GSIS Emergency Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].gsis_emergency">
+                                        <input class="form-control" ng-model="empUpdate.gsis_emergency">
                                     </div>
                                 </div>                                                        
                             </div>  
@@ -942,25 +940,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Share Capital</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].share_capital">
+                                        <input class="form-control" ng-model="empUpdate.share_capital">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>STL</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].stl">
+                                        <input class="form-control" ng-model="empUpdate.stl">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>LTL</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].ltl">
+                                        <input class="form-control" ng-model="empUpdate.ltl">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Education</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].education">
+                                        <input class="form-control" ng-model="empUpdate.education">
                                     </div>
                                 </div>                                                        
                             </div>
@@ -968,25 +966,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>STL (Others)</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].stl_other">
+                                        <input class="form-control" ng-model="empUpdate.stl_other">
                                     </div>
                                 </div> 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Pabaon</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].pabaon">
+                                        <input class="form-control" ng-model="empUpdate.pabaon">
                                     </div>
                                 </div>                                                                                                        
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>BTS</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].bts">
+                                        <input class="form-control" ng-model="empUpdate.bts">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Silver</label>
-                                        <input class="form-control" ng-model="empUpdate.loan[0].silver">
+                                        <input class="form-control" ng-model="empUpdate.silver">
                                     </div>
                                 </div>                                                                
                             </div><hr>
@@ -1337,21 +1335,36 @@ html {
             $scope.changePassword.oldPassword = "";
             $scope.changePassword.newPassword = "";
             $scope.changePassword.confirmPassword = "";
+            $scope.logLocation = "7";
 
             $scope.empList = [];
 
             $scope.empUpdate = {};
 
-            $http.get('/employee').then(function success(response) {
-                $scope.empList = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
+           $scope.refreshLog = function() {
+                 $http.get('/employeeloanlist?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.empList = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+             };
+
+             $scope.refreshLog();
 
             $http.get('/employeeloan/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                $('#dataTable1').DataTable({
+                    destroy: true,
+                    responsive: true
+                }).destroy();
+                setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
                 console.log(response);
             }, function error(response) {
                 console.log(response);
@@ -1379,14 +1392,28 @@ html {
             };
 
             $scope.updateLoan = function (id) {
-                $scope.empUpdate = _.findWhere($scope.empList, {id: id});
+                //$scope.empUpdate = _.findWhere($scope.empList, {id: id});
+                $http.get('/employeeviewloan/' + id).then(function success(response) {
+                    $scope.empUpdate = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
 
                 //alert(JSON.stringify($scope.empUpdate));
             };
 
-            $scope.submitUpdate = function (id) {
+            $scope.submitUpdate = function () {
 
-                alert(JSON.stringify($scope.empUpdate.loan[0]));
+                var data = $scope.empUpdate;
+
+
+                $http.post('/employeeupdateloan/' + $scope.empUpdate.employee_id.id, data).then(function success(response) {
+                    alert('Updated')
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
             };
 
             $scope.viewLoan = function (id) {
@@ -1400,9 +1427,10 @@ html {
 
     <script>
     $(document).ready(function() {
-        $('#dataTable1').DataTable({
+        /*$('#dataTable1').DataTable({
+            destroy: true,
             responsive: true
-        });
+        });*/
     });
     $(document).ready(function() {
         $('#dataTable2').DataTable({

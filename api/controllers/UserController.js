@@ -18,8 +18,81 @@ module.exports = {
 		});
 	},
 
-	viewLoan: function(req, res) {
+	showEmployeeAttendance: function(req, res) {
+		Employee_Attendance.find({employee_id: req.params.id}).exec(function(err, user) {
 
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(user);
+		});
+	},
+
+	showEmployeeLoanList: function(req, res) {
+
+		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
+			// body...
+			var usersId = _.pluck(users, 'id');
+			Employee.find({account_id: usersId, location_id: req.param('location_id')})
+			.populate('account_id.account_type_id')
+			.populate('physical_description')
+			.populate('address')
+			.populate('emergency')
+			.populate('parent')
+			.populate('sibling')
+			.populate('education_background')
+			.populate('employee_type_id')
+			.populate('schedule')
+			.populate('loan')
+			.exec(function(err, employee) {
+
+				if(err) {
+					return res.serverError(err);
+				}
+				
+				return res.json(employee);
+			});
+		})	
+	},
+
+	viewLoan: function(req, res) {
+		Loan.findOne({employee_id: req.params.id}).populate('employee_id').exec(function(err, loan) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(loan);
+		});
+	},
+
+	updateLoan: function(req, res) {
+
+		var data = {
+			conso: req.param('conso'),
+			policy: req.param('policy'),
+			gsis_education: req.param('gsis_education'),
+			gsis_emergency: req.param('gsis_emergency'),
+			share_capital: req.param('share_capital'),
+			stl: req.param('stl'),
+			ltl: req.param('ltl'),
+			education: req.param('education'),
+			stl_other: req.param('stl_other'),
+			pabaon: req.param('pabaon'),
+			bts: req.param('bts'),
+			silver: req.param('silver')
+		};
+
+		console.log(data);
+		Loan.update({employee_id: req.params.id}, data).exec(function(err, loan) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(loan);
+		});
 	},
 
 	viewEmployeeDTR: function(req, res) {

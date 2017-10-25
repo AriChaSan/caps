@@ -59,7 +59,13 @@ module.exports.routes = {
   'GET /employeeviewoneschedule/:id' : 'UserController.viewOneEmployeeSchedule',
   'GET /employeedtr/:id' : 'UserController.viewEmployeeDTR',
 
+  'GET /employeeloanlist': 'UserController.showEmployeeLoanList',
   'GET /employeeloan/:id': 'UserController.showEmployeeLoan',
+  'GET /employeeviewloan/:id': 'UserController.viewLoan',
+  'POST /employeeupdateloan/:id': 'UserController.updateLoan',
+
+  'GET /employeeattendance/:id': 'UserController.showEmployeeAttendance',
+
 
   'POST /employee/clockin/:id': 'UserController.clockIn',
   'POST /employee/clockout/:id': 'UserController.clockOut',
