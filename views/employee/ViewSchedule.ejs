@@ -115,79 +115,63 @@ html {
                                                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>Date</th>
                                                                             <th>Day</th>
                                                                             <th>Location</th>
                                                                             <th>Shift Type</th>
-                                                                            <th>Time In</th>
-                                                                            <th>Time Out</th>
-                                                                            <th>Total Work Duration</th>
+                                                                            <th>Start Time</th>
+                                                                            <th>End Time</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Monday</td>
-                                                                            <td>City Hall</td>
-                                                                            <td>Day Shift</td>
-                                                                            <td>07:00am</td>
-                                                                            <td>03:00pm</td>
-                                                                            <td>08:00:00</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/23/2017</td>
-                                                                            <td>Tuesday</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>                                                         
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/24/2017</td>
-                                                                            <td>Wednesday</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/25/2017</td>
-                                                                            <td>Thursday</td>
-                                                                            <td>City Hall</td>
-                                                                            <td>Day Shift</td>
-                                                                            <td>07:00am</td>
-                                                                            <td>03:00pm</td>
-                                                                            <td>08:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/26/2017</td>
-                                                                            <td>Friday</td>
-                                                                            <td>City Hall</td>
-                                                                            <td>Day Shift</td>
-                                                                            <td>07:00am</td>
-                                                                            <td>03:00pm</td>
-                                                                            <td>08:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/27/2017</td>
-                                                                            <td>Saturday</td>
-                                                                            <td>City Hall</td>
-                                                                            <td>Day Shift</td>
-                                                                            <td>07:00am</td>
-                                                                            <td>03:00pm</td>
-                                                                            <td>08:00:00</td>
-                                                                        </tr>  
-                                                                        <tr>
-                                                                            <td>07/28/2017</td>
-                                                                            <td>Sunday</td>
-                                                                            <td>City Hall</td>
-                                                                            <td>Day Shift</td>
-                                                                            <td>07:00am</td>
-                                                                            <td>03:00pm</td>
-                                                                            <td>08:00:00</td>                                                           
-                                                                        </tr>                                                                                                  
+                                                                         <tr>
+                                                                             <td>Monday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].monday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].monday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr> 
+                                                                         <tr>
+                                                                             <td>Tuesday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].tuesday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].tuesday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr>   
+                                                                         <tr>
+                                                                             <td>Wednesday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].wednesday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].wednesday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr>   
+                                                                         <tr>
+                                                                             <td>Thursday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].thursday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].thursday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr>   
+                                                                         <tr>
+                                                                             <td>Friday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].friday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].friday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr>   
+                                                                         <tr>
+                                                                             <td>Saturday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].saturday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].saturday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr>   
+                                                                         <tr>
+                                                                             <td>Sunday</td>
+                                                                             <td>{{ empSched.location_id.location }}</td>
+                                                                             <td>{{ empSched.shift }}</td>
+                                                                             <td>{{ (empSched.schedule[0].sunday == 'on') ? time.start : 'Day Off'}}</td>
+                                                                             <td>{{ (empSched.schedule[0].sunday == 'on') ? time.end : 'Day Off'}}</td>
+                                                                         </tr>                                                                                                  
                                                                     </tbody>
                                                                 </table>
                                                             </div> 
@@ -700,7 +684,69 @@ html {
     <script src="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 
     <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
+ <script>
+    (function() {
+        var app = angular.module('app', []);
 
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+
+            $scope.empSched = {};
+            $scope.time = {};
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                
+                $http.get('/employeeviewoneschedule/' + $scope.employee.id).then(function success(response) {
+    
+                    $scope.empSched = response.data;
+                    $scope.time = _.findWhere($scope.empSched.location_id.shifts, {shift_type: $scope.empSched.shift});
+
+                    
+                }, function error(response) {
+                    console.log(response);
+                });
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                alert(JSON.stringify($scope.userId));
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+        });
+    })();
+</script>      
     <script>
     $(document).ready(function() {
         $('#dataTable1').DataTable({

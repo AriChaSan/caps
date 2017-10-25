@@ -9,6 +9,7 @@
 
     <title>Angeles City Civilian Security Unit - Employee Schedule</title>
     <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -133,7 +134,7 @@ html {
                                                             <hr>
                                                             <div class="panel panel-green">
                                                                 <div class="panel-heading">
-                                                                    <center><h4><b>DAY SHIFT (7AM - 3PM)</b></h4></center>
+                                                                    <center><h4><b>DAY SHIFT</b></h4></center>
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
@@ -150,46 +151,16 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td>Matthew Louis R. Di</td>
-                                                                                <td>7AM - 3PM</td>  
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                         
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Owen C. Payumo</td>
-                                                                                <td>7AM - 3PM</td>  
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                                          
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td>                                                        
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Antonina Cristine B. Pabalan</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                                          
-                                                                                <td>7AM - 3PM</td>  
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td>                                                        
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Arianne Gay C. Santos</td>
-                                                                                <td>7AM - 3PM</td>  
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                                           
-                                                                                <td>7AM - 3PM</td> 
-                                                                                <td>7AM - 3PM</td>                                                          
-                                                                            </tr>                                                                   
+                                                                            <tr ng-repeat="employee in day">
+                                                                                <td>{{ employee.lastname }}</td>
+                                                                                <td>{{ (employee.schedule[0].monday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].tuesday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].wednesday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].thursday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].friday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>   
+                                                                                <td>{{ (employee.schedule[0].saturday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].sunday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>                                                         
+                                                                            </tr>                                                                 
                                                                         </tbody>
                                                                     </table>
                                                                 </div> 
@@ -201,7 +172,7 @@ html {
                                                             <hr>
                                                             <div class="panel panel-green">
                                                                 <div class="panel-heading">
-                                                                    <center><h4><b>SWING SHIFT (3PM - 11PM)</b></h4></center>
+                                                                    <center><h4><b>SWING SHIFT</b></h4></center>
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable2">
@@ -218,46 +189,16 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td>Matthew Louis R. Di</td>
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td>  
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                         
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Owen C. Payumo</td>
-                                                                                <td>3PM - 11PM</td>  
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>  
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td>                         
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Antonina Cristine B. Pabalan</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                                          
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td>                                                      
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Arianne Gay C. Santos</td>
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td>     
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td> 
-                                                                                <td>3PM - 11PM</td> 
-                                                                                <td>3PM - 11PM</td>                                
-                                                                            </tr>                                                                   
+                                                                            <tr ng-repeat="employee in swing">
+                                                                                <td>{{ employee.lastname }}</td>
+                                                                                <td>{{ (employee.schedule[0].monday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].tuesday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].wednesday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].thursday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].friday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>   
+                                                                                <td>{{ (employee.schedule[0].saturday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].sunday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>                                                         
+                                                                            </tr>                                                                
                                                                         </tbody>
                                                                     </table>
                                                                 </div> 
@@ -269,7 +210,7 @@ html {
                                                             <hr>
                                                             <div class="panel panel-green">
                                                                 <div class="panel-heading">
-                                                                    <center><h4><b>GRAVEYARD SHIFT (11PM - 7AM)</b></h4></center>
+                                                                    <center><h4><b>GRAVEYARD SHIFT</b></h4></center>
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable3">
@@ -286,120 +227,25 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td>Matthew Louis R. Di</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>   
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                         
+                                                                            <tr ng-repeat="employee in graveyard">
+                                                                                <td>{{ employee.lastname }}</td>
+                                                                                <td>{{ (employee.schedule[0].monday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].tuesday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].wednesday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].thursday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].friday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>   
+                                                                                <td>{{ (employee.schedule[0].saturday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>
+                                                                                <td>{{ (employee.schedule[0].sunday == 'on') ? employee.locationShift.start + ' - ' + employee.locationShift.end : 'Day Off' }}</td>                                                         
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td>Owen C. Payumo</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>  
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Antonina Cristine B. Pabalan</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                                          
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Arianne Gay C. Santos</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td> 
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>                            
-                                                                            </tr>                                                                   
+                                                                            
+                                                                   
                                                                         </tbody>
                                                                     </table>
                                                                 </div> 
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <hr>
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading">
-                                                                    <center><h4><b>IRREGULAR SHIFT</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable4">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Name</th>
-                                                                                <th>Monday</th>
-                                                                                <th>Tuesday</th>
-                                                                                <th>Wednesday</th>
-                                                                                <th>Thursday</th>
-                                                                                <th>Friday</th>
-                                                                                <th>Saturday</th>
-                                                                                <th>Sunday</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td>Matthew Louis R. Di</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>3PM - 11PM</td>
-                                                                                <td>7AM - 3PM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>   
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                         
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Owen C. Payumo</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>  
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>3PM - 11PM</td>
-                                                                                <td>7AM - 3PM</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Antonina Cristine B. Pabalan</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td>                                                                          
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>3PM - 11PM</td>
-                                                                                <td>7AM - 3PM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Arianne Gay C. Santos</td>
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>3PM - 11PM</td>
-                                                                                <td>7AM - 3PM</td>
-                                                                                <td>OFF</td>
-                                                                                <td>OFF</td> 
-                                                                                <td>11PM - 7AM</td>
-                                                                                <td>11PM - 7AM</td>                            
-                                                                            </tr>                                                                   
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div> 
-                                                            </div> 
-                                                        </div>
-                                                    </div>                                                                         
+                                                                                                                            
                                                 </div>
                                             </div>
                                         </div>
@@ -1180,10 +1026,43 @@ html {
             $scope.employee = {};
             $scope.employee.fullname = "";
 
+            $scope.day = [];
+            $scope.swing = [];
+            $scope.graveyard = [];
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
                 console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeeviewschedule').then(function success(response) {
+
+                _.each(response.data, function(value, index) {
+
+                    var shift = value.shift;
+
+                    if(shift == 'dayTime') {
+                        var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
+                        value.locationShift = locationShift;
+                        $scope.day.push(value);
+                    } 
+
+                    if(shift == 'swingTime') {
+                        var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
+                        value.locationShift = locationShift;
+                        $scope.swing.push(value);
+                    } 
+
+                    if(shift == 'graveyardTime') {
+                        var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
+                        value.locationShift = locationShift;
+                        $scope.graveyard.push(value);
+                    } 
+                });
+                console.log($scope.day);
             }, function error(response) {
                 console.log(response);
             });

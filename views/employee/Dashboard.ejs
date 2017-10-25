@@ -816,7 +816,62 @@ html {
 
     <script src="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 
-    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
+    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script> 
+
+       <script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+                $http.get('/employeedtr/' + $scope.employee.id).then(function success(response) {
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                alert(JSON.stringify($scope.userId));
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+        });
+    })();
+</script>         
 
     <script>
     $(document).ready(function() {
@@ -991,55 +1046,7 @@ html {
     });                              
     </script>  
 
-    <script>
-    (function() {
-        var app = angular.module('app', []);
-
-        app.controller('appController', function($scope, $http) {
-
-            $scope.userId = <%= req.session.User.id %>;
-            $scope.employee = {};
-            $scope.employee.fullname = "";
-
-            $scope.changePassword = {};
-            $scope.changePassword.oldPassword = "";
-            $scope.changePassword.newPassword = "";
-            $scope.changePassword.confirmPassword = "";
-
-            $http.get('/employee/' + $scope.userId).then(function success(response) {
-                $scope.employee = response.data;
-                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
-
-            $scope.changePasswordSubmit = function () {
-
-                var data = {data: $scope.changePassword};
-
-                alert(JSON.stringify($scope.userId));
-
-                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
-                    alert('Success');
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-            
-            $scope.logout = function () {
-
-                $http.post('/logout').then(function success(response) {
-                    window.location.href = '/';
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-            
-        });
-    })();
-</script>       
+  
 
 </body>
 

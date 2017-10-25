@@ -53,6 +53,12 @@ module.exports.routes = {
   'GET /employeeswinglogs' : 'UserController.showEmployeeSwingLogs',
   'GET /employeegravelogs' : 'UserController.showEmployeeGraveLogs',
 
+  'POST /employeeupdateschedule' : 'UserController.updateEmployeeSchedule',
+
+  'GET /employeeviewschedule' : 'UserController.viewEmployeeSchedule',
+  'GET /employeeviewoneschedule/:id' : 'UserController.viewOneEmployeeSchedule',
+  'GET /employeedtr/:id' : 'UserController.viewEmployeeDTR',
+
   'POST /employee/clockin/:id': 'UserController.clockIn',
   'POST /employee/clockout/:id': 'UserController.clockOut',
 

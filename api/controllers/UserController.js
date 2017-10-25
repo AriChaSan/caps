@@ -18,6 +18,71 @@ module.exports = {
 		});
 	},
 
+	viewEmployeeDTR: function(req, res) {
+
+		var date = moment(new Date()).format('l');
+		Log_TimeIn.find({employee_id: req.params.id}).populate('employee_id').exec(function(err, user) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(user);
+		});
+	},
+
+	viewEmployeeSchedule: function(req, res) {
+		Employee.find().populate('location_id.shifts').populate('schedule').exec(function(err, employee) {
+			if(err) {
+				return res.serverError(employee);
+			}	
+
+			return res.json(employee);
+		});
+	},
+
+	viewOneEmployeeSchedule: function(req, res) {
+		Employee.findOne(req.params.id).populate('location_id.shifts').populate('schedule').exec(function(err, employee) {
+			if(err) {
+				return res.serverError(employee);
+			}	
+
+			return res.json(employee);
+		});
+	},
+
+	updateEmployeeSchedule: function(req, res) {
+		var employee = {
+			location_id: req.param('schedule').location_id,
+			shift: req.param('schedule').shift
+		};
+
+		Employee.update({id: req.param('employee').id}, employee).exec(function (err, employee) {
+
+			if(err) {
+				return res.json(err);
+			}
+
+			var schedule = {
+				monday: req.param('schedule').monday ? 'on':'off',
+				tuesday: req.param('schedule').tuesday ? 'on':'off',
+				wednesday: req.param('schedule').wednesday ? 'on':'off',
+				thursday: req.param('schedule').thursday ? 'on':'off',
+				friday: req.param('schedule').friday ? 'on':'off',
+				saturday: req.param('schedule').saturday ? 'on':'off',
+				sunday: req.param('schedule').sunday ? 'on':'off'
+			};
+
+			Schedule.update({employee_id: req.param('employee').id}, schedule).exec(function(err, schedule) {
+				if(err) {
+					return res.json(err);
+				}
+
+				return res.json(schedule);
+			});
+		});
+	},
+
 	showEmployeeDayLogs: function(req, res) {
 		Log_TimeIn.find().populate('employee_id').sort('id DESC').exec(function(err, employee) {
 			if(err) {

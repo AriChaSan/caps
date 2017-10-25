@@ -179,7 +179,7 @@ html {
                                                     <form role="form">
                                                         <div class="row">
                                                             <div class="container-fluid text-center"> 
-                                                            <img src="../images/{{ employee.image }}" class="img-circle" style="height:15%; width:15%;"><hr>
+                                                            <img src="../images/{{ view.employee.image }}" class="img-circle" style="height:15%; width:15%;"><hr>
                                                             </div>
                                                         </div>                                                
                                                         <div class="row">
@@ -598,7 +598,7 @@ html {
                                                                     <form role="form">
                                                                         <div class="row">
                                                             <div class="container-fluid text-center"> 
-                                                            <img src="{{ data.employee.personal.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
+                                                            <img src="../images/{{ data.employee.personal.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
                                                             <input type="file" id="fileInput" name="file" class="form-control" ng-model="data.employee.image" accept="image/*">
                                                             </div>
                                                         </div> 
