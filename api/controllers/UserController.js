@@ -18,6 +18,10 @@ module.exports = {
 		});
 	},
 
+	viewLoan: function(req, res) {
+
+	},
+
 	viewEmployeeDTR: function(req, res) {
 
 		var date = moment(new Date()).format('l');
@@ -276,6 +280,18 @@ module.exports = {
 		});
 	},
 
+	showEmployeeLoan: function(req, res) {
+		Employee.findOne(req.params.id).exec(function(err, employee) {
+
+			if(err) {
+				return res.serverError(err);
+			}
+			
+			return res.json(employee);
+		});
+	},
+
+
 	showEmployeeList: function(req, res) {
 
 		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
@@ -291,6 +307,7 @@ module.exports = {
 			.populate('education_background')
 			.populate('employee_type_id')
 			.populate('schedule')
+			.populate('loan')
 			.exec(function(err, employee) {
 
 				if(err) {
@@ -333,6 +350,9 @@ module.exports = {
 		if(data.account.account_type_id == 4 || data.account.account_type_id == 5) {
 
 			User.create(data.account).exec(function(err, user) {
+				if(err) {
+					return res.serverError(err);
+				}
 				var employee = {
 		          id_number: data.personal.id_number,
 		          firstname: data.personal.firstname,
@@ -341,11 +361,15 @@ module.exports = {
 		          qualifier: data.personal.qualifier,
 		          account_id: user.id,
 		          employee_type_id: data.personal.employee_type_id,
-		          location_id: "",
+		          location_id: 0,
 		          shift: ""
 		        };
 
-				Employee.create(employee).exec(function(err, employee) {}); 
+				Employee.create(employee).exec(function(err, employee) {
+					if(err) {
+						return res.serverError(err);
+					}
+				}); 
 			});
 		} else {
 
@@ -366,6 +390,7 @@ module.exports = {
 		          Address.create({employee_id: employee.id}).exec(function(err, address) {});
 		          Emergency.create({employee_id: employee.id}).exec(function(err, address) {});
 		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
+		          Loan.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 
 		          var schedule = [
 		            {

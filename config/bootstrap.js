@@ -41,6 +41,7 @@ module.exports.bootstrap = function(cb) {
           Address.create({employee_id: employee.id}).exec(function(err, address) {});
           Emergency.create({employee_id: employee.id}).exec(function(err, address) {});
           Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
+          Loan.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 
           var parent = [
             {

@@ -178,7 +178,7 @@ html {
                                                         <hr>
                                                         <div class="panel panel-green">
                                                             <div class="panel-heading">
-                                                                <center><h4><b>DAY SHIFT (7AM - 3PM)</b></h4></center>
+                                                                <center><h4><b>Record</b></h4></center>
                                                             </div>
                                                             <div class="panel-body">
                                                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
@@ -194,69 +194,16 @@ html {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Monday</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>
+                                                                        <tr ng-repeat="log in logs">
+                                                                            <td>{{ log.date }}</td>
+                                                                            <td>{{ weekday[log.day] }}</td>
+                                                                            <td>{{ log.logIn }}</td>
+                                                                            <td>{{ log.logOut || 'N/A'}}</td>
+                                                                            <td>N/A</td>
+                                                                            <td>N/A</td>
+                                                                            <td>N/A</td>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Tuesday</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>                                                         
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Wednesday</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>
-                                                                            <td>OFF</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Thursday</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Friday</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Saturday</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>                                                            
-                                                                        </tr>  
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Sunday</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>                                                            
-                                                                        </tr>                                                                                                  
+                                                                                                                                                                          
                                                                     </tbody>
                                                                 </table>
                                                             </div> 
@@ -833,12 +780,32 @@ html {
             $scope.changePassword.newPassword = "";
             $scope.changePassword.confirmPassword = "";
 
+            $scope.logs = [];
+            $scope.weekday = new Array(7);
+            $scope.weekday[0] =  "Sunday";
+            $scope.weekday[1] = "Monday";
+            $scope.weekday[2] = "Tuesday";
+            $scope.weekday[3] = "Wednesday";
+            $scope.weekday[4] = "Thursday";
+            $scope.weekday[5] = "Friday";
+            $scope.weekday[6] = "Saturday";
+
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
                 console.log(response);
+
                 $http.get('/employeedtr/' + $scope.employee.id).then(function success(response) {
-                    console.log(response);
+                    var data = response.data;
+
+                    $scope.logs = _.map(data, function(value, index) {
+                        var day = new Date(value.date);
+                        value.day = day.getDay();
+
+                        return value;
+                    });
+                    console.log($scope.logs);
                 }, function error(response) {
                     console.log(response);
                 });

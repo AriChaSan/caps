@@ -118,6 +118,11 @@ module.exports = {
       via: 'employee_id'
     },
 
+    loan: {
+      collection: 'loan',
+      via: 'employee_id'
+    },
+
     emergency: {
       collection: 'emergency',
       via: 'employee_id'

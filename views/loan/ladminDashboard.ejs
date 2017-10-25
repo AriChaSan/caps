@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Angeles City Civilian Security Unit - Loan Admin Dashboard</title>
+    <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
 
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -97,7 +99,7 @@ html {
 }  
 </style>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#e6e6e6;">
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px; background-color:#ffffff">
@@ -328,100 +330,19 @@ html {
                                                                     <th>Employee Picture</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Account Type</th>
-                                                                    <th>Date Created</th>
-                                                                    <th>Date Updated</th>
                                                                     <th>Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/MatthewDi.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>
+                                                                <tr ng-repeat="employee in empList">
+                                                                    <td class="text-center"><img src="../images/{{ employee.image }}" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>{{ employee.lastname + ', ' + employee.firstname + ' ' + employee.lastname }}</td>
+                                                                    <td>{{ employee.account_id.account_type }}</td>
                                                                     <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan" ng-click="updateLoan(employee.id)">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan" ng-click="viewLoan(employee.id)">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
                                                                 </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/OwenPayumo.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                        
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/ArianneSantos.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                           
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/AntoninaPabalan.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                       
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/MatthewDi.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/OwenPayumo.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                        
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/ArianneSantos.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                           
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/AntoninaPabalan.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                       
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddLoan">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
-                                                                </tr>                                                       
+                                                                                                                  
                                                             </tbody>
                                                         </table> <hr>
                                                         <div class="col-lg-12">   
@@ -988,32 +909,32 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">  
-                    <h3> Name: Matthew Louis R. Di</h3>
+                    <h3> Name: {{ empUpdate.lastname + ', ' + empUpdate.firstname + ' ' + empUpdate.middlename }}</h3>
                     <div class="panel panel-default">
                         <div class="panel-body">  
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Conso Loan</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].conso">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Policy Loan</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].policy">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>GSIS Education Loan</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].gsis_education">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>GSIS Emergency Loan</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].gsis_emergency">
                                     </div>
                                 </div>                                                        
                             </div>  
@@ -1021,25 +942,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Share Capital</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].share_capital">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>STL</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].stl">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>LTL</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].ltl">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Education</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].education">
                                     </div>
                                 </div>                                                        
                             </div>
@@ -1047,25 +968,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>STL (Others)</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].stl_other">
                                     </div>
                                 </div> 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Pabaon</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].pabaon">
                                     </div>
                                 </div>                                                                                                        
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>BTS</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].bts">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Silver</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.loan[0].silver">
                                     </div>
                                 </div>                                                                
                             </div><hr>
@@ -1078,7 +999,7 @@ html {
                                 </div>                                                                
                             </div><hr>
                             <div class="col-lg-12 col-lg-offset-11">   
-                                <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                                <button class="btn btn-success" type="button" ng-click="submitUpdate()">Save <i class="fa fa-save"></i></button>
                             </div>                                                                                                               
                         </div>                                                                                        
                     </div>                    
@@ -1400,7 +1321,82 @@ html {
 
     <script src="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 
-    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
+    <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>  
+
+      <script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $scope.empList = [];
+
+            $scope.empUpdate = {};
+
+            $http.get('/employee').then(function success(response) {
+                $scope.empList = response.data;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeeloan/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.updateLoan = function (id) {
+                $scope.empUpdate = _.findWhere($scope.empList, {id: id});
+
+                //alert(JSON.stringify($scope.empUpdate));
+            };
+
+            $scope.submitUpdate = function (id) {
+
+                alert(JSON.stringify($scope.empUpdate.loan[0]));
+            };
+
+            $scope.viewLoan = function (id) {
+                alert(id);
+            };
+            
+            
+        });
+    })();
+</script>  
 
     <script>
     $(document).ready(function() {
