@@ -10,6 +10,7 @@
 
     <title>Angeles City Civilian Security Unit - Dashboard</title>
     <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -182,6 +183,11 @@ html {
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                 <h2><i class="fa fa-calendar fa-fw"></i> Daily Time Record</h2><hr>
+                                                <div class="alert alert-danger" id="absentReportDiv" hidden>
+                                                    <h5>Absent for today !</h5>
+                                                    <ul id="absentReportList"></ul>
+                                                </div>
+                                                
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group form-group-lg">
@@ -232,13 +238,13 @@ html {
                                                                         </thead>
                                                                         <tbody>
                                                                            <tr ng-repeat="daylog in dayLog">
+                                                                                <td>{{daylog.date}}</td>
+                                                                                <td>{{daylog.employee_id.firstname}}</td>
                                                                                 <td>{{daylog.logIn}}</td>
-                                                                                <td>{{daylog.logIn}}</td>
-                                                                                <td>{{daylog.logIn}}</td>
-                                                                                <td>{{daylog.logIn}}</td>
-                                                                                <td>{{daylog.logIn}}</td>
-                                                                                <td>{{daylog.logIn}}</td>
-                                                                                <td>{{daylog.logIn}}</td>
+                                                                                <td>{{daylog.logOut || "N/A"}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
                                                                            </tr>
                                                                         </tbody>
                                                                     </table>
@@ -270,7 +276,15 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                           
+                                                                           <tr ng-repeat="swinglog in swingLog">
+                                                                                <td>{{swinglog.date}}</td>
+                                                                                <td>{{swinglog.employee_id.firstname}}</td>
+                                                                                <td>{{swinglog.logIn}}</td>
+                                                                                <td>{{swinglog.logOut || "N/A"}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                           </tr>
                                                                         </tbody>
                                                                     </table>
                                                                 </div> 
@@ -300,42 +314,15 @@ html {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Matthew Louis R. Di </td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Owen C. Payumo</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Arianne Gay C. Santos</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Antonina Cristina B. Pabalan</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
+                                                                       <tr ng-repeat="graveyardlog in graveLog">
+                                                                                <td>{{graveyardlog.date}}</td>
+                                                                                <td>{{graveyardlog.employee_id.firstname}}</td>
+                                                                                <td>{{graveyardlog.logIn}}</td>
+                                                                                <td>{{graveyardlog.logOut || "N/A"}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                           </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div> 
@@ -1051,21 +1038,219 @@ html {
 
     <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
 
-    <script>
-    $(document).ready(function() {
-        $('#dataTable1').DataTable({
-            responsive: true
+           
+<script src="../js/dependencies/sails.io.js"></script>
+
+<script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $scope.empIdNumber = "";
+
+            $scope.dayLog = "";
+            $scope.swingLog = "";
+            $scope.graveLog = "";
+
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeedaylogs').then(function success(response) {
+                $scope.dayLog = response.data;
+                console.log(response);
+                
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeeswinglogs').then(function success(response) {
+                $scope.swingLog = response.data;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $http.get('/employeegravelogs').then(function success(response) {
+                $scope.graveLog = response.data;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.clockIn = function () {
+
+                //
+                $http.post('/employee/clockin/' + $scope.empIdNumber).then(function success(response) {
+                    //alert('log In: ' + $scope.empIdNumber);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.clockOut = function () {
+
+                
+                $http.post('/employee/clockout/' + $scope.empIdNumber).then(function success(response) {
+                   // alert('log Out: ' + $scope.empIdNumber);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            io.socket.on('timeIn', function onServerSentEvent (msg) {
+              //alert('someone time in', msg);
+              console.log(msg);
+              if(msg.status == 404) {
+                alert(msg.employee_id + ' is still logged in.');
+              } else {
+                $scope.empIdNumber = "";
+                alert(msg.employee_id + ' has logged in.');
+                $http.get('/employeedaylogs').then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                        destroy: true,
+                        responsive: true
+                    });
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+
+                    $http.get('/employeeswinglogs').then(function success(response) {
+                        $scope.swingLog = response.data;
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }); 
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+
+                    $http.get('/employeegravelogs').then(function success(response) {
+                        $scope.graveLog = response.data;
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+              };
+            });
+
+            io.socket.on('timeOut', function onServerSentEvent (msg) {
+              //alert('someone time in', msg);
+              console.log(msg);
+              if(msg.status == 404) {
+                alert(msg.employee_id + ' is not logged in.');
+              } else {
+                $scope.empIdNumber = "";
+                alert(msg.employee_id + ' has logged out.');
+                $http.get('/employeedaylogs').then(function success(response) {
+                    $scope.dayLog = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeeswinglogs').then(function success(response) {
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeegravelogs').then(function success(response) {
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+              };
+            });
+
+            io.socket.on('absentReport', function (msg) {
+                console.log('Absent report: ' + JSON.stringify(msg));
+                if(!msg) {
+                    
+                } else {
+                    if(msg.employee_ids.length != 0) {
+                        _.each(msg.employee_ids, function(value, index) {
+                            $('#absentReportDiv').show();
+                            $('#absentReportList').append('<li>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</li>');
+                        });
+                    }
+                    
+                }
+                
+            });
+            
         });
+    })();
+</script>
+ <script>
+    $(document).ready(function() {        
+        setTimeout(function(){
+            $('#dataTable1').DataTable({
+                destroy: true,
+                responsive: true
+            });
+        }, 500);
     });
     $(document).ready(function() {
-        $('#dataTable2').DataTable({
-            responsive: true
-        });
+        setTimeout(function(){
+            $('#dataTable2').DataTable({
+                destroy: true,
+                responsive: true
+            });
+        }, 500);
     });
     $(document).ready(function() {
-        $('#dataTable3').DataTable({
-            responsive: true
-        });
+        setTimeout(function(){
+            $('#dataTable3').DataTable({
+                destroy: true,
+                responsive: true
+            });
+        }, 500);
     });
     $(document).ready(function() {
         $('#dataTable4').DataTable({
@@ -1207,162 +1392,7 @@ html {
             responsive: true
         });
     });                          
-    </script>         
-<script src="../js/dependencies/sails.io.js"></script>
-
-<script>
-    (function() {
-        var app = angular.module('app', []);
-
-        app.controller('appController', function($scope, $http) {
-
-            $scope.userId = <%= req.session.User.id %>;
-            $scope.employee = {};
-            $scope.employee.fullname = "";
-
-            $scope.changePassword = {};
-            $scope.changePassword.oldPassword = "";
-            $scope.changePassword.newPassword = "";
-            $scope.changePassword.confirmPassword = "";
-
-            $scope.empIdNumber = "";
-
-            $scope.dayLog = "";
-            $scope.swingLog = "";
-            $scope.graveLog = "";
-
-
-            $http.get('/employee/' + $scope.userId).then(function success(response) {
-                $scope.employee = response.data;
-                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
-
-            $http.get('/employeedaylogs').then(function success(response) {
-                $scope.dayLog = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
-
-            $http.get('/employeeswinglogs').then(function success(response) {
-                $scope.swingLog = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
-
-            $http.get('/employeegravelogs').then(function success(response) {
-                $scope.graveLog = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
-
-            $scope.changePasswordSubmit = function () {
-
-                var data = {data: $scope.changePassword};
-
-                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
-                    alert('Success');
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-            
-            $scope.logout = function () {
-
-                $http.post('/logout').then(function success(response) {
-                    window.location.href = '/';
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-
-            $scope.clockIn = function () {
-
-                //
-                $http.post('/employee/clockin/' + $scope.empIdNumber).then(function success(response) {
-                    //alert('log In: ' + $scope.empIdNumber);
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-
-            $scope.clockOut = function () {
-
-                
-                $http.post('/employee/clockout/' + $scope.empIdNumber).then(function success(response) {
-                   // alert('log Out: ' + $scope.empIdNumber);
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-
-            io.socket.on('timeIn', function onServerSentEvent (msg) {
-              //alert('someone time in', msg);
-              console.log(msg);
-              if(msg.status == 404) {
-                alert(msg.employee_id + ' is still logged in.');
-              } else {
-                $scope.empIdNumber = "";
-                alert(msg.employee_id + ' has logged in.');
-                $http.get('/employeedaylogs').then(function success(response) {
-                        console.log(response);
-                    }, function error(response) {
-                        console.log(response);
-                    });
-
-                    $http.get('/employeeswinglogs').then(function success(response) {
-                        console.log(response);
-                    }, function error(response) {
-                        console.log(response);
-                    });
-
-                    $http.get('/employeegravelogs').then(function success(response) {
-                        console.log(response);
-                    }, function error(response) {
-                        console.log(response);
-                    });
-              };
-            });
-
-            io.socket.on('timeOut', function onServerSentEvent (msg) {
-              //alert('someone time in', msg);
-              console.log(msg);
-              if(msg.status == 404) {
-                alert(msg.employee_id + ' is not logged in.');
-              } else {
-                $scope.empIdNumber = "";
-                alert(msg.employee_id + ' has logged out.');
-                $http.get('/employeedaylogs').then(function success(response) {
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-
-                $http.get('/employeeswinglogs').then(function success(response) {
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-
-                $http.get('/employeegravelogs').then(function success(response) {
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
-              };
-            });
-            
-        });
-    })();
-</script>
+    </script> 
 </body>
 
 </html>

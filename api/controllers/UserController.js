@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing Users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
+var moment =  require('moment');
 module.exports = {
 	
 	index: function(req, res) {
@@ -19,7 +19,7 @@ module.exports = {
 	},
 
 	showEmployeeDayLogs: function(req, res) {
-		Log_TimeIn.find().populate('employee_id').exec(function(err, employee) {
+		Log_TimeIn.find().populate('employee_id').sort('id DESC').exec(function(err, employee) {
 			if(err) {
 				return res.serverError(err);
 			}
@@ -38,7 +38,7 @@ module.exports = {
 	},
 
 	showEmployeeSwingLogs: function(req, res) {
-		Log_TimeIn.find().populate('employee_id').exec(function(err, employee) {
+		Log_TimeIn.find().populate('employee_id').sort('id DESC').exec(function(err, employee) {
 			if(err) {
 				return res.serverError(err);
 			}
@@ -56,7 +56,7 @@ module.exports = {
 	},
 
 	showEmployeeGraveLogs: function(req, res) {
-		Log_TimeIn.find().populate('employee_id').exec(function(err, employee) {
+		Log_TimeIn.find().populate('employee_id').sort('id DESC').exec(function(err, employee) {
 			if(err) {
 				return res.serverError(err);
 			}
@@ -89,9 +89,12 @@ module.exports = {
 			var time = new Date();
 			time = time.getTime();
 
+
 			var data = {
-				logIn: time,
-				employee_id: employee.id
+				logIn: moment(new Date()).format('LTS'),
+				employee_id: employee.id,
+				date: moment(new Date()).format('l'),
+				time: moment(new Date()).format('LTS')
 			};
 
 			Log_TimeIn.find({employee_id: employee.id, logOut: ""}).exec(function(err, log) {
@@ -134,7 +137,7 @@ module.exports = {
 			time = time.getTime();
 
 			var data = {
-				logOut: time				
+				logOut: moment(new Date()).format('LTS')				
 			};
 
 			Log_TimeIn.findOne({employee_id: employee.id, logOut: ""}).exec(function(err, log) {

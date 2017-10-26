@@ -7,7 +7,7 @@
 
 module.exports = {
   schema: true,
-  tableName: 'tbl_log_timein',
+  tableName: 'tbl_employee_attendance',
   attributes: {
 
   	attendance_status: {
@@ -29,6 +29,10 @@ module.exports = {
   	overtime: {
   		type: 'string'
   	},
+
+    date: {
+      type: 'string'
+    },
 
   	status: {
   		type: 'string'

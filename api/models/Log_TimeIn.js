@@ -5,6 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+var moment =  require('moment');
 module.exports = {
   schema: true,
   tableName: 'tbl_log_timein',
@@ -17,6 +18,16 @@ module.exports = {
     logOut: {
       type: 'string',
       defaultsTo: ""
+    },
+
+    date: {
+      type: 'string',
+      defaultsTo: moment(new Date()).format('l')
+    },
+
+    time: {
+      type: 'string',
+      defaultsTo: moment(new Date()).format('LTS')
     },
 
   	employee_id: {
