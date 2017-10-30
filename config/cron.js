@@ -38,7 +38,7 @@ module.exports.cron = {
   },
 
   dayLate: {
-    schedule: '00 16 7 * * *',
+    schedule: '00 30 7 * * *',
     onTick: function () {
       var moment = require('moment');
       var date = moment(new Date()).format('l');
@@ -90,7 +90,9 @@ module.exports.cron = {
       		if(value.timein.length != 0) {
       			var data = {
 	      			attendance_status: 'absent',
-	      			timeIn: value.timein[0].time,
+	      			//timeIn: value.timein[0].time,
+              timeIn: 'absent',
+              timeOut: 'absent',
 	      			employee_id: value.id,
 	      			date: date,
 	      			status: 'progress'
@@ -102,6 +104,8 @@ module.exports.cron = {
       		} else {
       			var data = {
 	      			attendance_status: 'absent',
+              timeIn: 'absent',
+              timeOut: 'absent',
 	      			employee_id: value.id,
 	      			date: date,
 	      			status: 'progress'
@@ -116,6 +120,7 @@ module.exports.cron = {
       		
       	});
       	sails.hooks.cron.jobs.dayAbsent.stop();
+        sails.hooks.cron.jobs.dayAbsent2.start();
       	sails.hooks.cron.jobs.dayLate.start();
       	sails.hooks.cron.jobs.dayPresent.start();
       	sails.hooks.cron.jobs.dayEnd.start();
@@ -127,7 +132,7 @@ module.exports.cron = {
       
     }
   },
-  dayAbsent: {
+  dayAbsent2: {
     schedule: '00 35 7 * * *',
     onTick: function () {
       var moment = require('moment');
@@ -142,7 +147,8 @@ module.exports.cron = {
       		if(value.timein.length != 0) {
       			var data = {
 	      			attendance_status: 'absent',
-	      			timeIn: value.timein[0].time,
+	      			timeIn: 'absent',
+              timeOut: 'absent',
 	      			employee_id: value.id,
 	      			date: date,
 	      			status: 'progress'
@@ -154,6 +160,8 @@ module.exports.cron = {
       		} else {
       			var data = {
 	      			attendance_status: 'absent',
+              timeIn: 'absent',
+              timeOut: 'absent',
 	      			employee_id: value.id,
 	      			date: date,
 	      			status: 'progress'
@@ -173,7 +181,8 @@ module.exports.cron = {
 	      		});
 
       	
-      	sails.hooks.cron.jobs.dayAbsent.stop();
+      	sails.hooks.cron.jobs.dayAbsent2.stop();
+        sails.hooks.cron.jobs.dayAbsent.start();
       	sails.hooks.cron.jobs.dayLate.start();
       	sails.hooks.cron.jobs.dayPresent.start();
       	sails.hooks.cron.jobs.dayEnd.start();
@@ -208,7 +217,7 @@ module.exports.cron = {
 	      		});
       		} else {
       			var data = {
-	      			timeOut: "--:--",
+	      			//timeOut: "--:--",
 	      			date: date,
 	      			status: 'complete'
 	      		};
