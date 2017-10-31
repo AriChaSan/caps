@@ -814,6 +814,7 @@ html {
 
                 var data = $scope.data.employee;
                 $http.post('/employee', {data: data}).then(function success(response) {
+                    alert('Success');
                     console.log(response);
                 }, function error(response) {
                     console.log(response);

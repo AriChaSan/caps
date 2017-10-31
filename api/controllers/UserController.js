@@ -464,6 +464,7 @@ module.exports = {
 		          Emergency.create({employee_id: employee.id}).exec(function(err, address) {});
 		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 		          Loan.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
+		          Leave_Credit.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 
 		          var schedule = [
 		            {
