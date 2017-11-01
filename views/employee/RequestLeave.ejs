@@ -124,29 +124,29 @@ html {
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Type of Leave</label>
-                                                        <select class="form-control">
-                                                            <option>Vacation</option>
-                                                            <option>Sick Leave</option>
-                                                            <option>Other</option>
+                                                        <select class="form-control" ng-model="leave.type">
+                                                            <option value="Force Leave">Force Leave</option>
+                                                            <option value="Sick Leave">Sick Leave</option>
+                                                            <option value="Birthday Leave">Birthday Leave</option>
                                                         </select> 
                                                         </div>
                                                     </div> 
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Number of Working Days Applied for</label>
-                                                            <input class="form-control">
+                                                            <input class="form-control" ng-model="leave.days">
                                                         </div>
                                                     </div>  
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>From</label>
-                                                            <input type="date" class="form-control">
+                                                            <input type="date" class="form-control" ng-model="leave.date_from">
                                                         </div>
                                                     </div>  
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>To</label>
-                                                            <input type="date" class="form-control">
+                                                            <input type="date" class="form-control" ng-model="leave.date_to">
                                                         </div>
                                                     </div>                                                                            
                                                 </div><hr>
@@ -155,9 +155,9 @@ html {
                                                         <div class="form-group">
                                                             <label style="color:red">In case of vacation leave</label>
                                                             <label>Where leave will be spent?</label>
-                                                        <select class="form-control">
-                                                            <option>Within the Philippines</option>
-                                                            <option>Abroad</option>
+                                                        <select class="form-control" ng-model="leave.leave_vacation">
+                                                            <option value="Within the Philippines">Within the Philippines</option>
+                                                            <option value="Abroad">Abroad</option>
                                                         </select> 
                                                         </div>
                                                     </div>                                              
@@ -165,9 +165,9 @@ html {
                                                         <div class="form-group">
                                                             <label style="color:red">In case of sick leave</label>
                                                             <label>Where leave will be spent?</label>
-                                                        <select class="form-control">
-                                                            <option>Hospital</option>
-                                                            <option>Out-patient</option>
+                                                        <select class="form-control" ng-model="leave.sick_vacation">
+                                                            <option value="Hospital">Hospital</option>
+                                                            <option value="Out-patient">Out-patient</option>
                                                         </select> 
                                                         </div>
                                                     </div> 
@@ -175,12 +175,12 @@ html {
                                                         <div class="form-group">
                                                             <label style="color:red">If other</label><br>
                                                             <label>Reason for requesting a leave.</label>
-                                                            <textarea class="form-control" rows="5"></textarea>
+                                                            <textarea class="form-control" rows="5" ng-model="leave.reason"></textarea>
                                                         </div>
                                                     </div>                                                     
                                                 </div>                                                                                            
                                                 <div class="col-lg-12 col-lg-offset-11">   
-                                                    <button class="btn btn-success" type="button">Send <i class="fa fa-send"></i></button>
+                                                    <button class="btn btn-success" type="button" ng-click="submitLeave()">Send <i class="fa fa-send"></i></button>
                                                 </div>               
                                             </form>                                               
                                         </div>
@@ -620,6 +620,124 @@ html {
     <script src="../bootstrap/data/morris-data.js"></script>
 
     <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+
+
+    <script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $scope.leave = {};
+            $scope.leave.type = "Force Leave";
+            $scope.leave.days = "";
+            $scope.leave.leave_vacation = "Within the Philippines";
+            $scope.leave.sick_vacation = "Hospital";
+            $scope.leave.reason = "";
+            $scope.leave.date_to = "";
+            $scope.leave.date_from = "";
+
+            $scope.leaveCredit = {};
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+
+                $http.get('/employeeviewleavecredit/' + $scope.employee.id).then(function success(response) {
+                    $scope.leaveCredit = response.data;
+                    console.log($scope.leaveCredit );
+                }, function error(response) {
+                    console.log(response);
+                });
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.submitLeave = function () {
+
+                if($scope.leave.type == 'Force Leave') {
+                    if($scope.leaveCredit.force_leave == 0) {
+                        alert('No force leave credits left.');
+                    } else {
+                        var data = {
+                            data: $scope.leave 
+                        };
+
+                       $http.post('/employeerequestleave/' + $scope.employee.id, data).then(function success(response) {
+                            console.log(response);
+                        }, function error(response) {
+                            console.log(response);
+                        });
+                   }
+                } else if($scope.leave.type == 'Birthday Leave') {
+                    if($scope.leaveCredit.birthday_leave == 0) {
+                        alert('No birthday leave credits left.');
+                    } else {
+                        var data = {
+                            data: $scope.leave 
+                        };
+
+                       $http.post('/employeerequestleave/' + $scope.employee.id, data).then(function success(response) {
+                            console.log(response);
+                        }, function error(response) {
+                            console.log(response);
+                        });
+                    }
+                } else if($scope.leave.type == 'Sick Leave') {
+                    if($scope.leaveCredit.sick_leave == 0) {
+                        alert('No sick leave credits left.');
+                    } else {
+
+                        var data = {
+                            data: $scope.leave 
+                        };
+
+                       $http.post('/employeerequestleave/' + $scope.employee.id, data).then(function success(response) {
+                            console.log(response);
+                        }, function error(response) {
+                            console.log(response);
+                        });
+                    }
+                };
+                       
+               
+
+                
+            };
+            
+        });
+    })();
+</script>
 
 </body>
 

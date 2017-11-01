@@ -26,6 +26,10 @@ module.exports = {
   		type: 'string'
   	},
 
+    reason: {
+      type: 'string'
+    },
+
   	date_from: {
   		type: 'string'
   	},
@@ -33,6 +37,11 @@ module.exports = {
   	date_to: {
   		type: 'string'
   	},
+
+    status: {
+      type: 'string',
+      defaultsTo: 'pending'
+    },
   	employee_id: {
   		model: 'employee'
   	}

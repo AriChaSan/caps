@@ -110,7 +110,7 @@ html {
                                                     <i class="fa fa-exclamation-circle fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="huge">5</div>
+                                                    <div class="huge">{{ leaveCredit.force_leave }}</div>
                                                     <div>Force Leave</div>
                                                 </div>
                                             </div>
@@ -132,7 +132,7 @@ html {
                                                     <i class="fa fa-gift fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="huge">1</div>
+                                                    <div class="huge">{{ leaveCredit.birthday_leave }}</div>
                                                     <div>Birthday Leave</div>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@ html {
                                                     <i class="fa fa-times-circle fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="huge">4</div>
+                                                    <div class="huge">{{ leaveCredit.sick_leave }}</div>
                                                     <div>Sick Leave</div>
                                                 </div>
                                             </div>
@@ -790,11 +790,18 @@ html {
             $scope.weekday[5] = "Friday";
             $scope.weekday[6] = "Saturday";
 
-
+            $scope.leaveCredit = {};
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
                 console.log(response);
+
+                $http.get('/employeeviewleavecredit/' + $scope.employee.id).then(function success(response) {
+                    $scope.leaveCredit = response.data;
+                    console.log($scope.leaveCredit );
+                }, function error(response) {
+                    console.log(response);
+                });
 
                 $http.get('/employeedtr/' + $scope.employee.id).then(function success(response) {
                     var data = response.data;
@@ -812,6 +819,8 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+            
 
             $scope.changePasswordSubmit = function () {
 

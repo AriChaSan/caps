@@ -11,6 +11,7 @@
     <title>Angeles City Civilian Security Unit - Dashboard</title>
     <script src="../angular/angular.js"></script>
     <script src="../angular/underscore.js"></script>
+    <script src="../angular/moment.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -951,27 +952,7 @@ html {
       </div>
     </div> 
 
-    <div id="mes" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-xlg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <h3>Subject of the message</h3>
-                    <h5>From: Matthew Louis R. Di</h5>  
-                    <hr>  
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.</p>  
-                    <hr>
-                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Reply <i class="fa fa-send"></i></button></center>
-                </div>                                                                                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
+    <% include requestModal/requestModal.ejs %>
 
     <div id="composemes" class="modal fade" role="dialog">
       <div class="modal-dialog modal-xlg">
@@ -1045,7 +1026,7 @@ html {
     (function() {
         var app = angular.module('app', []);
 
-        app.controller('appController', function($scope, $http) {
+        app.controller('appController', function($scope, $http,$compile) {
 
             $scope.userId = <%= req.session.User.id %>;
             $scope.employee = {};
@@ -1068,10 +1049,14 @@ html {
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+
+
                 console.log(response);
             }, function error(response) {
                 console.log(response);
             });
+
+            
 
             $scope.refreshLog = function() {
                 $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
@@ -1128,6 +1113,79 @@ html {
             };
 
             $scope.refreshLog();
+
+           
+            $http.get('/employeeviewrequestleave/').then(function success(response) {
+
+                var data = response.data;
+
+                _.each(data, function(value, index) {
+                    if(value.reqType == 'leave') {
+                        $('#reqList').append($compile('<li>' + 
+                                '<a href="#reqleave" ng-click="viewLeave(' + value.id + ')" data-target="#reqleave" data-toggle="modal">' +
+                                    '<div style="width: 400px;">' +
+                                        '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
+                                        '<span class="pull-right text-muted">' +
+                                            '<em>' + moment(value.createdAt).startOf('hour').fromNow() + '</em>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<div><b>Subject:</b>' + ' Request Leave' + '</div> ' +
+                                '</a>' +
+                        '</li>')($scope));
+                    } else if(value.reqType == 'keychange'){
+                        $('#reqList').append($compile('<li>' + 
+                                '<a href="#reqleave" data-target="#reqkey" data-toggle="modal">' +
+                                    '<div style="width: 400px;">' +
+                                        '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
+                                        '<span class="pull-right text-muted">' +
+                                            '<em>' + moment(value.createdAt).startOf('hour').fromNow() + '</em>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<div><b>Subject:</b>' + ' Request Time Key Change' + '</div> ' +
+                                '</a>' +
+                            '</li>')($scope));
+                    }
+                });
+
+                
+
+                
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.viewOneLeave = {};
+            $scope.viewLeave = function(id) {
+               $http.get('/employeeviewonerequestleave/' + id).then(function success(response) {
+                    $scope.viewOneLeave = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.acceptLeave = function(id) {
+
+                var data = {};
+                $http.post('/employeeacceptrequestleave/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.declineLeave = function(id) {
+
+                var data = {};
+                $http.post('/employeedeclinerequestleave/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
 
             $scope.changePasswordSubmit = function () {
 

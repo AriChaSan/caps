@@ -29,6 +29,120 @@ module.exports = {
 		});
 	},
 
+	requestLeave: function(req, res) {
+
+		var leave = req.param('data');
+
+		var data = {
+			leave_type: leave.type,
+			leave_days: leave.days,
+			leave_vacation: leave.leave_vacation,
+			sick_vacation: leave.sick_vacation,
+			reason: leave.reason,
+			date_from: moment(leave.date_from).format('l'),
+			date_to: moment(leave.date_tos).format('l'),
+			employee_id: req.params.id
+		};
+
+		Leave.create(data).exec(function(err, leave) {
+			if(err) {
+				return res.serverError(err);
+			}	
+			return res.json(leave);
+		});
+		//console.log(req.param('data'));
+	},
+
+	viewLeaveCredit: function(req, res) {
+
+		Leave_Credit.findOne({employee_id: req.params.id}).exec(function(err, leave_credit) {
+			if(err) {
+				return res.serverError(err);
+			}	
+			return res.json(leave_credit);
+		});
+	},
+
+	viewRequestLeave: function(req, res) {
+
+		Leave.find({status: 'pending'}).sort('createdAt DESC').populate('employee_id').exec(function(err, leave) {
+			if(err) {
+				return res.serverError(err);
+			}
+
+			var newLeave = _.map(leave, function(value, index) {
+
+				value.reqType = 'leave';
+				return value;
+			});	
+			return res.json(newLeave);
+		});
+		//console.log(req.param('data'));
+	},
+
+	viewOneRequestLeave: function(req, res) {
+
+		Leave.findOne(req.params.id).populate('employee_id').exec(function(err, leave) {
+			if(err) {
+				return res.serverError(err);
+			}
+
+			return res.json(leave);
+		});
+		//console.log(req.param('data'));
+	},
+
+	acceptRequestLeave: function(req, res) {
+
+		Leave.update({id: req.params.id}, {status: 'accepted'}).exec(function(err, leave){
+			if(err) {
+				return res.serverError(err);
+			}
+
+			if(leave[0].leave_type == "Force Leave") {
+				Leave_Credit.findOne({employee_id: leave[0].employee_id}).exec(function(err, leave_credit){
+
+					var leaveCr = leave_credit.force_leave - 1;
+					Leave_Credit.update({employee_id: leave[0].employee_id},{force_leave: leaveCr}).exec(function(err, leave_credit) {
+
+					});
+				});
+				console.log('leave_type');
+			} else if(leave[0].leave_type == "Birthday Leave") {
+				Leave_Credit.findOne({employee_id: leave[0].employee_id}).exec(function(err, leave_credit){
+
+					var leaveCr = leave_credit.birthday_leave - 1;
+					Leave_Credit.update({employee_id: leave[0].employee_id},{birthday_leave: leaveCr}).exec(function(err, leave_credit) {
+
+					});
+				});
+				console.log('leave_type');
+			} else if(leave[0].leave_type ==="Sick Leave") {
+				Leave_Credit.findOne({employee_id: leave[0].employee_id}).exec(function(err, leave_credit){
+
+					var leaveCr = leave_credit.sick_leave - 1;
+					Leave_Credit.update({employee_id: leave[0].employee_id},{sick_leave: leaveCr}).exec(function(err, leave_credit) {
+
+					});
+				});
+				console.log('leave_type');
+			}
+			console.log(leave);
+			return res.json(leave);
+		});
+	},
+
+	declineRequestLeave: function(req, res) {
+
+		Leave.update({id: req.params.id}, {status: 'accepted'}).exec(function(err, leave){
+			if(err) {
+				return res.serverError(err);
+			}
+
+			return res.json(leave);
+		});
+	},
+
 	showEmployeeLoanList: function(req, res) {
 
 		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {

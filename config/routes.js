@@ -63,6 +63,13 @@ module.exports.routes = {
   'GET /employeeloan/:id': 'UserController.showEmployeeLoan',
   'GET /employeeviewloan/:id': 'UserController.viewLoan',
   'POST /employeeupdateloan/:id': 'UserController.updateLoan',
+  'POST /employeerequestleave/:id': 'UserController.requestLeave',
+  'GET /employeeviewrequestleave': 'UserController.viewRequestLeave',
+  'GET /employeeviewonerequestleave/:id': 'UserController.viewOneRequestLeave',
+  'POST /employeeacceptrequestleave/:id': 'UserController.acceptRequestLeave',
+  'POST /employeedeclinerequestleave/:id': 'UserController.declineRequestLeave',
+
+  'GET /employeeviewleavecredit/:id': 'UserController.viewLeaveCredit',
 
   'GET /employeeattendance/:id': 'UserController.showEmployeeAttendance',
 
