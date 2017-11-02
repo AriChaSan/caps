@@ -148,6 +148,21 @@ module.exports = {
       via: 'employee_id'
     },
 
+    employee_attendance: {
+      collection: 'employee_attendance',
+      via: 'employee_id'
+    },
+
+    leave: {
+      collection: 'leave',
+      via: 'employee_id'
+    },
+
+    leave_credit: {
+      collection: 'leave_credit',
+      via: 'employee_id'
+    },
+
     location_id: {
       model: 'location'
     },

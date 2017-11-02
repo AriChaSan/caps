@@ -18,7 +18,59 @@ module.exports = {
 		});
 	},
 
+	employeeDTR: function(req, res) {
+		Employee.findOne(req.params.id).populate('employee_attendance').exec(function(err, user) {
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(user);
+		});
+	},
+
+	employeeAttendanceSummary: function(req, res) {
+
+		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
+			var usersId = _.pluck(user, 'id');
+			Employee.find({account_id: usersId}).populate('employee_attendance').exec(function(err, user) {
+
+				if(err) {
+					return res.serverError(err);
+				}	
+
+				return res.json(user);
+			});
+		});
+		
+	},
+
+	employeeAbsenceReport: function(req, res) {
+		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
+			var usersId = _.pluck(user, 'id');
+			Employee.find({account_id: usersId}).populate('leave_credit').populate('leave', {status: 'accepted'}).exec(function(err, user) {
+
+				if(err) {
+					return res.serverError(err);
+				}	
+
+				return res.json(user);
+			});
+		});
+		
+	},
+
+	employeeAbsenceReportDetail: function(req, res) {
+		Leave.find({employee_id: req.params.id, status: {'!': 'pending'}}).populate('employee_id.location_id').populate('employee_id.employee_type_id').exec(function(err, leave) {
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(leave);
+		});
+	},
+
 	showEmployeeAttendance: function(req, res) {
+
 		Employee_Attendance.find({employee_id: req.params.id}).exec(function(err, user) {
 
 			if(err) {
@@ -351,10 +403,10 @@ module.exports = {
 
 
 			var data = {
-				logIn: moment(new Date()).format('LTS'),
+				logIn: moment(new Date()).format('LT'),
 				employee_id: employee.id,
 				date: moment(new Date()).format('l'),
-				time: moment(new Date()).format('LTS')
+				time: moment(new Date()).format('LT')
 			};
 
 			Log_TimeIn.find({employee_id: employee.id, logOut: ""}).exec(function(err, log) {
@@ -397,7 +449,7 @@ module.exports = {
 			time = time.getTime();
 
 			var data = {
-				logOut: moment(new Date()).format('LTS')				
+				logOut: moment(new Date()).format('LT')				
 			};
 
 			Log_TimeIn.findOne({employee_id: employee.id, logOut: ""}).exec(function(err, log) {
@@ -495,6 +547,7 @@ module.exports = {
 			.populate('employee_type_id')
 			.populate('schedule')
 			.populate('loan')
+			.populate('location_id')
 			.exec(function(err, employee) {
 
 				if(err) {

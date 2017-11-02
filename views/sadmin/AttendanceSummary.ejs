@@ -9,6 +9,8 @@
 
     <title>Angeles City Civilian Security Unit - Attendance Summary</title>
     <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
+    <script src="../angular/moment.js"></script>
     <link href="../../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -157,116 +159,18 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td>001</td>
-                                                                                <td>Matthew Louis R. Di</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
+                                                                            <tr ng-repeat="employee in employeesAttendance">
+                                                                                <td>{{employee.id_number}}</td>
+                                                                                <td>{{employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename}}</td>
+                                                                                <td>{{employee.workingDays}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A%</td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td>002</td>
-                                                                                <td>Owen C. Payumo</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>003</td>
-                                                                                <td>Antonina Pabalan</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>004</td>
-                                                                                <td>Arianne C. Santos</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>005</td>
-                                                                                <td>Jerry N. Macapagal</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>   
-                                                                            <tr>
-                                                                                <td>006</td>
-                                                                                <td>Louie M. Evaristo</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr> 
-                                                                            <tr>
-                                                                                <td>007</td>
-                                                                                <td>Paolo B. Nunag</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>008</td>
-                                                                                <td>Andrew D. Muhlfeld</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>009</td>
-                                                                                <td>Jonathan G. Manaloto</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr> 
-                                                                            <tr>
-                                                                                <td>010</td>
-                                                                                <td>Darwin F. Magbag</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>                                                                                                      
+                                                                                                                                                                                 
                                                                         </tbody>                                      
                                                                       </table>
                                                                 </div>
@@ -848,10 +752,30 @@ html {
             $scope.changePassword.newPassword = "";
             $scope.changePassword.confirmPassword = "";
 
+            $scope.employeesAttendance = [];
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
                 console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+
+            $http.get('/employeeattendancesummary').then(function success(response) {
+
+                $scope.employeesAttendance = _.map(response.data, function(value, index) {
+                    var absent = _.where(value.employee_attendance, {attendance_status: 'absent'});
+                    var present = _.where(value.employee_attendance, {attendance_status: 'present'});
+                    var dayoff = _.where(value.employee_attendance, {attendance_status: 'dayoff'});
+                    var leave = _.where(value.employee_attendance, {attendance_status: 'leave'});
+                    var late = _.where(value.employee_attendance, {attendance_status: 'late'});
+                    value.workingDays = present.length + dayoff.length + leave.length + late.length;
+
+                    return value;
+                });
+                console.log($scope.employeesAttendance);
             }, function error(response) {
                 console.log(response);
             });

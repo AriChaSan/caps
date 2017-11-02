@@ -9,6 +9,8 @@
 
     <title>Angeles City Civilian Security Unit - Absence Report</title>
     <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
+    <script src="../angular/moment.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -147,78 +149,16 @@ html {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Matthew Louis R. Di </td>
-                                                                        <td>4</td>
-                                                                        <td>1</td>
-                                                                        <td>4</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
+                                                                    <tr ng-repeat="employee in employeeAbsence">
+                                                                        <td>{{ employee.id_number}}</td>
+                                                                        <td>{{employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename}}</td>
+                                                                        <td>{{employee.leave_credit[0].force_leave}}</td>
+                                                                        <td>{{employee.leave_credit[0].birthday_leave}}</td>
+                                                                        <td>{{employee.leave_credit[0].sick_leave}}</td>
+                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" ng-click="viewAbsenceReportDetail(employee.id)">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Owen C. Payumo</td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Arianne Gay C. Santos</td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Antonina Cristina B. Pabalan</td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Matthew Louis R. Di </td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Owen C. Payumo</td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Arianne Gay C. Santos</td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>03</td>
-                                                                        <td>Antonina Cristina B. Pabalan</td>
-                                                                        <td>5</td>
-                                                                        <td>1</td>
-                                                                        <td>5</td>
-                                                                        <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">View Absence Details <i class="fa fa-eye fa-fw"></i></button>
-                                                                        </td>
-                                                                    </tr>                                                                                
+                                                                                                                                                   
                                                                 </tbody>
                                                             </table> 
                                                         </div>
@@ -248,7 +188,8 @@ html {
                                                                     </div>
                                                                 </div>                                                        
                                                             </div>
-                                                        </div><hr>                                                      
+                                                        </div><hr>  
+                                                        <div ng-repeat="absence in employeeAbsenceDetail">                                                    
                                                         <form role="form">
                                                             <div class="row">
                                                                 <center>
@@ -259,51 +200,46 @@ html {
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Employee ID Number</label>
-                                                                        <p>14-0891-813</p>
+                                                                        <p>{{absence.employee_id.id_number}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Full Name</label>
-                                                                        <p>Matthew Louis R. Di</p>
+                                                                        <p>{{absence.employee_id.lastname + ', ' + absence.employee_id.firstname + ' ' + absence.employee_id.middlename}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Position</label>
-                                                                        <p>Security Officer IV</p>
+                                                                        <p>{{absence.employee_id.employee_type_id.employee_type}}</p>
                                                                     </div>
                                                                 </div>  
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Location</label>
-                                                                        <p>City Hall</p>
+                                                                        <p>{{absence.employee_id.location_id.location}}</p>
                                                                     </div>
                                                                 </div>                                                                                                          
                                                             </div><hr>                                              
                                                             <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Swap Schedule with</label>
-                                                                        <p>Owen C. Payumo</p>
-                                                                    </div>
-                                                                </div> 
+                                    
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Number of Working Days Applied for</label>
-                                                                        <p>3</p>
+                                                                        <p>{{absence.leave_days}}</p>
                                                                     </div>
                                                                 </div>  
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>From</label>
-                                                                        <p>January 01, 2017</p>
+                                                                        <p>{{absence.date_from}}</p>
                                                                     </div>
                                                                 </div>  
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>To</label>
-                                                                        <p>January 03, 2017</p>
+                                                                        <p>{{absence.date_to}}</p>
                                                                     </div>
                                                                 </div>                                                                            
                                                             </div><hr>
@@ -312,107 +248,28 @@ html {
                                                                     <div class="form-group">
                                                                         <label style="color:red">In case of vacation leave</label>
                                                                         <label>Where leave will be spent?</label>
-                                                                        <p>Philippines</p>
+                                                                        <p>{{absence.leave_vacation}}</p>
                                                                     </div>
                                                                 </div>                                              
                                                                 <div class="col-lg-3">
                                                                     <div class="form-group">
                                                                         <label style="color:red">In case of sick leave</label>
                                                                         <label>Where leave will be spent?</label>
-                                                                        <p>N/A</p>
+                                                                        <p>{{absence.sick_vacation}}</p>
                                                                     </div>
                                                                 </div> 
                                                                 <div class="col-lg-6">
                                                                     <div class="form-group">
                                                                         <label style="color:red">If other</label><br>
                                                                         <label>Reason for requesting a leave.</label>
-                                                                        <p>N/A</p>
+                                                                        <p>{{absence.reason}}</p>
                                                                     </div>
                                                                 </div>                                                     
-                                                            </div>             
-                                                        </form><hr>
-                                                        <form role="form">
-                                                            <div class="row">
-                                                                <center>
-                                                                <h3><b>Application for Leave</b></h3>
-                                                                </center>
-                                                            </div><hr>                                          
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Employee ID Number</label>
-                                                                        <p>14-0891-813</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Full Name</label>
-                                                                        <p>Matthew Louis R. Di</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Position</label>
-                                                                        <p>Security Officer IV</p>
-                                                                    </div>
-                                                                </div>  
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Location</label>
-                                                                        <p>City Hall</p>
-                                                                    </div>
-                                                                </div>                                                                                                          
-                                                            </div><hr>                                              
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Swap Schedule with</label>
-                                                                        <p>Owen C. Payumo</p>
-                                                                    </div>
-                                                                </div> 
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>Number of Working Days Applied for</label>
-                                                                        <p>3</p>
-                                                                    </div>
-                                                                </div>  
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>From</label>
-                                                                        <p>January 01, 2017</p>
-                                                                    </div>
-                                                                </div>  
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label>To</label>
-                                                                        <p>January 03, 2017</p>
-                                                                    </div>
-                                                                </div>                                                                            
-                                                            </div><hr>
-                                                            <div class="row">
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label style="color:red">In case of vacation leave</label>
-                                                                        <label>Where leave will be spent?</label>
-                                                                        <p>Philippines</p>
-                                                                    </div>
-                                                                </div>                                              
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group">
-                                                                        <label style="color:red">In case of sick leave</label>
-                                                                        <label>Where leave will be spent?</label>
-                                                                        <p>N/A</p>
-                                                                    </div>
-                                                                </div> 
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label style="color:red">If other</label><br>
-                                                                        <label>Reason for requesting a leave.</label>
-                                                                        <p>N/A</p>
-                                                                    </div>
-                                                                </div>                                                     
-                                                            </div>             
-                                                        </form>                                                                                                         
+                                                            </div> 
+
+                                                        </form>
+                                                            <hr>   
+                                                            </div>                                                                                                 
                                                     </div>                                                                                                                                                                                         
                                                 </div>                                          
                                               </div>
@@ -1031,6 +888,9 @@ html {
             $scope.changePassword.newPassword = "";
             $scope.changePassword.confirmPassword = "";
 
+            $scope.employeeAbsence = [];
+            $scope.employeeAbsenceDetail = [];
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -1038,6 +898,26 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+            $http.get('/employeeabsencereport').then(function success(response) {
+                $scope.employeeAbsence = response.data;
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.viewAbsenceReportDetail = function(id) {
+                $http.get('/employeeabsencereportdetail/' + id).then(function success(response) {
+                    $scope.employeeAbsenceDetail = _.map(response.data, function(value, index) {
+                        value.date_to = moment(value.date_to).format('LL');
+                        value.date_from = moment(value.date_from).format('LL');
+                        return value;
+                    });
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
 
             $scope.changePasswordSubmit = function () {
 

@@ -72,7 +72,10 @@ module.exports.routes = {
   'GET /employeeviewleavecredit/:id': 'UserController.viewLeaveCredit',
 
   'GET /employeeattendance/:id': 'UserController.showEmployeeAttendance',
-
+  'GET /employeeattendancesummary': 'UserController.employeeAttendanceSummary',
+  'GET /employeeabsencereport': 'UserController.employeeAbsenceReport',
+  'GET /employeeabsencereportdetail/:id': 'UserController.employeeAbsenceReportDetail',
+  'GET /employeedtr/:id': 'UserController.employeeDTR',
 
   'POST /employee/clockin/:id': 'UserController.clockIn',
   'POST /employee/clockout/:id': 'UserController.clockOut',

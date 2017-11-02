@@ -351,7 +351,7 @@ module.exports.cron = {
 	      		});
       		} else {
       			var data = {
-	      			timeOut: "--:--",
+	      			//timeOut: "--:--",
 	      			date: date,
 	      			status: 'complete'
 	      		};
@@ -669,7 +669,7 @@ module.exports.cron = {
             });
           } else {
             var data = {
-              timeOut: "--:--",
+              //timeOut: "--:--",
               date: date,
               status: 'complete'
             };
@@ -987,7 +987,7 @@ module.exports.cron = {
             });
           } else {
             var data = {
-              timeOut: "--:--",
+              //timeOut: "--:--",
               date: date,
               status: 'complete'
             };
