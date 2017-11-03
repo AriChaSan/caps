@@ -29,7 +29,7 @@ module.exports = function(req, res, next) {
     }
 
     if (req.session.User.account_type == 'accounting') {
-      return res.redirect('/accounting/dashboard');
+      return res.redirect('/payroll/dashboard');
     }
   }
 

@@ -18,6 +18,20 @@ module.exports = {
 		});
 	},
 
+	allRecord: function(req, res) {
+		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
+			var usersId = _.pluck(user, 'id');
+			Employee.find({account_id: usersId}).populate('employee_attendance').exec(function(err, employee) {
+				if(err) {
+					return res.serverError(err);
+				}	
+
+				return res.json(employee);
+			});
+		});
+		
+	},
+
 	employeeDTR: function(req, res) {
 		Employee.findOne(req.params.id).populate('employee_attendance').exec(function(err, user) {
 			if(err) {

@@ -77,6 +77,8 @@ module.exports.routes = {
   'GET /employeeabsencereportdetail/:id': 'UserController.employeeAbsenceReportDetail',
   'GET /employeedtr/:id': 'UserController.employeeDTR',
 
+  'GET /employeeallrecord': 'UserController.allRecord',
+
   'POST /employee/clockin/:id': 'UserController.clockIn',
   'POST /employee/clockout/:id': 'UserController.clockOut',
 
