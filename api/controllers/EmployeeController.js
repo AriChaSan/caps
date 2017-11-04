@@ -11,6 +11,10 @@ module.exports = {
 		return res.view('employee/dashboard');
 	},
 
+	requestkeychange: function(req, res) {
+		return res.view('employee/requestkeychanges');
+	},
+
 	requestleave: function(req, res) {
 		return res.view('employee/requestleave');
 	},

@@ -79,6 +79,8 @@ module.exports.routes = {
 
   'GET /employeeallrecord': 'UserController.allRecord',
 
+
+
   'POST /employee/clockin/:id': 'UserController.clockIn',
   'POST /employee/clockout/:id': 'UserController.clockOut',
 
@@ -121,6 +123,7 @@ module.exports.routes = {
   'GET /employees/viewattendance': 'EmployeeController.viewattendance',
   'GET /employees/viewpersonalprofile': 'EmployeeController.viewpersonalprofile',
   'GET /employees/viewschedule': 'EmployeeController.viewschedule',
+  'GET /employees/requestkeychange': 'EmployeeController.requestkeychange',
 
   /***************************************************************************
   *                                                                          *
