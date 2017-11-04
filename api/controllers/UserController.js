@@ -209,6 +209,70 @@ module.exports = {
 		});
 	},
 
+	showEmployeePayrollList: function(req, res) {
+
+		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
+			// body...
+			var usersId = _.pluck(users, 'id');
+			Employee.find({account_id: usersId, location_id: req.param('location_id')})
+			.populate('account_id.account_type_id')
+			.populate('physical_description')
+			.populate('address')
+			.populate('emergency')
+			.populate('parent')
+			.populate('sibling')
+			.populate('education_background')
+			.populate('employee_type_id')
+			.populate('schedule')
+			.populate('loan')
+			.populate('payroll')
+			.exec(function(err, employee) {
+
+				if(err) {
+					return res.serverError(err);
+				}
+				
+				return res.json(employee);
+			});
+		})	
+	},
+
+	viewPayroll: function(req, res) {
+		Payroll.findOne({employee_id: req.params.id}).populate('employee_id').exec(function(err, loan) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(loan);
+		});
+	},
+
+	updatePayroll: function(req, res) {
+
+		var data = {
+			monthly_rate: req.param('monthly_rate'),
+			amount_accured: req.param('amount_accured'),
+			pera: req.param('pera'),
+			withholding_tax: req.param('withholding_tax'),
+			mpl: req.param('mpl'),
+			personal_share: req.param('personal_share'),
+			government_share: req.param('government_share'),
+			ecc_new: req.param('ecc_new')
+			
+		};
+
+		console.log(data);
+		Payroll.update({employee_id: req.params.id}, data).exec(function(err, loan) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(loan);
+		});
+	},
+
 	showEmployeeLoanList: function(req, res) {
 
 		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
@@ -646,6 +710,7 @@ module.exports = {
 		          Physical_Description.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 		          Loan.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 		          Leave_Credit.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
+		          Payroll.create({employee_id: employee.id}).exec(function(err, physical_Description) {});
 
 		          var schedule = [
 		            {

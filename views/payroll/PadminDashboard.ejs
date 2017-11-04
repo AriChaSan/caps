@@ -10,6 +10,9 @@
 
     <title>Angeles City Civilian Security Unit - Payroll Admin Dashboard</title>
 
+    <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
+
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -97,7 +100,7 @@ html {
 }  
 </style>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#e6e6e6;">
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px; background-color:#ffffff">
@@ -111,8 +114,8 @@ html {
                 </div> 
                 <ul class="nav navbar-nav navbar-right">
                     <li style="padding-right: 25px;" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="images/MatthewDi.png" class="img-circle" 
-                        style="height:40px; width:40px;"> Matthew Louis R. Di <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="../images/{{employee.image}}" class="img-circle" 
+                        style="height:40px; width:40px;"> {{ employee.fullname }} <i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#01modal" data-target="#01modal" data-toggle="modal"><i class="fa fa-fw fa-gear"></i> Account Settings</a>
@@ -122,7 +125,7 @@ html {
                                 <a href="#07modal" data-target="#07modal" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Time-in</a>
                             </li>                        
                             <li>
-                                <a href="index.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="#" ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             </li>
                         </ul>                
                     </li>
@@ -328,100 +331,23 @@ html {
                                                                     <th>Employee Picture</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Account Type</th>
-                                                                    <th>Date Created</th>
-                                                                    <th>Date Updated</th>
+                                                                    
                                                                     <th>Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/MatthewDi.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>
+                                                                
+
+                                                                <tr ng-repeat="employee in empList">
+                                                                    <td class="text-center"><img src="../images/{{ employee.image }}" class="responsive" style="height:40px; width:40px;"></td>
+                                                                    <td>{{ employee.lastname + ', ' + employee.firstname + ' ' + employee.lastname }}</td>
+                                                                    <td>{{ employee.account_id.account_type }}</td>
                                                                     <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll" ng-click="updateLoan(employee.id)">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll" ng-click="viewLoan(employee.id)">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
                                                                 </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/OwenPayumo.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                        
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/ArianneSantos.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                           
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/AntoninaPabalan.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                       
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/MatthewDi.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/OwenPayumo.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                        
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/ArianneSantos.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                           
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                             
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-center"><img src="images/AntoninaPabalan.png" class="responsive" style="height:40px; width:40px;"></td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Admin</td>
-                                                                    <td>07/22/2017</td>
-                                                                    <td>07/22/2017</td>                                                       
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#AddPayroll">Add <i class="fa fa-plus fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdatePayroll">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewPayroll">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
-                                                                </tr>                                                        
+                                                                
+                                                                                                                          
                                                             </tbody>
                                                         </table> <hr>
                                                         <div class="col-lg-12">   
@@ -451,8 +377,7 @@ html {
             <div class="panel panel-default">
                 <div class="panel-body">    
                     <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
+                    
                     <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
                     </center> 
                 </div>
@@ -535,23 +460,23 @@ html {
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Enter Current Password</label>
-                                    <input class="form-control">
+                                    <input class="form-control" ng-model="changePassword.oldPassword">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Enter New Password</label>
-                                    <input class="form-control">
+                                    <input class="form-control" ng-model="changePassword.newPassword">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
+                                    <input class="form-control" ng-model="changePassword.confirmPassword"><hr>  
                                 </div>
                             </div>                                                   
                         <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                            <button class="btn btn-success" type="button" ng-click="changePasswordSubmit()">Save <i class="fa fa-save"></i></button>
                         </div>                                                                                                                      
                     </form>                                               
                 </div>
@@ -953,32 +878,32 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">  
-                    <h3> Name: Matthew Louis R. Di</h3>
+                    <h3> Name: {{ empUpdate.employee_id.lastname + ', ' + empUpdate.employee_id.firstname + ' ' + empUpdate.employee_id.middlename }}</h3>
                     <div class="panel panel-default">
                         <div class="panel-body">  
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Monthly Rate</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.monthly_rate">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Amount Accured for the Period</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.amount_accured">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>PERA</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.pera">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Withholding Tax</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.withholding_tax">
                                     </div>
                                 </div>                                                        
                             </div>  
@@ -986,30 +911,30 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>MPL</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.mpl">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Personal Share (new 9%)</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.personal_share">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Government Share (old 12%)</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.government_share">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>E.C.C New</label>
-                                        <input class="form-control">
+                                        <input class="form-control" ng-model="empUpdate.ecc_new">
                                     </div>
                                 </div>                                                        
                             </div><hr>
                             <div class="col-lg-12 col-lg-offset-11">   
-                                <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
+                                <button class="btn btn-success" type="button" ng-click="submitUpdate()">Save <i class="fa fa-save"></i></button>
                             </div>                                                                                                               
                         </div>                                                                                        
                     </div>                    
@@ -1286,6 +1211,109 @@ html {
 
     <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
 
+      <script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+            $scope.logLocation = "7";
+
+            $scope.empList = [];
+
+            $scope.empUpdate = {};
+
+           $scope.refreshLog = function() {
+                 $http.get('/employeepayroll?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.empList = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+             };
+
+             $scope.refreshLog();
+
+            $http.get('/employeepayroll/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+                $('#dataTable1').DataTable({
+                    destroy: true,
+                    responsive: true
+                }).destroy();
+                setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.updateLoan = function (id) {
+                //$scope.empUpdate = _.findWhere($scope.empList, {id: id});
+                $http.get('/employeepayroll/' + id).then(function success(response) {
+                    $scope.empUpdate = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                //alert(JSON.stringify($scope.empUpdate));
+            };
+
+            $scope.submitUpdate = function () {
+
+                var data = $scope.empUpdate;
+
+
+                $http.post('/employeeupdatepayroll/' + $scope.empUpdate.employee_id.id, data).then(function success(response) {
+                    alert('Updated')
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.viewLoan = function (id) {
+                alert(id);
+            };
+            
+            
+        });
+    })();
+</script>  
     <script>
     $(document).ready(function() {
         $('#dataTable1').DataTable({

@@ -113,6 +113,11 @@ module.exports = {
       via: 'employee_id'
     },
 
+    payroll: {
+      collection: 'payroll',
+      via: 'employee_id'
+    },
+
     address: {
       collection: 'address',
       via: 'employee_id'

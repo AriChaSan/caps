@@ -71,6 +71,10 @@ module.exports.routes = {
 
   'GET /employeeviewleavecredit/:id': 'UserController.viewLeaveCredit',
 
+  'GET /employeepayroll': 'UserController.showEmployeePayrollList',
+  'GET /employeepayroll/:id': 'UserController.viewPayroll',
+  'POST /employeeupdatepayroll/:id': 'UserController.updatePayroll',
+
   'GET /employeeattendance/:id': 'UserController.showEmployeeAttendance',
   'GET /employeeattendancesummary': 'UserController.employeeAttendanceSummary',
   'GET /employeeabsencereport': 'UserController.employeeAbsenceReport',
