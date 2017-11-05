@@ -12,7 +12,7 @@ module.exports = {
 	},
 
 	requestkeychange: function(req, res) {
-		return res.view('employee/requestkeychanges');
+		return res.view('employee/requestkeychange');
 	},
 
 	requestleave: function(req, res) {

@@ -1132,9 +1132,9 @@ html {
                                     '<div><b>Subject:</b>' + ' Request Leave' + '</div> ' +
                                 '</a>' +
                         '</li>')($scope));
-                    } else if(value.reqType == 'keychange'){
+                    } else if(value.reqType == 'timekey'){
                         $('#reqList').append($compile('<li>' + 
-                                '<a href="#reqleave" data-target="#reqkey" data-toggle="modal">' +
+                                '<a href="#reqleave" ng-click="viewTimekey(' + value.id + ')" data-target="#reqkey" data-toggle="modal">' +
                                     '<div style="width: 400px;">' +
                                         '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
                                         '<span class="pull-right text-muted">' +
@@ -1159,6 +1159,39 @@ html {
             $scope.viewLeave = function(id) {
                $http.get('/employeeviewonerequestleave/' + id).then(function success(response) {
                     $scope.viewOneLeave = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.acceptTimeKey= function(id) {
+
+                var data = {};
+                $http.post('/employeeaccepttimekey/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.declineTimeKey= function(id) {
+
+                var data = {};
+                $http.post('/employeedeclinetimekey/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+
+            $scope.viewOneTimekey= {};
+            $scope.viewTimekey = function(id) {
+               $http.get('/employeerequestkeychange/' + id).then(function success(response) {
+                    $scope.viewOneTimekey = response.data;
                     console.log(response);
                 }, function error(response) {
                     console.log(response);

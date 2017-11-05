@@ -18,6 +18,26 @@ module.exports = {
 		});
 	},
 
+	keyChange: function(req, res) {
+		Employee_Attendance.findOne(req.params.id).exec(function(err, employee) {
+			if(err) {
+					return res.serverError(err);
+				}	
+
+				return res.json(employee);
+		});
+	},
+
+	postKeyChange: function(req, res) {
+		TimeKey.create(req.param('data')).exec(function(err, time) {
+			if(err) {
+					return res.serverError(err);
+				}	
+
+				return res.json(time);
+		});
+	},
+
 	allRecord: function(req, res) {
 		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
 			var usersId = _.pluck(user, 'id');
@@ -132,18 +152,85 @@ module.exports = {
 	viewRequestLeave: function(req, res) {
 
 		Leave.find({status: 'pending'}).sort('createdAt DESC').populate('employee_id').exec(function(err, leave) {
+			
+
+			TimeKey.find({status: 'pending'}).sort('createdAt DESC').populate('employee_id').exec(function(err, timekey) {
+				if(err) {
+					return res.serverError(err);
+				}
+
+				var data = [];
+
+				var newLeave = _.map(leave, function(value, index) {
+
+					value.reqType = 'leave';
+					return value;
+				});	
+
+				var newTimeKey = _.map(timekey, function(value, index) {
+
+					value.reqType = 'timekey';
+					return value;
+				});
+
+				_.each(newLeave, function(value, index) {
+
+					data.push(value);
+				});
+
+
+				_.each(newTimeKey, function(value, index) {
+
+					data.push(value);
+				});		
+				return res.json(data);
+			});
+			
+		});
+		//console.log(req.param('data'));
+	},
+
+	viewOneTimeKey: function(req, res) {
+
+		TimeKey.findOne(req.params.id).populate('employee_id').exec(function(err, leave) {
 			if(err) {
 				return res.serverError(err);
 			}
 
-			var newLeave = _.map(leave, function(value, index) {
-
-				value.reqType = 'leave';
-				return value;
-			});	
-			return res.json(newLeave);
+			return res.json(leave);
 		});
 		//console.log(req.param('data'));
+	},
+
+	acceptTimeKey: function(req, res) {
+
+		TimeKey.update({id: req.params.id}, {status: 'accepted'}).exec(function(err, leave){
+			if(err) {
+				return res.serverError(err);
+			}
+
+			var data = {
+				timeIn: leave[0].newTimeIn,
+				timeOut: leave[0].newTimeOut
+			};
+
+			Employee_Attendance.update({id: leave[0].timeId}, data).exec(function(err, leave) {
+				return res.json(leave);
+			});
+
+			
+		});
+	},
+
+	declineTimeKey: function(req, res) {
+
+		TimeKey.update({id: req.params.id}, {status: 'decline'}).exec(function(err, leave){
+			if(err) {
+				return res.serverError(err);
+			}
+
+			return res.json(leave);
+		});
 	},
 
 	viewOneRequestLeave: function(req, res) {

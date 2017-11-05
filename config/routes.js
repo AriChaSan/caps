@@ -82,6 +82,11 @@ module.exports.routes = {
   'GET /employeedtr/:id': 'UserController.employeeDTR',
 
   'GET /employeeallrecord': 'UserController.allRecord',
+  'GET /employeekeychange/:id': 'UserController.keyChange',
+  'POST /employeekeychange/:id': 'UserController.postKeyChange',
+  'GET /employeerequestkeychange/:id': 'UserController.viewOneTimeKey',
+  'POST /employeeaccepttimekey/:id': 'UserController.acceptTimeKey',
+  'POST /employeedeclinetimekey/:id': 'UserController.declineTimeKey',
 
 
 

@@ -120,147 +120,18 @@ html {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>August 01, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
+                                                <tr ng-repeat="attendance in employee.employee_attendance">
+                                                    <td>{{attendance.date}}</td>
+                                                    <td>{{attendance.timeIn}}</td>
+                                                    <td>{{attendance.timeOut}}</td>
+                                                    <td>N/a</td>
+                                                    <td>N/a</td>
+                                                    <td>N/a</td>
 
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
+                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey" ng-click="keyChange(attendance.id)" >Request Change <i class="fa fa-refresh fa-fw"></i></button>
                                                     </td>
                                                 </tr>   
-                                                <tr>
-                                                    <td>August 02, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 03, 2017</td>
-                                                    <td>OFF</td>
-                                                    <td>OFF</td>
-                                                    <td>OFF</td>
-                                                    <td>OFF</td>
-                                                    <td>OFF</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 04, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>August 05, 2017</td>
-                                                    <td>ABSENT</td>
-                                                    <td>ABSENT</td>
-                                                    <td>ABSENT</td>
-                                                    <td>ABSENT</td>
-                                                    <td>ABSENT</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 06, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr>   
-                                                <tr>
-                                                    <td>August 07, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 08, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 09, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>August 10, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 12, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr>   
-                                                <tr>
-                                                    <td>August 13, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 14, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr> 
-                                                <tr>
-                                                    <td>August 15, 2017</td>
-                                                    <td>08:00am</td>
-                                                    <td>05:00pm</td>
-                                                    <td>09:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td>00:00:00</td>
-                                                    <td class="text-center"><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#timekey">Request Change <i class="fa fa-refresh fa-fw"></i></button>
-                                                    </td>
-                                                </tr>         
+                                                         
                                             </tbody>                              
                                         </table> 
                                     </div>
@@ -661,7 +532,7 @@ html {
                         <div class="col-lg-4">
                             <div class="form-group">
                               <label for="sel1">Hour</label>
-                              <select class="form-control" id="sel1">
+                              <select class="form-control" ng-model="timeKey.timeInHr">
                                 <option value="00">00</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -681,7 +552,7 @@ html {
                         <div class="col-lg-4">
                             <div class="form-group">
                               <label for="sel1">Minute</label>
-                              <select class="form-control" id="sel1">
+                              <select class="form-control" ng-model="timeKey.timeInMin">
                                 <option value="00">00</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -748,9 +619,9 @@ html {
                         <div class="col-lg-4">
                             <div class="form-group">
                               <label for="sel1">AM/PM</label>
-                              <select class="form-control" id="sel1">
-                                <option>AM</option>
-                                <option>PM</option>
+                              <select class="form-control" ng-model="timeKey.timeInAmPm">
+                                <option value="am">AM</option>
+                                <option value="pm">PM</option>
                               </select>
                             </div>
                         </div>
@@ -763,7 +634,7 @@ html {
                         <div class="col-lg-4">
                             <div class="form-group">
                               <label for="sel1">Hour</label>
-                              <select class="form-control" id="sel1">
+                              <select class="form-control" ng-model="timeKey.timeOutHr">
                                 <option value="00">00</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -783,7 +654,7 @@ html {
                         <div class="col-lg-4">
                             <div class="form-group">
                               <label for="sel1">Minute</label>
-                              <select class="form-control" id="sel1">
+                              <select class="form-control" ng-model="timeKey.timeOutMin">
                                 <option value="00">00</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -850,9 +721,9 @@ html {
                         <div class="col-lg-4">
                             <div class="form-group">
                               <label for="sel1">AM/PM</label>
-                              <select class="form-control" id="sel1">
-                                <option>AM</option>
-                                <option>PM</option>
+                              <select class="form-control" ng-model="timeKey.timeOutAmPm">
+                                <option value="am">AM</option>
+                                <option value="pm">PM</option>
                               </select>
                             </div>
                         </div>
@@ -860,7 +731,7 @@ html {
                 </div>                                                                                         
             </div>
 
-                <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Send Request <i class="fa fa-send"></i></button></center>
+                <center><button class="btn btn-success" type="button" ng-click="submitKeyChange()">Send Request <i class="fa fa-send"></i></button></center>
 
           </div>
         </div>
@@ -1008,6 +879,19 @@ html {
             $scope.empSched = {};
             $scope.time = {};
 
+            $scope.timeKey = {};
+            $scope.timeKey.timeInHr = "";
+            $scope.timeKey.timeInMin = "";
+            $scope.timeKey.timeInAmPm = "";
+            $scope.timeKey.timeOutHr = "";
+            $scope.timeKey.timeOutMin = "";
+            $scope.timeKey.timeOutAmPm = "";
+
+            $scope.prevTimeIn = "";
+            $scope.prevTimeOut = "";
+            $scope.prevDate = "";
+            $scope.timeId = "";
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -1025,6 +909,66 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+            $scope.keyChange = function (id) {
+
+                $http.get('/employeekeychange/' + id).then(function success(response) {
+
+                    $scope.prevTimeIn = response.data.timeIn;
+                    $scope.prevTimeOut = response.data.timeOut;
+                    $scope.prevDate= response.data.date;
+                    $scope.timeId= response.data.id;
+
+                    var timeInSet = [];
+                    var timeIn = response.data.timeIn.split(' ');
+                    var timeInAmPm = timeIn[1];
+                    timeIn = timeIn[0].split(':');
+                    timeInSet.push(timeIn[0]);
+                    timeInSet.push(timeIn[1]);
+                    timeInSet.push(timeInAmPm);
+                    var timeOutSet = [];
+                    var timeOut = response.data.timeOut.split(' ');
+                    var timeOutAmPm = timeOut[1];
+                    timeOut = timeOut[0].split(':');
+                    timeOutSet.push(timeOut[0]);
+                    timeOutSet.push(timeOut[1]);
+                    timeOutSet.push(timeOutAmPm);
+
+                    $scope.timeKey.timeInHr = timeInSet[0];
+                    $scope.timeKey.timeInMin = timeInSet[1];
+                    $scope.timeKey.timeInAmPm = timeInSet[2];
+                    $scope.timeKey.timeOutHr = timeOutSet[0];
+                    $scope.timeKey.timeOutMin = timeOutSet[1];
+                    $scope.timeKey.timeOutAmPm = timeOutSet[2];
+
+
+                    console.log(timeOutSet);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.submitKeyChange = function() {
+                var data = {
+                        prevTimeIn: $scope.prevTimeIn,
+                        prevTimeOut: $scope.prevTimeOut,
+                        newTimeIn: $scope.timeKey.timeInHr + ':' + $scope.timeKey.timeInMin + " " + $scope.timeKey.timeInAmPm,
+                        newTimeOut: $scope.timeKey.timeOutHr + ':' + $scope.timeKey.timeOutMin + " " + $scope.timeKey.timeOutAmPm,
+                        date: $scope.prevDate,
+                        employee_id: $scope.employee.id,
+                        timeId: $scope.timeId
+                    };
+
+                    data = { data: data };
+
+                    console.log(data);
+                 $http.post('/employeekeychange/' + $scope.employee.id, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
 
             $scope.changePasswordSubmit = function () {
 
