@@ -144,132 +144,68 @@ input:checked + .slider:before {
                             <div class="panel-body">
                                 <h1 class="page-header"><i class="fa fa-gear fa-fw"></i> Settings</h1>          
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-green">
-                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                <center><h4><b>Administrator Settings</b></h4></center>
-                                            </div> 
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
                                             <div class="panel-body">
-                                                    <h4>Allow Admin to update profile?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>  
-                                                    <h4>Allow Admin to update account?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br> 
-                                                    <h4>Allow Admin to change password?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <hr>                                                                                                
-                                                    <h4>Allow Admin to add employee?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox" id="switch2" value="true">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <h4>Allow Admin to enable and disable employee account?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <h4>Allow Admin to update daily time record?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>                                                
-                                                    <h4>Allow Admin to update employee profile?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <h4>Allow Admin to update employee account?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <h4>Allow Admin to change employee shift?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <div class="col-lg-12 col-lg-offset-10">   
-                                                        <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                                                    </div>                                    
-                                            </div>                                                                                        
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group form-group-lg">
+                                                            <div class="col-lg-4">
+                                                                <h3>Location:</h3>
+                                                                <select class="form-control" id="sel1">
+                                                                    <option>Angeles City Hall</option>
+                                                                    <option>Renal Care Unit</option>
+                                                                    <option>Angeles City Library</option>
+                                                                    <option>Museo Ning Angeles</option>
+                                                                    <option>Blood Bank</option>
+                                                                    <option>CSWDO</option>
+                                                                    <option>City College of Angeles</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>                 
+                                                    </div>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <hr>
+                                                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Employee ID</th>
+                                                                    <th>Employee Name</th>
+                                                                    <th>Account Type</th>
+                                                                    <th>Date Created</th>
+                                                                    <th>Date Updated</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                    </td>
+                                                                    <td>{{ emp.id_number }}</td>
+                                                                    <td> {{ emp.lastname + ', ' + emp.firstname + ' ' + emp.middlename }} </td>
+                                                                    <td ng-switch-when="csu_superadmin">CSU Superadmin</td>
+                                                                    <td ng-switch-when="csu_admin">CSU Admin</td>
+                                                                    <td ng-switch-when="csu_employee">CSU Employee</td>
+                                                                    <td ng-switch-when="loan">Loan</td>
+                                                                    <td ng-switch-when="accounting">Accounting</td>
+                                                                    <td ng-switch-default>none</td>
+                                                                    <td>{{ emp.account_id.createdAt }}</td>
+                                                                    <td>{{ emp.account_id.updatedAt }}</td>
+                                                                    <td class="text-center">
+                                                                    <button class="btn btn-success" type="button" ng-click="viewEmployee(emp.account_id.id)">Enable <i class="fa fa-check fa-fw"></i></button>
+                                                                    <button class="btn btn-danger" type="button" ng-click="updateEmployee(emp.account_id.id)">Disable <i class="fa fa-times fa-fw"></i></button></td>            
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                      </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="panel panel-green">
-                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                <center><h4><b>Employee Settings</b></h4></center>
-                                            </div> 
-                                            <div class="panel-body">
-                                                    <h4>Allow Employee to update profile?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <h4>Allow Employee to update account?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <br>
-                                                    <h4>Allow Employee to change password?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <div class="col-lg-12 col-lg-offset-10">   
-                                                        <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                                                    </div>                                          
-                                            </div>                                                                                        
-                                        </div><br>
-                                        <div class="panel panel-green">
-                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                <center><h4><b>Loan Admin Settings</b></h4></center>
-                                            </div> 
-                                            <div class="panel-body">
-                                                    <h4>Allow Loan Admin to update loan?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <div class="col-lg-12 col-lg-offset-10">   
-                                                        <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                                                    </div>                                          
-                                            </div>                                                                                        
-                                        </div><br>
-                                        <div class="panel panel-green">
-                                            <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                <center><h4><b>Payroll Admin Settings</b></h4></center>
-                                            </div> 
-                                            <div class="panel-body">
-                                                    <h4>Allow Payroll Admin to update payroll?<h4>
-                                                    <label class="switch" id="switch1">
-                                                      <input type="checkbox">
-                                                      <span class="slider"></span>
-                                                    </label> 
-                                                    <div class="col-lg-12 col-lg-offset-10">   
-                                                        <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                                                    </div>                                          
-                                            </div>                                                                                        
-                                        </div>                                          
-                                    </div>
-                                </div>   
+                                </div>  
                             </div>
                         </div> 
                     </div>
