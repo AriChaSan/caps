@@ -116,15 +116,15 @@ html {
                                                             <div class="form-group form-group-lg">
                                                                 <div class="col-lg-4">
                                                                     <h3>Location:</h3>
-                                                                    <select class="form-control" id="sel1">
-                                                                        <option>Angeles City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College of Angeles</option>
-                                                                    </select>
+                                                                    <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
+                                                                </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -876,6 +876,7 @@ html {
     <script>
     $(document).ready(function() {
         $('#dataTable1').DataTable({
+            destroy: true,
             responsive: true
         });
     });
@@ -1038,34 +1039,46 @@ html {
                 console.log(response);
             });
 
-            $http.get('/employeeviewschedule').then(function success(response) {
+            $scope.logLocation = "7";
+            $scope.refreshLog = function() {
+
+               $http.get('/employeeviewschedule?location_id=' + $scope.logLocation).then(function success(response) {
+                $scope.day = [];
+                $scope.swing = [];
+                $scope.graveyard = [];
+               
 
                 _.each(response.data, function(value, index) {
 
-                    var shift = value.shift;
+                        var shift = value.shift;
 
-                    if(shift == 'dayTime') {
-                        var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
-                        value.locationShift = locationShift;
-                        $scope.day.push(value);
-                    } 
+                        if(shift == 'dayTime') {
+                            var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
+                            value.locationShift = locationShift;
+                            $scope.day.push(value);
+                        } 
 
-                    if(shift == 'swingTime') {
-                        var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
-                        value.locationShift = locationShift;
-                        $scope.swing.push(value);
-                    } 
+                        if(shift == 'swingTime') {
+                            var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
+                            value.locationShift = locationShift;
+                            $scope.swing.push(value);
+                        } 
 
-                    if(shift == 'graveyardTime') {
-                        var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
-                        value.locationShift = locationShift;
-                        $scope.graveyard.push(value);
-                    } 
+                        if(shift == 'graveyardTime') {
+                            var locationShift = _.findWhere(value.location_id.shifts, {shift_type: shift});
+                            value.locationShift = locationShift;
+                            $scope.graveyard.push(value);
+                        } 
+                    });
+                    console.log($scope.day);
+                }, function error(response) {
+                    console.log(response);
                 });
-                console.log($scope.day);
-            }, function error(response) {
-                console.log(response);
-            });
+            };
+
+            $scope.refreshLog();
+
+            
 
             $scope.changePasswordSubmit = function () {
 

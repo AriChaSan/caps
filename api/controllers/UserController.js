@@ -440,7 +440,7 @@ module.exports = {
 	},
 
 	viewEmployeeSchedule: function(req, res) {
-		Employee.find().populate('location_id.shifts').populate('schedule').exec(function(err, employee) {
+		Employee.find({location_id: req.param('location_id')}).populate('location_id.shifts').populate('schedule').exec(function(err, employee) {
 			if(err) {
 				return res.serverError(employee);
 			}	
@@ -701,7 +701,7 @@ module.exports = {
 		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
 			// body...
 			var usersId = _.pluck(users, 'id');
-			Employee.find({account_id: usersId})
+			Employee.find({account_id: usersId, location_id: req.param('location_id')})
 			.populate('account_id.account_type_id')
 			.populate('physical_description')
 			.populate('address')
@@ -728,7 +728,7 @@ module.exports = {
 		User.find({account_type_id: [1, 2, 3]}).exec(function(err, users) {
 			// body...
 			var usersId = _.pluck(users, 'id');
-			Employee.find({account_id: usersId})
+			Employee.find({account_id: usersId, location_id: req.param('location_id')})
 			.populate('account_id.account_type_id')
 			.populate('physical_description')
 			.populate('address')

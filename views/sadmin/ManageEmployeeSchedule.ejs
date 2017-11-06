@@ -115,15 +115,15 @@ html {
                                                             <div class="form-group form-group-lg">
                                                                 <div class="col-lg-4">
                                                                     <h3>Location:</h3>
-                                                                    <select class="form-control" id="sel1">
-                                                                        <option>Angeles City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College of Angeles</option>
-                                                                    </select>
+                                                                    <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
+                                                                </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -963,12 +963,17 @@ html {
                 console.log(response);
             });
 
-            $http.get('/employeeschedulelist').then(function success(response) {
-                $scope.view.employee = response.data;
-                console.log($scope.view.employee);
-            }, function error(response) {
-                console.log(response);
-            });
+           $scope.logLocation = "7";
+            $scope.refreshLog = function() {
+                $http.get('/employeeschedulelist?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.view.employee = response.data;
+                    console.log($scope.view.employee);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.refreshLog();
 
 
             $scope.changePasswordSubmit = function () {
