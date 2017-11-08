@@ -195,13 +195,13 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr ng-repeat="attendance in employeeDTR.employee_attendance">
+                                                                            <tr ng-repeat="attendance in attendanceDTR">
                                                                                 <td>{{attendance.date}}</td>
                                                                                 <td>{{attendance.timeIn}}</td>
                                                                                 <td>{{attendance.timeOut}}</td>
-                                                                                <td>N/a</td>
-                                                                                <td>N/a</td>
-                                                                                <td>N/a</td>
+                                                                                <td>{{attendance.duration}}</td>
+                                                                                <td>{{attendance.overtime}}</td>
+                                                                                <td>{{attendance.late}}</td>
                                                                             </tr>   
                                                                                                                                                           
                                                                         </tbody>                                      
@@ -829,6 +829,8 @@ html {
 
             $scope.employeeList = [];
             $scope.employeeDTR = {};
+
+            $scope.moment = moment;
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -852,10 +854,35 @@ html {
 
             $scope.date_from = "";
             $scope.date_to = "";
+            $scope.attendanceDTR = [];
             $scope.viewDTR = function(id) {
                 $http.get('/employeedtr/' + id  + '?date_from='  + $scope.date_from + '&date_to='+ $scope.date_to).then(function success(response) {
-                    $scope.employeeDTR = response.data
-                    console.log(response);
+                    $scope.employeeDTR = response.data;
+
+                    $scope.attendanceDTR = _.map($scope.employeeDTR.employee_attendance, function(value, index) {
+
+                      var shiftStart = '';
+                      var shiftEnd = '';
+                      if($scope.employeeDTR.shift == 'dayTime') {
+                         shiftStart = ['7', '00'];
+                         shiftEnd = ['3', '00'];
+
+                         var timeIn = value.timeIn.split(' ');
+                         timeIn = timeIn[0].split(':');
+
+                         var timeOut = value.timeOut.split(' ');
+                         timeOut = timeOut[0].split(':');
+
+                         value.late = Math.abs(shiftStart[0] - timeIn[0]) + ':' + Math.abs(shiftStart[1] - timeIn[1]);
+
+                         value.overtime = Math.abs(shiftEnd[0] - timeOut[0]) + ':' + ((Math.abs(shiftEnd[1] - timeOut[1]) == '0') ? '00' : Math.abs(shiftEnd[1] - timeOut[1]));
+
+                         value.duration = Math.abs(Math.abs(timeIn[0] - Math.abs(Number(timeOut[0]) + 12)) - 1) + ':' + Math.abs(timeIn[1] - timeOut[1]);
+                      }
+                      
+                      return value;
+                    });
+                    console.log($scope.attendanceDTR);
                 }, function error(response) {
                     console.log(response);
                 });

@@ -6,16 +6,16 @@
                         <img src="../images/DashboardLG.png" alt="Admin Picture" height="100%" width="100%" class="responsive">
                     </li>                    
                     <li>
-                        <a href="/admin/dashboard"><h4 style="color:#FFFFFF"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h4></a>
+                        <a href="/sadmin/dashboard"><h4 style="color:#FFFFFF"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h4></a>
                     </li>
                     <li>
-                        <a href="/admin/viewpersonalprofile"><h4 style="color:#FFFFFF"><i class="fa fa-user fa-fw"></i> Personal Profile<span class="fa arrow"></span></h4></a>
+                        <a href="/sadmin/viewpersonalprofile"><h4 style="color:#FFFFFF"><i class="fa fa-user fa-fw"></i> Personal Profile<span class="fa arrow"></span></h4></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/viewpersonalprofile" style="color:#FFFFFF"><i class="fa fa-eye fa-fw"></i> View Personal Profile</a>
+                                <a href="/sadmin/viewpersonalprofile" style="color:#FFFFFF"><i class="fa fa-eye fa-fw"></i> View Personal Profile</a>
                             </li>
                             <li>
-                                <a href="/admin/updatepersonalprofile" style="color:#FFFFFF"><i class="fa fa-edit fa-fw"></i> Update Personal Profile</a>
+                                <a href="/sadmin/updatepersonalprofile" style="color:#FFFFFF"><i class="fa fa-edit fa-fw"></i> Update Personal Profile</a>
                             </li>
                         </ul>
                     </li>
@@ -23,10 +23,10 @@
                         <a href="#"><h4 style="color:#FFFFFF"><i class="fa fa-group fa-fw"></i> Manage Employee<span class="fa arrow"></span></h4></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/addemployee" style="color:#FFFFFF"><i class="fa fa-plus fa-fw"></i> Add Employee Account</a>
+                                <a href="/sadmin/addemployee" style="color:#FFFFFF"><i class="fa fa-plus fa-fw"></i> Add Employee Account</a>
                             </li>                        
                             <li>
-                                <a href="/admin/employeelist" style="color:#FFFFFF"><i class="fa fa-list fa-fw"></i> Employee List</a>
+                                <a href="/sadmin/employeelist" style="color:#FFFFFF"><i class="fa fa-list fa-fw"></i> Employee List</a>
                             </li>                           
                         </ul>
                     </li>  
@@ -34,11 +34,11 @@
                         <a href="#"><h4 style="color:#FFFFFF"><i class="fa fa-calendar fa-fw"></i> Schedule<span class="fa arrow"></span></h4></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/manageemployeeschedule" style="color:#FFFFFF"><i class="fa fa-edit fa-fw"></i> Manage Schedule</a>
+                                <a href="/sadmin/manageemployeeschedule" style="color:#FFFFFF"><i class="fa fa-edit fa-fw"></i> Manage Schedule</a>
                             </li>                        
 
                             <li>
-                                <a href="/admin/schedulesummary" style="color:#FFFFFF"><i class="fa fa-eye fa-fw"></i> View Schedule Summary</a>
+                                <a href="/sadmin/schedulesummary" style="color:#FFFFFF"><i class="fa fa-eye fa-fw"></i> View Schedule Summary</a>
                             </li>                            
                         </ul>
                     </li>                      
@@ -46,19 +46,19 @@
                         <a href="#"><h4 style="color:#FFFFFF"><i class="fa fa-file fa-fw"></i> Generate Reports<span class="fa arrow"></span></h4></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/admin/attendancesummary" style="color:#FFFFFF"><i class="fa fa-calendar fa-fw"></i> Attendance Summary</a>
+                                <a href="/sadmin/attendancesummary" style="color:#FFFFFF"><i class="fa fa-calendar fa-fw"></i> Attendance Summary</a>
                             </li>
                             <li>
-                                <a href="/admin/absencereports" style="color:#FFFFFF"><i class="fa fa-times fa-fw"></i> Absence Report</a>
+                                <a href="/sadmin/absencereports" style="color:#FFFFFF"><i class="fa fa-times fa-fw"></i> Absence Report</a>
                             </li>                             
                             <li>
                                 <a href="#" style="color:#FFFFFF"><i class="fa fa-list fa-fw"></i> Daily Time Record <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
-                                        <a href="/admin/onebyonerecord" style="color:#FFFFFF"><i class="fa fa-file-o fa-fw"></i> One-By-One Record</a>
+                                        <a href="/sadmin/onebyonerecord" style="color:#FFFFFF"><i class="fa fa-file-o fa-fw"></i> One-By-One Record</a>
                                     </li>
                                     <li>
-                                        <a href="/admin/allrecords" style="color:#FFFFFF"><i class="fa fa-files-o fa-fw"></i> All Records</a>
+                                        <a href="/sadmin/allrecords" style="color:#FFFFFF"><i class="fa fa-files-o fa-fw"></i> All Records</a>
                                     </li> 
                                 </ul>
                             </li>                                                                                                                      
@@ -81,8 +81,8 @@
                 </div> 
                 <ul class="nav navbar-nav navbar-right">
                     <li style="padding-right: 25px;" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="images/MatthewDi.png" class="img-circle" 
-                        style="height:40px; width:40px;"> Matthew Louis R. Di <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#000000"><img src="../images/{{ employee.image }}" class="img-circle" 
+                        style="height:40px; width:40px;">{{ employee.fullname }}<i class="fa fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="#01modal" data-target="#01modal" data-toggle="modal"><i class="fa fa-fw fa-gear"></i> Account Settings</a>
@@ -136,43 +136,8 @@
                             <h4><i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
                         </button>
                         <span class="badge badge-notify">3</span>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Matthew Louis R. Di</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Antonina Cristina B. Pabalan</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Owen C. Payumo</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
+                        <ul class="dropdown-menu dropdown-messages" id="reqList">
+                            <!--<li class="divider"></li>
                             <li>
                                 <a class="text-center" href="#readallmes" data-target="#readallmes" data-toggle="modal">
                                     <strong>Read All Messages</strong>
@@ -185,7 +150,7 @@
                                     <strong>Compose New Message</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
-                            </li>                           
+                            </li>   -->                        
                         </ul>
                         <!-- /.dropdown-messages -->
                     </li>

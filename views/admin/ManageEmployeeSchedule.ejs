@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Angeles City Civilian Security Unit - Manage Schedule</title>
-
+    <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -92,7 +93,7 @@ html {
 }  
 </style>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
         <% include navbar/navbar.ejs %>
@@ -114,15 +115,15 @@ html {
                                                             <div class="form-group form-group-lg">
                                                                 <div class="col-lg-4">
                                                                     <h3>Location:</h3>
-                                                                    <select class="form-control" id="sel1">
-                                                                        <option>Angeles City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College of Angeles</option>
-                                                                    </select>
+                                                                    <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
+                                                                </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -139,97 +140,19 @@ html {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>Swing Shift</td>
+                                                                <tr ng-repeat="emp in view.employee">
+                                                                    <td>{{ emp.id_number }}</td>
+                                                                    <td>{{ emp.lastname + ', ' + emp.firstname + ' ' + emp.middlename }}</td>
+                                                                    <td>{{ emp.employee_type_id.employee_type }}</td>
+                                                                    <td>{{ emp.shift }}</td>
                                                                     <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>    
+                                                                    
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" ng-click="updateSched(emp.id)">Update <i class="fa fa-edit fa-fw"></i></button>
+                                                                    <!--<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
+                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>-->    
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Security Officer III</td>
-                                                                    <td>Graveyard Shift</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                         
-                                                                </tr>                                                          
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Security Officer II</td>
-                                                                    <td>Day Shift</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" disabled>Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03">Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                         
-                                                                </tr>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                        
-                                                                </tr>                                                          
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Matthew Louis R. Di </td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                          
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Owen C. Payumo</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                            
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Arianne Gay C. Santos</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                           
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>03</td>
-                                                                    <td>Antonina Cristina B. Pabalan</td>
-                                                                    <td>Security Officer IV</td>
-                                                                    <td>None</td>
-                                                                    <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01">Add <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" disabled>Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal03" disabled>Remove <i class="fa fa-times-circle fa-fw"></i></button>    
-                                                                    </td>                                                            
-                                                                </tr>                                                        
+                                                                                                                        
                                                             </tbody>
                                                         </table>                                                      
                                                     </div>
@@ -248,31 +171,31 @@ html {
                                                         <form role="form">
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
-                                                                <h4>Name: Antonina Cristina B. Pabalan</h4>
+                                                                <h4>{{ updateEmp.lastname + ', ' +  updateEmp.firstname + ' ' + updateEmp.middlename }}</h4>
                                                                 </div>
                                                             </div> 
                                                             <hr>                                                               
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
                                                                     <label>Location </label>
-                                                                    <select class="form-control">
-                                                                        <option>City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College Of Angeles</option>
+                                                                    <select class="form-control" ng-model="updateEmp.location_id">
+                                                                        <option value="7">City Hall</option>
+                                                                        <option value="4">Renal Care Unit</option>
+                                                                        <option value="6">Angeles City Library</option>
+                                                                        <option value="5">Museo Ning Angeles</option>
+                                                                        <option value="2">Blood Bank</option>
+                                                                        <option value="3">CSWDO</option>
+                                                                        <option value="1">City College Of Angeles</option>
                                                                     </select> 
                                                                 </div>
                                                             </div><br>
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
                                                                     <label>Shift Type </label>
-                                                                    <select class="form-control">
-                                                                        <option>Day Shift</option>
-                                                                        <option>Swing Shift</option>
-                                                                        <option>Graveyard Shift</option>
+                                                                    <select class="form-control" ng-model="updateEmp.shift">
+                                                                        <option value="dayTime">Day Shift</option>
+                                                                        <option value="swingTime">Swing Shift</option>
+                                                                        <option value="graveyardTime">Graveyard Shift</option>
                                                                     </select> 
                                                                 </div>                                                                
                                                             </div><hr>
@@ -282,7 +205,7 @@ html {
                                                                         <div class="col-lg-12">
                                                                             <label>Schedule (Select Working Days) </label><br>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Monday</label>
+                                                                                <label><input type="checkbox" value="true">Monday</label>
                                                                             </div>
                                                                             <div class="checkbox">
                                                                                 <label><input type="checkbox" value="">Tuesday</label>
@@ -334,31 +257,31 @@ html {
                                                         <form role="form">
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
-                                                                <h4>Name: Antonina Cristina B. Pabalan</h4>
+                                                                <h4>Name: {{ updateEmp.lastname + ', ' +  updateEmp.firstname + ' ' + updateEmp.middlename }}</h4>
                                                                 </div>
                                                             </div> 
                                                             <hr>                                                               
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
                                                                     <label>Location </label>
-                                                                    <select class="form-control">
-                                                                        <option>City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College Of Angeles</option>
+                                                                    <select class="form-control" ng-model="schedule.location_id">
+                                                                        <option value="7">City Hall</option>
+                                                                        <option value="4">Renal Care Unit</option>
+                                                                        <option value="6">Angeles City Library</option>
+                                                                        <option value="5">Museo Ning Angeles</option>
+                                                                        <option value="2">Blood Bank</option>
+                                                                        <option value="3">CSWDO</option>
+                                                                        <option value="1">City College Of Angeles</option>
                                                                     </select> 
                                                                 </div>
                                                             </div><br>
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
                                                                     <label>Shift Type </label>
-                                                                    <select class="form-control">
-                                                                        <option>Day Shift</option>
-                                                                        <option>Swing Shift</option>
-                                                                        <option>Graveyard Shift</option>
+                                                                    <select class="form-control" ng-model="schedule.shift">
+                                                                        <option value="dayTime">Day Shift</option>
+                                                                        <option value="swingTime">Swing Shift</option>
+                                                                        <option value="graveyardTime">Graveyard Shift</option>
                                                                     </select> 
                                                                 </div>                                                                
                                                             </div><hr>
@@ -368,25 +291,25 @@ html {
                                                                         <div class="col-lg-12">
                                                                             <label>Schedule (Select Working Days) </label><br>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Monday</label>
+                                                                                <label><input type="checkbox" id="schedMonday" ng-model="schedule.monday">Monday</label>
                                                                             </div>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Tuesday</label>
+                                                                                <label><input type="checkbox" id="schedTuesday" ng-model="schedule.tuesday">Tuesday</label>
                                                                             </div>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Wednesday</label>
+                                                                                <label><input type="checkbox" id="schedWednesday" ng-model="schedule.wednesday">Wednesday</label>
                                                                             </div>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Thursday</label>
+                                                                                <label><input type="checkbox" id="schedThursday" ng-model="schedule.thursday">Thursday</label>
                                                                             </div>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Friday</label>
+                                                                                <label><input type="checkbox" id="schedFriday" ng-model="schedule.friday">Friday</label>
                                                                             </div>
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Saturday</label>
+                                                                                <label><input type="checkbox" id="schedSaturday" ng-model="schedule.saturday">Saturday</label>
                                                                             </div>        
                                                                             <div class="checkbox">
-                                                                                <label><input type="checkbox" value="">Sunday</label>
+                                                                                <label><input type="checkbox" id="schedSunday" ng-model="schedule.sunday">Sunday</label>
                                                                             </div>                               
                                                                         </div>                                                                                                
                                                                     </div>                          
@@ -396,7 +319,7 @@ html {
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
                                                                     <center>
-                                                                    <button class="btn btn-success btn-md" type="button">Save <i class="fa fa-save"></i></button>
+                                                                    <button class="btn btn-success btn-md" type="button" ng-click="submitUpdateSchedule()">Save <i class="fa fa-save"></i></button>
                                                                     </center>
                                                                 </div>
                                                             </div>  
@@ -449,13 +372,7 @@ html {
           </div>
           <div class="modal-body">
             <div class="panel panel-default">
-                <div class="panel-body">    
-                    <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
-                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
-                    </center> 
-                </div>
+                <% include changepassword/changepassword.ejs %>
             </div>       
           </div>
         </div>
@@ -531,29 +448,7 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">    
-                    <form role="form">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter Current Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter New Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
-                                </div>
-                            </div>                                                   
-                        <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                        </div>                                                                                                                      
-                    </form>                                               
+                    <% include changepassword/changepasswordform.ejs %>                                               
                 </div>
             </div>            
           </div>
@@ -618,23 +513,7 @@ html {
         </div>
       </div>
     </div> 
-    <div id="07modal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <center><h3>Time: 01:23AM</h3>
-                    <h3>Date: September 2, 2017</h3></center>
-                </div>                                                                                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
+   <% include timemodal/timemodal.ejs %>
 
     <div id="notif" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
@@ -1045,7 +924,6 @@ html {
         });
     });
     </script>     
-
 <script>
     (function() {
         var app = angular.module('app', []);
@@ -1056,6 +934,27 @@ html {
             $scope.employee = {};
             $scope.employee.fullname = "";
 
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $scope.view = {};
+
+            $scope.updateEmp = {};
+
+            $scope.schedule = {};
+            $scope.schedule.monday = false;
+            $scope.schedule.tuesday = false;
+            $scope.schedule.wednesday = false;
+            $scope.schedule.thursday = false;
+            $scope.schedule.friday = false;
+            $scope.schedule.saturday = false;
+            $scope.schedule.sunday = false;
+
+            $scope.schedule.location_id = "";
+            $scope.schedule.shift = "";
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -1063,11 +962,76 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+           $scope.logLocation = "7";
+            $scope.refreshLog = function() {
+                $http.get('/employeeschedulelist?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.view.employee = response.data;
+                    console.log($scope.view.employee);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.refreshLog();
+
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
             
             $scope.logout = function () {
 
                 $http.post('/logout').then(function success(response) {
                     window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.updateSched = function(id) {
+                $scope.updateEmp = _.findWhere($scope.view.employee, {id: id});
+                $('#schedMonday').attr('checked', ($scope.updateEmp.schedule[0].monday == 'on') ? true:false); // Checks it
+                $('#schedTuesday').attr('checked', ($scope.updateEmp.schedule[0].tuesday == 'on') ? true:false); // Unchecks it
+                $('#schedWednesday').attr('checked', ($scope.updateEmp.schedule[0].wednesday == 'on') ? true:false);
+                $('#schedThursday').attr('checked', ($scope.updateEmp.schedule[0].thursday == 'on') ? true:false);
+                $('#schedFriday').attr('checked', ($scope.updateEmp.schedule[0].friday == 'on') ? true:false);
+                $('#schedSaturday').attr('checked', ($scope.updateEmp.schedule[0].saturday == 'on') ? true:false);
+                $('#schedSunday').attr('checked', ($scope.updateEmp.schedule[0].sunday == 'on') ? true:false);
+
+                $scope.schedule.monday = ($scope.updateEmp.schedule[0].monday == 'on') ? true:false;
+                $scope.schedule.tuesday = ($scope.updateEmp.schedule[0].tuesday == 'on') ? true:false;
+                $scope.schedule.wednesday = ($scope.updateEmp.schedule[0].wednesday == 'on') ? true:false;
+                $scope.schedule.thursday = ($scope.updateEmp.schedule[0].thursday == 'on') ? true:false;
+                $scope.schedule.friday = ($scope.updateEmp.schedule[0].friday == 'on') ? true:false;
+                $scope.schedule.saturday = ($scope.updateEmp.schedule[0].saturday == 'on') ? true:false;
+                $scope.schedule.sunday = ($scope.updateEmp.schedule[0].sunday == 'on') ? true:false;
+
+                $scope.schedule.location_id = $scope.updateEmp.location_id.toString();
+                $scope.schedule.shift = $scope.updateEmp.shift;
+
+                console.log($scope.schedule);
+                console.log($scope.updateEmp);
+            };
+
+            $scope.submitUpdateSchedule = function () {
+
+                var data = {
+                    employee: $scope.updateEmp,
+                    schedule: $scope.schedule
+                };
+
+                $http.post('/employeeupdateschedule', data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
                 }, function error(response) {
                     console.log(response);
                 });

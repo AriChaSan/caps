@@ -8,26 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Angeles City Civilian Security Unit - Attendance Summary</title>
+    <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
+    <script src="../angular/moment.js"></script>
+    <link href="../../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
-    <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="../../bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <link href="../bootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../../bootstrap/vendor/morrisjs/morris.css" rel="stylesheet">
 
-    <link href="../bootstrap/vendor/morrisjs/morris.css" rel="stylesheet">
-
-    <link href="../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="assets/demo.css">
 
     <link rel="stylesheet" href="assets/form-basic.css">
 
-    <link href="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
-    <link href="../bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="../../bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
-    <script src = "../bootstrap/js/bootstrap-datepicker.js"></script>
+    <script src = "../../bootstrap/js/bootstrap-datepicker.js"></script>
 
 </head>
 <style>
@@ -99,10 +101,10 @@ html {
   });
   </script>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
-        <% include navbar/navbar.ejs %>     
+       <% include navbar/navbar.ejs %>   
             <br>
             <div style="background-color:#e6e6e6; padding-right: 20px; padding-left: 20px;"> 
                 <div class="row">
@@ -119,15 +121,15 @@ html {
                                                             <div class="form-group form-group-lg">
                                                                 <div class="col-lg-4">
                                                                     <h3>Location:</h3>
-                                                                    <select class="form-control" id="sel1">
-                                                                        <option>Angeles City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College of Angeles</option>
-                                                                    </select>
+                                                                    <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
+                                                                </select>
                                                                 </div>
                                                             </div>                                                        
                                                         </div>
@@ -137,9 +139,9 @@ html {
                                                                 <hr>
                                                                 <div>
                                                                     <div>
-                                                                      From: <input type="date" name = "from" value="<?php echo $from;?>">
-                                                                      To: <input type="date" name = "to" value="<?php echo $to;?>">
-                                                                      <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go'><br><br>
+                                                                      From: <input type="date" name = "from" value="<?php echo $from;?>" ng-model="date_from">
+                                                                      To: <input type="date" name = "to" value="<?php echo $to;?>" ng-model="date_to">
+                                                                      <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go' ng-click="refreshLog()"><br><br>
                                                                       </div> 
                                                                       <center><p><b>Republic of the Philippines<br>ANGELES CITY LOCAL GOVERNMENT<br>Angeles City<br>ATTENDANCE SUMMARY</b></p></center>
                                                                       <table width="100%" class="table table-striped table-bordered table-hover">
@@ -157,116 +159,18 @@ html {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td>001</td>
-                                                                                <td>Matthew Louis R. Di</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
+                                                                            <tr ng-repeat="employee in employeesAttendance">
+                                                                                <td>{{employee.id_number}}</td>
+                                                                                <td>{{employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename}}</td>
+                                                                                <td>{{employee.workingDays}} Days</td>
+                                                                                <td>{{employee.totalWorkDay}}  Days</td>
+                                                                                <td>{{employee.workingHours}} Hours</td>
+                                                                                <td>{{employee.totalWorkHours}} Hours</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A%</td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td>002</td>
-                                                                                <td>Owen C. Payumo</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>003</td>
-                                                                                <td>Antonina Pabalan</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>004</td>
-                                                                                <td>Arianne C. Santos</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>005</td>
-                                                                                <td>Jerry N. Macapagal</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>   
-                                                                            <tr>
-                                                                                <td>006</td>
-                                                                                <td>Louie M. Evaristo</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr> 
-                                                                            <tr>
-                                                                                <td>007</td>
-                                                                                <td>Paolo B. Nunag</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>008</td>
-                                                                                <td>Andrew D. Muhlfeld</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>009</td>
-                                                                                <td>Jonathan G. Manaloto</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr> 
-                                                                            <tr>
-                                                                                <td>010</td>
-                                                                                <td>Darwin F. Magbag</td>
-                                                                                <td>15</td>
-                                                                                <td>120</td>
-                                                                                <td>120</td>
-                                                                                <td>0</td>
-                                                                                <td>0</td>
-                                                                                <td>8</td>
-                                                                                <td>100%</td>
-                                                                            </tr>                                                                                                      
+                                                                                                                                                                                 
                                                                         </tbody>                                      
                                                                       </table>
                                                                 </div>
@@ -298,13 +202,7 @@ html {
           </div>
           <div class="modal-body">
             <div class="panel panel-default">
-                <div class="panel-body">    
-                    <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
-                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
-                    </center> 
-                </div>
+                <% include changepassword/changepassword.ejs %>
             </div>       
           </div>
         </div>
@@ -380,29 +278,7 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">    
-                    <form role="form">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter Current Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter New Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
-                                </div>
-                            </div>                                                   
-                        <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                        </div>                                                                                                                      
-                    </form>                                               
+                    <% include changepassword/changepasswordform.ejs %>                                               
                 </div>
             </div>            
           </div>
@@ -467,23 +343,7 @@ html {
         </div>
       </div>
     </div> 
-    <div id="07modal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <center><h3>Time: 01:23AM</h3>
-                    <h3>Date: September 2, 2017</h3></center>
-                </div>                                                                                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>   
+    <% include timemodal/timemodal.ejs %> 
     <div id="notif" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -887,6 +747,13 @@ html {
             $scope.employee = {};
             $scope.employee.fullname = "";
 
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $scope.employeesAttendance = [];
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -894,6 +761,75 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+
+            $scope.date_from = "";
+            $scope.date_to = "";
+            $scope.logLocation = "7";
+            $scope.refreshLog = function() {
+                $http.get('/employeeattendancesummary?location_id=' + $scope.logLocation + '&date_from='  + $scope.date_from + '&date_to='+ $scope.date_to).then(function success(response) {
+
+                  var dateFrom = new Date($scope.date_from);
+                  var dateTo = new Date($scope.date_to);
+                  var totalWorkDay = 0;
+                  dateFrom = dateFrom.getDate();
+                  dateTo = dateTo.getDate();
+                  for(var x = dateFrom; x <= dateTo; x++) {
+                    totalWorkDay++;
+                  };
+
+                  console.log(dateFrom + ' + '  + dateTo);
+                  $scope.employeesAttendance = _.map(response.data, function(value, index) {
+                      var absent = _.where(value.employee_attendance, {attendance_status: 'absent'});
+                      var present = _.where(value.employee_attendance, {attendance_status: 'present'});
+                      var dayoff = _.where(value.employee_attendance, {attendance_status: 'dayoff'});
+                      var leave = _.where(value.employee_attendance, {attendance_status: 'leave'});
+                      var late = _.where(value.employee_attendance, {attendance_status: 'late'});
+
+                      /*_.each(value.employee_attendance, function(value1, index) {
+
+                        var shiftStart = 0;
+                        var shiftEnd = 0;
+                        var shiftDate = value1.date;
+
+                        if(value.shift == 'dayTime') {
+
+                          shiftStart = moment(shiftDate + ' 7:00 am').format('x');
+                          shiftEnd = moment(shiftDate + ' 3:00 pm').format('x');
+                          console.log(shiftEnd);
+                        };
+
+                      });*/
+                      //console.log(moment('11/9/2017 7:00 am').format('x'));
+                      value.workingDays = present.length + dayoff.length + leave.length + late.length;
+                      value.totalWorkDay = totalWorkDay - dayoff;
+                      value.workingHours = value.workingDays * 8;
+                      value.totalWorkHours = value.totalWorkDay * 8;
+
+                      return value;
+                  });
+                  console.log($scope.employeesAttendance);
+              }, function error(response) {
+                  console.log(response);
+              });
+            };
+
+            $scope.refreshLog();
+
+
+            
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
             
             $scope.logout = function () {
 

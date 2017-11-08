@@ -162,10 +162,10 @@ html {
                                                                             <tr ng-repeat="employee in employeesAttendance">
                                                                                 <td>{{employee.id_number}}</td>
                                                                                 <td>{{employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename}}</td>
-                                                                                <td>{{employee.workingDays}}</td>
-                                                                                <td>N/A</td>
-                                                                                <td>N/A</td>
-                                                                                <td>N/A</td>
+                                                                                <td>{{employee.workingDays}} Days</td>
+                                                                                <td>{{employee.totalWorkDay}}  Days</td>
+                                                                                <td>{{employee.workingHours}} Hours</td>
+                                                                                <td>{{employee.totalWorkHours}} Hours</td>
                                                                                 <td>N/A</td>
                                                                                 <td>N/A</td>
                                                                                 <td>N/A%</td>
@@ -769,13 +769,42 @@ html {
             $scope.refreshLog = function() {
                 $http.get('/employeeattendancesummary?location_id=' + $scope.logLocation + '&date_from='  + $scope.date_from + '&date_to='+ $scope.date_to).then(function success(response) {
 
+                  var dateFrom = new Date($scope.date_from);
+                  var dateTo = new Date($scope.date_to);
+                  var totalWorkDay = 0;
+                  dateFrom = dateFrom.getDate();
+                  dateTo = dateTo.getDate();
+                  for(var x = dateFrom; x <= dateTo; x++) {
+                    totalWorkDay++;
+                  };
+
+                  console.log(dateFrom + ' + '  + dateTo);
                   $scope.employeesAttendance = _.map(response.data, function(value, index) {
                       var absent = _.where(value.employee_attendance, {attendance_status: 'absent'});
                       var present = _.where(value.employee_attendance, {attendance_status: 'present'});
                       var dayoff = _.where(value.employee_attendance, {attendance_status: 'dayoff'});
                       var leave = _.where(value.employee_attendance, {attendance_status: 'leave'});
                       var late = _.where(value.employee_attendance, {attendance_status: 'late'});
+
+                      /*_.each(value.employee_attendance, function(value1, index) {
+
+                        var shiftStart = 0;
+                        var shiftEnd = 0;
+                        var shiftDate = value1.date;
+
+                        if(value.shift == 'dayTime') {
+
+                          shiftStart = moment(shiftDate + ' 7:00 am').format('x');
+                          shiftEnd = moment(shiftDate + ' 3:00 pm').format('x');
+                          console.log(shiftEnd);
+                        };
+
+                      });*/
+                      //console.log(moment('11/9/2017 7:00 am').format('x'));
                       value.workingDays = present.length + dayoff.length + leave.length + late.length;
+                      value.totalWorkDay = totalWorkDay - dayoff;
+                      value.workingHours = value.workingDays * 8;
+                      value.totalWorkHours = value.totalWorkDay * 8;
 
                       return value;
                   });

@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Angeles City Civilian Security Unit - Dashboard</title>
-
+    <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
+    <script src="../angular/moment.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -91,12 +93,19 @@ html {
     border-color: transparent;
     background-color: #d9d9d9;
 }  
+
+#add {
+  display: inline-block;
+  padding-left: 30px;
+  float: left;
+}
+
 </style>
 
-<body>
+<body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
-        <% include navbar/navbar.ejs %>   
+        <% include navbar/navbar.ejs %>    
             <br>
             <div style="background-color:#e6e6e6; padding-right: 20px; padding-left: 20px;"> 
                 <div class="row">
@@ -135,7 +144,7 @@ html {
                                                 </div>
                                                 <div class="col-xs-9 text-right">
                                                     <div class="huge">5</div>
-                                                    <div>Locked Account(s)</div>
+                                                    <div>Active Account(s)</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -175,151 +184,117 @@ html {
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                 <h2><i class="fa fa-calendar fa-fw"></i> Daily Time Record</h2><hr>
+                                                <div class="alert alert-danger" id="absentReportDiv" hidden>
+                                                    <h5>Absent for today !</h5>
+                                                    <ul id="absentReportList"></ul>
+                                                </div>
+                                                
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="form-group form-group-lg">
                                                             <div class="col-lg-4">
                                                                 <h3>Location:</h3>
-                                                                <select class="form-control" id="sel1">
-                                                                    <option>Angeles City Hall</option>
-                                                                    <option>Renal Care Unit</option>
-                                                                    <option>Angeles City Library</option>
-                                                                    <option>Museo Ning Angeles</option>
-                                                                    <option>Blood Bank</option>
-                                                                    <option>CSWDO</option>
-                                                                    <option>City College of Angeles</option>
+                                                                <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div> 
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <hr>
-                                                        <div class="panel panel-green">
-                                                            <div class="panel-heading">
-                                                                <center><h4><b>DAY SHIFT (7AM - 3PM)</b></h4></center>
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Date</th>
-                                                                            <th>Employee Name</th>
-                                                                            <th>Time In</th>
-                                                                            <th>Time Out</th>
-                                                                            <th>Work Duration</th>
-                                                                            <th>Over Time</th>
-                                                                            <th>Late By</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Matthew Louis R. Di </td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Owen C. Payumo</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Arianne Gay C. Santos</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Antonina Cristina B. Pabalan</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div> 
-                                                        </div>  
+                                                <br>
+                                                <div class="container-fluid">
+                                                  <ul class="nav nav-tabs">
+                                                    <li class="active"><a data-toggle="tab" href="#home">Day Time</a></li>
+                                                    <li><a data-toggle="tab" href="#menu1">Swing Time</a></li>
+                                                    <li><a data-toggle="tab" href="#menu2">Graveyard Time</a></li>
+                                                  </ul>
+
+                                                  <div class="tab-content">
+                                                    <div id="home" class="tab-pane fade in active">
+                                                      <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <hr>
+                                                            <div class="panel panel-green">
+                                                                <div class="panel-heading">
+                                                                    <center><h4><b>DAY SHIFT (7AM - 3PM)</b></h4></center>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable1">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Date</th>
+                                                                                <th>Employee Name</th>
+                                                                                <th>Time In</th>
+                                                                                <th>Time Out</th>
+                                                                                <th>Work Duration</th>
+                                                                                <th>Over Time</th>
+                                                                                <th>Late By</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                           <tr ng-repeat="daylog in dayLog">
+                                                                                <td>{{daylog.date}}</td>
+                                                                                <td>{{daylog.employee_id.firstname}}</td>
+                                                                                <td>{{daylog.logIn}}</td>
+                                                                                <td>{{daylog.logOut || "N/A"}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                           </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div> 
+                                                            </div>  
+                                                        </div>
                                                     </div>
-                                                </div> 
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <hr>
-                                                        <div class="panel panel-green">
-                                                            <div class="panel-heading">
-                                                                <center><h4><b>SWING SHIFT (3PM - 11PM)</b></h4></center>
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable2">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Date</th>
-                                                                            <th>Employee Name</th>
-                                                                            <th>Time In</th>
-                                                                            <th>Time Out</th>
-                                                                            <th>Work Duration</th>
-                                                                            <th>Over Time</th>
-                                                                            <th>Late By</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Matthew Louis R. Di </td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Owen C. Payumo</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Arianne Gay C. Santos</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Antonina Cristina B. Pabalan</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div> 
-                                                        </div>                                                      
                                                     </div>
-                                                </div>   
-                                                <div class="row">
+                                                    <div id="menu1" class="tab-pane fade">
+                                                      <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <hr>
+                                                            <div class="panel panel-green">
+                                                                <div class="panel-heading">
+                                                                    <center><h4><b>Swing SHIFT (3PM - 11PM)</b></h4></center>
+                                                                </div>
+                                                                <div class="panel-body">
+
+                                                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable2">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Date</th>
+                                                                                <th>Employee Name</th>
+                                                                                <th>Time In</th>
+                                                                                <th>Time Out</th>
+                                                                                <th>Work Duration</th>
+                                                                                <th>Over Time</th>
+                                                                                <th>Late By</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                           <tr ng-repeat="swinglog in swingLog">
+                                                                                <td>{{swinglog.date}}</td>
+                                                                                <td>{{swinglog.employee_id.firstname}}</td>
+                                                                                <td>{{swinglog.logIn}}</td>
+                                                                                <td>{{swinglog.logOut || "N/A"}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                           </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div> 
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div id="menu2" class="tab-pane fade">
+                                                      <div class="row">
                                                     <div class="col-lg-12">
                                                         <hr>
                                                         <div class="panel panel-green">
@@ -340,111 +315,25 @@ html {
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Matthew Louis R. Di </td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Owen C. Payumo</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Arianne Gay C. Santos</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Antonina Cristina B. Pabalan</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
+                                                                       <tr ng-repeat="graveyardlog in graveLog">
+                                                                                <td>{{graveyardlog.date}}</td>
+                                                                                <td>{{graveyardlog.employee_id.firstname}}</td>
+                                                                                <td>{{graveyardlog.logIn}}</td>
+                                                                                <td>{{graveyardlog.logOut || "N/A"}}</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                                <td>N/A</td>
+                                                                           </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div> 
                                                         </div>                                                    
                                                     </div>
-                                                </div>    
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <hr>
-                                                        <div class="panel panel-green">
-                                                            <div class="panel-heading">
-                                                                <center><h4><b>IRREGULAR SHIFT</b></h4></center>
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable4">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Date</th>
-                                                                            <th>Employee Name</th>
-                                                                            <th>Time In</th>
-                                                                            <th>Time Out</th>
-                                                                            <th>Work Duration</th>
-                                                                            <th>Over Time</th>
-                                                                            <th>Late By</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Matthew Louis R. Di </td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Owen C. Payumo</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Arianne Gay C. Santos</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                          
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>07/22/2017</td>
-                                                                            <td>Antonina Cristina B. Pabalan</td>
-                                                                            <td>08:00am</td>
-                                                                            <td>05:00pm</td>
-                                                                            <td>09:00:00</td>
-                                                                            <td>00:00:00</td>
-                                                                            <td>00:00:00</td>                                                           
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div> 
-                                                        </div>                                                     
+                                                </div> 
                                                     </div>
-                                                </div>                                                               
+                                                  </div>
+                                                </div>
+                                                                                                               
                                             </div>                                            
                                         </div>
                                     </div>
@@ -465,13 +354,7 @@ html {
           </div>
           <div class="modal-body">
             <div class="panel panel-default">
-                <div class="panel-body">    
-                    <center>
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewac" data-dismiss="modal">View Account <i class="fa fa-eye fa-fw"></i></button><hR>
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#02modal" data-dismiss="modal">Update Account <i class="fa fa-edit fa-fw"></i></button>
-                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#03modal" data-dismiss="modal">Change Password <i class="fa fa-lock fa-fw"></i></button>
-                    </center> 
-                </div>
+                <% include changepassword/changepassword.ejs %>
             </div>       
           </div>
         </div>
@@ -547,29 +430,7 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">    
-                    <form role="form">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter Current Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Enter New Password</label>
-                                    <input class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Confirm New Password</label>
-                                    <input class="form-control"><hr>  
-                                </div>
-                            </div>                                                   
-                        <div class="col-lg-12 col-lg-offset-9">   
-                            <button class="btn btn-success" type="button">Save <i class="fa fa-save"></i></button>
-                        </div>                                                                                                                      
-                    </form>                                               
+                    <% include changepassword/changepasswordform.ejs %>                                              
                 </div>
             </div>            
           </div>
@@ -696,7 +557,7 @@ html {
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-exclamation-circle"></i> Locked Account(s)</h2></center>
+            <center><h2 class="modal-title"><i class="fa fa-exclamation-circle"></i> Active Account(s)</h2></center>
           </div>
           <div class="modal-body">
             <div class="panel panel-default">
@@ -806,23 +667,7 @@ html {
 
       </div>
     </div>
-    <div id="07modal" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-check"></i> Time-in Successful!</h2></center>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <center><h3>Time: 01:23AM</h3>
-                    <h3>Date: September 2, 2017</h3></center>
-                </div>                                                                                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
+    <% include timemodal/timemodal.ejs %>
     <div id="notif" class="modal fade" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -1107,27 +952,7 @@ html {
       </div>
     </div> 
 
-    <div id="mes" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-xlg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
-          </div>
-          <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <h3>Subject of the message</h3>
-                    <h5>From: Matthew Louis R. Di</h5>  
-                    <hr>  
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend.</p>  
-                    <hr>
-                    <center><button class="btn btn-success" type="button" data-toggle="modal" data-target="#composemes" data-dismiss="modal">Reply <i class="fa fa-send"></i></button></center>
-                </div>                                                                                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
+    <% include requestModal/requestModal.ejs %>
 
     <div id="composemes" class="modal fade" role="dialog">
       <div class="modal-dialog modal-xlg">
@@ -1194,21 +1019,410 @@ html {
 
     <script src="../bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script>    
 
-    <script>
-    $(document).ready(function() {
-        $('#dataTable1').DataTable({
-            responsive: true
+           
+<script src="../js/dependencies/sails.io.js"></script>
+
+<script>
+    (function() {
+        var app = angular.module('app', []);
+
+        app.controller('appController', function($scope, $http,$compile) {
+
+            $scope.userId = <%= req.session.User.id %>;
+            $scope.employee = {};
+            $scope.employee.fullname = "";
+
+            $scope.changePassword = {};
+            $scope.changePassword.oldPassword = "";
+            $scope.changePassword.newPassword = "";
+            $scope.changePassword.confirmPassword = "";
+
+            $scope.empIdNumber = "";
+
+            $scope.dayLog = "";
+            $scope.swingLog = "";
+            $scope.graveLog = "";
+
+            $scope.logLocation = "7";
+
+
+            $http.get('/employee/' + $scope.userId).then(function success(response) {
+                $scope.employee = response.data;
+                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
+
+
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            
+
+            $scope.refreshLog = function() {
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                    
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.swingLog = response.data;
+                    $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.graveLog = response.data;
+                    $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.refreshLog();
+
+           
+            $http.get('/employeeviewrequestleave/').then(function success(response) {
+
+                var data = response.data;
+
+                _.each(data, function(value, index) {
+                    if(value.reqType == 'leave') {
+                        $('#reqList').append($compile('<li>' + 
+                                '<a href="#reqleave" ng-click="viewLeave(' + value.id + ')" data-target="#reqleave" data-toggle="modal">' +
+                                    '<div style="width: 400px;">' +
+                                        '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
+                                        '<span class="pull-right text-muted">' +
+                                            '<em>' + moment(value.createdAt).startOf('hour').fromNow() + '</em>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<div><b>Subject:</b>' + ' Request Leave' + '</div> ' +
+                                '</a>' +
+                        '</li>')($scope));
+                    } else if(value.reqType == 'timekey'){
+                        $('#reqList').append($compile('<li>' + 
+                                '<a href="#reqleave" ng-click="viewTimekey(' + value.id + ')" data-target="#reqkey" data-toggle="modal">' +
+                                    '<div style="width: 400px;">' +
+                                        '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
+                                        '<span class="pull-right text-muted">' +
+                                            '<em>' + moment(value.createdAt).startOf('hour').fromNow() + '</em>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<div><b>Subject:</b>' + ' Request Time Key Change' + '</div> ' +
+                                '</a>' +
+                            '</li>')($scope));
+                    }
+                });
+
+                
+
+                
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.viewOneLeave = {};
+            $scope.viewLeave = function(id) {
+               $http.get('/employeeviewonerequestleave/' + id).then(function success(response) {
+                    $scope.viewOneLeave = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.acceptTimeKey= function(id) {
+
+                var data = {};
+                $http.post('/employeeaccepttimekey/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.declineTimeKey= function(id) {
+
+                var data = {};
+                $http.post('/employeedeclinetimekey/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+
+            $scope.viewOneTimekey= {};
+            $scope.viewTimekey = function(id) {
+               $http.get('/employeerequestkeychange/' + id).then(function success(response) {
+                    $scope.viewOneTimekey = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.acceptLeave = function(id) {
+
+                var data = {};
+                $http.post('/employeeacceptrequestleave/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.declineLeave = function(id) {
+
+                var data = {};
+                $http.post('/employeedeclinerequestleave/' + id, data).then(function success(response) {
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.changePasswordSubmit = function () {
+
+                var data = {data: $scope.changePassword};
+
+                $http.post('/user/changepassword/' + $scope.userId, data).then(function success(response) {
+                    alert('Success');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            
+            $scope.logout = function () {
+
+                $http.post('/logout').then(function success(response) {
+                    window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.clockIn = function () {
+
+                //
+                $http.post('/employee/clockin/' + $scope.empIdNumber).then(function success(response) {
+                    //alert('log In: ' + $scope.empIdNumber);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.clockOut = function () {
+
+                
+                $http.post('/employee/clockout/' + $scope.empIdNumber).then(function success(response) {
+                   // alert('log Out: ' + $scope.empIdNumber);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            io.socket.on('timeIn', function onServerSentEvent (msg) {
+              //alert('someone time in', msg);
+              console.log(msg);
+              if(msg.status == 404) {
+                alert(msg.employee_id + ' is still logged in.');
+              } else {
+                $scope.empIdNumber = "";
+                alert(msg.employee_id + ' has logged in.');
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+
+                    $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                        $scope.swingLog = response.data;
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500); 
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+
+                    $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                        $scope.graveLog = response.data;
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+              };
+            });
+
+            io.socket.on('timeOut', function onServerSentEvent (msg) {
+              //alert('someone time in', msg);
+              console.log(msg);
+              if(msg.status == 404) {
+                alert(msg.employee_id + ' is not logged in.');
+              } else {
+                $scope.empIdNumber = "";
+                alert(msg.employee_id + ' has logged out.');
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.swingLog = response.data;
+                    $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.graveLog = response.data;
+                    $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+              };
+            });
+
+            io.socket.on('absentReport', function (msg) {
+                console.log('Absent report: ' + JSON.stringify(msg));
+                if(!msg) {
+                    
+                } else {
+                    if(msg.employee_ids.length != 0) {
+                        _.each(msg.employee_ids, function(value, index) {
+                            $('#absentReportDiv').show();
+                            $('#absentReportList').append('<li>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</li>');
+                        });
+                    }
+                    
+                }
+                
+            });
+            
         });
+    })();
+</script>
+ <script>
+    $(document).ready(function() {        
+        
     });
     $(document).ready(function() {
-        $('#dataTable2').DataTable({
-            responsive: true
-        });
+        setTimeout(function(){
+            $('#dataTable2').DataTable({
+                destroy: true,
+                responsive: true
+            });
+        }, 500);
     });
     $(document).ready(function() {
-        $('#dataTable3').DataTable({
-            responsive: true
-        });
+        setTimeout(function(){
+            $('#dataTable3').DataTable({
+                destroy: true,
+                responsive: true
+            });
+        }, 500);
     });
     $(document).ready(function() {
         $('#dataTable4').DataTable({
@@ -1350,37 +1564,7 @@ html {
             responsive: true
         });
     });                          
-    </script>         
-<script>
-    (function() {
-        var app = angular.module('app', []);
-
-        app.controller('appController', function($scope, $http) {
-
-            $scope.userId = <%= req.session.User.id %>;
-            $scope.employee = {};
-            $scope.employee.fullname = "";
-
-            $http.get('/employee/' + $scope.userId).then(function success(response) {
-                $scope.employee = response.data;
-                $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
-            
-            $scope.logout = function () {
-
-                $http.post('/logout').then(function success(response) {
-                    window.location.href = '/';
-                }, function error(response) {
-                    console.log(response);
-                });
-            };
-            
-        });
-    })();
-</script>
+    </script> 
 </body>
 
 </html>
