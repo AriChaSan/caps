@@ -119,15 +119,15 @@ html {
                                                             <div class="form-group form-group-lg">
                                                                 <div class="col-lg-4">
                                                                     <h3>Location:</h3>
-                                                                    <select class="form-control" id="sel1">
-                                                                        <option>Angeles City Hall</option>
-                                                                        <option>Renal Care Unit</option>
-                                                                        <option>Angeles City Library</option>
-                                                                        <option>Museo Ning Angeles</option>
-                                                                        <option>Blood Bank</option>
-                                                                        <option>CSWDO</option>
-                                                                        <option>City College of Angeles</option>
-                                                                    </select>
+                                                                    <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
+                                                                </select>
                                                                 </div>
                                                             </div>                                                        
                                                         </div>
@@ -137,9 +137,9 @@ html {
                                                                 <hr> 
                                                                 <div>
                                                                       <div>
-                                                                      From: <input type="date" name = "from" value="<?php echo $from;?>">
-                                                                      To: <input type="date" name = "to" value="<?php echo $to;?>">
-                                                                      <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go'><br><br>
+                                                                      From: <input type="date" name = "from" value="<?php echo $from;?>" ng-model="date_from">
+                                                                      To: <input type="date" name = "to" value="<?php echo $to;?>" ng-model="date_to">
+                                                                      <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go' ng-click="refreshLog(employeeDTR.id)"><br><br>
                                                                       </div> 
                                                                       <div ng-repeat="employee in employeeRecord">
                                                                       <center><h4><b>Republic of the Philippines<br>ANGELES CITY LOCAL GOVERNMENT<br>Angeles City<br>DAILY TIME RECORD</b></h4></center>
@@ -756,13 +756,21 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+            $scope.date_from = "";
+            $scope.date_to = "";
+            $scope.logLocation = "7";
+            $scope.refreshLog = function() {
+                $http.get('/employeeallrecord?location_id=' + $scope.logLocation  + '&date_from='  + $scope.date_from + '&date_to='+ $scope.date_to).then(function success(response) {
+                  $scope.employeeRecord = response.data;
+                  console.log(response);
+              }, function error(response) {
+                  console.log(response);
+              });
+            };
 
-            $http.get('/employeeallrecord').then(function success(response) {
-                $scope.employeeRecord = response.data;
-                console.log(response);
-            }, function error(response) {
-                console.log(response);
-            });
+            $scope.refreshLog();
+
+            
 
             $scope.changePasswordSubmit = function () {
 

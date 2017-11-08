@@ -152,14 +152,14 @@ input:checked + .slider:before {
                                                         <div class="form-group form-group-lg">
                                                             <div class="col-lg-4">
                                                                 <h3>Location:</h3>
-                                                                <select class="form-control" id="sel1">
-                                                                    <option>Angeles City Hall</option>
-                                                                    <option>Renal Care Unit</option>
-                                                                    <option>Angeles City Library</option>
-                                                                    <option>Museo Ning Angeles</option>
-                                                                    <option>Blood Bank</option>
-                                                                    <option>CSWDO</option>
-                                                                    <option>City College of Angeles</option>
+                                                                <select class="form-control" id="sel1" ng-model="logLocation" ng-change="refreshLog()">
+                                                                    <option value="7">Angeles City Hall</option>
+                                                                    <option value="4">Renal Care Unit</option>
+                                                                    <option value="6">Angeles City Library</option>
+                                                                    <option value="5">Museo Ning Angeles</option>
+                                                                    <option value="2">Blood Bank</option>
+                                                                    <option value="3">CSWDO</option>
+                                                                    <option value="1">City College of Angeles</option>
                                                                 </select>
                                                             </div>
                                                         </div>                 
@@ -174,28 +174,24 @@ input:checked + .slider:before {
                                                                     <th>Employee ID</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Account Type</th>
-                                                                    <th>Date Created</th>
-                                                                    <th>Date Updated</th>
+                                                                    <th>Status</th>
                                                                     <th>Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                    </td>
-                                                                    <td>{{ emp.id_number }}</td>
-                                                                    <td> {{ emp.lastname + ', ' + emp.firstname + ' ' + emp.middlename }} </td>
+                                                                <tr ng-repeat="employee in employeeList" ng-switch="employee.account_id.account_type">
+                                                                    <td>{{ employee.id_number }}</td> 
+                                                                    <td> {{ employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename }} </td>
                                                                     <td ng-switch-when="csu_superadmin">CSU Superadmin</td>
                                                                     <td ng-switch-when="csu_admin">CSU Admin</td>
                                                                     <td ng-switch-when="csu_employee">CSU Employee</td>
                                                                     <td ng-switch-when="loan">Loan</td>
                                                                     <td ng-switch-when="accounting">Accounting</td>
                                                                     <td ng-switch-default>none</td>
-                                                                    <td>{{ emp.account_id.createdAt }}</td>
-                                                                    <td>{{ emp.account_id.updatedAt }}</td>
+                                                                    <td>{{ employee.account_id.status }}</td>
                                                                     <td class="text-center">
-                                                                    <button class="btn btn-success" type="button" ng-click="viewEmployee(emp.account_id.id)">Enable <i class="fa fa-check fa-fw"></i></button>
-                                                                    <button class="btn btn-danger" type="button" ng-click="updateEmployee(emp.account_id.id)">Disable <i class="fa fa-times fa-fw"></i></button></td>            
+                                                                    <button class="btn btn-success" type="button" ng-click="enableEmployee(employee.account_id.id)">Enable <i class="fa fa-check fa-fw"></i></button>
+                                                                    <button class="btn btn-danger" type="button" ng-click="disableEmployee(employee.account_id.id)">Disable <i class="fa fa-times fa-fw"></i></button></td>            
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -775,6 +771,36 @@ input:checked + .slider:before {
             }, function error(response) {
                 console.log(response);
             });
+
+            $scope.logLocation = "7";
+            $scope.refreshLog = function() {
+                $http.get('/employee?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.employeeList = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.refreshLog();
+
+            $scope.enableEmployee = function (id) {
+                $http.post('/employeeenable/' + id).then(function success(response) {
+                    $scope.refreshLog();
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.disableEmployee = function (id) {
+                $http.post('/employeedisable/' + id).then(function success(response) {
+                    $scope.refreshLog();
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
 
             $scope.changePasswordSubmit = function () {
 

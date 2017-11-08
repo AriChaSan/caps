@@ -44,6 +44,9 @@ module.exports.routes = {
   'GET /user/:id': 'UserController.showUser',
   'POST /user/changepassword/:id': 'UserController.changePassword',
 
+  'POST /employeeenable/:id': 'UserController.enableEmployee',
+  'POST /employeedisable/:id': 'UserController.disableEmployee',
+
   'GET /employee': 'UserController.showEmployeeList',
   'GET /employee/:id': 'UserController.showEmployee',
   'PUT /employee/:id': 'UserController.update',
@@ -57,7 +60,7 @@ module.exports.routes = {
 
   'GET /employeeviewschedule' : 'UserController.viewEmployeeSchedule',
   'GET /employeeviewoneschedule/:id' : 'UserController.viewOneEmployeeSchedule',
-  'GET /employeedtr/:id' : 'UserController.viewEmployeeDTR',
+  //'GET /employeedtr/:id' : 'UserController.viewEmployeeDTR',
 
   'GET /employeeloanlist': 'UserController.showEmployeeLoanList',
   'GET /employeeloan/:id': 'UserController.showEmployeeLoan',

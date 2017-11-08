@@ -18,6 +18,28 @@ module.exports = {
 		});
 	},
 
+	enableEmployee: function(req, res) {
+		User.update({id: req.params.id}, {status:'active'}).exec(function(err, user) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(user);
+		});
+	},
+
+	disableEmployee: function(req, res) {
+		User.update({id: req.params.id}, {status:'disable'}).exec(function(err, user) {
+
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(user);
+		});
+	},
+
 	keyChange: function(req, res) {
 		Employee_Attendance.findOne(req.params.id).exec(function(err, employee) {
 			if(err) {
@@ -39,9 +61,11 @@ module.exports = {
 	},
 
 	allRecord: function(req, res) {
+		var date_from = moment(new Date(req.param('date_from'))).format('l');
+			var date_to = moment(new Date(req.param('date_to'))).format('l');
 		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
 			var usersId = _.pluck(user, 'id');
-			Employee.find({account_id: usersId}).populate('employee_attendance').exec(function(err, employee) {
+			Employee.find({account_id: usersId, location_id: req.param('location_id')}).populate('employee_attendance', {date: { '>=': date_from, '<=': date_to }}).exec(function(err, employee) {
 				if(err) {
 					return res.serverError(err);
 				}	
@@ -53,7 +77,11 @@ module.exports = {
 	},
 
 	employeeDTR: function(req, res) {
-		Employee.findOne(req.params.id).populate('employee_attendance').exec(function(err, user) {
+		var date_from = moment(new Date(req.param('date_from'))).format('l');
+			var date_to = moment(new Date(req.param('date_to'))).format('l');
+			console.log(date_from);
+			console.log(date_to);
+		Employee.findOne(req.params.id).populate('employee_attendance', {date: { '>=': date_from, '<=': date_to }}).exec(function(err, user) {
 			if(err) {
 				return res.serverError(err);
 			}	
@@ -66,7 +94,11 @@ module.exports = {
 
 		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
 			var usersId = _.pluck(user, 'id');
-			Employee.find({account_id: usersId}).populate('employee_attendance').exec(function(err, user) {
+			var date_from = moment(new Date(req.param('date_from'))).format('l');
+			var date_to = moment(new Date(req.param('date_to'))).format('l');
+			console.log(date_from);
+			console.log(date_from);
+			Employee.find({account_id: usersId, location_id: req.param('location_id')}).populate('employee_attendance', {date: { '>=': date_from, '<=': date_to }}).exec(function(err, user) {
 
 				if(err) {
 					return res.serverError(err);
@@ -429,6 +461,7 @@ module.exports = {
 	viewEmployeeDTR: function(req, res) {
 
 		var date = moment(new Date()).format('l');
+
 		Log_TimeIn.find({employee_id: req.params.id}).populate('employee_id').exec(function(err, user) {
 
 			if(err) {
@@ -942,6 +975,11 @@ module.exports = {
 
 			if(user == undefined || user.length > 0) {
 				error.push('Username does not exist.');
+				return res.json(404, {errors: error});
+			};
+
+			if(user.status == 'disable') {
+				error.push('Account is disabled.');
 				return res.json(404, {errors: error});
 			};
 

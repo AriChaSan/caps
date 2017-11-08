@@ -58,12 +58,15 @@ module.exports = {
   },
 
   beforeUpdate: function(values, cb) {
+
+  if(values.password) {
+    var bcrypt = require('bcryptjs');
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(values.password, salt);
     
-  var bcrypt = require('bcryptjs');
-  var salt = bcrypt.genSaltSync(10);
-  var hash = bcrypt.hashSync(values.password, salt);
+    values.password = hash;
+  }
   
-  values.password = hash;
 
   cb();               
   }
