@@ -30,6 +30,14 @@ module.exports = {
   		type: 'string'
   	},
 
+    undertime: {
+      type: 'string'
+    },
+
+    workhours: {
+      type: 'string'
+    },
+
     date: {
       type: 'string'
     },

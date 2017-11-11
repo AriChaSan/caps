@@ -389,6 +389,21 @@ module.exports.cron = {
       		if(value.timein.length != 0) {
 
             var overtime = null;
+            var workhours = null;
+            var undertime = null;
+            var late = null;
+            if('7:00 am' < value.timein[0].logIn) {
+              var shift = ['7', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
             if('3:00 pm' < value.timein[0].logOut) {
               var shift = ['3', '00'];
               var logOut = value.timein[0].logOut.split(' ');
@@ -401,9 +416,25 @@ module.exports.cron = {
               overtime = hour + ':' + minutes;
             }
 
+            var timeIn1 = value.timein[0].logIn.split(':');
+              var timeOut1 = value.timein[0].logOut.split(':');
+              workhours = Math.abs(Number(timeIn1[0]) - Math.abs(Number(timeOut1[0]) + 12));
+              workhours -= 1;
+
+            if('7:00 am' < value.timein[0].logIn && '3:00 pm' > value.timein[0].logOut) {
+              var timeIn = value.timein[0].logIn.split(' ');
+              timeIn = timeIn[0].split(':');
+              var timeOut = value.timein[0].logOut.split(' ');
+              timeOut = timeOut[0].split(':');
+              var late1 = (late == null) ? 0 : late.split(':');
+              undertime = Number(((late1.length == 0) ? 0 : late1[1])) + Number(Math.abs(Number(timeOut[1]) - 60));
+            }
+
       			var data = {
 	      			timeOut: value.timein[0].logOut,
               overtime: overtime,
+              workhours: workhours,
+              undertime: undertime,
 	      			//date: date,
 	      			status: 'complete'
 	      		};
