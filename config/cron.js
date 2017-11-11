@@ -1,4 +1,70 @@
 module.exports.cron = {
+  dayLeave: {
+    schedule: '* 00 00 * * *',
+    onTick: function () {
+      var moment = require('moment');
+      var date = new Date;
+      var day = date.getDay();
+      var weekday = new Array(7);
+      weekday[0] = 'sunday';
+      weekday[1] = 'monday';
+      weekday[2] = 'tuesday';
+      weekday[3] = 'wednesday';
+      weekday[4] = 'thursday';
+      weekday[5] = 'friday';
+      weekday[6] = 'saturday';
+
+      Employee.find({shift: 'dayTime'}).populate('schedule').populate('leave', {status: 'accepted'}).exec(function(err, employee) {
+        
+        _.each(employee, function(value, index) {
+
+          if(value.leave.length != 0) {
+
+            var leaveWeekDay = [];
+            var dateFrom = new Date(value.leave[0].date_from);
+            var dateFromFirstDay = new Date(dateFrom.getFullYear(), dateFrom.getMonth(), 1);
+            var dateFromLastDay = new Date(dateFrom.getFullYear(), dateFrom.getMonth() + 1, 0);
+
+            var dateTo = new Date(value.leave[0].date_to);
+            var dateToFirstDay = new Date(dateTo.getFullYear(), dateTo.getMonth(), 1);
+            var dateToLastDay = new Date(dateTo.getFullYear(), dateTo.getMonth() + 1, 0);
+
+            var dateRange = 0;
+            if(dateFrom.getFullYear() == dateTo.getFullYear()) {
+
+              if(dateFrom.getMonth() == dateTo.getMonth()) {
+                dateRange = Math.abs(dateTo.getDate() - dateFrom.getDate());
+              }
+
+              if(dateFrom.getMonth() < dateTo.getMonth()) {
+                var dateFromRange = Math.abs(dateFrom.getDate() - dateFromLastDay.getDate());
+                var dateToRange = Math.abs(dateTo.getDate() - dateToFirstDay.getDate());
+
+                console.log(dateFromRange);
+                console.log(dateToRange);
+                dateRange = Math.abs(dateToRange + dateFromRange);
+              }
+            }
+
+            console.log(dateRange);
+            console.log(moment(dateFrom).format('l'));
+            console.log(moment(dateFromFirstDay).format('l'));
+            console.log(moment(dateFromLastDay).format('l'));
+            console.log(moment(dateTo).format('l'));
+            console.log(moment(dateToFirstDay).format('l'));
+            console.log(moment(dateToLastDay).format('l'));
+          }
+        });
+        
+        sails.hooks.cron.jobs.dayLeave.stop();
+      });
+    },
+    onComplete: function() {
+      console.log('I am triggering when job is complete');
+      
+    }
+  },
+
   dayOff: {
     schedule: '* 00 7 * * *',
     onTick: function () {
@@ -322,8 +388,22 @@ module.exports.cron = {
 
       		if(value.timein.length != 0) {
 
+            var overtime = null;
+            if('3:00 pm' < value.timein[0].logOut) {
+              var shift = ['3', '00'];
+              var logOut = value.timein[0].logOut.split(' ');
+              logOut = logOut[0].split(':');
+
+              var hour = Math.abs(logOut[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logOut[1] - shift[1]);
+
+              overtime = hour + ':' + minutes;
+            }
+
       			var data = {
 	      			timeOut: value.timein[0].logOut,
+              overtime: overtime,
 	      			//date: date,
 	      			status: 'complete'
 	      		};
@@ -368,11 +448,25 @@ module.exports.cron = {
 
       		if(value.timein.length != 0) {
 
-      			var data = {
-	      			timeOut: value.timein[0].logOut,
-	      			//date: date,
-	      			status: 'complete'
-	      		};
+      			var overtime = null;
+            if('3:00 pm' < value.timein[0].logOut) {
+              var shift = ['3', '00'];
+              var logOut = value.timein[0].logOut.split(' ');
+              logOut = logOut[0].split(':');
+
+              var hour = Math.abs(logOut[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logOut[1] - shift[1]);
+
+              overtime = hour + ':' + minutes;
+            }
+
+            var data = {
+              timeOut: value.timein[0].logOut,
+              overtime: overtime,
+              //date: date,
+              status: 'complete'
+            };
 	      		
       			Employee_Attendance.update({employee_id: value.id},data).exec(function(err, employee) {
 	      			console.log(employee);
@@ -666,10 +760,24 @@ module.exports.cron = {
         _.each(employee, function(value, index) {
           
 
-          if(value.timein.length != 0) {
+            if(value.timein.length != 0) {
+
+            var overtime = null;
+            if('11:00 pm' < value.timein[0].logOut) {
+              var shift = ['11', '00'];
+              var logOut = value.timein[0].logOut.split(' ');
+              logOut = logOut[0].split(':');
+
+              var hour = Math.abs(logOut[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logOut[1] - shift[1]);
+
+              overtime = hour + ':' + minutes;
+            }
 
             var data = {
               timeOut: value.timein[0].logOut,
+              overtime: overtime,
               //date: date,
               status: 'complete'
             };
@@ -714,8 +822,22 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var overtime = null;
+            if('11:00 pm' < value.timein[0].logOut) {
+              var shift = ['11', '00'];
+              var logOut = value.timein[0].logOut.split(' ');
+              logOut = logOut[0].split(':');
+
+              var hour = Math.abs(logOut[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logOut[1] - shift[1]);
+
+              overtime = hour + ':' + minutes;
+            }
+
             var data = {
               timeOut: value.timein[0].logOut,
+              overtime: overtime,
               //date: date,
               status: 'complete'
             };
@@ -1014,9 +1136,23 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var overtime = null;
+            if('7:00 am' < value.timein[0].logOut) {
+              var shift = ['7', '00'];
+              var logOut = value.timein[0].logOut.split(' ');
+              logOut = logOut[0].split(':');
+
+              var hour = Math.abs(logOut[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logOut[1] - shift[1]);
+
+              overtime = hour + ':' + minutes;
+            }
+
             var data = {
               timeOut: value.timein[0].logOut,
-             // date: date,
+              overtime: overtime,
+              //date: date,
               status: 'complete'
             };
             
@@ -1060,8 +1196,22 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var overtime = null;
+            if('7:00 am' < value.timein[0].logOut) {
+              var shift = ['7', '00'];
+              var logOut = value.timein[0].logOut.split(' ');
+              logOut = logOut[0].split(':');
+
+              var hour = Math.abs(logOut[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logOut[1] - shift[1]);
+
+              overtime = hour + ':' + minutes;
+            }
+
             var data = {
               timeOut: value.timein[0].logOut,
+              overtime: overtime,
               //date: date,
               status: 'complete'
             };
