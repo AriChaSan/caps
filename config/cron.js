@@ -69,9 +69,23 @@ module.exports.cron = {
 
       		if(value.timein.length != 0) {
 
+             var late = null;
+            if('7:00 am' < value.timein[0].logIn) {
+              var shift = ['7', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
       			var data = {
 	      			attendance_status: 'present',
-	      			timeIn: value.timein[0].time,
+	      			timeIn: value.timein[0].logIn,
+              late: late,
 	      			employee_id: value.id,
 	      			date: value.timein[0].date,
 	      			status: 'progress'
@@ -113,9 +127,23 @@ module.exports.cron = {
 
       		if(value.timein.length != 0) {
 
+            var late = null;
+            if('7:00 am' < value.timein[0].logIn) {
+              var shift = ['7', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
       			var data = {
 	      			attendance_status: 'late',
 	      			timeIn: value.timein[0].time,
+              late:late,
 	      			employee_id: value.id,
 	      			date: value.timein[0].date,
 	      			status: 'progress'
@@ -296,7 +324,7 @@ module.exports.cron = {
 
       			var data = {
 	      			timeOut: value.timein[0].logOut,
-	      			date: date,
+	      			//date: date,
 	      			status: 'complete'
 	      		};
 	      		
@@ -306,7 +334,7 @@ module.exports.cron = {
       		} else {
       			var data = {
 	      			//timeOut: "--:--",
-	      			date: date,
+	      			//date: date,
 	      			status: 'complete'
 	      		};
 	      		
@@ -342,7 +370,7 @@ module.exports.cron = {
 
       			var data = {
 	      			timeOut: value.timein[0].logOut,
-	      			date: date,
+	      			//date: date,
 	      			status: 'complete'
 	      		};
 	      		
@@ -352,7 +380,7 @@ module.exports.cron = {
       		} else {
       			var data = {
 	      			//timeOut: "--:--",
-	      			date: date,
+	      			//date: date,
 	      			status: 'complete'
 	      		};
 	      		
@@ -387,9 +415,23 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var late = null;
+            if('3:00 pm' < value.timein[0].logIn) {
+              var shift = ['3', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
             var data = {
               attendance_status: 'present',
-              timeIn: value.timein[0].time,
+              timeIn: value.timein[0].logIn,
+              late: late,
               employee_id: value.id,
               date: value.timein[0].date,
               status: 'progress'
@@ -431,9 +473,23 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var late = null;
+            if('3:00 pm' < value.timein[0].logIn) {
+              var shift = ['3', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
             var data = {
               attendance_status: 'late',
               timeIn: value.timein[0].time,
+              late:late,
               employee_id: value.id,
               date: value.timein[0].date,
               status: 'progress'
@@ -614,7 +670,7 @@ module.exports.cron = {
 
             var data = {
               timeOut: value.timein[0].logOut,
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
@@ -624,7 +680,7 @@ module.exports.cron = {
           } else {
             var data = {
               //timeOut: "--:--",
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
@@ -660,7 +716,7 @@ module.exports.cron = {
 
             var data = {
               timeOut: value.timein[0].logOut,
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
@@ -670,7 +726,7 @@ module.exports.cron = {
           } else {
             var data = {
               //timeOut: "--:--",
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
@@ -705,9 +761,23 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var late = null;
+            if('11:00 pm' < value.timein[0].logIn) {
+              var shift = ['11', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
             var data = {
               attendance_status: 'present',
               timeIn: value.timein[0].time,
+              late: late,
               employee_id: value.id,
               date: value.timein[0].date,
               status: 'progress'
@@ -749,9 +819,23 @@ module.exports.cron = {
 
           if(value.timein.length != 0) {
 
+            var late = null;
+            if('11:00 pm' < value.timein[0].logIn) {
+              var shift = ['11', '00'];
+              var logIn = value.timein[0].logIn.split(' ');
+              logIn = logIn[0].split(':');
+
+              var hour = Math.abs(logIn[0] - shift[0]);
+              hour = (hour == '0') ? '00': hour;
+              var minutes = Math.abs(logIn[1] - shift[1]);
+
+              late = hour + ':' + minutes;
+            }
+
             var data = {
               attendance_status: 'late',
               timeIn: value.timein[0].time,
+              late:late,
               employee_id: value.id,
               date: value.timein[0].date,
               status: 'progress'
@@ -932,7 +1016,7 @@ module.exports.cron = {
 
             var data = {
               timeOut: value.timein[0].logOut,
-              date: date,
+             // date: date,
               status: 'complete'
             };
             
@@ -942,7 +1026,7 @@ module.exports.cron = {
           } else {
             var data = {
               //timeOut: "--:--",
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
@@ -978,7 +1062,7 @@ module.exports.cron = {
 
             var data = {
               timeOut: value.timein[0].logOut,
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
@@ -988,7 +1072,7 @@ module.exports.cron = {
           } else {
             var data = {
               //timeOut: "--:--",
-              date: date,
+              //date: date,
               status: 'complete'
             };
             
