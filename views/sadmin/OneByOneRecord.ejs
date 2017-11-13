@@ -199,9 +199,9 @@ html {
                                                                                 <td>{{attendance.date}}</td>
                                                                                 <td>{{attendance.timeIn}}</td>
                                                                                 <td>{{attendance.timeOut}}</td>
-                                                                                <td>{{attendance.duration}}</td>
-                                                                                <td>{{attendance.overtime}}</td>
-                                                                                <td>{{attendance.late}}</td>
+                                                                                <td>{{attendance.workhours || 0}} Hours</td>
+                                                                                <td>{{attendance.overtime || 0}} Minutes</td>
+                                                                                <td>{{attendance.late || 0}} Minutes</td>
                                                                             </tr>   
                                                                                                                                                           
                                                                         </tbody>                                      
@@ -859,29 +859,16 @@ html {
                 $http.get('/employeedtr/' + id  + '?date_from='  + $scope.date_from + '&date_to='+ $scope.date_to).then(function success(response) {
                     $scope.employeeDTR = response.data;
 
-                    $scope.attendanceDTR = _.map($scope.employeeDTR.employee_attendance, function(value, index) {
+                    $scope.attendanceDTR = [];
 
-                      var shiftStart = '';
-                      var shiftEnd = '';
-                      if($scope.employeeDTR.shift == 'dayTime') {
-                         shiftStart = ['7', '00'];
-                         shiftEnd = ['3', '00'];
+                    _.each($scope.employeeDTR.employee_attendance, function(value1, index) {
 
-                         var timeIn = value.timeIn.split(' ');
-                         timeIn = timeIn[0].split(':');
-
-                         var timeOut = value.timeOut.split(' ');
-                         timeOut = timeOut[0].split(':');
-
-                         value.late = Math.abs(shiftStart[0] - timeIn[0]) + ':' + Math.abs(shiftStart[1] - timeIn[1]);
-
-                         value.overtime = Math.abs(shiftEnd[0] - timeOut[0]) + ':' + ((Math.abs(shiftEnd[1] - timeOut[1]) == '0') ? '00' : Math.abs(shiftEnd[1] - timeOut[1]));
-
-                         value.duration = Math.abs(Math.abs(timeIn[0] - Math.abs(Number(timeOut[0]) + 12)) - 1) + ':' + Math.abs(timeIn[1] - timeOut[1]);
+                      var date= new Date(value1.date);
+                      if(date >= new Date($scope.date_from) && date <= new Date($scope.date_to)) {
+                        $scope.attendanceDTR.push(value1)
                       }
-                      
-                      return value;
                     });
+
                     console.log($scope.attendanceDTR);
                 }, function error(response) {
                     console.log(response);

@@ -145,7 +145,7 @@ module.exports.cron = {
               hour = (hour == '0') ? '00': hour;
               var minutes = Math.abs(logIn[1] - shift[1]);
 
-              late = hour + ':' + minutes;
+              late = minutes;
             }
 
       			var data = {
@@ -203,7 +203,7 @@ module.exports.cron = {
               hour = (hour == '0') ? '00': hour;
               var minutes = Math.abs(logIn[1] - shift[1]);
 
-              late = hour + ':' + minutes;
+              late = minutes;
             }
 
       			var data = {
@@ -413,7 +413,7 @@ module.exports.cron = {
               hour = (hour == '0') ? '00': hour;
               var minutes = Math.abs(logOut[1] - shift[1]);
 
-              overtime = hour + ':' + minutes;
+              overtime = minutes;
             }
 
             var timeIn1 = value.timein[0].logIn.split(':');

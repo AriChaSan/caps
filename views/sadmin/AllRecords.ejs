@@ -9,6 +9,7 @@
 
     <title>Angeles City Civilian Security Unit - All Records</title>
     <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -160,9 +161,9 @@ html {
                                                                                 <td>{{employeeAttendance.date}}</td>
                                                                                 <td>{{employeeAttendance.timeIn}}</td>
                                                                                 <td>{{employeeAttendance.timeOut}}</td>
-                                                                                <td>N/A</td>
-                                                                                <td>N/A</td>
-                                                                                <td>N/A</td>
+                                                                                <td>{{employeeAttendance.workhours || 0}} Hours</td>
+                                                                                <td>{{employeeAttendance.overtime || 0}} Minutes</td>
+                                                                                <td>{{employeeAttendance.late || 0}} Minutes</td>
                                                                             </tr>   
                                                                                              
                                                                         </tbody>                                      
@@ -762,6 +763,25 @@ html {
             $scope.refreshLog = function() {
                 $http.get('/employeeallrecord?location_id=' + $scope.logLocation  + '&date_from='  + $scope.date_from + '&date_to='+ $scope.date_to).then(function success(response) {
                   $scope.employeeRecord = response.data;
+
+
+                  var newEmployeeRecord = _.map($scope.employeeRecord, function(value, index) {
+
+                    var newEmployeeAttendance = [];
+
+                      _.each(value.employee_attendance, function(value1, index) {
+
+                        var date= new Date(value1.date);
+                        if(date >= new Date($scope.date_from) && date <= new Date($scope.date_to)) {
+                          newEmployeeAttendance.push(value1)
+                        }
+                      });
+
+                      value.employee_attendance = newEmployeeAttendance;
+                      return value;
+                    });
+
+                  $scope.employeeRecord = newEmployeeRecord;
                   console.log(response);
               }, function error(response) {
                   console.log(response);

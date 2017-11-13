@@ -65,7 +65,7 @@ module.exports = {
 			var date_to = moment(new Date(req.param('date_to'))).format('l');
 		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
 			var usersId = _.pluck(user, 'id');
-			Employee.find({account_id: usersId, location_id: req.param('location_id')}).populate('employee_attendance', {date: { '>=': date_from, '<=': date_to }}).exec(function(err, employee) {
+			Employee.find({account_id: usersId, location_id: req.param('location_id')}).populate('employee_attendance').exec(function(err, employee) {
 				if(err) {
 					return res.serverError(err);
 				}	
@@ -81,7 +81,7 @@ module.exports = {
 			var date_to = moment(new Date(req.param('date_to'))).format('l');
 			console.log(date_from);
 			console.log(date_to);
-		Employee.findOne(req.params.id).populate('employee_attendance', {date: { '>=': date_from, '<=': date_to }}).exec(function(err, user) {
+		Employee.findOne(req.params.id).populate('employee_attendance').exec(function(err, user) {
 			if(err) {
 				return res.serverError(err);
 			}	
@@ -97,8 +97,8 @@ module.exports = {
 			var date_from = moment(new Date(req.param('date_from'))).format('l');
 			var date_to = moment(new Date(req.param('date_to'))).format('l');
 			console.log(date_from);
-			console.log(date_from);
-			Employee.find({account_id: usersId, location_id: req.param('location_id')}).populate('employee_attendance', {date: { '>=': date_from, '<=': date_to }}).exec(function(err, user) {
+			console.log(date_to);
+			Employee.find({account_id: usersId, location_id: req.param('location_id')}).populate('employee_attendance').exec(function(err, user) {
 
 				if(err) {
 					return res.serverError(err);
