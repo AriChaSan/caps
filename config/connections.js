@@ -40,7 +40,7 @@ module.exports.connections = {
   * Run: npm install sails-mysql                                             *
   *                                                                          *
   ***************************************************************************/
-   mysql: {
+   mysql1: {
      adapter: 'sails-mysql',
      host: '127.0.0.1',
      user: 'root', //optional
@@ -48,7 +48,7 @@ module.exports.connections = {
      database: 'db_capstonev3' //optional
    },
 
-   mysql1: {
+   mysql: {
      adapter: 'sails-mysql',
      host: 'sql11.freemysqlhosting.net',
      port: 3306,
