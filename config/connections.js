@@ -48,6 +48,15 @@ module.exports.connections = {
      database: 'db_capstonev3' //optional
    },
 
+   mysql1: {
+     adapter: 'sails-mysql',
+     host: 'sql11.freemysqlhosting.net',
+     port: 3306,
+     user: 'sql11204175', //optional
+     password: 'XjpSRajvUD', //optional
+     database: 'sql11204175' //optional
+   },
+
   /***************************************************************************
   *                                                                          *
   * MongoDB is the leading NoSQL database.                                   *
