@@ -33,6 +33,56 @@
 
 </head>
 <style>
+@media print {
+
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  float: left;
+}
+.col-lg-12 {
+  width: 100%;
+}
+.col-lg-11 {
+  width: 91.66666666666666%;
+}
+.col-lg-10 {
+  width: 83.33333333333334%;
+}
+.col-lg-9 {
+  width: 75%;
+}
+.col-lg-8 {
+  width: 66.66666666666666%;
+}
+.col-lg-7 {
+  width: 58.333333333333336%;
+}
+.col-lg-6 {
+  width: 50%;
+}
+.col-lg-5 {
+  width: 41.66666666666667%;
+}
+.col-lg-4 {
+  width: 33.33333333333333%;
+ }
+ .col-lg-3 {
+   width: 25%;
+ }
+ .col-lg-2 {
+   width: 16.666666666666664%;
+ }
+ .col-lg-1 {
+  width: 8.333333333333332%;
+ }
+
+  }
+
+@page{
+margin-left: 1.5cm;
+margin-right: 1.5cm;
+margin-top: 1.5cm;
+margin-bottom: 1.5cm;
+}
 html {
     overflow-x: hidden;
 }
@@ -100,7 +150,19 @@ html {
       $('.datepicker').datepicker();
   });
   </script>
+  <script>
+    function printDiv(divName) {
+       var printContents = document.getElementById(divName).innerHTML;
+       var originalContents = document.body.innerHTML;
+       document.title= "Civil Security Unit of Angeles City";
+       document.footer="";
+       document.body.innerHTML = printContents;
 
+       window.print();
+
+       document.body.innerHTML = originalContents;
+  }
+  </script>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
@@ -142,13 +204,14 @@ html {
                                                                       From: <input type="date" name = "from" value="<?php echo $from;?>" ng-model="date_from">
                                                                       To: <input type="date" name = "to" value="<?php echo $to;?>" ng-model="date_to">
                                                                       <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go' ng-click="refreshLog()"><br><br>
-                                                                      </div> 
-                                                                      <center><p><b>Republic of the Philippines<br>ANGELES CITY LOCAL GOVERNMENT<br>Angeles City<br>ATTENDANCE SUMMARY</b></p></center>
+                                                                      </div>
+                                                                      <div id="PrintArea1"> 
+                                                                      <center><p><b>Republic of the Philippines<br>ANGELES CITY LOCAL GOVERNMENT<br>Angeles City<br>ATTENDANCE SUMMARY <br/> [DATE DITO @OWEN]<br/><br/></b></p></center>
                                                                       <table width="100%" class="table table-striped table-bordered table-hover">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Employee ID</th>
-                                                                                <th>Name</th>
+                                                                                <th width="300px">Name</th>
                                                                                 <th>Work Days</th>
                                                                                 <th>Target Work Days</th>
                                                                                 <th>Work Hours</th>
@@ -162,20 +225,22 @@ html {
                                                                             <tr ng-repeat="employee in employeesAttendance">
                                                                                 <td>{{employee.id_number}}</td>
                                                                                 <td>{{employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename}}</td>
-                                                                                <td>{{employee.workingDays}} Days</td>
-                                                                                <td>{{employee.totalWorkDay}}  Days</td>
-                                                                                <td>{{employee.workingHours}} Hours</td>
-                                                                                <td>{{employee.totalWorkHours}} Hours</td>
-                                                                                <td>{{employee.undertimeHours}} Hours</td>
-                                                                                <td>{{employee.overtimeHours}} Hours</td>
+                                                                                <td>{{employee.workingDays}} </td>
+                                                                                <td>{{employee.totalWorkDay}}  </td>
+                                                                                <td>{{employee.workingHours}} </td>
+                                                                                <td>{{employee.totalWorkHours}} </td>
+                                                                                <td>{{employee.undertimeHours}} </td>
+                                                                                <td>{{employee.overtimeHours}} </td>
                                                                                 <td>N/A%</td>
                                                                             </tr>
                                                                                                                                                                                  
                                                                         </tbody>                                      
                                                                       </table>
-                                                                </div>
-                                                                <div class="col-lg-12 col-lg-offset-11">   
-                                                                    <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
+                                                                  </div>
+                                                              </div>
+                                                                <div class="col-lg-12 col-lg-offset-10">   
+                                                                  <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Send Email <i class="fa fa-send"></i></button>
+                                                                    <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Print <i class="fa fa-print"></i></button>
                                                                 </div>                                                                   
                                                             </div>
                                                         </div>

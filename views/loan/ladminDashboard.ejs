@@ -32,6 +32,56 @@
 
 </head>
 <style>
+@media print {
+
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  float: left;
+}
+.col-lg-12 {
+  width: 100%;
+}
+.col-lg-11 {
+  width: 91.66666666666666%;
+}
+.col-lg-10 {
+  width: 83.33333333333334%;
+}
+.col-lg-9 {
+  width: 75%;
+}
+.col-lg-8 {
+  width: 66.66666666666666%;
+}
+.col-lg-7 {
+  width: 58.333333333333336%;
+}
+.col-lg-6 {
+  width: 50%;
+}
+.col-lg-5 {
+  width: 41.66666666666667%;
+}
+.col-lg-4 {
+  width: 33.33333333333333%;
+ }
+ .col-lg-3 {
+   width: 25%;
+ }
+ .col-lg-2 {
+   width: 16.666666666666664%;
+ }
+ .col-lg-1 {
+  width: 8.333333333333332%;
+ }
+
+  }
+
+@page{
+margin-left: 2cm;
+margin-right: 2cm;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
 html {
     overflow-x: hidden;
 }
@@ -98,7 +148,31 @@ html {
     background-color: #d9d9d9;
 }  
 </style>
+<SCRIPT language=Javascript>
+   <!--
+   function isNumberKey(evt)
+   {
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode != 46 && charCode > 31 
+        && (charCode < 48 || charCode > 57))
+         return false;
 
+      return true;
+   }
+
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+     document.title= "Civil Security Unit of Angeles City";
+     document.footer="";
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+   //-->
+</SCRIPT>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#e6e6e6;">
@@ -880,7 +954,10 @@ html {
                                 </div>                                                                
                             </div><hr>
                             <div class="row">
-                                <div class="col-lg-3 col-lg-offset-9">
+                                 <div class="col-lg-3"></div>
+                                 <div class="col-lg-3"></div>
+                                 <div class="col-lg-3"></div>
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Amount Paid in Cash</label>
                                         <input class="form-control">
@@ -914,25 +991,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Conso Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.conso">
+                                        <input class="form-control" ng-model="empUpdate.conso" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Policy Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.policy">
+                                        <input class="form-control" ng-model="empUpdate.policy" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>GSIS Education Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.gsis_education">
+                                        <input class="form-control" ng-model="empUpdate.gsis_education" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>GSIS Emergency Loan</label>
-                                        <input class="form-control" ng-model="empUpdate.gsis_emergency">
+                                        <input class="form-control" ng-model="empUpdate.gsis_emergency" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                        
                             </div>  
@@ -940,25 +1017,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Share Capital</label>
-                                        <input class="form-control" ng-model="empUpdate.share_capital">
+                                        <input class="form-control" ng-model="empUpdate.share_capital" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>STL</label>
-                                        <input class="form-control" ng-model="empUpdate.stl">
+                                        <input class="form-control" ng-model="empUpdate.stl" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>LTL</label>
-                                        <input class="form-control" ng-model="empUpdate.ltl">
+                                        <input class="form-control" ng-model="empUpdate.ltl" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Education</label>
-                                        <input class="form-control" ng-model="empUpdate.education">
+                                        <input class="form-control" ng-model="empUpdate.education" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                        
                             </div>
@@ -966,25 +1043,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>STL (Others)</label>
-                                        <input class="form-control" ng-model="empUpdate.stl_other">
+                                        <input class="form-control" ng-model="empUpdate.stl_other" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div> 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Pabaon</label>
-                                        <input class="form-control" ng-model="empUpdate.pabaon">
+                                        <input class="form-control" ng-model="empUpdate.pabaon" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                                                                        
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>BTS</label>
-                                        <input class="form-control" ng-model="empUpdate.bts">
+                                        <input class="form-control" ng-model="empUpdate.bts" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Silver</label>
-                                        <input class="form-control" ng-model="empUpdate.silver">
+                                        <input class="form-control" ng-model="empUpdate.silver" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                                
                             </div><hr>
@@ -992,7 +1069,7 @@ html {
                                 <div class="col-lg-3 col-lg-offset-9">
                                     <div class="form-group">
                                         <label>Amount Paid in Cash</label>
-                                        <input class="form-control">
+                                        <input class="form-control" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                                
                             </div><hr>
@@ -1014,79 +1091,85 @@ html {
             <center><h2 class="modal-title"><i class="fa fa-eye"></i> View Loan Details</h2></center>
           </div>
           <div class="modal-body">
-            <div class="panel panel-default">
-                <div class="panel-body">  
-                    <h3> Name: Matthew Louis R. Di</h3>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <label>Conso Loan</label>
-                                    <p>4300.04</p>
-                                </div> 
-                                <div class="col-lg-3">
-                                    <label>Policy Loan</label>
-                                    <p>4300.04</p>
-                                </div> 
-                                <div class="col-lg-3">
-                                    <label>GSIS Education Loan</label>
-                                    <p>4300.04</p>
-                                </div>  
-                                <div class="col-lg-3">
-                                    <label>GSIS Emergency Loan</label>
-                                    <p>2323</p>
-                                </div>                                                   
-                            </div> 
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <label>Share Capital</label>
-                                    <p>5534</p>
-                                </div> 
-                                <div class="col-lg-3">
-                                    <label>STL</label>
-                                    <p>2313</p>
-                                </div> 
-                                <div class="col-lg-3">
-                                    <label>LTL</label>
-                                    <p>4421</p>
-                                </div>  
-                                <div class="col-lg-3">
-                                    <label>Education</label>
-                                    <p>3321</p>
-                                </div>                                                   
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <label>STL (Others)</label>
-                                    <p>6411</p>
-                                </div> 
-                                <div class="col-lg-3">
-                                    <label>Pabaon</label>
-                                    <p>5512</p>
-                                </div>  
-                                <div class="col-lg-3">
-                                    <label>BTS</label>
-                                    <p>3423</p>
-                                </div> 
-                                <div class="col-lg-3">
-                                    <label>Silver</label>
-                                    <p>3231</p>
-                                </div>                                                                                  
-                            </div><hr>
-                            <div class="row">
-                                <div class="col-lg-3 col-lg-offset-9">
-                                    <label>Amount Paid in Cash</label>
-                                    <p>4343432</p>
-                                </div>                                                                                  
-                            </div>                                                                                                             
-                        </div>
+            
+                <div class="panel panel-default">
+                <div class="panel-body"> 
 
+                    <div id="PrintArea1"> 
+                        <h3> Name: Matthew Louis R. Di</h3>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Conso Loan</label>
+                                        <p>4300.04</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>Policy Loan</label>
+                                        <p>4300.04</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>GSIS Education Loan</label>
+                                        <p>4300.04</p>
+                                    </div>  
+                                    <div class="col-lg-3">
+                                        <label>GSIS Emergency Loan</label>
+                                        <p>2323</p>
+                                    </div>                                                   
+                                </div> 
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Share Capital</label>
+                                        <p>5534</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>STL</label>
+                                        <p>2313</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>LTL</label>
+                                        <p>4421</p>
+                                    </div>  
+                                    <div class="col-lg-3">
+                                        <label>Education</label>
+                                        <p>3321</p>
+                                    </div>                                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>STL (Others)</label>
+                                        <p>6411</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>Pabaon</label>
+                                        <p>5512</p>
+                                    </div>  
+                                    <div class="col-lg-3">
+                                        <label>BTS</label>
+                                        <p>3423</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>Silver</label>
+                                        <p>3231</p>
+                                    </div>                                                                                  
+                                </div><hr>
+                                <div class="row">
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-3">
+                                        <label>Amount Paid in Cash</label>
+                                        <p>4343432</p>
+                                    </div>                                                                                  
+                                </div>                                                                                                             
+                            </div>
+                          </div>  
                     </div>  
                             <div class="col-lg-12 col-lg-offset-11">   
-                                <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
+                                <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Print <i class="fa fa-print"></i></button>
                             </div>                   
                 </div>
-            </div>            
+            </div>          
           </div>
         </div>
       </div>

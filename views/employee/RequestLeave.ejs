@@ -74,6 +74,21 @@ html {
       $('.datepicker').datepicker();
   });
   </script>
+<script>
+function alphaOnly(event) {
+  var key = event.keyCode;
+  return ((key >= 65 && key <= 90) || key == 8);
+};
+   function isNumberKey(evt)
+   {
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode != 46 && charCode > 31 
+        && (charCode < 48 || charCode > 57))
+         return false;
+
+      return true;
+   }
+</script>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
@@ -134,7 +149,7 @@ html {
                                                     <div class="col-lg-3">
                                                         <div class="form-group">
                                                             <label>Number of Working Days Applied for</label>
-                                                            <input class="form-control" ng-model="leave.days">
+                                                            <input class="form-control" ng-model="leave.days" onkeypress="return isNumberKey(event)">
                                                         </div>
                                                     </div>  
                                                     <div class="col-lg-3">

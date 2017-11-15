@@ -32,6 +32,56 @@
 
 </head>
 <style>
+@media print {
+
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  float: left;
+}
+.col-lg-12 {
+  width: 100%;
+}
+.col-lg-11 {
+  width: 91.66666666666666%;
+}
+.col-lg-10 {
+  width: 83.33333333333334%;
+}
+.col-lg-9 {
+  width: 75%;
+}
+.col-lg-8 {
+  width: 66.66666666666666%;
+}
+.col-lg-7 {
+  width: 58.333333333333336%;
+}
+.col-lg-6 {
+  width: 50%;
+}
+.col-lg-5 {
+  width: 41.66666666666667%;
+}
+.col-lg-4 {
+  width: 33.33333333333333%;
+ }
+ .col-lg-3 {
+   width: 25%;
+ }
+ .col-lg-2 {
+   width: 16.666666666666664%;
+ }
+ .col-lg-1 {
+  width: 8.333333333333332%;
+ }
+
+  }
+
+@page{
+margin-left: 2cm;
+margin-right: 2cm;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
 html {
     overflow-x: hidden;
 }
@@ -90,7 +140,19 @@ html {
     background-color: #d9d9d9;
 }  
 </style>
+<script>
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+     document.title= "Civil Security Unit of Angeles City";
+     document.footer="";
+     document.body.innerHTML = printContents;
 
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
@@ -102,7 +164,7 @@ html {
                         <div class="panel panel-default" style="background-color:#ffffff">
                             <div class="panel-body">
                                 <h1 class="page-header"><i class="fa fa-dashboard fa-fw"></i> Dashboard</h1>          
-                                <div class="col-lg-4 col-md-6">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
                                             <div class="row">
@@ -124,7 +186,7 @@ html {
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="panel panel-yellow">
                                         <div class="panel-heading">
                                             <div class="row">
@@ -146,7 +208,7 @@ html {
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="panel panel-red">
                                         <div class="panel-heading">
                                             <div class="row">
@@ -160,6 +222,28 @@ html {
                                             </div>
                                         </div>
                                         <a href="#06modal" data-target="#06modal" data-toggle="modal">
+                                            <div class="panel-footer">
+                                                <span class="pull-left">View Details</span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div><br>  
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="panel panel-green">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-check fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9 text-right">
+                                                    <div class="huge">{{ leaveCredit.sick_leave }}</div>
+                                                    <div>Payroll</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#pay" data-target="#pay" data-toggle="modal" ng-click="viewLoan(employee.id)">
                                             <div class="panel-footer">
                                                 <span class="pull-left">View Details</span>
                                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -744,7 +828,126 @@ html {
           </div>
         </div>
       </div>
-    </div>         
+    </div>  
+    <div id="pay" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye"></i> View Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3> Name: {{ empView.lastname + ', ' + empView.firstname  + ' ' +  empView.middlename}}</h3>
+                    <div class="panel panel-default">
+                        <div id="PrintArea1" class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Monthly Rate</label>
+                                    <p>{{ empView.payroll[0].monthly_rate}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Amount Accured for the Month</label>
+                                    <p>{{ empView.payroll[0].amount_accured}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>PERA</label>
+                                    <p>{{ empView.payroll[0].pera}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>Withholding Tax</label>
+                                    <p>{{ empView.payroll[0].withholding_tax}}</p>
+                                </div>                                                   
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>MPL</label>
+                                    <p>{{ empView.payroll[0].mpl}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Personal Share (new 9%)</label>
+                                    <p>{{ empView.payroll[0].personal_share}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Government Share (old 12%)</label>
+                                    <p>{{ empView.payroll[0].government_share}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>E.C.C. New</label>
+                                    <p>{{ empView.payroll[0].ecc_new}}</p>
+                                </div>                                                   
+                            </div><hr>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Conso Loan</label>
+                                    <p>{{ empView.loan[0].conso}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Policy Loan</label>
+                                    <p>{{ empView.loan[0].policy}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>GSIS Education Loan</label>
+                                    <p>{{ empView.loan[0].gsis_education}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>GSIS Emergency Loan</label>
+                                    <p>{{ empView.loan[0].gsis_emergency}}</p>
+                                </div>                                                   
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Share Capital</label>
+                                    <p>{{ empView.loan[0].capital}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>STL</label>
+                                    <p>{{ empView.loan[0].stl}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>LTL</label>
+                                    <p>{{ empView.loan[0].ltl}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>Education</label>
+                                    <p>{{ empView.loan[0].education}}</p>
+                                </div>                                                   
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>STL (Others)</label>
+                                    <p>{{ empView.loan[0].stl_other}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Pabaon</label>
+                                    <p>{{ empView.loan[0].pabaon}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>BTS</label>
+                                    <p>{{ empView.loan[0].bts}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Silver</label>
+                                    <p>{{ empView.loan[0].silver}}</p>
+                                </div>                                                                                  
+                            </div><hr>
+                            <div class="row">
+                                <div class="col-lg-3 col-lg-offset-9">
+                                    <label>Amount Paid in Cash</label>
+                                    <p>4343432</p>
+                                </div>                                                                                  
+                            </div>                                                                               
+                        </div>                                                                                        
+                    </div> 
+                            <div class="col-lg-12 col-lg-offset-11">   
+                                <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Print <i class="fa fa-print"></i></button>
+                            </div>                     
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>       
     <script src="../bootstrap/vendor/jquery/jquery.min.js"></script>
 
     <script src="../bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -774,7 +977,7 @@ html {
             $scope.userId = <%= req.session.User.id %>;
             $scope.employee = {};
             $scope.employee.fullname = "";
-
+            $scope.empView = [];
             $scope.changePassword = {};
             $scope.changePassword.oldPassword = "";
             $scope.changePassword.newPassword = "";
@@ -840,6 +1043,14 @@ html {
 
                 $http.post('/logout').then(function success(response) {
                     window.location.href = '/';
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            $scope.viewLoan = function (id) {
+                $http.get('/employee/' + id).then(function success(response) {
+                    $scope.empView = response.data;
+                    console.log(response);
                 }, function error(response) {
                     console.log(response);
                 });

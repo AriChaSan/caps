@@ -1,0 +1,57 @@
+html {
+    overflow-x: hidden;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #404040;
+  text-decoration: none;
+}
+
+.img-circle {
+    background: #d9d9d9;
+    padding: 1px; 
+}
+
+.navbar-nav > li > a{ 
+    padding: 8px 8px 
+}
+.sidebar {
+  border-radius: 0 !important;
+  border:0 !important ;
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -30px;
+}
+.modal-sm {
+  width: 450px;
+  margin-top: 30px;
+}
+.modal-md {
+  width: 1050px;
+  margin-top: 30px;
+}
+.modal-xxlg {
+  width: 700px;
+  margin-top: 30px;
+}
+.modal-xlg {
+  width: 600px;
+  margin-top: 30px;
+}
+.nav-tabs>li>a:hover, .nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    background-color: #f2f2f2;   
+    }
+.nav-pills>li>a:hover, .nav-pills>li>a:focus, .nav-pills>li>a:hover {
+    border-color: transparent;
+    background-color: #d9d9d9;
+}  

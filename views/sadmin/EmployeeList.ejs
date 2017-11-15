@@ -29,6 +29,56 @@
 
 </head>
 <style>
+@media print {
+
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  float: left;
+}
+.col-lg-12 {
+  width: 100%;
+}
+.col-lg-11 {
+  width: 91.66666666666666%;
+}
+.col-lg-10 {
+  width: 83.33333333333334%;
+}
+.col-lg-9 {
+  width: 75%;
+}
+.col-lg-8 {
+  width: 66.66666666666666%;
+}
+.col-lg-7 {
+  width: 58.333333333333336%;
+}
+.col-lg-6 {
+  width: 50%;
+}
+.col-lg-5 {
+  width: 41.66666666666667%;
+}
+.col-lg-4 {
+  width: 33.33333333333333%;
+ }
+ .col-lg-3 {
+   width: 25%;
+ }
+ .col-lg-2 {
+   width: 16.666666666666664%;
+ }
+ .col-lg-1 {
+  width: 8.333333333333332%;
+ }
+
+  }
+
+@page{
+margin-left: 2cm;
+margin-right: 2cm;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
 html {
     overflow-x: hidden;
 }
@@ -91,7 +141,34 @@ html {
     background-color: #d9d9d9;
 }  
 </style>
+<script>
+function alphaOnly(event) {
+  var key = event.keyCode;
+  return ((key >= 65 && key <= 90) || key == 8);
+};
+   function isNumberKey(evt)
+   {
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode != 46 && charCode > 31 
+        && (charCode < 48 || charCode > 57))
+         return false;
 
+      return true;
+   }
+</script>
+<script>
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+     document.title= "Civil Security Unit of Angeles City";
+     document.footer="";
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
@@ -152,9 +229,11 @@ html {
                                                                     <td>{{ emp.account_id.createdAt }}</td>
                                                                     <td>{{ emp.account_id.updatedAt }}</td>
                                                                     <td class="text-center">
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" ng-click="viewEmployee(emp.account_id.id)">View <i class="fa fa-eye fa-fw"></i></button>
-                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" ng-click="updateEmployee(emp.account_id.id)">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal03">Status <i class="fa fa-check fa-fw"></i></button></td>                                                            
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal01" ng-click="viewEmployee(emp.account_id.id)">View<i class="fa fa-eye fa-fw"></i></button>
+                                                                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#pay" ng-click="viewLoan(employee.id)">Payroll <i class="fa fa-eye fa-fw"></i></button><hr>
+                                                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal02" ng-click="updateEmployee(emp.account_id.id)">Update<i class="fa fa-edit fa-fw"></i></button>
+                                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal03">Status <i class="fa fa-check fa-fw"></i></button>
+                                                                    </td>                                                            
                                                                 </tr>
                                                                                                                         
                                                             </tbody>
@@ -170,13 +249,14 @@ html {
                                                 <center><h2 class="modal-title"><i class="fa fa-eye fa-fw"></i> View Employee Profile</h2></center>
                                               </div>                                            
                                               <div class="modal-body">
-                                                <div class="panel-body">    
-                                                            <div class="panel panel-green">
+                                                <div class="panel-body">   
+                                                    <div id="PrintArea1">
+                                                        <div class="panel panel-green">
                                                                 <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
                                                                     <center><h4><b>I. PERSONAL DATA</b></h4></center>
                                                                 </div>
                                                                 <div class="panel-body">
-                                                    <form role="form">
+                                                        <form role="form">
                                                         <div class="row">
                                                             <div class="container-fluid text-center"> 
                                                             <img src="../images/{{ view.employee.image }}" class="img-circle" style="height:15%; width:15%;"><hr>
@@ -259,324 +339,324 @@ html {
                                                                 </div>
                                                             </div>                                                      
                                                         </div>                                                                       
-                                                    </form>                                               
-                                                </div>
-                                                            </div>                   
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>II. RESIDENCE DATA</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                    <form role="form">
-                                                    <label style="color:red">Home Address</label>   
-                                                        <div class="row">                                 
-                                                            <div class="col-lg-6">
-                                                                <div class="form-group">
-                                                                    <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <p>{{view.employee.address[0].barangay || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="form-group">
-                                                                    <label>City/Municipality</label>
-                                                                    <p>{{view.employee.address[0].municipality || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                                      
-                                                        </div> 
-                                                        <div class="row">                                 
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Province/State</label>
-                                                                    <p>{{view.employee.address[0].province || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Country</label>
-                                                                    <p>{{view.employee.address[0].country || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>      
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Zipcode</label>
-                                                                    <p>{{view.employee.address[0].zip_code || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                                                                                          
-                                                        </div>                                                     
-                                                        <hr> 
-                                                        <label style="color:red">Emergency Contact Address</label>   
-                                                        <div class="row">  
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Contact Person name</label>
-                                                                    <p>{{view.employee.emergency[0].contact_person || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Relation</label>
-                                                                    <p>{{view.employee.emergency[0].relation || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>    
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Contact Number</label>
-                                                                    <p>{{view.employee.emergency[0].contact_number || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>      
-                                                            <div class="col-lg-6">
-                                                                <div class="form-group">
-                                                                    <label>Apartment Name/ House no./Street/ Baranggay</label>
-                                                                    <p>{{view.employee.emergency[0].barangay || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="form-group">
-                                                                    <label>City/Municipality</label>
-                                                                    <p>{{view.employee.emergency[0].municipality || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                                      
-                                                        </div> 
-                                                        <div class="row">                                 
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Province/State</label>
-                                                                    <p>{{view.employee.emergency[0].province || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Country</label>
-                                                                    <p>{{view.employee.emergency[0].country || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>      
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Zipcode</label>
-                                                                    <p>{{view.employee.emergency[0].zip_code || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                                                                                           
-                                                        </div>                                                                                                                       
-                                                    </form>                                                                                               
-                                                </div>                                             
-                                                            </div>   
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>III. PHYSICAL DESCRIPTION</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                    <form role="form">
-                                                        <div class="row">
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Height (cm)</label>
-                                                                    <p>{{view.employee.physical_description[0].height || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Weight (lbs)</label>
-                                                                    <p>{{view.employee.physical_description[0].weight || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Built</label>
-                                                                    <p>{{view.employee.physical_description[0].built || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Eye Color</label>
-                                                                    <p>{{view.employee.physical_description[0].eye_color || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>  
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Hair Color</label>
-                                                                    <p>{{view.employee.physical_description[0].hair_color || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>  
-                                                            <div class="col-lg-2">
-                                                                <label>Complexion</label>
-                                                                <p>{{view.employee.physical_description[0].complexion || 'N/A'}}</p>
-                                                            </div>                                  
-                                                        </div>                                                                      
-                                                    </form>                                               
-                                                </div>
-                                                            </div>   
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>IV. FAMILY DATA</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                    <form role="form">
-                                                        <label style="color:red">Father</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Father's Name</label>
-                                                                    <p>{{view.employee.parent[0].name || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <p>{{view.employee.parent[0].dob || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Contact Number</label>
-                                                                    <p>{{view.employee.parent[0].contact || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                
+                                                        </form>                                               
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Occupation</label>
-                                                                    <p>{{view.employee.parent[0].occupation || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Name</label>
-                                                                    <p>{{view.employee.parent[0].company_name || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Address</label>
-                                                                    <p>{{view.employee.parent[0].company_address || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                
-                                                        </div> 
-                                                        <hr>
-                                                        <label style="color:red">Mother</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Mother's Name</label>
-                                                                    <p>{{view.employee.parent[1].name || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <p>{{view.employee.parent[1].dob || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Contact Number</label>
-                                                                    <p>{{view.employee.parent[1].contact || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Occupation</label>
-                                                                    <p>{{view.employee.parent[1].occupation || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Name</label>
-                                                                    <p>{{view.employee.parent[1].company_name || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Address</label>
-                                                                    <p>{{view.employee.parent[1].company_address || 'N/A'}}</p>
-                                                                </div>
-                                                            </div>                                
-                                                        </div> 
-                                                        <hr>  
-                                                        <label style="color:red">Brother(s)/Sister(s)</label>      
-                                                        <div class="row" ng-repeat="sibling in view.employee.sibling">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <p>{{ sibling.name || "N/A"}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <p>{{ sibling.dob || "N/A"}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course/Occupation</label>
-                                                                    <p>{{ sibling.occupation || "N/A"}}</p>
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School/Company</label>
-                                                                    <p>{{ sibling.company || "N/A"}}</p>
-                                                                </div>
-                                                            </div>                                                                                        
-                                                        </div>              
-                                                    </form>                                               
-                                                </div>
-                                                            </div>
+                                                                    </div>                   
 
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>VI. EDUCATIONAL BACKGROUND</b></h4></center>
+                                                                    <div class="panel panel-green">
+                                                                        <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                                            <center><h4><b>II. RESIDENCE DATA</b></h4></center>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                            <form role="form">
+                                                            <label style="color:red">Home Address</label>   
+                                                                <div class="row">                                 
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <label>Apartment Name/ House no./Street/ Baranggay</label>
+                                                                            <p>{{view.employee.address[0].barangay || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <label>City/Municipality</label>
+                                                                            <p>{{view.employee.address[0].municipality || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                                      
+                                                                </div> 
+                                                                <div class="row">                                 
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Province/State</label>
+                                                                            <p>{{view.employee.address[0].province || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Country</label>
+                                                                            <p>{{view.employee.address[0].country || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>      
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Zipcode</label>
+                                                                            <p>{{view.employee.address[0].zip_code || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                                                                                          
+                                                                </div>                                                     
+                                                                <hr> 
+                                                                <label style="color:red">Emergency Contact Address</label>   
+                                                                <div class="row">  
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Contact Person name</label>
+                                                                            <p>{{view.employee.emergency[0].contact_person || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Relation</label>
+                                                                            <p>{{view.employee.emergency[0].relation || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>    
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Contact Number</label>
+                                                                            <p>{{view.employee.emergency[0].contact_number || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>      
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <label>Apartment Name/ House no./Street/ Baranggay</label>
+                                                                            <p>{{view.employee.emergency[0].barangay || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group">
+                                                                            <label>City/Municipality</label>
+                                                                            <p>{{view.employee.emergency[0].municipality || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                                      
+                                                                </div> 
+                                                                <div class="row">                                 
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Province/State</label>
+                                                                            <p>{{view.employee.emergency[0].province || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Country</label>
+                                                                            <p>{{view.employee.emergency[0].country || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>      
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Zipcode</label>
+                                                                            <p>{{view.employee.emergency[0].zip_code || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                                                                                           
+                                                                </div>                                                                                                                       
+                                                            </form>                                                                                               
+                                                        </div>                                             
+                                                                    </div>   
+
+                                                                    <div class="panel panel-green">
+                                                                        <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                                            <center><h4><b>III. PHYSICAL DESCRIPTION</b></h4></center>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                            <form role="form">
+                                                                <div class="row">
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-group">
+                                                                            <label>Height (cm)</label>
+                                                                            <p>{{view.employee.physical_description[0].height || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-group">
+                                                                            <label>Weight (lbs)</label>
+                                                                            <p>{{view.employee.physical_description[0].weight || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-group">
+                                                                            <label>Built</label>
+                                                                            <p>{{view.employee.physical_description[0].built || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-group">
+                                                                            <label>Eye Color</label>
+                                                                            <p>{{view.employee.physical_description[0].eye_color || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>  
+                                                                    <div class="col-lg-2">
+                                                                        <div class="form-group">
+                                                                            <label>Hair Color</label>
+                                                                            <p>{{view.employee.physical_description[0].hair_color || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>  
+                                                                    <div class="col-lg-2">
+                                                                        <label>Complexion</label>
+                                                                        <p>{{view.employee.physical_description[0].complexion || 'N/A'}}</p>
+                                                                    </div>                                  
+                                                                </div>                                                                      
+                                                            </form>                                               
+                                                        </div>
+                                                                    </div>   
+
+                                                                    <div class="panel panel-green">
+                                                                        <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                                            <center><h4><b>IV. FAMILY DATA</b></h4></center>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                            <form role="form">
+                                                                <label style="color:red">Father</label>
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Father's Name</label>
+                                                                            <p>{{view.employee.parent[0].name || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Date of Birth</label>
+                                                                            <p>{{view.employee.parent[0].dob || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Contact Number</label>
+                                                                            <p>{{view.employee.parent[0].contact || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                
                                                                 </div>
-                                                                <div class="panel-body">
-                                                    <form role="form" ng-repeat="school in view.employee.education_background">
-                                                    <div ng-switch="school.education_type">
-                                                        <label style="color:red" ng-switch-when="elementary">Elementary</label>
-                                                        <label style="color:red" ng-switch-when="highschool">Highschool</label>
-                                                        <label style="color:red" ng-switch-when="college">College</label>
-                                                        <label style="color:red" ng-switch-when="post_graduate">Post graduate</label>
-                                                        <label style="color:red" ng-switch-default>test</label>
-                                                    </div>
-                                                        
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <p>{{ school.school || "N/A"}}</p>
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Occupation</label>
+                                                                            <p>{{view.employee.parent[0].occupation || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Company Name</label>
+                                                                            <p>{{view.employee.parent[0].company_name || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Company Address</label>
+                                                                            <p>{{view.employee.parent[0].company_address || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                
+                                                                </div> 
+                                                                <hr>
+                                                                <label style="color:red">Mother</label>
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Mother's Name</label>
+                                                                            <p>{{view.employee.parent[1].name || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Date of Birth</label>
+                                                                            <p>{{view.employee.parent[1].dob || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Contact Number</label>
+                                                                            <p>{{view.employee.parent[1].contact || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                
                                                                 </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Occupation</label>
+                                                                            <p>{{view.employee.parent[1].occupation || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Company Name</label>
+                                                                            <p>{{view.employee.parent[1].company_name || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label>Company Address</label>
+                                                                            <p>{{view.employee.parent[1].company_address || 'N/A'}}</p>
+                                                                        </div>
+                                                                    </div>                                
+                                                                </div> 
+                                                                <hr>  
+                                                                <label style="color:red">Brother(s)/Sister(s)</label>      
+                                                                <div class="row" ng-repeat="sibling in view.employee.sibling">
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>Name</label>
+                                                                            <p>{{ sibling.name || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>Date of Birth</label>
+                                                                            <p>{{ sibling.dob || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>Course/Occupation</label>
+                                                                            <p>{{ sibling.occupation || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>School/Company</label>
+                                                                            <p>{{ sibling.company || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>                                                                                        
+                                                                </div>              
+                                                            </form>                                               
+                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="panel panel-green">
+                                                                        <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                                            <center><h4><b>VI. EDUCATIONAL BACKGROUND</b></h4></center>
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                            <form role="form" ng-repeat="school in view.employee.education_background">
+                                                                <div ng-switch="school.education_type">
+                                                                <label style="color:red" ng-switch-when="elementary">Elementary</label>
+                                                                <label style="color:red" ng-switch-when="highschool">Highschool</label>
+                                                                <label style="color:red" ng-switch-when="college">College</label>
+                                                                <label style="color:red" ng-switch-when="post_graduate">Post graduate</label>
+                                                                <label style="color:red" ng-switch-default>test</label>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>School</label>
+                                                                            <p>{{ school.school || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>Course</label>
+                                                                            <p>{{ school.course || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>Year Graduated</label>
+                                                                            <p>{{ school.year || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3">
+                                                                        <div class="form-group">
+                                                                            <label>Honors/Awards</label>
+                                                                            <p>{{ school.award || "N/A"}}</p>
+                                                                        </div>
+                                                                    </div>                                  
+                                                                </div> 
+                                                            </form>
                                                             </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <p>{{ school.course || "N/A"}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <p>{{ school.year || "N/A"}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <p>{{ school.award || "N/A"}}</p>
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                    </form>
-                                                                                                       
-                                                </div>
-                                                            </div>                                                                                               
+                                                        </div>
+                                                    </div>                                                                       
                                                         <div class="col-lg-12 col-lg-offset-11">   
-                                                            <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
+                                                            <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Print <i class="fa fa-print"></i></button>
                                                         </div>                                                                       
-                                                    </div>
+                                                </div>
                                                 </div>                                              
                                               </div>
                                             </div>
@@ -590,47 +670,47 @@ html {
                                               </div>
                                               <div class="modal-body">
                                                 <div class="panel-body">    
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>I. PERSONAL DATA</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">                                                           
-                                                                    <form role="form">
-                                                                        <div class="row">
+                                            <div class="panel panel-green">
+                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                    <center><h4><b>I. PERSONAL DATA</b></h4></center>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" enctype="multipart/form-data">
+                                                        <div class="row">
                                                             <div class="container-fluid text-center"> 
                                                             <img src="../images/{{ data.employee.personal.image }}" class="img-circle" style="height:15%; width:15%;"><BR><BR>
                                                             <input type="file" id="fileInput" name="file" class="form-control" ng-model="data.employee.image" accept="image/*">
                                                             </div>
-                                                        </div> 
-                                                                        <hr>                                                                      
-                                                                        <div class="row">
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row">
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Last Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.lastname">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.lastname">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>First Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.firstname">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.firstname">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Middle Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.middlename">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.middlename">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Qualifier</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.qualifier">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.qualifier">
                                                                 </div>
                                                             </div>                                                        
                                                         </div> 
-                                                                        <hr>
-                                                                        <div class="row">
+                                                        <hr>
+                                                        <div class="row">
                                                             <div class="col-lg-4">
                                                                 <label>Gender</label>
                                                                 <select class="form-control" ng-model="data.employee.personal.gender">
@@ -666,9 +746,9 @@ html {
                                                                     <option value="other">Other</option>
                                                                 </select> 
                                                             </div>                    
-                                                        </div>  
-                                                                        <hr> 
-                                                                        <div class="row">
+                                                        </div>   
+                                                        <hr> 
+                                                        <div class="row">
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
@@ -678,18 +758,18 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Place of Birth</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.pob">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.pob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Civil Status</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.civil_status">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.civil_status">
                                                                 </div>
                                                             </div>                                                       
                                                         </div>
-                                                                        <hr>  
-                                                                        <div class="row">
+                                                        <hr>  
+                                                        <div class="row">
                                                             <div class="col-lg-4 col-lg-offset-2">
                                                                 <div class="form-group">
                                                                     <label>Email Address</label>
@@ -699,19 +779,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mobile Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.mobile_number">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.personal.mobile_number">
                                                                 </div>
                                                             </div>                                                      
-                                                        </div>                                                                        
-                                                                    </form>                                               
-                                                                </div>
-                                                            </div>                   
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>II. RESIDENCE DATA</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
+                                                        </div>                                                                       
+                                                    </form>                                               
+                                                </div>
+                                            </div>                   
+                                        </div>
+                                            <div class="panel panel-green">
+                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
+                                                    <center><h4><b>II. RESIDENCE DATA</b></h4></center>
+                                                </div>
+                                                <div class="panel-body">
                                                     <form role="form">
                                                     <label style="color:red">Home Address</label>   
                                                         <div class="row">                                 
@@ -724,7 +804,7 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.municipality">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.address.municipality">
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -732,19 +812,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.province">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.address.province">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.country">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.address.country">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.zip_code">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.address.zip_code">
                                                                 </div>
                                                             </div>                                                                                                          
                                                         </div>                                                     
@@ -754,19 +834,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Person name</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.contact_person">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.contact_person">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Relation</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.relation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.relation">
                                                                 </div>
                                                             </div>    
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.contact_number">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.emergency.contact_number">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-6">
@@ -778,7 +858,7 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.municipality">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.municipality">
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -786,395 +866,24 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.province">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.province">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.country">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.country">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.zip_code">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.emergency.zip_code">
                                                                 </div>
                                                             </div>                                                                                                           
                                                         </div>                                                                                                                       
                                                     </form>                                                                                               
-                                                </div>                                             
-                                                            </div>   
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>III. PHYSICAL DESCRIPTION</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                    <form role="form">
-                                                        <div class="row">
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Height (cm)</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.height">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Weight (lbs)</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.weight">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Built</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.built">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Eye Color</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.eye_color">
-                                                                </div>
-                                                            </div>  
-                                                            <div class="col-lg-2">
-                                                                <div class="form-group">
-                                                                    <label>Hair Color</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.hair_color">
-                                                                </div>
-                                                            </div>  
-                                                            <div class="col-lg-2">
-                                                                <label>Complexion</label>
-                                                                <select class="form-control" ng-model="data.employee.physical_description.complexion">
-                                                                    <option value="light">Light</option>
-                                                                    <option value="light">Fair</option>
-                                                                    <option value="light">Dark</option>
-                                                                </select> 
-                                                            </div>                                  
-                                                        </div>                                                                      
-                                                    </form>                                               
-                                                </div>
-                                                            </div>   
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>IV. FAMILY DATA</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                    <form role="form">
-                                                        <label style="color:red">Father</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Father's Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.parent[0].dob">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Contact Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].contact">
-                                                                </div>
-                                                            </div>                                
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].occupation">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].company_name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Address</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].company_address">
-                                                                </div>
-                                                            </div>                                
-                                                        </div> 
-                                                        <hr>
-                                                        <label style="color:red">Mother</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Mother's Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.parent[1].dob">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Contact Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].contact">
-                                                                </div>
-                                                            </div>                                
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].occupation">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].company_name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Company Address</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].company_address">
-                                                                </div>
-                                                            </div>                                
-                                                        </div> 
-                                                        <hr>  
-                                                        <label style="color:red">Brother(s)/Sister(s)</label>      
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[0].name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[0].dob">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[0].occupation">
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[0].company">
-                                                                </div>
-                                                            </div>                                                                                        
-                                                        </div> 
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[1].name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[1].dob">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[1].occupation">
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[1].company">
-                                                                </div>
-                                                            </div>                                                                                        
-                                                        </div>  
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[2].name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[2].dob">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[2].occupation">
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[2].company">
-                                                                </div>
-                                                            </div>                                                                                        
-                                                        </div>  
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[3].name">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[3].dob">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[3].occupation">
-                                                                </div>
-                                                            </div> 
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[3].company">
-                                                                </div>
-                                                            </div>                                                                                        
-                                                        </div>               
-                                                    </form>                                               
-                                                </div>
-                                                            </div>
-
-                                                            <div class="panel panel-green">
-                                                                <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
-                                                                    <center><h4><b>VI. EDUCATIONAL BACKGROUND</b></h4></center>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                    <form role="form">
-                                                        <label style="color:red">Elementary</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].school">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].course">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].year">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].award">
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr> 
-                                                        <label style="color:red">Highschool</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].school">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].course">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].year">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].award">
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr> 
-                                                        <label style="color:red">College</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].school">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].course">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].year">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].award">
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr> 
-                                                        <label style="color:red">Post Graduate</label>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].school">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].course">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].year">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="form-group">
-                                                                    <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].award">
-                                                                </div>
-                                                            </div>                                  
-                                                        </div> 
-                                                        <hr>                                                                                               
-                                                    </form>                                               
-                                                </div>  
+                                                </div>    
                                                             </div>                                                                                               
                                                         <div class="col-lg-12 col-lg-offset-11">   
                                                             <button class="btn btn-success" type="button" ng-click="updateSubmit(update.employee.id)">Save <i class="fa fa-save"></i></button>
@@ -1619,6 +1328,130 @@ html {
         </div>
       </div>
     </div>  
+    <div id="pay" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-eye"></i> View Payroll Details</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                <div id="PrintArea2">
+                    <h3> Name: {{ empView.lastname + ', ' + empView.firstname  + ' ' +  empView.middlename}}</h3>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Monthly Rate</label>
+                                    <p>{{ empView.payroll[0].monthly_rate}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Amount Accured for the Month</label>
+                                    <p>{{ empView.payroll[0].amount_accured}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>PERA</label>
+                                    <p>{{ empView.payroll[0].pera}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>Withholding Tax</label>
+                                    <p>{{ empView.payroll[0].withholding_tax}}</p>
+                                </div>                                                   
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>MPL</label>
+                                    <p>{{ empView.payroll[0].mpl}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Personal Share (new 9%)</label>
+                                    <p>{{ empView.payroll[0].personal_share}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Government Share (old 12%)</label>
+                                    <p>{{ empView.payroll[0].government_share}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>E.C.C. New</label>
+                                    <p>{{ empView.payroll[0].ecc_new}}</p>
+                                </div>                                                   
+                            </div><hr>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Conso Loan</label>
+                                    <p>{{ empView.loan[0].conso}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Policy Loan</label>
+                                    <p>{{ empView.loan[0].policy}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>GSIS Education Loan</label>
+                                    <p>{{ empView.loan[0].gsis_education}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>GSIS Emergency Loan</label>
+                                    <p>{{ empView.loan[0].gsis_emergency}}</p>
+                                </div>                                                   
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Share Capital</label>
+                                    <p>{{ empView.loan[0].capital}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>STL</label>
+                                    <p>{{ empView.loan[0].stl}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>LTL</label>
+                                    <p>{{ empView.loan[0].ltl}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>Education</label>
+                                    <p>{{ empView.loan[0].education}}</p>
+                                </div>                                                   
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>STL (Others)</label>
+                                    <p>{{ empView.loan[0].stl_other}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Pabaon</label>
+                                    <p>{{ empView.loan[0].pabaon}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>BTS</label>
+                                    <p>{{ empView.loan[0].bts}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Silver</label>
+                                    <p>{{ empView.loan[0].silver}}</p>
+                                </div>                                                                                  
+                            </div><hr>
+                            <div class="row">
+                                <div class="col-lg-3"> </div> 
+                                <div class="col-lg-3"> </div> 
+                                <div class="col-lg-3"> </div> 
+                                <div class="col-lg-3">
+                                    <label>Amount Paid in Cash</label>
+                                    <p>4343432</p>
+                                </div>                                                                                  
+                            </div>                                                                               
+                        </div>                                                                                        
+                    </div>
+                </div>   
+                        <div class="col-lg-12 col-lg-offset-11">   
+                            <button class="btn btn-success" type="button" onclick="printDiv('PrintArea2')">Print <i class="fa fa-print"></i></button>
+                        </div>                     
+                </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="readallmes" class="modal fade" role="dialog">
       <div class="modal-dialog modal-xlg">
         <div class="modal-content">
@@ -1790,7 +1623,7 @@ html {
             $scope.employee.fullname = "";
 
             $scope.view = {};
-
+            $scope.empView = [];
             $scope.update = {};
 
             $scope.data = {};
@@ -1827,7 +1660,14 @@ html {
             };
 
             $scope.refreshLog();
-
+                        $scope.viewLoan = function (id) {
+                $http.get('/employee/' + id).then(function success(response) {
+                    $scope.empView = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
             $scope.viewEmployee = function(id) {
                 $http.get('/employee/' + id).then(function success(response) {
                 $scope.view.employee = response.data;

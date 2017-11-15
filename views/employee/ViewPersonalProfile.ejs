@@ -25,7 +25,59 @@
     <link rel="stylesheet" href="assets/form-basic.css">
 
 </head>
+
 <style>
+@media print {
+
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  float: left;
+}
+.col-lg-12 {
+  width: 100%;
+}
+.col-lg-11 {
+  width: 91.66666666666666%;
+}
+.col-lg-10 {
+  width: 83.33333333333334%;
+}
+.col-lg-9 {
+  width: 75%;
+}
+.col-lg-8 {
+  width: 66.66666666666666%;
+}
+.col-lg-7 {
+  width: 58.333333333333336%;
+}
+.col-lg-6 {
+  width: 50%;
+}
+.col-lg-5 {
+  width: 41.66666666666667%;
+}
+.col-lg-4 {
+  width: 33.33333333333333%;
+ }
+ .col-lg-3 {
+   width: 25%;
+ }
+ .col-lg-2 {
+   width: 16.666666666666664%;
+ }
+ .col-lg-1 {
+  width: 8.333333333333332%;
+ }
+
+  }
+
+@page{
+margin-left: 2cm;
+margin-right: 2cm;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+
 html {
     overflow-x: hidden;
 }
@@ -69,7 +121,19 @@ html {
   margin-top: 30px;
 }
 </style>
+<script>
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+     document.title= "Civil Security Unit of Angeles City";
+     document.footer="";
+     document.body.innerHTML = printContents;
 
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
@@ -80,7 +144,8 @@ html {
                     <div class="col-lg-12">
                         <div class="panel panel-default" style="background-color:#ffffff">
                             <div class="panel-body">
-                                <h1 class="page-header"><i class="fa fa-eye fa-fw"></i> View Personal Profile</h1>      
+                                <h1 class="page-header"><i class="fa fa-eye fa-fw"></i> View Personal Profile</h1>
+                                <div id="printableArea">     
                                     <div class="col-lg-12">
                                         <div class="panel panel-green">
                                             <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
@@ -174,7 +239,6 @@ html {
                                                 </div>
                                         </div>                   
                                     </div>
-
                                     <div class="col-lg-12">
                                         <div class="panel panel-green">
                                             <div class="panel-heading" style="padding-bottom: 1px; padding-top: 1px">
@@ -485,10 +549,11 @@ html {
                                                     </form>
                                                                                                        
                                                 </div>
-                                        </div>                                                                                               
+                                        </div>                   
                                     </div> 
+                                </div>
                                     <div class="col-lg-12 col-lg-offset-11">   
-                                        <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
+                                        <button class="btn btn-success" type="button" onclick="printDiv('printableArea')">Print <i class="fa fa-print"></i></button>
                                     </div>                                                                       
                                 </div>
                             </div>
@@ -498,6 +563,7 @@ html {
             </div>                     
         </div>  
     </div>
+    
 
     <div id="01modal" class="modal fade" role="dialog">
       <div class="modal-dialog modal-sm">

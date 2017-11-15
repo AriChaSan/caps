@@ -99,7 +99,19 @@ html {
     background-color: #d9d9d9;
 }  
 </style>
+<SCRIPT language=Javascript>
+   <!--
+   function isNumberKey(evt)
+   {
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode != 46 && charCode > 31 
+        && (charCode < 48 || charCode > 57))
+         return false;
 
+      return true;
+   }
+   //-->
+</SCRIPT>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#e6e6e6;">
@@ -885,25 +897,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Monthly Rate</label>
-                                        <input class="form-control" ng-model="empUpdate.monthly_rate">
+                                        <input class="form-control" ng-model="empUpdate.monthly_rate" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Amount Accured for the Period</label>
-                                        <input class="form-control" ng-model="empUpdate.amount_accured">
+                                        <input class="form-control" ng-model="empUpdate.amount_accured" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>PERA</label>
-                                        <input class="form-control" ng-model="empUpdate.pera">
+                                        <input class="form-control" ng-model="empUpdate.pera" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Withholding Tax</label>
-                                        <input class="form-control" ng-model="empUpdate.withholding_tax">
+                                        <input class="form-control" ng-model="empUpdate.withholding_tax" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                        
                             </div>  
@@ -911,25 +923,25 @@ html {
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>MPL</label>
-                                        <input class="form-control" ng-model="empUpdate.mpl">
+                                        <input class="form-control" ng-model="empUpdate.mpl" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Personal Share (new 9%)</label>
-                                        <input class="form-control" ng-model="empUpdate.personal_share">
+                                        <input class="form-control" ng-model="empUpdate.personal_share" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Government Share (old 12%)</label>
-                                        <input class="form-control" ng-model="empUpdate.government_share">
+                                        <input class="form-control" ng-model="empUpdate.government_share" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>E.C.C New</label>
-                                        <input class="form-control" ng-model="empUpdate.ecc_new">
+                                        <input class="form-control" ng-model="empUpdate.ecc_new" onkeypress="return isNumberKey(event)">
                                     </div>
                                 </div>                                                        
                             </div><hr>
@@ -953,46 +965,106 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">  
-                    <h3> Name: Matthew Louis R. Di</h3>
+                    <h3> Name: {{ empView.lastname + ', ' + empView.firstname  + ' ' +  empView.middlename}}</h3>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label>Monthly Rate</label>
-                                    <p>4300.04</p>
+
+                                    <p>{{ empView.payroll[0].monthly_rate}}</p>
                                 </div> 
                                 <div class="col-lg-3">
                                     <label>Amount Accured for the Month</label>
-                                    <p>4300.04</p>
+                                    <p>{{ empView.payroll[0].amount_accured}}</p>
                                 </div> 
                                 <div class="col-lg-3">
                                     <label>PERA</label>
-                                    <p>4300.04</p>
+                                    <p>{{ empView.payroll[0].pera}}</p>
                                 </div>  
                                 <div class="col-lg-3">
                                     <label>Withholding Tax</label>
-                                    <p>2323</p>
+                                    <p>{{ empView.payroll[0].withholding_tax}}</p>
                                 </div>                                                   
                             </div> 
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label>MPL</label>
-                                    <p>5534</p>
+                                    <p>{{ empView.payroll[0].mpl}}</p>
                                 </div> 
                                 <div class="col-lg-3">
                                     <label>Personal Share (new 9%)</label>
-                                    <p>2313</p>
+                                    <p>{{ empView.payroll[0].personal_share}}</p>
                                 </div> 
                                 <div class="col-lg-3">
                                     <label>Government Share (old 12%)</label>
-                                    <p>4421</p>
+                                    <p>{{ empView.payroll[0].government_share}}</p>
                                 </div>  
                                 <div class="col-lg-3">
                                     <label>E.C.C. New</label>
-                                    <p>3321</p>
+                                    <p>{{ empView.payroll[0].ecc_new}}</p>
+                                </div>                                                   
+                            </div><hr>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Conso Loan</label>
+                                    <p>{{ empView.loan[0].conso}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Policy Loan</label>
+                                    <p>{{ empView.loan[0].policy}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>GSIS Education Loan</label>
+                                    <p>{{ empView.loan[0].gsis_education}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>GSIS Emergency Loan</label>
+                                    <p>{{ empView.loan[0].gsis_emergency}}</p>
+                                </div>                                                   
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Share Capital</label>
+                                    <p>{{ empView.loan[0].share_capital}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>STL</label>
+                                    <p>{{ empView.loan[0].stl}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Reconstruct</label>
+                                    <p>{{ empView.loan[0].ltl}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>Educational Loan</label>
+                                    <p>{{ empView.loan[0].education}}</p>
                                 </div>                                                   
                             </div>
-                                                                                                               
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Personal Loan</label>
+                                    <p>{{ empView.loan[0].stl_other}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Pabaon</label>
+                                    <p>{{ empView.loan[0].pabaon}}</p>
+                                </div>  
+                                <div class="col-lg-3">
+                                    <label>BTS</label>
+                                    <p>{{ empView.loan[0].bts}}</p>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <label>Holiday</label>
+                                    <p>{{ empView.loan[0].silver}}</p>
+                                </div>                                                                                  
+                            </div><hr>
+                            <div class="row">
+                                <div class="col-lg-3 col-lg-offset-9">
+                                    <label>Net Pay</label>
+                                    <p>{{ empView.pay}}</p>
+                                </div>                                                                                  
+                            </div>                                                                               
                         </div>                                                                                        
                     </div>                            <div class="col-lg-12 col-lg-offset-11">   
                                 <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
@@ -1231,6 +1303,8 @@ html {
 
             $scope.empUpdate = {};
 
+            $scope.empView = [];
+
            $scope.refreshLog = function() {
                  $http.get('/employeepayroll?location_id=' + $scope.logLocation).then(function success(response) {
                     $scope.empList = response.data;
@@ -1307,7 +1381,40 @@ html {
             };
 
             $scope.viewLoan = function (id) {
-                alert(id);
+                $http.get('/employee/' + id).then(function success(response) {
+                    $scope.empView = response.data;
+                    var days =20;
+
+                    var seciv=2372.4;
+                    var seciii=1672.6;
+                    var secii=886.5;
+                    var seci=575.6;
+                    var rate=0;
+                    if($scope.empView.employee_type_id.id === 4){
+                        rate = seciv;
+                    }else if($scope.empView.employee_type_id.id === 3){
+                         rate = seciii;
+                    }else if($scope.empView.employee_type_id.id === 2){
+                         rate = secii;
+                    }else if($scope.empView.employee_type_id.id === 1){
+                         rate = seci;
+                    }
+                    
+                        $scope.empView.payroll[0].monthly_rate = (rate*days).toFixed(2);
+                        $scope.empView.payroll[0].amount_accured = ($scope.empView.payroll[0].monthly_rate/2).toFixed(2);
+                        $scope.empView.payroll[0].personal_share = ($scope.empView.payroll[0].monthly_rate*(0.09)).toFixed(2);
+                        $scope.empView.payroll[0].government_share = ($scope.empView.payroll[0].monthly_rate*(0.12)).toFixed(2);
+                        $scope.empView.pay = ((Number($scope.empView.payroll[0].pera) + Number($scope.empView.payroll[0].amount_accured)) - (
+                                    Number($scope.empView.payroll[0].withholding_tax) + Number($scope.empView.payroll[0].mpl) + Number($scope.empView.payroll[0].personal_share) +
+                                    Number($scope.empView.loan[0].conso) + Number($scope.empView.loan[0].policy) + Number($scope.empView.loan[0].education) + 
+                                    Number($scope.empView.loan[0].share_capital) + Number($scope.empView.loan[0].stl) + Number($scope.empView.loan[0].ltl) +
+                                    Number($scope.empView.loan[0].pabaon) + Number($scope.empView.loan[0].stl_other) + Number($scope.empView.loan[0].silver) + Number($scope.empView.loan[0].bts))).toFixed(2);;
+                        console.log($scope.empView.pay);
+
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
             };
             
             
