@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<div id="reqleave" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3>Request Leave</h3>
+                    <h5>From: {{ viewOneLeave.employee_id.lastname + ', ' + viewOneLeave.employee_id.firstname + ' '+ viewOneLeave.employee_id.middlename}}</h5>  
+                    <hr>  
+                    <p>Type: {{ viewOneLeave.leave_type }}</p> 
+                    <p>Days: {{ viewOneLeave.leave_days }}</p> 
+                    <p>Vacation: {{ viewOneLeave.leave_vacation }}</p>
+                    <p>Sick Vacation: {{ viewOneLeave.sick_vacation }}</p>  
+                    <p>Reason: {{ viewOneLeave.reason }}</p>  
+                    <p>Date From: {{ viewOneLeave.date_from }}</p> 
+                    <p>Date To: {{ viewOneLeave.date_to }}</p> 
+                    <hr>
+
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+<div id="reqkey" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-xlg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <center><h2 class="modal-title"><i class="fa fa-envelope"></i> Message</h2></center>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-body">  
+                    <h3>Request Time Key Change</h3>
+                    <h5>From: {{ viewOneTimekey.employee_id.lastname + ', ' + viewOneTimekey.employee_id.firstname + ' '+ viewOneTimekey.employee_id.middlename}}</h5>  
+                    <hr>  
+                    <p>Previous Time In: {{viewOneTimekey.prevTimeIn }}</p> 
+                    <p>Previous Time Out: {{viewOneTimekey.prevTimeOut }}</p> 
+
+                    <p>New Time In: {{viewOneTimekey.newTimeIn }}</p> 
+                    <p>New Time Out: {{viewOneTimekey.newTimeOut }}</p> 
+                    <p>Shift Type: Day Time</p>  
+                    <p>Date: {{viewOneTimekey.date }}</p>  
+                    <hr>
+
+                    </center>
+                </div>                                                                                        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 

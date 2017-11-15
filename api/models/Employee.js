@@ -194,6 +194,7 @@ module.exports = {
       obj.education_background.push(highschool);
       obj.education_background.push(college);
       obj.education_background.push(post_graduate);
+      obj.fullname1 = obj.lastname +', '+  obj.firstname +' '+ obj.middlename;  
       return obj;
     }
   }

@@ -72,7 +72,21 @@ html {
   margin-top: 30px;
 }
 </style>
+<script>
+function alphaOnly(event) {
+  var key = event.keyCode;
+  return ((key >= 65 && key <= 90) || key == 8);
+};
+   function isNumberKey(evt)
+   {
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode != 46 && charCode > 31 
+        && (charCode < 48 || charCode > 57))
+         return false;
 
+      return true;
+   }
+</script>
 <body ng-app="app" ng-controller="appController">
 
     <div id="wrapper" style="background-color:#262626;">
@@ -104,25 +118,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Last Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.lastname">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.lastname">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>First Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.firstname">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.firstname">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Middle Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.middlename">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.middlename">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Qualifier</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.qualifier">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.qualifier">
                                                                 </div>
                                                             </div>                                                        
                                                         </div> 
@@ -175,13 +189,13 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Place of Birth</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.pob">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.pob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Civil Status</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.civil_status">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.personal.civil_status">
                                                                 </div>
                                                             </div>                                                       
                                                         </div>
@@ -196,7 +210,7 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mobile Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.personal.mobile_number">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.personal.mobile_number">
                                                                 </div>
                                                             </div>                                                      
                                                         </div>                                                                       
@@ -223,7 +237,7 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.municipality">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.address.municipality">
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -231,19 +245,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.province">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.address.province">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.country">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.address.country">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <input class="form-control" ng-model="data.employee.address.zip_code">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.address.zip_code">
                                                                 </div>
                                                             </div>                                                                                                          
                                                         </div>                                                     
@@ -253,19 +267,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Person name</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.contact_person">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.contact_person">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Relation</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.relation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.relation">
                                                                 </div>
                                                             </div>    
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.contact_number">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.emergency.contact_number">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-6">
@@ -277,7 +291,7 @@ html {
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <label>City/Municipality</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.municipality">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.municipality">
                                                                 </div>
                                                             </div>                                                      
                                                         </div> 
@@ -285,19 +299,19 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Province/State</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.province">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.province">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Country</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.country">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.emergency.country">
                                                                 </div>
                                                             </div>      
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Zipcode</label>
-                                                                    <input class="form-control" ng-model="data.employee.emergency.zip_code">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.emergency.zip_code">
                                                                 </div>
                                                             </div>                                                                                                           
                                                         </div>                                                                                                                       
@@ -315,31 +329,31 @@ html {
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Height (cm)</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.height">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.physical_description.height">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Weight (lbs)</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.weight">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.physical_description.weight">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Built</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.built">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.physical_description.built">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Eye Color</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.eye_color">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.physical_description.eye_color">
                                                                 </div>
                                                             </div>  
                                                             <div class="col-lg-2">
                                                                 <div class="form-group">
                                                                     <label>Hair Color</label>
-                                                                    <input class="form-control" ng-model="data.employee.physical_description.hair_color">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.physical_description.hair_color">
                                                                 </div>
                                                             </div>  
                                                             <div class="col-lg-2">
@@ -366,7 +380,7 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Father's Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.parent[0].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
@@ -378,7 +392,7 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].contact">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.parent[0].contact">
                                                                 </div>
                                                             </div>                                
                                                         </div>
@@ -386,13 +400,13 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].occupation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.parent[0].occupation">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[0].company_name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.parent[0].company_name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
@@ -408,7 +422,7 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Mother's Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.parent[1].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
@@ -420,7 +434,7 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Contact Number</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].contact">
+                                                                    <input onkeypress="return isNumberKey(event)" class="form-control" ng-model="data.employee.parent[1].contact">
                                                                 </div>
                                                             </div>                                
                                                         </div>
@@ -428,13 +442,13 @@ html {
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].occupation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.parent[1].occupation">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <div class="form-group">
                                                                     <label>Company Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.parent[1].company_name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.parent[1].company_name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4">
@@ -450,25 +464,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[0].name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[0].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[0].dob">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[0].dob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[0].occupation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[0].occupation">
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[0].company">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[0].company">
                                                                 </div>
                                                             </div>                                                                                        
                                                         </div> 
@@ -476,7 +490,7 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[1].name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[1].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -488,13 +502,13 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[1].occupation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[1].occupation">
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[1].company">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[1].company">
                                                                 </div>
                                                             </div>                                                                                        
                                                         </div>  
@@ -502,25 +516,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[2].name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[2].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Date of Birth</label>
-                                                                    <input class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[2].dob">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" placeholder="MM/DD/YYYY" ng-model="data.employee.sibling[2].dob">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[2].occupation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[2].occupation">
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[2].company">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[2].company">
                                                                 </div>
                                                             </div>                                                                                        
                                                         </div>  
@@ -528,7 +542,7 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Name</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[3].name">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[3].name">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -540,13 +554,13 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course/Occupation</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[3].occupation">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[3].occupation">
                                                                 </div>
                                                             </div> 
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School/Company</label>
-                                                                    <input class="form-control" ng-model="data.employee.sibling[3].company">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.sibling[3].company">
                                                                 </div>
                                                             </div>                                                                                        
                                                         </div>               
@@ -565,25 +579,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].school">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[0].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].course">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[0].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].year">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.education_background[0].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[0].award">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[0].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -593,25 +607,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].school">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[1].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].course">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[1].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].year">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.education_background[1].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[1].award">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[1].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -621,25 +635,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].school">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[2].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].course">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[2].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].year">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.education_background[2].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[2].award">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[2].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -649,25 +663,25 @@ html {
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>School</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].school">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[3].school">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Course</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].course">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[3].course">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Year Graduated</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].year">
+                                                                    <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.education_background[3].year">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-3">
                                                                 <div class="form-group">
                                                                     <label>Honors/Awards</label>
-                                                                    <input class="form-control" ng-model="data.employee.education_background[3].award">
+                                                                    <input onkeydown="return alphaOnly(event);" class="form-control" ng-model="data.employee.education_background[3].award">
                                                                 </div>
                                                             </div>                                  
                                                         </div> 
@@ -1387,7 +1401,7 @@ html {
                 $http.put('/employee/' + $scope.userId, fd, {transformRequest: angular.identity,headers:{"Content-Type": undefined
             }}).then(function success(response) {
                     alert('Success');
-                    window.location.href = '/sadmin/viewpersonalprofile';
+                    window.location.href = '/admin/viewpersonalprofile';
                 }, function error(response) {
                     alert('Error updating profile.');
                 });

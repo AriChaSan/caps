@@ -10,6 +10,7 @@
     <title>Angeles City Civilian Security Unit - All Records</title>
     <script src="../angular/angular.js"></script>
     <script src="../angular/underscore.js"></script>
+     <script src="../chartjs/dist/Chart.min.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -241,15 +242,12 @@ html {
                                                                           </table>
                                                                           </div>
                                                                         </div>
-                                                                        <div id="charts" class="tab-pane fade in active">
-                                                                          <div ng-repeat="employee in employeeRecord">
-                                                                          <center><h4><b>Republic of the Philippines<br>ANGELES CITY LOCAL GOVERNMENT<br>Angeles City<br>DAILY TIME RECORD</b></h4></center>
-                                                                          <img src="../images/employee.png" alt="Admin Picture" height="7%" width="7%" class="responsive">
-                                                                          <p><b>Employee ID: {{employee.id_number}}<br>Name: {{employee.lastname + ', ' + employee.firstname + ' ' + employee.middlename}}<br>Date: August 1, 2017 to August 15, 2017</b></p><br>
-                                                                          <div class="panel panel-default">
-                                                                            <Br><br>
+                                                                        <div id="charts" class="tab-pane fade in">
+
+                                                                          <div class="container-fluid" style="width: 200px; height: 300px;overflow: auto;"></div>
+                                                                            <canvas id="myChart" width="100%" height="50px" style="margin-top: -200px;"></canvas>
                                                                           </div>
-                                                                          </div>
+                                                                          
                                                                         </div>
                                                                       </div>                                      
                                                                 </div>
@@ -833,6 +831,9 @@ html {
 
             $scope.employeeRecord = [];
 
+            $scope.ctx ="";
+            $scope.myChart ="";
+
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
@@ -840,6 +841,57 @@ html {
             }, function error(response) {
                 console.log(response);
             });
+
+             $scope.renderChart = function(userData, present, late, absent) {
+
+                if($scope.myChart != "") {
+                  $scope.myChart.destroy();
+                };
+                $scope.ctx = document.getElementById("myChart");
+                $scope.myChart = new Chart($scope.ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: userData,
+                        datasets: [
+                        {
+                            label: 'Present',
+                            data: present,
+                            backgroundColor: 'rgba(118, 252, 114, 0.2)',
+                            borderColor: 'rgba(118, 252, 114, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Late',
+                            data: late,
+                            backgroundColor: 'rgba(255, 185, 79, 0.2)',
+                            borderColor: 'rgba(255, 185, 79, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Absent',
+                            data: absent,
+                            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                            borderColor: 'rgba(255, 0, 0, 1)',
+                            borderWidth: 1
+                        }
+                        
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                  responsive: false,
+                                    beginAtZero:true,
+                                    autoSkip: false
+                                }
+                            }]
+                        }
+
+                    }
+                });
+            };
+            
             $scope.date_from = "";
             $scope.date_to = "";
             $scope.logLocation = "7";
@@ -865,7 +917,27 @@ html {
                     });
 
                   $scope.employeeRecord = newEmployeeRecord;
-                  console.log(response);
+                  $scope.allname = [];
+                  $scope.allPresentData = [];
+                  $scope.allLateData = [];
+                  $scope.allAbsentData = [];
+
+                  _.each($scope.employeeRecord, function(value, index) {
+                    var present = _.where(value.employee_attendance, {attendance_status: 'present'});
+                    var dayoff = _.where(value.employee_attendance, {attendance_status: 'dayoff'});
+                    present = present.length + dayoff.length;
+                    var late = _.where(value.employee_attendance, {attendance_status: 'late'});
+                    var absent = _.where(value.employee_attendance, {attendance_status: 'absent'});
+
+
+                    $scope.allname.push(value.fullname1);
+                    $scope.allPresentData.push(present);
+                    $scope.allLateData.push(late.length);
+                    $scope.allAbsentData.push(absent.length);
+                  });
+                  
+                  $scope.renderChart($scope.allname,$scope.allPresentData,$scope.allLateData,$scope.allAbsentData);
+                  console.log($scope.employeeRecord );
               }, function error(response) {
                   console.log(response);
               });

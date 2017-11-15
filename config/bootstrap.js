@@ -13,7 +13,7 @@ module.exports.bootstrap = function(cb) {
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
- /* sails.config.hookTimeout = 60000;
+  sails.config.hookTimeout = 60000;
 
   User.findOne({username: 'sadmin'}).exec(function(err, user) {
 
@@ -304,7 +304,7 @@ module.exports.bootstrap = function(cb) {
 
     Shift.findOrCreate(shiftType).exec(function(err, employeeType) {
 
-    });*/
+    });
 
   cb();
 };

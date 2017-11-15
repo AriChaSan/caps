@@ -11,7 +11,7 @@
     <title>Angeles City Civilian Security Unit - Dashboard</title>
     <script src="../angular/angular.js"></script>
     <script src="../angular/underscore.js"></script>
-
+<script src="../angular/moment.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -725,7 +725,7 @@ html {
         </div>
       </div>
     </div>    
-
+<% include requestModal/requestModal.ejs %>
     <div id="readallmes" class="modal fade" role="dialog">
       <div class="modal-dialog modal-xxlg">
         <div class="modal-content">
@@ -838,12 +838,16 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">  
+                From: <input type="date" name = "from" value="<?php echo $from;?>" ng-model="date_from">
+                                                                      To: <input type="date" name = "to" value="<?php echo $to;?>" ng-model="date_to">
+                                                                      <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go' ng-click="viewLoan(empView.id)"><br><br>  
                     <h3> Name: {{ empView.lastname + ', ' + empView.firstname  + ' ' +  empView.middlename}}</h3>
                     <div class="panel panel-default">
                         <div id="PrintArea1" class="panel-body">
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label>Monthly Rate</label>
+
                                     <p>{{ empView.payroll[0].monthly_rate}}</p>
                                 </div> 
                                 <div class="col-lg-3">
@@ -898,24 +902,24 @@ html {
                             <div class="row">
                                 <div class="col-lg-3">
                                     <label>Share Capital</label>
-                                    <p>{{ empView.loan[0].capital}}</p>
+                                    <p>{{ empView.loan[0].share_capital}}</p>
                                 </div> 
                                 <div class="col-lg-3">
                                     <label>STL</label>
                                     <p>{{ empView.loan[0].stl}}</p>
                                 </div> 
                                 <div class="col-lg-3">
-                                    <label>LTL</label>
+                                    <label>Reconstruct</label>
                                     <p>{{ empView.loan[0].ltl}}</p>
                                 </div>  
                                 <div class="col-lg-3">
-                                    <label>Education</label>
+                                    <label>Educational Loan</label>
                                     <p>{{ empView.loan[0].education}}</p>
                                 </div>                                                   
                             </div>
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <label>STL (Others)</label>
+                                    <label>Personal Loan</label>
                                     <p>{{ empView.loan[0].stl_other}}</p>
                                 </div> 
                                 <div class="col-lg-3">
@@ -927,14 +931,14 @@ html {
                                     <p>{{ empView.loan[0].bts}}</p>
                                 </div> 
                                 <div class="col-lg-3">
-                                    <label>Silver</label>
+                                    <label>Holiday</label>
                                     <p>{{ empView.loan[0].silver}}</p>
                                 </div>                                                                                  
                             </div><hr>
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-9">
-                                    <label>Amount Paid in Cash</label>
-                                    <p>4343432</p>
+                                    <label>Net Pay</label>
+                                    <p>{{ empView.pay}}</p>
                                 </div>                                                                                  
                             </div>                                                                               
                         </div>                                                                                        
@@ -972,7 +976,7 @@ html {
     (function() {
         var app = angular.module('app', []);
 
-        app.controller('appController', function($scope, $http) {
+        app.controller('appController', function($scope, $http, $compile) {
 
             $scope.userId = <%= req.session.User.id %>;
             $scope.employee = {};
@@ -1047,9 +1051,119 @@ html {
                     console.log(response);
                 });
             };
+
+            
+            $http.get('/employeeviewrequestleave/').then(function success(response) {
+
+                var data = response.data;
+
+                _.each(data, function(value, index) {
+                    if(value.reqType == 'leave') {
+                        $('#reqList').append($compile('<li>' + 
+                                '<a href="#reqleave" ng-click="viewLeave(' + value.id + ')" data-target="#reqleave" data-toggle="modal">' +
+                                    '<div style="width: 400px;">' +
+                                        '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
+                                        '<span class="pull-right text-muted">' +
+                                            '<em>' + moment(value.createdAt).startOf('hour').fromNow() + '</em>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<div><b>Subject:</b>' + ' Request Leave' + '</div> ' +
+                                '</a>' +
+                        '</li>')($scope));
+                    } else if(value.reqType == 'timekey'){
+                        $('#reqList').append($compile('<li>' + 
+                                '<a href="#reqleave" ng-click="viewTimekey(' + value.id + ')" data-target="#reqkey" data-toggle="modal">' +
+                                    '<div style="width: 400px;">' +
+                                        '<i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</strong>' +
+                                        '<span class="pull-right text-muted">' +
+                                            '<em>' + moment(value.createdAt).startOf('hour').fromNow() + '</em>' +
+                                        '</span>' +
+                                    '</div>' +
+                                    '<div><b>Subject:</b>' + ' Request Time Key Change' + '</div> ' +
+                                '</a>' +
+                            '</li>')($scope));
+                    }
+                });
+
+                
+
+                
+                console.log(response);
+            }, function error(response) {
+                console.log(response);
+            });
+
+            $scope.viewOneLeave = {};
+            $scope.viewLeave = function(id) {
+               $http.get('/employeeviewonerequestleave/' + id).then(function success(response) {
+                    $scope.viewOneLeave = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            $scope.viewOneTimekey= {};
+            $scope.viewTimekey = function(id) {
+               $http.get('/employeerequestkeychange/' + id).then(function success(response) {
+                    $scope.viewOneTimekey = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+            $scope.date_from = "";
+            $scope.date_to = "";
+
             $scope.viewLoan = function (id) {
                 $http.get('/employee/' + id).then(function success(response) {
                     $scope.empView = response.data;
+
+                    $scope.newAttendance = [];
+                      _.each($scope.empView.employee_attendance, function(value1, index) {
+
+
+                        var date= new Date(value1.date);
+                        if(date >= new Date($scope.date_from) && date <= new Date($scope.date_to)) {
+                          $scope.newAttendance.push(value1)
+                        }
+                      });
+
+
+                    var present = _.where($scope.newAttendance, {attendance_status: 'present'});
+                    var dayoff = _.where($scope.newAttendance, {attendance_status: 'dayoff'});
+                    present = present.length + dayoff.length;
+                    var late = _.where($scope.newAttendance, {attendance_status: 'late'});
+                    var absent = _.where($scope.newAttendance, {attendance_status: 'absent'});
+
+                    var days = present + dayoff.length + late.length;
+
+                    var seciv=2372.4;
+                    var seciii=1672.6;
+                    var secii=886.5;
+                    var seci=575.6;
+                    var rate=0;
+                    if($scope.empView.employee_type_id.id === 4){
+                        rate = seciv;
+                    }else if($scope.empView.employee_type_id.id === 3){
+                         rate = seciii;
+                    }else if($scope.empView.employee_type_id.id === 2){
+                         rate = secii;
+                    }else if($scope.empView.employee_type_id.id === 1){
+                         rate = seci;
+                    }
+                    
+                        $scope.empView.payroll[0].monthly_rate = (rate*days).toFixed(2);
+                        $scope.empView.payroll[0].amount_accured = ($scope.empView.payroll[0].monthly_rate/2).toFixed(2);
+                        $scope.empView.payroll[0].personal_share = ($scope.empView.payroll[0].monthly_rate*(0.09)).toFixed(2);
+                        $scope.empView.payroll[0].government_share = ($scope.empView.payroll[0].monthly_rate*(0.12)).toFixed(2);
+                        $scope.empView.pay = ((Number($scope.empView.payroll[0].pera) + Number($scope.empView.payroll[0].amount_accured)) - (
+                                    Number($scope.empView.payroll[0].withholding_tax) + Number($scope.empView.payroll[0].mpl) + Number($scope.empView.payroll[0].personal_share) +
+                                    Number($scope.empView.loan[0].conso) + Number($scope.empView.loan[0].policy) + Number($scope.empView.loan[0].education) + 
+                                    Number($scope.empView.loan[0].share_capital) + Number($scope.empView.loan[0].stl) + Number($scope.empView.loan[0].ltl) +
+                                    Number($scope.empView.loan[0].pabaon) + Number($scope.empView.loan[0].stl_other) + Number($scope.empView.loan[0].silver) + Number($scope.empView.loan[0].bts))).toFixed(2);;
+                        console.log($scope.empView.pay);
+
                     console.log(response);
                 }, function error(response) {
                     console.log(response);

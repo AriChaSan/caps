@@ -25,9 +25,7 @@
                             <li>
                                 <a href="/employees/viewschedule" style="color:#FFFFFF"><i class="fa fa-eye fa-fw"></i> View Schedule</a>
                             </li>                        
-                            <li>
-                                <a href="/employees/requestscheduleswap" style="color:#FFFFFF"><i class="fa fa-refresh fa-fw"></i> Request Schedule Swap</a>
-                            </li>
+
                         </ul>
                     </li>  
                     <li>
@@ -78,10 +76,7 @@
                 </ul>                
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <button class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black; border:0px; background-color: white; padding-top: 12px">
-                            <h4><i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
-                        </button>
-                        <span class="badge badge-notify">3</span>
+                       
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
                                 <a href="#SSRSent" data-target="#SSRSent" data-toggle="modal">
@@ -150,44 +145,9 @@
                         <button class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black; border:0px; background-color: white; padding-top: 12px">
                             <h4><i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
                         </button>
-                        <span class="badge badge-notify">3</span>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Matthew Louis R. Di</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Antonina Cristina B. Pabalan</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Owen C. Payumo</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
+                        
+                        <ul class="dropdown-menu dropdown-messages" id="reqList">
+                            <!--<li class="divider"></li>
                             <li>
                                 <a class="text-center" href="#readallmes" data-target="#readallmes" data-toggle="modal">
                                     <strong>Read All Messages</strong>
@@ -200,7 +160,7 @@
                                     <strong>Compose New Message</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
-                            </li>                           
+                            </li>   -->                        
                         </ul>
                         <!-- /.dropdown-messages -->
                     </li>

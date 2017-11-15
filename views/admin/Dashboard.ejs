@@ -22,10 +22,6 @@
 
     <link href="../bootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="assets/demo.css">
-
-    <link rel="stylesheet" href="assets/form-basic.css">
-
     <link href="../bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
@@ -1007,10 +1003,6 @@ html {
 
     <script src="../bootstrap/vendor/raphael/raphael.min.js"></script>
 
-    <script src="../bootstrap/vendor/morrisjs/morris.min.js"></script>
-
-    <script src="../bootstrap/data/morris-data.js"></script>
-
     <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
 
     <script src="../bootstrap/vendor/datatables/js/jquery.dataTables.min.js"></script>
@@ -1049,7 +1041,7 @@ html {
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
                 $scope.employee.fullname = response.data.lastname + ', ' +response.data.firstname + ' ' + response.data.middlename;
-
+                $("#imgID").attr("src", "../images/" + $scope.employee.image);
 
                 console.log(response);
             }, function error(response) {

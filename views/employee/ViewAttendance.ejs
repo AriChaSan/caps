@@ -147,9 +147,9 @@ html {
                                                                             <td>{{weekday[attendance.day]}}</td>
                                                                             <td>{{ attendance.timeIn }}</td>
                                                                             <td>{{ attendance.timeOut }}</td>
-                                                                            <td>N/A</td>
-                                                                            <td>N/A</td>
-                                                                            <td>N/A</td>
+                                                                            <td>{{ attendance.workhours || 0}}</td>
+                                                                            <td>{{ attendance.overtime || 0}}</td>
+                                                                            <td>{{ attendance.late || 0}}</td>
                                                                         </tr>
                                                                                                                                                                          
                                                                     </tbody>

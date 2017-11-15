@@ -231,7 +231,7 @@ html {
                                                                                 <td>{{employee.totalWorkHours}} </td>
                                                                                 <td>{{employee.undertimeHours}} </td>
                                                                                 <td>{{employee.overtimeHours}} </td>
-                                                                                <td>N/A%</td>
+                                                                                <td>{{employee.workrate}} </td>
                                                                             </tr>
                                                                                                                                                                                  
                                                                         </tbody>                                      
@@ -863,7 +863,7 @@ html {
                   if(dateFrom.getFullYear() == dateTo.getFullYear()) {
 
                     if(dateFrom.getMonth() == dateTo.getMonth()) {
-                      totalWorkDay = Math.abs(dateTo.getDate() - dateFrom.getDate());
+                      totalWorkDay = Math.abs(dateTo.getDate() - dateFrom.getDate()) + 1;
                     }
 
                     if(dateFrom.getMonth() < dateTo.getMonth()) {
@@ -872,7 +872,7 @@ html {
 
                       console.log(dateFromRange);
                       console.log(dateToRange);
-                      totalWorkDay = Math.abs(dateToRange + dateFromRange);
+                      totalWorkDay = Math.abs(dateToRange + dateFromRange + 1);
                     }
                   }
 
@@ -889,7 +889,7 @@ html {
 
                       //console.log(moment('11/9/2017 7:00 am').format('x'));
                       value.workingDays = present.length + dayoff.length + leave.length + late.length;
-                      value.totalWorkDay = totalWorkDay - dayoff;
+                      value.totalWorkDay = totalWorkDay;
                       value.workingHours = 0;
                       value.undertimeHours = 0;
                       value.overtimeHours = 0;
@@ -910,7 +910,8 @@ html {
                       value.overtimeHours = Math.floor(value.overtimeHours / 60);
                       value.totalWorkHours = value.totalWorkDay * 8;
 
-
+                      value.workrate = value.workingHours / value.totalWorkHours;
+                      value.workrate = value.workrate  * 100;
                       return value;
                   });
 
