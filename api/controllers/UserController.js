@@ -17,6 +17,15 @@ module.exports = {
 			return res.json(user);
 		});
 	},
+	allAccount: function(req, res) {
+		User.find().populate('account_type_id').populate('employee').exec(function(err, user) {
+			if(err) {
+				return res.serverError(err);
+			}	
+
+			return res.json(user);
+		});
+	},
 
 	enableEmployee: function(req, res) {
 		User.update({id: req.params.id}, {status:'active'}).exec(function(err, user) {
@@ -596,6 +605,13 @@ module.exports = {
 				return res.json(404, {message: 'Employee not found.'});
 			}
 
+			console.log(moment(employee.startingDate).format());
+			console.log(moment(new Date()).format());
+
+			if(moment(employee.startingDate).format() > moment(new Date()).format()) {
+				return res.json(404, {message: 'Employee starting date is not now.'});
+			}
+
 			var time = new Date();
 			time = time.getTime();
 
@@ -799,6 +815,7 @@ module.exports = {
 		          qualifier: data.personal.qualifier,
 		          account_id: user.id,
 		          employee_type_id: data.personal.employee_type_id,
+		          startingDate: data.personal.startingDate,
 		          location_id: 0,
 		          shift: ""
 		        };
@@ -807,6 +824,8 @@ module.exports = {
 					if(err) {
 						return res.serverError(err);
 					}
+
+					return res.json(employee);
 				}); 
 			});
 		} else {
@@ -821,6 +840,7 @@ module.exports = {
 		          account_id: user.id,
 		          employee_type_id: data.personal.employee_type_id,
 		          location_id: data.personal.location_id,
+		          startingDate: data.personal.startingDate,
 		          shift: data.personal.shift
 		        };
 
@@ -898,6 +918,8 @@ module.exports = {
 
 		          Education_Background.create(education).exec(function(err, education_background) {});
 		        }); 
+
+		        return res.json(user);
 			});
 		}
 	},

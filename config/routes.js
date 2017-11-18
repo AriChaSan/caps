@@ -44,6 +44,8 @@ module.exports.routes = {
   'GET /user/:id': 'UserController.showUser',
   'POST /user/changepassword/:id': 'UserController.changePassword',
 
+  'GET /allaccount': 'UserController.allAccount',
+
   'POST /employeeenable/:id': 'UserController.enableEmployee',
   'POST /employeedisable/:id': 'UserController.disableEmployee',
 

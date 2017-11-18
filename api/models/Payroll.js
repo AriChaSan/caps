@@ -11,42 +11,42 @@ module.exports = {
   attributes: {
   	monthly_rate: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	amount_accured: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	pera: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	withholding_tax: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	mpl: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	personal_share: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	government_share: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
   	ecc_new: {
   		type: 'string',
-  		defaultsTo: ''
+  		defaultsTo: 0
   	},
 
 

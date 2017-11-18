@@ -9,6 +9,7 @@
 
     <title>Angeles City Civilian Security Unit - Add Employee Account</title>
     <script src="../angular/angular.js"></script>
+    <script src="../angular/underscore.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -104,11 +105,24 @@ function alphaOnly(event) {
                                     <div class="panel panel-default">                                     
                                         <div class="panel-body">
                                             <form role="form">
+                                                <div class="row" id="errList" hidden>
+                                                    <div class="col-lg-12">
+                                                        <div class="alert alert-danger">
+                                                            <ul>
+                                                                <li ng-repeat="error in errors">{{error}}</li>
+                                                            </ul>
+                                                        </div>
+                                                  </div>                                                       
+                                                </div> 
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label>Employee ID</label>
+                                                            <label>Employee ID*</label>
                                                             <input class="form-control" onkeypress="return isNumberKey(event)" ng-model="data.employee.personal.id_number">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Starting Date*</label>
+                                                            <input type="date" class="form-control" ng-model="data.employee.personal.startingDate">
                                                         </div>
                                                     </div>                                                       
                                                 </div>   
@@ -116,13 +130,13 @@ function alphaOnly(event) {
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label>Last Name</label>
+                                                            <label>Last Name*</label>
                                                             <input class="form-control" onkeydown="return alphaOnly(event);" ng-model="data.employee.personal.lastname">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label>First Name</label>
+                                                            <label>First Name*</label>
                                                             <input class="form-control" onkeydown="return alphaOnly(event);" ng-model="data.employee.personal.firstname">
                                                         </div>
                                                     </div>
@@ -143,20 +157,20 @@ function alphaOnly(event) {
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label>Username</label>
+                                                            <label>Username*</label>
                                                             <input class="form-control" ng-model="data.employee.account.username">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
-                                                            <label>Password</label>
-                                                            <input class="form-control" ng-model="data.employee.account.password">
+                                                            <label>Password*</label>
+                                                            <input type="password" class="form-control" ng-model="data.employee.account.password">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div class="form-group">
                                                             <label>Repeat Password</label>
-                                                            <input class="form-control" ng-model="data.employee.account.confirmPassword">
+                                                            <input type="password" class="form-control" ng-model="data.employee.account.confirmPassword">
                                                         </div>
                                                     </div>                                                       
                                                 </div>
@@ -223,7 +237,7 @@ function alphaOnly(event) {
                                                     </div>                                                                                                
                                                 </div><hr>                                                                                    
                                                 <div class="col-lg-12 col-lg-offset-11">   
-                                                    <button class="btn btn-success" type="button" ng-click="submit()">Save <i class="fa fa-save"></i></button>
+                                                    <button id="btnSave" class="btn btn-success" type="button" ng-click="submit()">Save <i class="fa fa-save"></i></button>
                                                 </div>               
                                             </form>                                               
                                         </div>
@@ -774,6 +788,7 @@ function alphaOnly(event) {
             $scope.data.employee.personal.employee_type_id = "1"; 
             $scope.data.employee.personal.location_id = "7"; 
             $scope.data.employee.personal.shift = "dayTime"; 
+            $scope.data.employee.personal.startingDate = ""; 
 
             $scope.data.employee.account = {};
             $scope.data.employee.account.username = "";
@@ -803,6 +818,28 @@ function alphaOnly(event) {
                 console.log(response);
             });
 
+
+            $scope.empListUsername = [];
+            $scope.empListIdNumber = [];
+
+            $scope.allaccount = function() {
+                $scope.empListUsername = [];
+                $scope.empListIdNumber = [];
+                $http.get('/allaccount').then(function success(response) {
+
+                    _.each(response.data, function(value, index) {
+                        $scope.empListUsername.push(value.username);
+                        $scope.empListIdNumber.push(value.employee[0].id_number);
+                    });
+                    console.log($scope.empListUsername);
+                    console.log($scope.empListIdNumber);
+                }, function error(response) {
+                    console.log(response);
+                });                 
+            };
+
+            $scope.allaccount();
+
             $scope.changePasswordSubmit = function () {
 
                 var data = {data: $scope.changePassword};
@@ -826,13 +863,78 @@ function alphaOnly(event) {
 
             $scope.submit = function () {
 
-                var data = $scope.data.employee;
-                $http.post('/employee', {data: data}).then(function success(response) {
-                    alert('Success');
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
+                $scope.errors = [];
+
+                if($scope.data.employee.personal.id_number == "") {
+                    $scope.errors.push('ID number is required.');
+                }
+
+                if($scope.data.employee.personal.startingDate == "") {
+                    $scope.errors.push('Starting Date is required.');
+                }
+
+                if($scope.data.employee.personal.firstname == "") {
+                    $scope.errors.push('Firstname is required.');
+                }
+
+                if($scope.data.employee.personal.lastname == "") {
+                    $scope.errors.push('Lastname is required.');
+                }
+
+                if($scope.data.employee.account.username == "") {
+                    $scope.errors.push('Username is required.');
+                }
+
+                if($scope.data.employee.account.password == "") {
+                    $scope.errors.push('Password is required.');
+                }
+
+                if($scope.empListUsername.indexOf($scope.data.employee.account.username) != -1) {
+                    //alert('Username already exist.');
+                    $scope.errors.push('Username already exist.');
+                } 
+
+                if($scope.empListIdNumber.indexOf($scope.data.employee.personal.id_number) != -1) {
+                    //alert('Id number already exist.');
+                    $scope.errors.push('ID number already exist.');
+                }
+
+                if($scope.data.employee.account.password != $scope.data.employee.account.confirmPassword) {
+                    $scope.errors.push('Password and confirm password does not match.');
+                }
+
+                if($scope.data.employee.account.account_type_id == "1"  || $scope.data.employee.account.account_type_id == "2" || $scope.data.employee.account.account_type_id == "3") {
+
+                    var count = 0;
+
+                    _.each($scope.data.employee.schedule, function(value, index) {
+                        if(value) {
+                            count++;
+                        }
+                    });
+
+                    if(count == 0) {
+                        $scope.errors.push('Please select a working day.');
+                    }
+                }
+
+                if($scope.errors.length != 0) {
+                    $('#errList').show();
+                } else {
+                    $('#errList').hide();
+                    $("#btnSave").prop("disabled", true);
+                    var data = $scope.data.employee;
+                    $http.post('/employee', {data: data}).then(function success(response) {
+                        alert('Success creating account.');
+                        $("#btnSave").prop("disabled", false);
+                        $scope.allaccount();
+                        console.log(response);
+                    }, function error(response) {
+                        alert('An error has occured.');
+                        console.log(response);
+                    }); 
+                }
+                
             };
 
             $scope.changeAccount = function() {

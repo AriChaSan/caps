@@ -33,6 +33,7 @@ module.exports.bootstrap = function(cb) {
           account_id: user.id,
           employee_type_id: 4,
           location_id: 7,
+          startingDate: new Date(),
           shift: 'dayTime'
         };
 

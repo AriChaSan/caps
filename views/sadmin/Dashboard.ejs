@@ -117,7 +117,7 @@ html {
                                                     <i class="fa fa-tasks fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="huge">26</div>
+                                                    <div class="huge">{{ totalAccount }}</div>
                                                     <div>Total Account(s)</div>
                                                 </div>
                                             </div>
@@ -139,7 +139,7 @@ html {
                                                     <i class="fa fa-exclamation-circle fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="huge">5</div>
+                                                    <div class="huge">{{ activeAccount }}</div>
                                                     <div>Active Account(s)</div>
                                                 </div>
                                             </div>
@@ -161,7 +161,7 @@ html {
                                                     <i class="fa fa-times-circle fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="huge">3</div>
+                                                    <div class="huge">{{ disabledAccount }}</div>
                                                     <div>Disabled Account(s)</div>
                                                 </div>
                                             </div>
@@ -512,34 +512,14 @@ html {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Matthew Louis R. Di </td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                         
+                            <tr ng-repeat="employee in totalAccountList">
+                                <td>{{employee.employee[0].id_number}}</td>
+                                <td>{{employee.employee[0].fullname1}}</td>
+                                <td>{{employee.account_type}}</td>
+                                <td>{{employee.createdAt}}</td>
+                                <td>{{employee.updatedAt}}</td>                                                         
                             </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Owen C. Payumo</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                                                     
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Arianne Gay C. Santos</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                              
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Antonina Cristina B. Pabalan</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                               
-                            </tr>
+                            
                         </tbody>
                     </table>                                               
                 </div>                                                                                        
@@ -569,33 +549,12 @@ html {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Matthew Louis R. Di </td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                         
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Owen C. Payumo</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                                                     
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Arianne Gay C. Santos</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                              
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Antonina Cristina B. Pabalan</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                               
+                            <tr ng-repeat="employee in activeAccountList">
+                                <td>{{employee.employee[0].id_number}}</td>
+                                <td>{{employee.employee[0].fullname1}}</td>
+                                <td>{{employee.account_type}}</td>
+                                <td>{{employee.createdAt}}</td>
+                                <td>{{employee.updatedAt}}</td>                                                         
                             </tr>
                         </tbody>
                     </table>                                               
@@ -626,33 +585,12 @@ html {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Matthew Louis R. Di </td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                         
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Owen C. Payumo</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                                                     
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Arianne Gay C. Santos</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                              
-                            </tr>
-                            <tr>
-                                <td>01</td>
-                                <td>Antonina Cristina B. Pabalan</td>
-                                <td>Admin</td>
-                                <td>07/22/2017</td>
-                                <td>07/22/2017</td>                                                               
+                            <tr ng-repeat="employee in disabledAccountList">
+                                <td>{{employee.employee[0].id_number}}</td>
+                                <td>{{employee.employee[0].fullname1}}</td>
+                                <td>{{employee.account_type}}</td>
+                                <td>{{employee.createdAt}}</td>
+                                <td>{{employee.updatedAt}}</td>                                                         
                             </tr>
                         </tbody>
                     </table>                                               
@@ -1037,6 +975,30 @@ html {
 
             $scope.logLocation = "7";
 
+            $scope.totalAccount = 0;
+            $scope.activeAccount = 0;
+            $scope.disabledAccount = 0;
+
+            $scope.totalAccountList = [];
+            $scope.activeAccountList = [];
+            $scope.disabledAccountList = [];
+            $http.get('/allaccount').then(function success(response) {
+                $scope.totalAccount = response.data.length;
+                $scope.activeAccount = _.where(response.data, {status: 'active'});
+                $scope.activeAccount = $scope.activeAccount.length;
+                $scope.disabledAccount = _.where(response.data, {status: 'disable'});
+                $scope.disabledAccount = $scope.disabledAccount.length;
+
+                $scope.totalAccountList = response.data;
+                $scope.activeAccountList = _.where(response.data, {status: 'active'});
+                $scope.disabledAccountList = _.where(response.data, {status: 'disable'});
+
+                console.log(response);
+
+                }, function error(response) {
+                    console.log(response);
+                }); 
+
 
             $http.get('/employee/' + $scope.userId).then(function success(response) {
                 $scope.employee = response.data;
@@ -1240,6 +1202,7 @@ html {
                     //alert('log In: ' + $scope.empIdNumber);
                     console.log(response);
                 }, function error(response) {
+                    alert(response.data.message);
                     console.log(response);
                 });
             };

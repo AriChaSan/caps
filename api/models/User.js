@@ -4,7 +4,7 @@
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
-
+var moment = require('moment');
 module.exports = {
   schema: true,
   tableName: 'tbl_account',
@@ -40,8 +40,8 @@ module.exports = {
       var obj = this.toObject();
       obj.account_type = obj.account_type_id.account_type;
       delete obj.account_type_id;
-      //delete obj.createdAt;
-      //delete obj.updatedAt;
+      obj.createdAt = moment(obj.createdAt).format('LL');
+      obj.updatedAt = moment(obj.createdAt).format('LL');
       return obj;
     }
   },

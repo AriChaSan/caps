@@ -11,6 +11,10 @@ module.exports = {
   tableName: 'tbl_employee',
   attributes: {
 
+    startingDate: {
+      type: 'string'
+    },
+
   	id_number: {
   		type: 'string',
   		size: 128,

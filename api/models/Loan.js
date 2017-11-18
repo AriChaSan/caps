@@ -12,62 +12,62 @@ module.exports = {
   	
   	conso: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     policy: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     gsis_education: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     gsis_emergency: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     share_capital: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     stl: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     ltl: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     education: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     stl_other: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     pabaon: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     bts: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
     silver: {
       type: 'string',
-      defaultsTo: ""
+      defaultsTo: 0
     },
 
   	employee_id: {

@@ -255,6 +255,15 @@ html {
                                                 <div class="panel panel-default">
                                                     <div class="panel-body">    
                                                         <form role="form">
+                                                        <div class="row" id="errList" hidden>
+                                                            <div class="col-lg-12">
+                                                                <div class="alert alert-danger">
+                                                                    <ul>
+                                                                        <li ng-repeat="error in errors">{{error}}</li>
+                                                                    </ul>
+                                                                </div>
+                                                          </div>                                                       
+                                                        </div> 
                                                             <div class="row">    
                                                                 <div class="col-lg-12">
                                                                 <h4>Name: {{ updateEmp.lastname + ', ' +  updateEmp.firstname + ' ' + updateEmp.middlename }}</h4>
@@ -998,6 +1007,7 @@ html {
             };
 
             $scope.updateSched = function(id) {
+                $('#errList').hide();
                 $scope.updateEmp = _.findWhere($scope.view.employee, {id: id});
                 $('#schedMonday').attr('checked', ($scope.updateEmp.schedule[0].monday == 'on') ? true:false); // Checks it
                 $('#schedTuesday').attr('checked', ($scope.updateEmp.schedule[0].tuesday == 'on') ? true:false); // Unchecks it
@@ -1023,18 +1033,41 @@ html {
             };
 
             $scope.submitUpdateSchedule = function () {
+                console.log($scope.schedule);
 
-                var data = {
-                    employee: $scope.updateEmp,
-                    schedule: $scope.schedule
-                };
+                var count = 0;
+                $scope.errors = [];
 
-                $http.post('/employeeupdateschedule', data).then(function success(response) {
-                    alert('Success');
-                    console.log(response);
-                }, function error(response) {
-                    console.log(response);
-                });
+                if($scope.schedule.monday == false && $scope.schedule.tuesday == false && $scope.schedule.wednesday== false  && $scope.schedule.thursday == false && $scope.schedule.friday == false && $scope.schedule.saturday == false && $scope.schedule.sunday == false) {
+                    
+                } else {
+                    count++;
+                }
+
+
+                if(count == 0) {
+                    $scope.errors.push('Please select a working day.');
+                }
+                
+
+                if($scope.errors.length != 0) {
+                    $('#errList').show();
+                } else {
+                    $('#errList').hide();
+                    var data = {
+                        employee: $scope.updateEmp,
+                        schedule: $scope.schedule
+                    };
+
+                    $http.post('/employeeupdateschedule', data).then(function success(response) {
+                        alert('Success');
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+                }
+
+                
             };
             
         });
