@@ -8,51 +8,51 @@
 module.exports = {
 
 	absencereports: function(req, res) {
-		return res.view('sadmin/absencereports');
+		return res.view('sadmin/AbsenceReports');
 	},
 
 	addemployee: function(req, res) {
-		return res.view('sadmin/addemployeeaccount');
+		return res.view('sadmin/AddEmployeeAccount');
 	},
 
 	allrecords: function(req, res) {
-		return res.view('sadmin/allrecords');
+		return res.view('sadmin/AllRecords');
 	},
 
 	attendancesummary: function(req, res) {
-		return res.view('sadmin/attendancesummary');
+		return res.view('sadmin/AttendanceSummary');
 	},
 
 	dashboard: function(req, res) {
-		return res.view('sadmin/dashboard');
+		return res.view('sadmin/Dashboard');
 	},
 
 	employeelist: function(req, res) {
-		return res.view('sadmin/employeelist');
+		return res.view('sadmin/EmployeeList');
 	},
 
 	manageemployeeschedule: function(req, res) {
-		return res.view('sadmin/manageemployeeschedule');
+		return res.view('sadmin/ManageEmployeeSchedule');
 	},
 
 	onebyonerecord: function(req, res) {
-		return res.view('sadmin/onebyonerecord');
+		return res.view('sadmin/OneByOneRecord');
 	},
 
 	schedulesummary: function(req, res) {
-		return res.view('sadmin/schedulesummary');
+		return res.view('sadmin/ScheduleSummary');
 	},
 
 	settings: function(req, res) {
-		return res.view('sadmin/settings');
+		return res.view('sadmin/Settings');
 	},
 
 	updatepersonalprofile: function(req, res) {
-		return res.view('sadmin/updatepersonalprofile');
+		return res.view('sadmin/UpdatePersonalProfile');
 	},
 
 	viewpersonalprofile: function(req, res) {
-		return res.view('sadmin/viewpersonalprofile');
+		return res.view('sadmin/ViewPersonalProfile');
 	}
 };
 

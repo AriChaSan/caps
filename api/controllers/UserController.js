@@ -17,6 +17,8 @@ module.exports = {
 			return res.json(user);
 		});
 	},
+	
+
 	allAccount: function(req, res) {
 		User.find().populate('account_type_id').populate('employee').exec(function(err, user) {
 			if(err) {

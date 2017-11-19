@@ -52,9 +52,9 @@ module.exports.connections = {
      adapter: 'sails-mysql',
      host: 'sql11.freemysqlhosting.net',
      port: 3306,
-     user: 'sql11204175', //optional
-     password: 'XjpSRajvUD', //optional
-     database: 'sql11204175' //optional
+     user: 'sql11206202', //optional
+     password: 'eUKbI1N9Wb', //optional
+     database: 'sql11206202' //optional
    },
 
   /***************************************************************************

@@ -8,7 +8,7 @@
 module.exports = {
 	
 	dashboard: function(req, res) {
-		return res.view('loan/ladmindashboard');
+		return res.view('loan/ladminDashboard');
 	}
 };
 

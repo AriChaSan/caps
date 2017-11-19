@@ -8,7 +8,7 @@
 module.exports = {
 	
 	dashboard: function(req, res) {
-		return res.view('employee/dashboard');
+		return res.view('employee/Dashboard');
 	},
 
 	requestkeychange: function(req, res) {
@@ -16,27 +16,27 @@ module.exports = {
 	},
 
 	requestleave: function(req, res) {
-		return res.view('employee/requestleave');
+		return res.view('employee/RequestLeave');
 	},
 
 	requestscheduleswap: function(req, res) {
-		return res.view('employee/requestscheduleswap');
+		return res.view('employee/RequestScheduleSwap');
 	},
 
 	updatepersonalprofile: function(req, res) {
-		return res.view('employee/updatepersonalprofile');
+		return res.view('employee/UpdatePersonalProfile');
 	},
 
 	viewattendance: function(req, res) {
-		return res.view('employee/viewattendance');
+		return res.view('employee/ViewAttendance');
 	},
 
 	viewpersonalprofile: function(req, res) {
-		return res.view('employee/viewpersonalprofile');
+		return res.view('employee/ViewPersonalProfile');
 	},
 
 	viewschedule: function(req, res) {
-		return res.view('employee/viewschedule');
+		return res.view('employee/ViewSchedule');
 	}
 
 };

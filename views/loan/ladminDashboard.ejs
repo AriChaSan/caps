@@ -194,9 +194,7 @@ html {
                                 <a href="#01modal" data-target="#01modal" data-toggle="modal"><i class="fa fa-fw fa-gear"></i> Account Settings</a>
                             </li>
                             <li class="divider"></li> 
-                            <li>
-                                <a href="#07modal" data-target="#07modal" data-toggle="modal"><i class="fa fa-fw fa-check"></i> Time-in</a>
-                            </li>                        
+                      
                             <li>
                                 <a href="#" ng-click="logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             </li>
@@ -204,97 +202,7 @@ html {
                     </li>
                 </ul>                
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <button class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black; border:0px; background-color: white; padding-top: 12px">
-                            <h4><i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
-                        </button>
-                        <span class="badge badge-notify">3</span>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#tod" data-target="#tod" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all loans <b>today</b>.<br>
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#3d" data-target="#3d" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle" style="color:red"></i> Manage all loans within <b>3 days</b>.<br>
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>                                                                                                              
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#notif" data-target="#notif" data-toggle="modal">
-                                    <strong>See All Notifications</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-alerts -->
-                    </li>                           
-                    <li class="dropdown">
-                        <button class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:black; border:0px; background-color: white; padding-top: 12px">
-                            <h4><i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i></h4>
-                        </button>
-                        <span class="badge badge-notify">3</span>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Matthew Louis R. Di</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Antonina Cristina B. Pabalan</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#mes" data-target="#mes" data-toggle="modal">
-                                    <div>
-                                        <i class="fa fa-exclamation-circle fa-fw" style="color:red"></i> <strong>Owen C. Payumo</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div><b>Subject:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#readallmes" data-target="#readallmes" data-toggle="modal">
-                                    <strong>Read All Messages</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#composemes" data-target="#composemes" data-toggle="modal">
-                                    <strong>Compose New Message</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>                           
-                        </ul>
-                        <!-- /.dropdown-messages -->
-                    </li>
+                    
 
        
                 </ul>                       
@@ -414,13 +322,13 @@ html {
                                                                     <td>{{ employee.account_id.account_type }}</td>
                                                                     <td class="text-center">
                                                                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#UpdateLoan" ng-click="updateLoan(employee.id)">Update <i class="fa fa-edit fa-fw"></i></button>
-                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan" ng-click="viewLoan(employee.id)">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
+                                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#ViewLoan" ng-click="updateLoan(employee.id)">View <i class="fa fa-eye fa-fw"></i></button></td>                                                            
                                                                 </tr>
                                                                                                                   
                                                             </tbody>
                                                         </table> <hr>
                                                         <div class="col-lg-12">   
-                                                            <center><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#ViewLoanSum">View Loan Summary<i class="fa fa-eye fa-fw"></i></button></center></td>
+                                                            <center><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#ViewLoanSum" ng-click="updateLoanSummary()">View Loan Summary<i class="fa fa-eye fa-fw"></i></button></center></td>
                                                         </div>
                                                     </div>
                                                 </div>                                                                                           
@@ -1096,72 +1004,64 @@ html {
                 <div class="panel-body"> 
 
                     <div id="PrintArea1"> 
-                        <h3> Name: Matthew Louis R. Di</h3>
+                        <h3> Name: {{ empUpdate.employee_id.lastname + ', ' + empUpdate.employee_id.firstname + ' ' + empUpdate.employee_id.middlename }}</h3>
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <label>Conso Loan</label>
-                                        <p>4300.04</p>
+                                        <p>{{ empUpdate.conso }}</p>
                                     </div> 
                                     <div class="col-lg-3">
                                         <label>Policy Loan</label>
-                                        <p>4300.04</p>
+                                        <p>{{ empUpdate.policy }}</p>
                                     </div> 
                                     <div class="col-lg-3">
                                         <label>GSIS Education Loan</label>
-                                        <p>4300.04</p>
+                                        <p>{{ empUpdate.gsis_education }}</p>
                                     </div>  
                                     <div class="col-lg-3">
                                         <label>GSIS Emergency Loan</label>
-                                        <p>2323</p>
+                                        <p>{{ empUpdate.gsis_emergency }}</p>
                                     </div>                                                   
                                 </div> 
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <label>Share Capital</label>
-                                        <p>5534</p>
+                                        <p>{{ empUpdate.share_capital }}</p>
                                     </div> 
                                     <div class="col-lg-3">
                                         <label>STL</label>
-                                        <p>2313</p>
+                                        <p>{{ empUpdate.stl }}</p>
                                     </div> 
                                     <div class="col-lg-3">
                                         <label>LTL</label>
-                                        <p>4421</p>
+                                        <p>{{ empUpdate.ltl }}</p>
                                     </div>  
                                     <div class="col-lg-3">
                                         <label>Education</label>
-                                        <p>3321</p>
+                                        <p>{{ empUpdate.education }}</p>
                                     </div>                                                   
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <label>STL (Others)</label>
-                                        <p>6411</p>
+                                        <p>{{ empUpdate.stl_other }}</p>
                                     </div> 
                                     <div class="col-lg-3">
                                         <label>Pabaon</label>
-                                        <p>5512</p>
+                                        <p>{{ empUpdate.pabaon }}</p>
                                     </div>  
                                     <div class="col-lg-3">
                                         <label>BTS</label>
-                                        <p>3423</p>
+                                        <p>{{ empUpdate.bts }}</p>
                                     </div> 
                                     <div class="col-lg-3">
                                         <label>Silver</label>
-                                        <p>3231</p>
+                                        <p>{{ empUpdate.silver }}</p>
                                     </div>                                                                                  
                                 </div><hr>
-                                <div class="row">
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-3">
-                                        <label>Amount Paid in Cash</label>
-                                        <p>4343432</p>
-                                    </div>                                                                                  
-                                </div>                                                                                                             
+                                                                                                            
                             </div>
                           </div>  
                     </div>  
@@ -1288,92 +1188,71 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTable17">
-                        <thead>
-                            <tr>
-                                <th>Employee Name</th>
-                                <th>Conso Loan</th>
-                                <th>Policy Loan</th>
-                                <th>GSIS Education Loan</th>
-                                <th>GSIS Emergency Loan</th>
-                                <th>Share Capital</th>
-                                <th>STL</th>
-                                <th>LTL</th>
-                                <th>Education</th>
-                                <th>STL (Others)</th>
-                                <th>Pabaon</th>
-                                <th>BTS</th>
-                                <th>Silver</th>
-                                <th>Amount Paid in Cash</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Matthew Louis R. Di </td> 
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>   
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>       
-                                <td></td>                                
-                            </tr>
-                            <tr>
-                                <td>Owen C. Payumo</td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>   
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>    
-                                <td></td>                                                                                                              
-                            </tr>
-                            <tr>
-                                <td>Arianne Gay C. Santos</td>   
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>   
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>   
-                                <td></td>                                                                                        
-                            </tr>
-                            <tr>
-                                <td>Antonina Cristina B. Pabalan</td> 
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>   
-                                <td></td>  
-                                <td></td>  
-                                <td></td>  
-                                <td></td>   
-                                <td></td>                                                                                           
-                            </tr>
-                        </tbody>
-                    </table><hr>
+
+                <div ng-repeat="empUpdate in empUpdateList">
+                    <h3> Name: {{ empUpdate.lastname + ', ' + empUpdate.firstname + ' ' + empUpdate.middlename }}</h3>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Conso Loan</label>
+                                        <p>{{ empUpdate.loan[0].conso }}</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>Policy Loan</label>
+                                        <p>{{ empUpdate.loan[0].policy }}</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>GSIS Education</label>
+                                        <p>{{ empUpdate.loan[0].gsis_education }}</p>
+                                    </div>  
+                                    <div class="col-lg-3">
+                                        <label>GSIS Emergency Loan</label>
+                                        <p>{{ empUpdate.loan[0].gsis_emergency }}</p>
+                                    </div>                                                   
+                                </div> 
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Share Capital</label>
+                                        <p>{{ empUpdate.loan[0].share_capital }}</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>STL</label>
+                                        <p>{{ empUpdate.loan[0].stl }}</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>LTL</label>
+                                        <p>{{ empUpdate.loan[0].ltl }}</p>
+                                    </div>  
+                                    <div class="col-lg-3">
+                                        <label>Education</label>
+                                        <p>{{ empUpdate.loan[0].education }}</p>
+                                    </div>                                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>STL (Others)</label>
+                                        <p>{{ empUpdate.loan[0].stl_other }}</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>Pabaon</label>
+                                        <p>{{ empUpdate.loan[0].pabaon }}</p>
+                                    </div>  
+                                    <div class="col-lg-3">
+                                        <label>BTS</label>
+                                        <p>{{ empUpdate.loan[0].bts }}</p>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <label>Silver</label>
+                                        <p>{{ empUpdate.loan[0].silver }}</p>
+                                    </div>                                                                                  
+                                </div><hr>
+                                                                                                            
+                            </div>
+                          </div>  
+                </div>
+                    
+                        <hr>
                             <div class="col-lg-12 col-lg-offset-11">   
                                 <button class="btn btn-success" type="button">Print <i class="fa fa-print"></i></button>
                             </div>                                              
@@ -1478,6 +1357,19 @@ html {
                 //$scope.empUpdate = _.findWhere($scope.empList, {id: id});
                 $http.get('/employeeviewloan/' + id).then(function success(response) {
                     $scope.empUpdate = response.data;
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                //alert(JSON.stringify($scope.empUpdate));
+            };
+
+            $scope.empUpdateList = [];
+            $scope.updateLoanSummary = function (id) {
+                //$scope.empUpdate = _.findWhere($scope.empList, {id: id});
+                $http.get('/employeeloanlist?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.empUpdateList = response.data;
                     console.log(response);
                 }, function error(response) {
                     console.log(response);

@@ -8,7 +8,7 @@
 module.exports = {
 
 	dashboard: function(req, res) {
-		return res.view('payroll/padmindashboard');
+		return res.view('payroll/PadminDashboard');
 	}
 };
 

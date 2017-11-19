@@ -90,6 +90,7 @@ module.exports.cron = {
               var data = {
                 attendance_status: 'dayoff',
                 timeIn: 'dayoff',
+                workhours: '8',
                 timeOut: 'dayoff',
                 employee_id: value.id,
                 date: moment(date).format('l'),
@@ -103,6 +104,7 @@ module.exports.cron = {
               var data = {
                 attendance_status: 'leave',
                 timeIn: 'leave',
+                workhours: '8',
                 timeOut: 'leave',
                 employee_id: value.id,
                 date: moment(date).format('l'),

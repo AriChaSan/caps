@@ -8,47 +8,47 @@
 module.exports = {
 	
 	absencereports: function(req, res) {
-		return res.view('admin/absencereports');
+		return res.view('admin/AbsenceReports');
 	},
 
 	addemployee: function(req, res) {
-		return res.view('admin/addemployeeaccount');
+		return res.view('admin/AddEmployeeAccount');
 	},
 
 	allrecords: function(req, res) {
-		return res.view('admin/allrecords');
+		return res.view('admin/AllRecords');
 	},
 
 	attendancesummary: function(req, res) {
-		return res.view('admin/attendancesummary');
+		return res.view('admin/AttendanceSummary');
 	},
 
 	dashboard: function(req, res) {
-		return res.view('admin/dashboard');
+		return res.view('admin/Dashboard');
 	},
 
 	employeelist: function(req, res) {
-		return res.view('admin/employeelist');
+		return res.view('admin/EmployeeList');
 	},
 
 	manageemployeeschedule: function(req, res) {
-		return res.view('admin/manageemployeeschedule');
+		return res.view('admin/ManageEmployeeSchedule');
 	},
 
 	onebyonerecord: function(req, res) {
-		return res.view('admin/onebyonerecord');
+		return res.view('admin/OneByOneRecord');
 	},
 
 	schedulesummary: function(req, res) {
-		return res.view('admin/schedulesummary');
+		return res.view('admin/ScheduleSummary');
 	},
 
 	updatepersonalprofile: function(req, res) {
-		return res.view('admin/updatepersonalprofile');
+		return res.view('admin/UpdatePersonalProfile');
 	},
 
 	viewpersonalprofile: function(req, res) {
-		return res.view('admin/viewpersonalprofile');
+		return res.view('admin/ViewPersonalProfile');
 	}
 };
 
