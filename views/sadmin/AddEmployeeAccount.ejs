@@ -10,6 +10,7 @@
     <title>Angeles City Civilian Security Unit - Add Employee Account</title>
     <script src="../angular/angular.js"></script>
     <script src="../angular/underscore.js"></script>
+    <script src="../angular/moment.js"></script>
     <link href="../bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="../bootstrap/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -765,6 +766,7 @@ function alphaOnly(event) {
     <script src="../bootstrap/data/morris-data.js"></script>
 
     <script src="../bootstrap/dist/js/sb-admin-2.js"></script>
+    <script src="../js/dependencies/sails.io.js"></script>
 
 <script>
     (function() {
@@ -873,6 +875,12 @@ function alphaOnly(event) {
                     $scope.errors.push('Starting Date is required.');
                 }
 
+                console.log(moment($scope.data.employee.personal.startingDate).format());
+                console.log(moment(new Date()).format());
+                if(moment($scope.data.employee.personal.startingDate).format() < moment(new Date()).format()) {
+                    $scope.errors.push('Starting Date should not be start today.');
+                }
+
                 if($scope.data.employee.personal.firstname == "") {
                     $scope.errors.push('Firstname is required.');
                 }
@@ -902,6 +910,7 @@ function alphaOnly(event) {
                 if($scope.data.employee.account.password != $scope.data.employee.account.confirmPassword) {
                     $scope.errors.push('Password and confirm password does not match.');
                 }
+
 
                 if($scope.data.employee.account.account_type_id == "1"  || $scope.data.employee.account.account_type_id == "2" || $scope.data.employee.account.account_type_id == "3") {
 
@@ -949,7 +958,170 @@ function alphaOnly(event) {
                     $('#locationDiv').show();
                     $('#scheduleDiv').show();
                 }
-            }
+            };
+
+            $scope.clockIn = function () {
+
+                //
+                $http.post('/employee/clockin/' + $scope.empIdNumber).then(function success(response) {
+                    //alert('log In: ' + $scope.empIdNumber);
+                    console.log(response);
+                }, function error(response) {
+                    alert(response.data.message);
+                    console.log(response);
+                });
+            };
+
+            $scope.clockOut = function () {
+
+                
+                $http.post('/employee/clockout/' + $scope.empIdNumber).then(function success(response) {
+                   // alert('log Out: ' + $scope.empIdNumber);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+            };
+
+            io.socket.on('timeIn', function onServerSentEvent (msg) {
+              //alert('someone time in', msg);
+              console.log(msg);
+              if(msg.status == 404) {
+                alert(msg.employee_id + ' is still logged in.');
+              } else {
+                $scope.empIdNumber = "";
+                alert(msg.employee_id + ' has logged in.');
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+
+                    $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                        $scope.swingLog = response.data;
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500); 
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+
+                    $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                        $scope.graveLog = response.data;
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                        console.log(response);
+                    }, function error(response) {
+                        console.log(response);
+                    });
+              };
+            });
+
+            io.socket.on('timeOut', function onServerSentEvent (msg) {
+              //alert('someone time in', msg);
+              console.log(msg);
+              if(msg.status == 404) {
+                alert(msg.employee_id + ' is not logged in.');
+              } else {
+                $scope.empIdNumber = "";
+                alert(msg.employee_id + ' has logged out.');
+                $http.get('/employeedaylogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.dayLog = response.data;
+                    $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable1').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeeswinglogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.swingLog = response.data;
+                    $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable2').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+
+                $http.get('/employeegravelogs?location_id=' + $scope.logLocation).then(function success(response) {
+                    $scope.graveLog = response.data;
+                    $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        }).destroy();
+                    setTimeout(function(){
+                        $('#dataTable3').DataTable({
+                            destroy: true,
+                            responsive: true
+                        });
+                    }, 500);
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+              };
+            });
+
+            io.socket.on('absentReport', function (msg) {
+                console.log('Absent report: ' + JSON.stringify(msg));
+                if(!msg) {
+                    
+                } else {
+                    if(msg.employee_ids.length != 0) {
+                        _.each(msg.employee_ids, function(value, index) {
+                            $('#absentReportDiv').show();
+                            $('#absentReportList').append('<li>' + value.employee_id.lastname + ', ' + value.employee_id.firstname + ' ' + value.employee_id.middlename + '</li>');
+                        });
+                    }
+                    
+                }
+                
+            });
+
+
             
         });
     })();

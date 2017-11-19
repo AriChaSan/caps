@@ -354,6 +354,7 @@ module.exports = {
 			.populate('schedule')
 			.populate('loan')
 			.populate('payroll')
+			.populate('employee_attendance')
 			.exec(function(err, employee) {
 
 				if(err) {

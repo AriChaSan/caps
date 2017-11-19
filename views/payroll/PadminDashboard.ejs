@@ -1191,6 +1191,9 @@ html {
           <div class="modal-body">
             <div class="panel panel-default">
                 <div class="panel-body">
+                From: <input type="date" name = "from" value="<?php echo $from;?>" ng-model="date_from1">
+                                                                      To: <input type="date" name = "to" value="<?php echo $to;?>" ng-model="date_to1">
+                                                                      <input type='submit' name='go' class='btn btn-success btn-sm' value='Submit' id='go' ng-click="viewLoanSummary()"><br><br>
                     <div ng-repeat="empView in empLoanSUmmary">
                     <h3> Name: {{ empView.lastname + ', ' + empView.firstname  + ' ' +  empView.middlename}}</h3>
                     <div class="panel panel-default">
@@ -1448,8 +1451,8 @@ html {
                     var late = _.where($scope.newAttendance, {attendance_status: 'late'});
                     var absent = _.where($scope.newAttendance, {attendance_status: 'absent'});
 
-                   // var days = present + dayoff.length + late.length;
-                   var days = 15;
+                   var days = present + dayoff.length + late.length;
+                   //var days = 15;
 
                     var seciv=2372.4;
                     var seciii=1672.6;
@@ -1484,6 +1487,8 @@ html {
             };
 
             $scope.empLoanSUmmary = [];
+            $scope.date_from1 = "";
+            $scope.date_to1 = "";
             $scope.viewLoanSummary = function () {
                 $http.get('/employeepayroll?location_id=' + $scope.logLocation).then(function success(response) {
                     $scope.empLoanSUmmary = response.data;
@@ -1495,7 +1500,7 @@ html {
 
 
                         var date= new Date(value1.date);
-                        if(date >= new Date($scope.date_from) && date <= new Date($scope.date_to)) {
+                        if(date >= new Date($scope.date_from1) && date <= new Date($scope.date_to1)) {
                           value.newAttendance.push(value1)
                         }
                       });
@@ -1506,8 +1511,8 @@ html {
                     var late = _.where(value.newAttendance, {attendance_status: 'late'});
                     var absent = _.where(value.newAttendance, {attendance_status: 'absent'});
 
-                   // var days = present + dayoff.length + late.length;
-                   var days = 15;
+                   var days = present + dayoff.length + late.length;
+                   //var days = 15;
 
                     var seciv=2372.4;
                     var seciii=1672.6;
@@ -1538,7 +1543,7 @@ html {
 
                         return value;
                     });
-                    console.log($scope.newEmpLoan);
+                    console.log(response.data);
                 }, function error(response) {
                     console.log(response);
                 });
