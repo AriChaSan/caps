@@ -17,6 +17,67 @@ module.exports = {
 			return res.json(user);
 		});
 	},
+
+	email: function(req, res) {
+
+		var date_from = req.param('date_from');
+		var date_to = req.param('date_to');
+		var message = [];
+
+		User.find({account_type_id:[1, 2, 3]}).exec(function(err, user) {
+			var usersId = _.pluck(user, 'id');
+			Employee.find({account_id: usersId}).populate('employee_attendance').exec(function(err, employee) {
+				if(err) {
+					return res.serverError(err);
+				}	
+				var newEmployeeRecord = _.map(employee, function(value, index) {
+
+                    var newEmployeeAttendance = [];
+
+                      _.each(value.employee_attendance, function(value1, index) {
+
+                        var date= new Date(value1.date);
+                        if(date >= new Date(date_from) && date <= new Date(date_to)) {
+                          newEmployeeAttendance.push(value1)
+                        }
+                      });
+
+                      value.employee_attendance = newEmployeeAttendance;
+                      value.absent = _.where(value.employee_attendance, {attendance_status: 'absent'}); 
+                      return value;
+                    });
+
+
+				var absentEmployee = [];
+
+				_.each(newEmployeeRecord, function(value, index) {
+					if(value.absent.length != 0) {
+						absentEmployee.push(value);
+					}
+				});
+
+				sails.hooks.email.send(
+				  "testEmail",
+				  {
+				  	date_from: moment(date_from).format('LL'),
+				  	date_to: moment(date_to).format('LL'),
+				  	message: absentEmployee,
+				    recipientName: "Pabalan, Crisostomo",
+				    senderName: "CSU"
+				  },
+				  {
+				    to: "dlxagcs@gmail.com",
+				    subject: "Absent Report"
+				  },
+				  function(err) {console.log(err || "It worked!");}
+				);
+
+				return res.json(absentEmployee);
+			});
+		});
+
+		
+	},
 	
 
 	allAccount: function(req, res) {

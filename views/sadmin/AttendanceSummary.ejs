@@ -239,7 +239,7 @@ html {
                                                                   </div>
                                                               </div>
                                                                 <div class="col-lg-12 col-lg-offset-10">   
-                                                                  <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Send Email <i class="fa fa-send"></i></button>
+                                                                  <button class="btn btn-success" type="button" ng-click="email()">Send Email <i class="fa fa-send"></i></button>
                                                                     <button class="btn btn-success" type="button" onclick="printDiv('PrintArea1')">Print <i class="fa fa-print"></i></button>
                                                                 </div>                                                                   
                                                             </div>
@@ -847,6 +847,8 @@ html {
             });
 
 
+
+
             $scope.date_from = "";
             $scope.date_to = "";
             $scope.logLocation = "7";
@@ -952,7 +954,20 @@ html {
             $scope.refreshLog();
 
 
-            
+             $scope.email = function() {
+
+              if($scope.date_from != "" && $scope.date_to != "") {
+                $http.get('/email?date_from=' + $scope.date_from + '&date_to=' + $scope.date_to).then(function success(response) {
+                  alert('Email Sent');
+                    console.log(response);
+                }, function error(response) {
+                    console.log(response);
+                });
+              } else {
+                alert('Complete range of date.');
+              }
+                /**/
+            };
 
             $scope.changePasswordSubmit = function () {
 

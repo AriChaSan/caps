@@ -36,6 +36,7 @@ module.exports.routes = {
     policy: 'redirect',
     view: 'index'
   },
+  'GET /email': 'UserController.email',
 
   'POST /login': 'UserController.login',
   'POST /logout': 'UserController.logout',

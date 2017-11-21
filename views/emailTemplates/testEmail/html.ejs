@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<p>Dear <%=recipientName%>,</p>
+<br/>
+<p>Absent Report from <%=date_from%> to <%=date_to%></p>
+<br/>
+
+<% if(message.length != 0) {%>
+<% message.forEach(function(value) { %>
+        <p><%= value.lastname + ', ' +  value.firstname + ' ' + value.middlename%> - <%= value.absent.length %> absent. </p>
+    <% }); %>
+<%} else { %>
+<p>No absent employee.</p>
+<%} %>
+<p>Love,<br/><%=senderName%></p>
